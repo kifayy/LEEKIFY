@@ -51,6 +51,14 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        pathpicker: {
+          purple: "hsl(var(--pathpicker-purple))",
+          "purple-dark": "hsl(var(--pathpicker-purple-dark))",
+          gold: "hsl(var(--pathpicker-gold))",
+        },
+      },
+      fontFamily: {
+        script: ["var(--font-pathpicker-script)", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",
