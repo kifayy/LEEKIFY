@@ -51,7 +51,7 @@ export function WhatYoullDiscover() {
                 <div className="p-4 md:p-5">
                   <div className="flex items-center gap-2">
                     <Icon className="h-5 w-5 shrink-0 text-pathpicker-purple" aria-hidden />
-                    <h3 className="font-semibold text-base text-foreground">{item.title}</h3>
+                    <h3 className="font-semibold text-base text-[#181A1D]">{item.title}</h3>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.subtext}</p>
                 </div>

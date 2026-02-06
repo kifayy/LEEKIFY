@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Dancing_Script } from "next/font/google";
+import { Geist, Dancing_Script, Volkhov } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -28,6 +28,13 @@ const dancingScript = Dancing_Script({
   subsets: ["latin"],
 });
 
+const volkhov = Volkhov({
+  weight: "700",
+  variable: "--font-volkhov",
+  display: "swap",
+  subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} ${dancingScript.variable} antialiased`}>
+      <body className={`${geistSans.className} ${dancingScript.variable} ${volkhov.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

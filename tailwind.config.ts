@@ -59,6 +59,7 @@ export default {
       },
       fontFamily: {
         script: ["var(--font-pathpicker-script)", "cursive"],
+        volkhov: ["var(--font-volkhov)", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

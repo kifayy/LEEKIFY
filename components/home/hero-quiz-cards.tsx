@@ -14,7 +14,7 @@ export function HeroQuizCards() {
         <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
           <Link href="/scholarship-quiz" className={cardClass}>
             <GraduationCap className="mb-3 h-10 w-10 text-pathpicker-purple md:mb-4 md:h-12 md:w-12" aria-hidden />
-            <h2 className="text-lg font-bold text-foreground md:text-xl">Scholarship Quiz</h2>
+            <h2 className="text-lg font-bold text-[#181A1D] md:text-xl">Scholarship Quiz</h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
               Find scholarships matched to your profile. Quick apply, no-essay options.
             </p>
@@ -26,7 +26,7 @@ export function HeroQuizCards() {
 
           <Link href="/student-archetype-quiz" className={cardClass}>
             <Sparkles className="mb-3 h-10 w-10 text-pathpicker-purple md:mb-4 md:h-12 md:w-12" aria-hidden />
-            <h2 className="text-lg font-bold text-foreground md:text-xl">Archetype Quiz</h2>
+            <h2 className="text-lg font-bold text-[#181A1D] md:text-xl">Archetype Quiz</h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
               Find your Student archetype. Join 40k+ peers and see what type of student you are.
             </p>

@@ -14,6 +14,22 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
+type CarouselContextValue = {
+  api: CarouselApi | undefined;
+  canScrollPrev: boolean;
+  canScrollNext: boolean;
+};
+
+const CarouselContext = React.createContext<CarouselContextValue | null>(null);
+
+function useCarousel() {
+  const context = React.useContext(CarouselContext);
+  if (!context) {
+    throw new Error("useCarousel must be used within a <Carousel>");
+  }
+  return context;
+}
+
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
@@ -37,6 +53,8 @@ const Carousel = React.forwardRef<
     },
     ref,
   ) => {
+    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
+    const [canScrollNext, setCanScrollNext] = React.useState(false);
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
@@ -60,16 +78,42 @@ const Carousel = React.forwardRef<
       setApi(api);
     }, [api, setApi]);
 
+    React.useEffect(() => {
+      if (!api) return;
+      const onSelect = () => {
+        setCanScrollPrev(api.canScrollPrev());
+        setCanScrollNext(api.canScrollNext());
+      };
+      onSelect();
+      api.on("select", onSelect);
+      api.on("reInit", onSelect);
+      return () => {
+        api.off("select", onSelect);
+        api.off("reInit", onSelect);
+      };
+    }, [api]);
+
+    const contextValue = React.useMemo(
+      () => ({
+        api,
+        canScrollPrev,
+        canScrollNext,
+      }),
+      [api, canScrollPrev, canScrollNext],
+    );
+
     return (
-      <div
-        ref={setCarouselRef}
-        className={cn("relative overflow-hidden", className)}
-        role="region"
-        aria-roledescription="carousel"
-        {...props}
-      >
-        {children}
-      </div>
+      <CarouselContext.Provider value={contextValue}>
+        <div
+          ref={setCarouselRef}
+          className={cn("relative overflow-hidden", className)}
+          role="region"
+          aria-roledescription="carousel"
+          {...props}
+        >
+          {children}
+        </div>
+      </CarouselContext.Provider>
     );
   },
 );
@@ -104,41 +148,57 @@ CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => (
-  <Button
-    ref={ref}
-    variant={variant}
-    size={size}
-    className={cn(
-      "absolute left-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-border",
-      className,
-    )}
-    {...props}
-  >
-    <ChevronLeft className="h-4 w-4" />
-    <span className="sr-only">Previous slide</span>
-  </Button>
-));
+>(({ className, variant = "outline", size = "icon", onClick, ...props }, ref) => {
+  const { api, canScrollPrev } = useCarousel();
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        "absolute left-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-border",
+        className,
+      )}
+      disabled={!canScrollPrev}
+      onClick={(e) => {
+        api?.scrollPrev();
+        onClick?.(e);
+      }}
+      {...props}
+    >
+      <ChevronLeft className="h-4 w-4" />
+      <span className="sr-only">Previous slide</span>
+    </Button>
+  );
+});
 CarouselPrevious.displayName = "CarouselPrevious";
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => (
-  <Button
-    ref={ref}
-    variant={variant}
-    size={size}
-    className={cn(
-      "absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-border",
-      className,
-    )}
-    {...props}
-  >
-    <ChevronRight className="h-4 w-4" />
-    <span className="sr-only">Next slide</span>
-  </Button>
-));
+>(({ className, variant = "outline", size = "icon", onClick, ...props }, ref) => {
+  const { api, canScrollNext } = useCarousel();
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        "absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-border",
+        className,
+      )}
+      disabled={!canScrollNext}
+      onClick={(e) => {
+        api?.scrollNext();
+        onClick?.(e);
+      }}
+      {...props}
+    >
+      <ChevronRight className="h-4 w-4" />
+      <span className="sr-only">Next slide</span>
+    </Button>
+  );
+});
 CarouselNext.displayName = "CarouselNext";
 
 export {

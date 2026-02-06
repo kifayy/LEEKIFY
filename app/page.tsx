@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
+import { FeaturesSection } from "@/components/home/features-section";
 import { HeroQuizCards } from "@/components/home/hero-quiz-cards";
 import { WhatYoullDiscover } from "@/components/home/what-youll-discover";
 import { ReviewsCarousel } from "@/components/home/reviews-carousel";
@@ -8,12 +10,14 @@ import { NewsletterCTA } from "@/components/newsletter-cta";
 export default function Home() {
   return (
     <>
+      <HeroFigmaDesign />
+      <FeaturesSection />
       <HeroQuizCards />
       <WhatYoullDiscover />
-      <ReviewsCarousel />
       <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
         <FeaturedScholarshipsSection />
       </Suspense>
+      <ReviewsCarousel />
       <NewsletterCTA variant="want-scholarships" />
     </>
   );
