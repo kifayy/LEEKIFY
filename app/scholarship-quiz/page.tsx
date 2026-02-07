@@ -19,13 +19,13 @@ const OUTCOMES = [
 export default function ScholarshipQuizPage() {
   return (
     <div className="container mx-auto max-w-2xl px-4 py-8 md:py-16">
-      <h1 className="text-2xl font-bold tracking-tight md:text-4xl">Scholarship Quiz</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-4xl">Scholarship Quiz</h1>
       <p className="mt-3 text-sm text-muted-foreground md:mt-4 md:text-base leading-relaxed">
         Answer a few questions and we’ll match you with scholarships that fit your profile. Many
         are no-essay or quick-apply—so you can get money without the grind.
       </p>
-      <h2 className="mt-6 text-lg font-semibold md:mt-8 md:text-xl">What you’ll get</h2>
-      <ul className="mt-2 list-inside list-disc space-y-1.5 text-sm text-muted-foreground md:mt-3 md:space-y-2">
+      <h2 className="mt-6 text-lg font-bold text-[#181A1D] md:mt-8 md:text-xl">What you’ll get</h2>
+      <ul className="mt-2 list-inside list-disc space-y-1.5 text-sm font-normal text-muted-foreground md:mt-3 md:space-y-2">
         {OUTCOMES.map((item) => (
           <li key={item}>{item}</li>
         ))}

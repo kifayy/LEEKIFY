@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Dancing_Script, Volkhov } from "next/font/google";
+import Script from "next/script";
+import { Poppins, Dancing_Script, Volkhov } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -16,8 +17,9 @@ export const metadata: Metadata = {
     "Join 40k+ students. Take our viral archetype quiz to discover your student persona, social habits, and financial cheat codes. Built by Awarded.",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
   subsets: ["latin"],
 });
@@ -42,7 +44,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} ${dancingScript.variable} ${volkhov.variable} antialiased`}>
+      <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} antialiased`}>
+          <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="afterInteractive" />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

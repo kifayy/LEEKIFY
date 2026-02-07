@@ -26,10 +26,10 @@ async function ScholarshipsList() {
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8 md:py-16">
-      <h1 className="text-2xl font-bold tracking-tight md:text-4xl">
+      <h1 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-4xl">
         Featured scholarships for {monthName} {year}
       </h1>
-      <p className="mt-2 text-sm text-muted-foreground md:text-base">
+      <p className="mt-2 text-sm font-normal text-muted-foreground md:text-base">
         Opportunities updated regularly. Click a card to see full details and apply.
       </p>
       {scholarships.length === 0 ? (
@@ -52,11 +52,11 @@ async function ScholarshipsList() {
                   </div>
                   <CardContent className="p-4">
                     <h2 className="font-semibold line-clamp-2">{s.title}</h2>
-                    <p className="mt-1 text-sm text-muted-foreground">{s.provider}</p>
+                    <p className="mt-1 text-sm font-normal text-muted-foreground">{s.provider}</p>
                     {s.amount && (
                       <p className="mt-1 text-sm font-medium text-pathpicker-purple">{s.amount}</p>
                     )}
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="mt-1 text-xs font-normal text-muted-foreground">
                       Deadline: {formatDeadline(s.deadline)}
                     </p>
                   </CardContent>

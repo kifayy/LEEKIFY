@@ -1,5 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+
+const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
 const SOCIAL_LINKS = [
   { href: "https://facebook.com", icon: Facebook, label: "Facebook" },
@@ -53,21 +56,18 @@ export function SiteFooter() {
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
           {/* Left: Logo, Copyright, Social */}
           <div className="flex flex-col gap-6">
-            <Link href="/" className="w-fit">
-              <span
-                className="text-2xl font-bold"
-                style={{
-                  background: "linear-gradient(135deg, #F85E9F 0%, #5D50C6 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Pathpicker
-              </span>
+            <Link href="/" className="flex w-fit items-center active:opacity-80">
+              <Image
+                src={LOGO_URL}
+                alt="Pathpicker"
+                width={180}
+                height={54}
+                className="h-12 w-auto object-contain md:h-14"
+                unoptimized
+              />
             </Link>
-            <p className="max-w-[306px] text-sm leading-relaxed" style={{ color: "#6E6C8F" }}>
-              © {new Date().getFullYear()} Pathpicker. Find your student archetype and scholarships that fit.
+            <p className="max-w-[306px] text-sm font-normal leading-relaxed" style={{ color: "#6E6C8F" }}>
+              © {2026} Pathpicker. Find your student archetype and scholarships that fit.
             </p>
             <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
@@ -91,8 +91,7 @@ export function SiteFooter() {
             {FOOTER_COLUMNS.map((column) => (
               <div key={column.title} className="flex min-w-[120px] flex-col gap-4">
                 <h3
-                  className="text-sm font-semibold"
-                  style={{ color: "#17124B" }}
+                  className="text-sm font-bold text-[#181A1D]"
                 >
                   {column.title}
                 </h3>
@@ -123,7 +122,7 @@ export function SiteFooter() {
         {/* Footer bar */}
         <div className="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row">
           <p style={{ color: "#6E6C8F" }}>
-            © {new Date().getFullYear()} Pathpicker. All rights reserved.
+            © {2026} Pathpicker. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="transition-colors hover:opacity-80" style={{ color: "#6E6C8F" }}>

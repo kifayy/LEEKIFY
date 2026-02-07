@@ -41,11 +41,11 @@ async function ScholarshipDetail({ params }: Props) {
           </div>
         )}
         <header className="mt-4 md:mt-6">
-          <h1 className="text-xl font-bold tracking-tight md:text-4xl">{scholarship.title}</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground md:mt-2 md:text-base">{scholarship.provider}</p>
+          <h1 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-4xl">{scholarship.title}</h1>
+          <p className="mt-1.5 text-sm font-normal text-muted-foreground md:mt-2 md:text-base">{scholarship.provider}</p>
           <div className="mt-2 flex flex-wrap gap-4 text-sm">
             {scholarship.amount && (
-              <span className="font-medium text-pathpicker-purple">{scholarship.amount}</span>
+              <span className="font-normal text-pathpicker-purple">{scholarship.amount}</span>
             )}
             <span className="text-muted-foreground">
               Deadline: {formatDeadline(scholarship.deadline)}

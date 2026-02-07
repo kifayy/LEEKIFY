@@ -30,8 +30,8 @@
     --chart-4: 0 0% 90%;
     --chart-5: 45 93% 47%;
     --radius: 0.5rem;
-    --pathpicker-purple: 256 98% 71%;
-    --pathpicker-purple-dark: 256 98% 62%;
+    --pathpicker-purple: 258 98% 71%;
+    --pathpicker-purple-dark: 258 98% 62%;
     --pathpicker-gold: 45 93% 47%;
   }
 }
@@ -44,12 +44,12 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground text-base;
+    @apply bg-background text-foreground text-base font-normal;
+    overflow-x: hidden;
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
   h1, h2, h3 {
-    font-family: var(--font-volkhov), serif;
     font-weight: 700;
     color: #181A1D;
   }
@@ -64,7 +64,19 @@
   }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 @layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
   .animate-marquee-x {
     animation: marquee-x 15s linear infinite;
   }

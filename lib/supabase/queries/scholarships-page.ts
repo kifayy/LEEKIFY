@@ -8,6 +8,9 @@ export type ScholarshipsPageArticle = {
   meta_description: string | null;
   content: string | null;
   published_at: string | null;
+  og_image: string | null;
+  canonical_url: string | null;
+  auto_tag: string | null;
   created_at: string;
   updated_at: string;
 };

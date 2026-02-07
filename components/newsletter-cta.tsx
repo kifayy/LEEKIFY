@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Send } from "lucide-react";
 
 const NEWSLETTER_URL = "https://awarded.app/newsletter";
+const NEWSLETTER_IMAGE_URL = "https://storage.googleapis.com/images_592/Which%20College%20Path%20Unlocks%20The%20Most%20Scholarships%20(4).png";
+const BEEHIIV_EMBED_URL = "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";
 
 export function NewsletterCTA({
   variant = "default",
@@ -19,57 +22,55 @@ export function NewsletterCTA({
 
   if (variant === "want-scholarships") {
     return (
-      <section className="w-full py-12 md:py-20">
+      <section className="w-full overflow-x-hidden py-10 md:py-20">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          {/* Figma Newsletter: gold background, rounded, decorative shapes */}
+          {/* Newsletter: white bg, slight purple stroke, image + Beehiiv embed */}
           <div
-            className="relative overflow-hidden rounded-[30px] px-6 py-12 md:px-16 md:py-16"
-            style={{ backgroundColor: "#FAE049" }}
+            className="relative flex flex-col gap-6 rounded-[24px] border-2 bg-white px-5 py-10 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
+            style={{ borderColor: "rgba(149, 110, 254, 0.4)" }}
           >
-            {/* Decorative white shapes - Figma left/right vectors */}
-            <div
-              className="pointer-events-none absolute left-6 top-6 h-48 w-64 rounded-[40px] bg-white/95 md:left-10 md:h-64 md:w-80"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute bottom-6 right-6 h-56 w-40 rounded-[30px] bg-white/95 md:right-10 md:h-72 md:w-56"
-              aria-hidden
-            />
-
-            <div className="relative mx-auto max-w-2xl text-center">
-              <h2
-                className="text-2xl font-bold tracking-tight md:text-3xl"
-                style={{ color: "#2D3134" }}
-              >
+            {/* Content - above image on mobile, left on desktop */}
+            <div className="order-1 flex min-w-0 flex-1 flex-col gap-4 md:min-w-[320px] md:flex-shrink-0 md:order-1">
+              <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
                 Sign up to our newsletter
               </h2>
               <p
-                className="mt-4 text-sm leading-relaxed md:text-base"
+                className="text-sm font-normal leading-relaxed md:text-base"
                 style={{ color: "rgba(25, 24, 37, 0.75)" }}
               >
                 Get scholarship tips, new opportunities, and updates delivered to your inbox. Join thousands of students.
               </p>
-
-              <form
-                onSubmit={handleSubmit}
-                className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-stretch"
-              >
-                <input
-                  type="email"
-                  placeholder="Enter Your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 rounded-xl border-0 bg-white px-6 py-4 text-base shadow-sm outline-none placeholder:text-[#5F5F62] focus:ring-2 focus:ring-[#5D50C6]/30"
-                  required
+              <div className="h-[80px] w-full min-w-[280px] max-w-[450px] shrink-0 md:h-[80px]">
+                <iframe
+                  src={BEEHIIV_EMBED_URL}
+                  className="beehiiv-embed h-full w-full"
+                  data-test-id="beehiiv-embed"
+                  frameBorder={0}
+                  scrolling="no"
+                  style={{
+                    width: "100%",
+                    minWidth: "280px",
+                    maxWidth: "450px",
+                    height: "80px",
+                    margin: 0,
+                    borderRadius: 0,
+                    backgroundColor: "transparent",
+                    boxShadow: "0 0 #0000",
+                  }}
+                  title="Newsletter signup"
                 />
-                <button
-                  type="submit"
-                  className="flex h-[59px] min-h-[59px] w-full items-center justify-center gap-2 rounded-xl bg-[#816AFF] px-6 text-white shadow-[0_5px_14px_rgba(255,100,50,0.25)] transition-opacity hover:opacity-95 sm:w-auto sm:min-w-[60px]"
-                  aria-label="Subscribe"
-                >
-                  <Send className="h-5 w-5" strokeWidth={2} />
-                </button>
-              </form>
+              </div>
+            </div>
+            {/* Image - below content on mobile, right on desktop */}
+            <div className="order-2 shrink-0 md:order-2 md:max-w-[280px]">
+              <Image
+                src={NEWSLETTER_IMAGE_URL}
+                alt="Which College Path Unlocks The Most Scholarships"
+                width={450}
+                height={300}
+                className="w-full rounded-lg object-cover"
+                unoptimized
+              />
             </div>
           </div>
         </div>
@@ -79,7 +80,7 @@ export function NewsletterCTA({
 
   return (
     <div className="space-y-4">
-      <h3 className="text-base font-semibold md:text-xl">
+      <h3 className="text-base font-bold md:text-xl">
         Join our <span className="font-script font-normal italic">newsletter</span> & win scholarships.
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2">

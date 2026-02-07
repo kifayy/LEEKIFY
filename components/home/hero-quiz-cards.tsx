@@ -1,40 +1,105 @@
 import Link from "next/link";
-import { Sparkles, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Star } from "lucide-react";
 
-const cardClass =
-  "group flex min-h-[120px] flex-col items-center justify-center rounded-2xl border border-black/[0.08] bg-white p-6 text-center shadow-[0_1px_3px_0_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:border-pathpicker-purple/25 active:scale-[0.99] md:p-8";
+const SCHOLARSHIP_IMAGE =
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=778&h=552&fit=crop";
+const ARCHETYPE_IMAGE =
+  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=778&h=552&fit=crop";
 
-const ctaClass =
-  "mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-pathpicker-purple px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:brightness-95 active:brightness-90";
+const CARDS = [
+  {
+    href: "/scholarship-quiz",
+    title: "Scholarship Quiz",
+    description:
+      "Find scholarships matched to your profile. Quick apply, no-essay options. Get money without the grind.",
+    image: SCHOLARSHIP_IMAGE,
+    cta: "See More",
+  },
+  {
+    href: "/student-archetype-quiz",
+    title: "Archetype Quiz",
+    description:
+      "Find your Student archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",
+    image: ARCHETYPE_IMAGE,
+    cta: "See More",
+  },
+];
 
 export function HeroQuizCards() {
   return (
-    <section className="w-full py-8 md:py-20">
-      <div className="container mx-auto max-w-4xl px-4">
-        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-          <Link href="/scholarship-quiz" className={cardClass}>
-            <GraduationCap className="mb-3 h-10 w-10 text-pathpicker-purple md:mb-4 md:h-12 md:w-12" aria-hidden />
-            <h2 className="text-lg font-bold text-[#181A1D] md:text-xl">Scholarship Quiz</h2>
-            <p className="mt-1.5 text-sm text-muted-foreground">
-              Find scholarships matched to your profile. Quick apply, no-essay options.
-            </p>
-            <span className={ctaClass}>
-              <Sparkles className="h-4 w-4" />
-              Start Quiz
-            </span>
-          </Link>
+    <section className="w-full overflow-x-hidden py-6 md:py-20">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6">
+        <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
+          {CARDS.map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              className="group relative block w-full max-w-[389px] overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-none"
+            >
+              {/* Card - Figma travel_card structure */}
+              <div className="relative">
+                {/* Image area */}
+                <div className="relative aspect-[389/276] w-full overflow-hidden rounded-t-[39px] bg-[#F7F7F7]">
+                  <Image
+                    src={card.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 389px"
+                  />
+                  {/* White blur ellipse top-left */}
+                  <div
+                    className="absolute -left-12 -top-12 h-48 w-48 rounded-full bg-white blur-[88px]"
+                    aria-hidden
+                  />
+                  {/* Frosted 5.0 badge - top right */}
+                  <div
+                    className="absolute right-4 top-4 flex items-center gap-2 rounded-[45px] px-3 py-2 backdrop-blur-md"
+                    style={{
+                      backgroundColor: "rgba(12, 17, 32, 0.24)",
+                      boxShadow: "inset 7px 0 19px rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    <Star className="h-4 w-4 fill-[#FACD6B] text-[#FACD6B]" />
+                    <span className="text-base font-bold text-white">5.0</span>
+                  </div>
+                </div>
 
-          <Link href="/student-archetype-quiz" className={cardClass}>
-            <Sparkles className="mb-3 h-10 w-10 text-pathpicker-purple md:mb-4 md:h-12 md:w-12" aria-hidden />
-            <h2 className="text-lg font-bold text-[#181A1D] md:text-xl">Archetype Quiz</h2>
-            <p className="mt-1.5 text-sm text-muted-foreground">
-              Find your Student archetype. Join 40k+ peers and see what type of student you are.
-            </p>
-            <span className={ctaClass}>
-              <Sparkles className="h-4 w-4" />
-              Archetype Quiz
-            </span>
-          </Link>
+                {/* Content - white section + gray bottom */}
+                <div className="rounded-b-[29px] bg-white">
+                  {/* Title + description */}
+                  <div className="px-5 pt-4 text-center md:text-left">
+                    <h2 className="text-xl font-bold text-[#0C1120]">{card.title}</h2>
+                    <p
+                      className="mt-2 line-clamp-2 text-sm leading-relaxed"
+                      style={{ color: "rgba(12, 17, 32, 0.6)" }}
+                    >
+                      {card.description}
+                    </p>
+                  </div>
+                  {/* Big See More button at bottom */}
+                  <div className="px-4 pb-5 pt-4">
+                    <span
+                      className="flex w-full items-center justify-center gap-2 rounded-full py-4 text-base font-normal text-white transition-opacity group-hover:opacity-95"
+                      style={{
+                        background: "#956EFE",
+                      }}
+                    >
+                      {card.cta}
+                      <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
+                    </span>
+                  </div>
+                </div>
+                {/* Purple blur blob - decorative */}
+                <div
+                  className="pointer-events-none absolute -bottom-4 right-0 h-10 w-28 rounded-full opacity-50 blur-[33px]"
+                  style={{ backgroundColor: "#7723FF" }}
+                  aria-hidden
+                />
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

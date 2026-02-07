@@ -19,8 +19,8 @@ async function ArticlesList() {
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-12 md:py-16">
-      <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Scholarship guides & articles</h1>
-      <p className="mt-2 text-muted-foreground">
+      <h1 className="text-3xl font-bold tracking-tight text-[#181A1D] md:text-4xl">Scholarship guides & articles</h1>
+      <p className="mt-2 font-normal text-muted-foreground">
         Curated lists and guides to help you find and win scholarships.
       </p>
       {articles.length === 0 ? (

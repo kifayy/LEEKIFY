@@ -43,15 +43,15 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
   }, [api]);
 
   return (
-    <section className="w-full bg-white py-14 md:py-20">
+    <section className="w-full overflow-x-hidden bg-white py-10 md:py-20">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
         {/* Header - Figma Frame 29 */}
-        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
-          <div className="space-y-1">
-            <p className="text-sm font-medium md:text-base" style={{ color: "#F85E9F" }}>
+        <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8 md:mb-10 md:items-end">
+          <div className="space-y-1 text-center md:text-left">
+            <p className="text-sm font-normal md:text-base" style={{ color: "#956EFE" }}>
               fund your education
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-4xl lg:text-[2.9rem]">
+            <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-4xl lg:text-[2.9rem]">
               Featured scholarships
             </h2>
           </div>
@@ -65,14 +65,14 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
               aria-label="Previous"
               className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F6F6F6] shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_6.9px_15.8px_rgba(0,0,0,0.07)] transition-opacity disabled:opacity-50"
             >
-              <ArrowRight className="h-5 w-5 rotate-180 text-[#5D50C6]" strokeWidth={2.5} />
+              <ArrowRight className="h-5 w-5 rotate-180 text-[#956EFE]" strokeWidth={2.5} />
             </button>
             <button
               type="button"
               onClick={() => api?.scrollNext()}
               disabled={!canScrollNext}
               aria-label="Next"
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#5D50C6] shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_6.9px_15.8px_rgba(0,0,0,0.07)] transition-opacity disabled:opacity-50"
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#956EFE] shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_6.9px_15.8px_rgba(0,0,0,0.07)] transition-opacity disabled:opacity-50"
             >
               <ArrowRight className="h-5 w-5 text-white" strokeWidth={2.5} />
             </button>
@@ -81,7 +81,7 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
         </div>
 
         {scholarships.length === 0 ? (
-          <p className="text-sm text-[#181A1D]/60 md:text-base">
+          <p className="text-sm font-normal text-[#181A1D]/60 md:text-base">
             Check back soon for featured scholarships.
           </p>
         ) : (
@@ -94,7 +94,7 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
               {scholarships.map((s) => (
                 <CarouselItem
                   key={s.id}
-                  className="min-w-[85%] basis-[85%] pl-3 md:min-w-[380px] md:basis-[380px] md:pl-4"
+                  className="min-w-[88%] basis-[88%] pl-3 md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <Link
                     href={`/scholarships/${s.slug}`}
@@ -126,36 +126,36 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
                           }}
                         >
                           <Star className="h-4 w-4 fill-[#FACD6B] text-[#FACD6B]" />
-                          <span className="text-base font-semibold text-white">5.0</span>
+                          <span className="text-base font-bold text-white">5.0</span>
                         </div>
                       </div>
 
                       {/* Content area - white block */}
                       <div className="rounded-b-[29px] bg-white p-5 pb-6">
-                        <h3 className="text-lg font-bold text-[#0C1120] md:text-xl">
+                        <h3 className="text-lg font-bold text-[#181A1D] md:text-xl">
                           {truncate(s.title, 40)}
                         </h3>
-                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#0C1120]/60">
+                        <p className="mt-2 line-clamp-2 text-sm font-normal leading-relaxed text-[#0C1120]/60">
                           {s.content
                             ? truncate(s.content.replace(/\s+/g, " "), 80)
                             : s.provider}
                         </p>
                         <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
                           <div>
-                            <p className="text-sm text-[#0C1120]/60">{s.provider}</p>
+                            <p className="text-sm font-normal text-[#0C1120]/60">{s.provider}</p>
                             <div className="mt-1 flex items-baseline gap-2">
-                              <span className="text-lg font-bold text-[#0C1120]">
+                              <span className="text-lg font-bold text-[#181A1D]">
                                 {s.amount ?? "—"}
                               </span>
-                              <span className="text-sm text-[#0C1120]/28">
+                              <span className="text-sm font-normal text-[#0C1120]/28">
                                 {formatDeadline(s.deadline)}
                               </span>
                             </div>
                           </div>
                           <span
-                            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-opacity group-hover:opacity-95"
+                            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-normal text-white transition-opacity group-hover:opacity-95"
                             style={{
-                              background: "linear-gradient(135deg, #8482FF 0%, #7700FF 100%)",
+                              background: "#956EFE",
                             }}
                           >
                             See More

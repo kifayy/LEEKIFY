@@ -11,6 +11,8 @@ export type Scholarship = {
   image_url: string | null;
   slug: string;
   content: string | null;
+  tags: string[] | null;
+  meta_description: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -61,4 +63,39 @@ export async function getScholarshipBySlug(slug: string): Promise<Scholarship | 
     .single();
   if (error || !data) return null;
   return data as Scholarship;
+}
+
+/** Get scholarships by tag (for bulk article generation and filtering) */
+export async function getScholarshipsByTag(tag: string): Promise<Scholarship[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("scholarships")
+    .select("*")
+    .contains("tags", [tag])
+    .order("deadline", { ascending: true, nullsFirst: false });
+  if (error) return [];
+  return (data ?? []) as Scholarship[];
+}
+
+/** Get scholarships linked to an article via junction, ordered by display_order. Falls back to auto_tag if junction is empty. */
+export async function getScholarshipsForArticle(
+  articleId: string,
+  autoTag: string | null
+): Promise<Scholarship[]> {
+  const supabase = await createClient();
+  const { data: junctionRows, error } = await supabase
+    .from("scholarship_article_scholarships")
+    .select("display_order, scholarships(*)")
+    .eq("article_id", articleId)
+    .order("display_order", { ascending: true });
+  if (error) {
+    if (autoTag) return getScholarshipsByTag(autoTag);
+    return [];
+  }
+  const scholarships = (junctionRows ?? [])
+    .map((r) => (r as { scholarships: Scholarship | null }).scholarships)
+    .filter((s): s is Scholarship => s != null);
+  if (scholarships.length > 0) return scholarships;
+  if (autoTag) return getScholarshipsByTag(autoTag);
+  return [];
 }
