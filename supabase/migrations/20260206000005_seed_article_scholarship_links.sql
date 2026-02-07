@@ -1,5 +1,84 @@
 -- Seed: Add tags to scholarships and create sample article with linked scholarships
--- Run after 20260206000004
+-- Includes schema from 20260206000004 in case it wasn't applied
+
+-- Ensure schema exists
+alter table public.scholarships add column if not exists tags text[] default '{}';
+alter table public.scholarships add column if not exists meta_description text;
+create index if not exists idx_scholarships_tags on public.scholarships using gin(tags);
+
+create table if not exists public.scholarship_article_scholarships (
+  id uuid primary key default gen_random_uuid(),
+  article_id uuid not null references public.scholarships_page(id) on delete cascade,
+  scholarship_id uuid not null references public.scholarships(id) on delete cascade,
+  display_order int not null default 0,
+  created_at timestamptz not null default now(),
+  unique(article_id, scholarship_id)
+);
+create index if not exists idx_sas_article on public.scholarship_article_scholarships(article_id);
+create index if not exists idx_sas_scholarship on public.scholarship_article_scholarships(scholarship_id);
+alter table public.scholarship_article_scholarships enable row level security;
+drop policy if exists "Allow public read on scholarship_article_scholarships" on public.scholarship_article_scholarships;
+create policy "Allow public read on scholarship_article_scholarships"
+  on public.scholarship_article_scholarships for select using (true);
+
+alter table public.scholarships_page add column if not exists og_image text;
+alter table public.scholarships_page add column if not exists canonical_url text;
+alter table public.scholarships_page add column if not exists auto_tag text;
+
+-- Seed example scholarships (if none exist)
+insert into public.scholarships (title, provider, amount, deadline, is_featured, slug, content, image_url)
+values
+  (
+    'Coca-Cola Scholars Program',
+    'Coca-Cola Foundation',
+    '$20,000',
+    (current_date + interval '90 days')::timestamptz,
+    true,
+    'coca-cola-scholars',
+    'The Coca-Cola Scholars Program is one of the largest corporate-sponsored, achievement-based scholarship programs in the United States. Recognizes 150 high school seniors each year.',
+    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600'
+  ),
+  (
+    'Gates Scholarship',
+    'Bill & Melinda Gates Foundation',
+    'Full ride',
+    (current_date + interval '60 days')::timestamptz,
+    true,
+    'gates-scholarship',
+    'The Gates Scholarship is a highly selective, full scholarship for exceptional, Pell-eligible, minority, high school seniors. Covers full cost of attendance.',
+    'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600'
+  ),
+  (
+    'Dell Scholars Program',
+    'Michael & Susan Dell Foundation',
+    '$20,000',
+    (current_date + interval '45 days')::timestamptz,
+    true,
+    'dell-scholars',
+    'Dell Scholars Program supports students who have overcome significant obstacles to pursue their education. Includes scholarship plus ongoing support services.',
+    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600'
+  ),
+  (
+    'Cameron Impact Scholarship',
+    'Bryan Cameron Education Foundation',
+    '$50,000',
+    (current_date + interval '120 days')::timestamptz,
+    true,
+    'cameron-impact',
+    'Four-year, full-tuition scholarship for students who demonstrate excellence in academics, leadership, and community service.',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600'
+  ),
+  (
+    'QuestBridge National Match',
+    'QuestBridge',
+    'Full ride',
+    (current_date + interval '30 days')::timestamptz,
+    true,
+    'questbridge-match',
+    'Connects high-achieving, low-income students with full four-year scholarships to top colleges. Over 2,000 full scholarships awarded annually.',
+    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600'
+  )
+on conflict (slug) do nothing;
 
 -- Add tags to existing scholarships (for "Best scholarships for STEM kids" demo)
 update public.scholarships

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { getScholarshipsForMonth, getFeaturedScholarships } from "@/lib/supabase/queries/scholarships";
+import { getScholarshipsForMonth, getFeaturedScholarships, getAllScholarships } from "@/lib/supabase/queries/scholarships";
 import { Card, CardContent } from "@/components/ui/card";
 
 function formatDeadline(deadline: string | null): string {
@@ -19,6 +19,9 @@ async function ScholarshipsList() {
   let scholarships = await getScholarshipsForMonth();
   if (scholarships.length === 0) {
     scholarships = await getFeaturedScholarships();
+  }
+  if (scholarships.length === 0) {
+    scholarships = await getAllScholarships();
   }
   const now = new Date();
   const monthName = now.toLocaleString("en-US", { month: "long" });
