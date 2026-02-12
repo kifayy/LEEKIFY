@@ -121,10 +121,10 @@ export function HeroFigmaDesign() {
             </h1>
 
             {/* Buttons */}
-            <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <div className="flex flex-row flex-nowrap gap-3 sm:gap-4">
               <Button
                 asChild
-                className="min-h-[52px] w-full rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] hover:opacity-95 sm:min-h-[60px] sm:w-auto sm:px-10 sm:py-5 sm:text-lg"
+                className="shrink-0 min-h-[52px] rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] hover:opacity-95 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg"
               >
                 <Link href="/student-archetype-quiz" className="flex items-center gap-2">
                   <span>🎭</span>
@@ -134,7 +134,7 @@ export function HeroFigmaDesign() {
               <Button
                 variant="outline"
                 asChild
-                className="min-h-[52px] w-full rounded-full border-[#EEE] bg-white px-6 py-4 text-base text-[#22231B] hover:bg-gray-50 sm:min-h-[60px] sm:w-auto sm:px-10 sm:py-5 sm:text-lg"
+                className="shrink-0 min-h-[52px] rounded-full border-[#EEE] bg-white px-6 py-4 text-base text-[#22231B] hover:bg-gray-50 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg"
               >
                 <Link href="/scholarship-quiz" className="flex items-center gap-2">
                   <span>💸</span>

@@ -97,7 +97,7 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
                   className="min-w-[88%] basis-[88%] pl-3 md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <Link
-                    href={`/scholarships/${s.slug}`}
+                    href={`/scholarships/award/${s.slug}`}
                     className="group block overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}
@@ -112,8 +112,8 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center text-4xl font-bold text-[#181A1D]/20">
-                            {s.provider.slice(0, 2).toUpperCase()}
+                          <div className="flex h-full items-center justify-center text-5xl">
+                            🎓
                           </div>
                         )}
                         {/* Frosted rating badge */}

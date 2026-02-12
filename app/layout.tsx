@@ -12,9 +12,9 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Pathpicker | Find Your Student Archetype & Scholarships",
+  title: "PathPicker: Personalized Student Quizzes & Scholarship Finder",
   description:
-    "Join 40k+ students. Take our viral archetype quiz to discover your student persona, social habits, and financial cheat codes. Built by Awarded.",
+    "What student path should you take? Take our viral student quizzes to find your archetype, scholarships & more.",
 };
 
 const poppins = Poppins({

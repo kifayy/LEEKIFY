@@ -15,6 +15,14 @@ export type Scholarship = {
   meta_description: string | null;
   created_at: string;
   updated_at: string;
+  description_short: string | null;
+  requirements_summary: string | null;
+  highlight_1: string | null;
+  highlight_2: string | null;
+  highlight_3: string | null;
+  highlight_4: string | null;
+  highlight_5: string | null;
+  is_sweepstake: boolean | null;
 };
 
 export async function getFeaturedScholarships(): Promise<Scholarship[]> {
@@ -77,25 +85,60 @@ export async function getScholarshipsByTag(tag: string): Promise<Scholarship[]> 
   return (data ?? []) as Scholarship[];
 }
 
-/** Get scholarships linked to an article via junction, ordered by display_order. Falls back to auto_tag if junction is empty. */
+export type ScholarshipWithBlurb = {
+  scholarship: Scholarship;
+  ai_description: string | null;
+};
+
+/** Get sweepstake-only scholarships (for articles and related sections) */
+export async function getSweepstakeScholarships(limit = 12): Promise<Scholarship[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("scholarships")
+    .select("*")
+    .eq("is_sweepstake", true)
+    .order("deadline", { ascending: true, nullsFirst: false })
+    .limit(limit);
+  if (error) return [];
+  return (data ?? []) as Scholarship[];
+}
+
+/** Get scholarships linked to an article via junction, ordered by display_order. Includes ai_description. ONLY returns is_sweepstake = true. Falls back to tag-filtered sweepstakes, then all sweepstakes. */
 export async function getScholarshipsForArticle(
   articleId: string,
   autoTag: string | null
-): Promise<Scholarship[]> {
+): Promise<ScholarshipWithBlurb[]> {
   const supabase = await createClient();
   const { data: junctionRows, error } = await supabase
     .from("scholarship_article_scholarships")
-    .select("display_order, scholarships(*)")
+    .select("display_order, ai_description, scholarships(*)")
     .eq("article_id", articleId)
     .order("display_order", { ascending: true });
-  if (error) {
-    if (autoTag) return getScholarshipsByTag(autoTag);
-    return [];
+  if (!error) {
+    const items = (junctionRows ?? [])
+      .map((r) => {
+        const row = r as unknown as { scholarships: (Scholarship & { is_sweepstake?: boolean }) | null; ai_description: string | null };
+        const s = row.scholarships;
+        if (!s || s.is_sweepstake !== true) return null;
+        return {
+          scholarship: s,
+          ai_description: row.ai_description ?? null,
+        };
+      })
+      .filter((x): x is ScholarshipWithBlurb => x != null);
+    if (items.length > 0) return items;
   }
-  const scholarships = (junctionRows ?? [])
-    .map((r) => (r as { scholarships: Scholarship | null }).scholarships)
-    .filter((s): s is Scholarship => s != null);
-  if (scholarships.length > 0) return scholarships;
-  if (autoTag) return getScholarshipsByTag(autoTag);
-  return [];
+  if (autoTag) {
+    const supabase2 = await createClient();
+    const { data: byTag } = await supabase2
+      .from("scholarships")
+      .select("*")
+      .eq("is_sweepstake", true)
+      .contains("tags", [autoTag])
+      .order("deadline", { ascending: true, nullsFirst: false });
+    const sweepstakes = (byTag ?? []) as Scholarship[];
+    if (sweepstakes.length > 0) return sweepstakes.map((s) => ({ scholarship: s, ai_description: null }));
+  }
+  const sweepstakes = await getSweepstakeScholarships(12);
+  return sweepstakes.map((s) => ({ scholarship: s, ai_description: null }));
 }
