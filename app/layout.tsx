@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Poppins, Dancing_Script, Volkhov } from "next/font/google";
+import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -37,6 +37,13 @@ const volkhov = Volkhov({
   subsets: ["latin"],
 });
 
+const luckiestGuy = Luckiest_Guy({
+  weight: "400",
+  variable: "--font-luckiest-guy",
+  display: "swap",
+  subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} antialiased`}>
+      <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} antialiased`}>
           <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="afterInteractive" />
         <ThemeProvider
           attribute="class"

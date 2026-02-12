@@ -60,6 +60,7 @@ export default {
       fontFamily: {
         script: ["var(--font-pathpicker-script)", "cursive"],
         volkhov: ["var(--font-volkhov)", "serif"],
+        luckiest: ["var(--font-luckiest-guy)", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",

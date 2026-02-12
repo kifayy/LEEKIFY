@@ -103,6 +103,53 @@ export async function getSweepstakeScholarships(limit = 12): Promise<Scholarship
   return (data ?? []) as Scholarship[];
 }
 
+/** Get 4 random scholarships where is_sweepstake = true (for home page featured carousel) */
+export async function getRandomSweepstakeScholarships(count = 4): Promise<Scholarship[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("scholarships")
+    .select("*")
+    .eq("is_sweepstake", true)
+    .limit(50);
+  if (error) return [];
+  const list = (data ?? []) as Scholarship[];
+  // Shuffle and take first `count`
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list.slice(0, count);
+}
+
+/** One scholarship per partner: Citizens Bank, Sofi, US Bank (for home featured carousel) */
+export async function getFeaturedPartnersScholarships(): Promise<Scholarship[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("scholarships")
+    .select("*")
+    .order("deadline", { ascending: true, nullsFirst: false })
+    .limit(200);
+  if (error) return [];
+  const list = (data ?? []) as Scholarship[];
+  const result: Scholarship[] = [];
+  const seen = new Set<string>();
+  for (const s of list) {
+    const p = (s.provider ?? "").toLowerCase();
+    if (p.includes("citizens bank") && !seen.has("citizens")) {
+      result.push(s);
+      seen.add("citizens");
+    } else if ((p.includes("sofi") || p.includes("so fi")) && !seen.has("sofi")) {
+      result.push(s);
+      seen.add("sofi");
+    } else if ((p.includes("us bank") || p.includes("u.s. bank")) && !seen.has("usbank")) {
+      result.push(s);
+      seen.add("usbank");
+    }
+    if (result.length >= 3) break;
+  }
+  return result;
+}
+
 /** Get scholarships linked to an article via junction, ordered by display_order. Includes ai_description. ONLY returns is_sweepstake = true. Falls back to tag-filtered sweepstakes, then all sweepstakes. */
 export async function getScholarshipsForArticle(
   articleId: string,

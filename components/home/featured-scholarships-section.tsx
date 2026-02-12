@@ -1,4 +1,9 @@
-import { getFeaturedScholarships, getAllScholarships } from "@/lib/supabase/queries/scholarships";
+import {
+  getFeaturedPartnersScholarships,
+  getRandomSweepstakeScholarships,
+  getFeaturedScholarships,
+  getAllScholarships,
+} from "@/lib/supabase/queries/scholarships";
 import { FeaturedScholarshipsCarousel } from "@/components/home/featured-scholarships-carousel";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
 
@@ -101,13 +106,27 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
   },
 ];
 
+const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+
 export async function FeaturedScholarshipsSection() {
-  let scholarships = await getFeaturedScholarships();
+  // Prefer one each: Citizens Bank, Sofi, US Bank
+  let scholarships = await getFeaturedPartnersScholarships();
+  if (scholarships.length === 0) {
+    scholarships = await getRandomSweepstakeScholarships(4);
+  }
+  if (scholarships.length === 0) {
+    scholarships = await getFeaturedScholarships();
+  }
   if (scholarships.length === 0) {
     scholarships = (await getAllScholarships()).slice(0, 8);
   }
   if (scholarships.length === 0) {
     scholarships = PLACEHOLDER_SCHOLARSHIPS;
   }
-  return <FeaturedScholarshipsCarousel scholarships={scholarships} />;
+  return (
+    <FeaturedScholarshipsCarousel
+      scholarships={scholarships}
+      enterScholarshipUrl={AWARDED_APP_STORE_URL}
+    />
+  );
 }

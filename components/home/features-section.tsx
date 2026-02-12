@@ -1,23 +1,24 @@
 import Image from "next/image";
 
+// Feature cards for "What's PathPicker?" section
 const FEATURES = [
   {
     image: "https://storage.googleapis.com/images_592/woman_2154545.png",
     title: "Student Archetype",
     description:
-      "Find your archetype type with our 16‑archetype system. See how you study, rank against others, and what your answers say about you.",
+      "Discover your type with our 16‑archetype system. See how you study and rank.",
   },
   {
     image: "https://storage.googleapis.com/images_592/flying-money_3141991%20(2).png",
     title: "Scholarship Matches",
     description:
-      "See scholarships that fit your archetype, goals, and background. We pull options from 1,000+ partners so you're not stuck scrolling random lists.",
+      "Get scholarships that match your profile and goals. We pull from 1,000+ partners.",
   },
   {
     image: "https://storage.googleapis.com/images_592/laptop_10733804.png",
     title: "Student Tips",
     description:
-      "There's a million paths that you can take as a high school and college student. We help you find the ones that save you the most money, while fulfilling your goals.",
+      "Many paths exist for high school and college. We help you find ones that save money.",
   },
 ];
 
@@ -45,34 +46,45 @@ export function FeaturesSection() {
             </p>
           </div>
 
-          {/* Right: Feature cards - top-aligned so shorter copy doesn't leave empty space */}
-          <div className="grid min-w-0 grid-cols-1 items-start gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
+          {/* Right: Feature cards - rows for icons, titles, descriptions so they line up in columns */}
+          <div className="grid min-w-0 grid-cols-1 items-start gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[86px_auto_auto] lg:gap-x-6 lg:gap-y-4">
+            {/* Row 1: icons - fixed height so title row starts at same place */}
             {FEATURES.map((feature) => (
-                <div
-                  key={feature.title}
-                  className="flex min-w-0 flex-col items-center gap-6 rounded-[9px] p-0 text-center md:items-start md:text-left"
-                >
-                  <div className="relative flex h-[86px] w-[112px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white">
-                    <Image
-                      src={feature.image}
-                      alt=""
-                      width={112}
-                      height={86}
-                      className="h-full w-full object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <h3 className="min-w-0 break-words text-lg font-bold text-[#181A1D] md:text-xl">
-                    {feature.title}
-                  </h3>
-                  <p
-                    className="min-w-0 text-sm font-normal leading-relaxed"
-                    style={{ color: "rgba(25, 24, 37, 0.75)" }}
-                  >
-                    {feature.description}
-                  </p>
+              <div
+                key={`${feature.title}-icon`}
+                className="flex min-h-[86px] min-w-0 items-center justify-center md:justify-start"
+              >
+                <div className="relative flex h-[86px] w-[112px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white">
+                  <Image
+                    src={feature.image}
+                    alt=""
+                    width={112}
+                    height={86}
+                    className="h-full w-full object-contain"
+                    unoptimized
+                  />
                 </div>
-              ))}
+              </div>
+            ))}
+            {/* Row 2: titles - aligned to top of row */}
+            {FEATURES.map((feature) => (
+              <h3
+                key={`${feature.title}-title`}
+                className="min-w-0 break-words pt-0 text-center text-lg font-bold leading-tight text-[#181A1D] md:text-left md:text-xl"
+              >
+                {feature.title}
+              </h3>
+            ))}
+            {/* Row 3: descriptions - aligned to top of row */}
+            {FEATURES.map((feature) => (
+              <p
+                key={`${feature.title}-desc`}
+                className="min-w-0 text-center text-sm font-normal leading-relaxed md:text-left"
+                style={{ color: "rgba(25, 24, 37, 0.75)" }}
+              >
+                {feature.description}
+              </p>
+            ))}
           </div>
         </div>
       </div>

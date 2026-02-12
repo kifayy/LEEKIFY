@@ -12,37 +12,7 @@ const HOLD_DELAY_MS = 1800;
 const DELETE_DELAY_MS = 55;
 
 const HERO_IMAGE = "https://my.pathpicker.com/images/hero-student.png";
-
-const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
-
-const PLACEHOLDER_LOGOS = [
-  "https://storage.googleapis.com/images_592/P1laceholder%20Logo%404x.png",
-  "https://storage.googleapis.com/images_592/Placeholder%20Log7o%404x.png",
-  "https://storage.googleapis.com/images_592/Placeholder%20Logo%404x.png",
-  GREEKER_URL,
-];
-
-function LogoSlot({ src }: { src: string }) {
-  const isGreeker = src === GREEKER_URL;
-  return (
-    <div
-      className={`flex shrink-0 items-center justify-center px-4 md:px-6 ${isGreeker ? "pt-[0.6rem]" : ""}`}
-    >
-      <Image
-        src={src}
-        alt=""
-        width={isGreeker ? 230 : 200}
-        height={isGreeker ? 138 : 120}
-        className={
-          isGreeker
-            ? "h-[5.75rem] w-auto object-contain md:h-[6.9rem]"
-            : "h-20 w-auto object-contain md:h-24"
-        }
-        unoptimized
-      />
-    </div>
-  );
-}
+const HERO_IMAGE_DESKTOP = "https://storage.googleapis.com/images_592/bsa.png";
 
 export function HeroFigmaDesign() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -76,7 +46,7 @@ export function HeroFigmaDesign() {
   }, [charIndex, isDeleting, word, wordIndex]);
 
   return (
-    <section className="relative w-full overflow-x-hidden overflow-y-visible bg-white pt-4 md:pt-12">
+    <section className="relative w-full max-h-[100vh] overflow-x-hidden overflow-y-hidden bg-white pt-4 md:pt-12">
       {/* Blurred blue glow */}
       <div
         className="absolute left-1/2 top-8 -translate-x-1/2 h-[305px] w-[312px] rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12"
@@ -86,16 +56,7 @@ export function HeroFigmaDesign() {
       <div className="container relative mx-auto max-w-6xl px-4 md:px-6">
         <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
           {/* Left: Content */}
-          <div className="flex w-full max-w-[421px] flex-1 flex-col items-center gap-6 md:items-start md:gap-8 lg:pt-6">
-            {/* Character logos marquee */}
-            <div className="marquee-fade-edges -mx-2 max-w-md overflow-hidden px-2 py-3 md:max-w-lg">
-              <div className="flex w-max animate-marquee-x">
-                {[...PLACEHOLDER_LOGOS, ...PLACEHOLDER_LOGOS].map((src, i) => (
-                  <LogoSlot key={i} src={src} />
-                ))}
-              </div>
-            </div>
-
+          <div className="flex w-full max-w-[421px] flex-1 flex-col items-center gap-6 pt-4 md:items-start md:gap-8 md:pt-6 lg:pt-10">
             {/* 5-star 40k+ Students Matched - above headline */}
             <div className="inline-flex w-fit items-center gap-2">
               <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
@@ -109,11 +70,10 @@ export function HeroFigmaDesign() {
             </div>
 
             {/* Headline with typewriter rotating word (no cursor) */}
-            <h1 className="text-center text-[1.75rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-3xl md:text-left md:text-4xl lg:text-5xl">
+            <h1 className="text-center text-[2.6rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[2.44rem] md:text-left md:text-[2.925rem] lg:text-[3.9rem]">
               Find your{" "}
               <br className="hidden md:block" />
               <span className="md:whitespace-nowrap">
-                student{" "}
                 <span className="inline-block min-w-[10ch] text-[#956EFE] sm:min-w-[12ch]">
                   {displayedText}
                 </span>
@@ -146,20 +106,25 @@ export function HeroFigmaDesign() {
 
           {/* Right: Image + decorative elements */}
           <div className="relative w-full max-w-[580px] lg:min-h-[520px]">
-            {/* Blue circle */}
-            <div
-              className="absolute right-0 top-0 hidden h-[320px] w-[320px] rounded-full opacity-100 md:block lg:right-8 lg:h-[400px] lg:w-[400px] xl:h-[528px] xl:w-[528px]"
-              style={{ backgroundColor: "rgb(200, 185, 255)" }}
-            />
-
-            {/* Hero image */}
-            <div className="relative z-10 mx-auto mt-4 aspect-[3/4] max-h-[480px] w-full max-w-[400px] overflow-hidden rounded-2xl md:absolute md:right-0 md:top-8 md:mt-0 md:max-h-[520px] md:max-w-[420px] lg:max-h-[560px] lg:max-w-[460px]">
+            {/* Hero image - mobile only (below md) */}
+            <div className="relative z-10 mx-auto mt-4 aspect-[3/4] max-h-[480px] w-full max-w-[400px] overflow-hidden rounded-2xl md:absolute md:right-0 md:top-8 md:mt-0 md:max-h-[520px] md:max-w-[420px] md:hidden lg:max-h-[560px] lg:max-w-[460px]">
               <Image
                 src={HERO_IMAGE}
                 alt="Traveler"
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 420px"
+                priority
+              />
+            </div>
+            {/* Hero image - desktop (md and up), full image visible */}
+            <div className="relative z-10 mx-auto mt-4 hidden aspect-[3/4] max-h-[1027px] min-h-[830px] w-full max-w-[830px] overflow-hidden rounded-2xl md:block md:absolute md:right-0 md:top-0 md:mt-0 md:-translate-y-72 md:min-h-[949px] lg:max-h-[1187px] lg:min-h-[1027px]">
+              <Image
+                src={HERO_IMAGE_DESKTOP}
+                alt="Traveler"
+                fill
+                className="object-contain object-center"
+                sizes="830px"
                 priority
               />
             </div>

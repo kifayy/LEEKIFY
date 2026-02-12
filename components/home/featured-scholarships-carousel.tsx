@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   Carousel,
@@ -8,7 +7,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import type { CarouselApi } from "@/components/ui/carousel";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
 
 function formatDeadline(deadline: string | null): string {
@@ -17,12 +16,28 @@ function formatDeadline(deadline: string | null): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+/** Format amount with commas e.g. "20000" -> "20,000", "$1,500" -> "1,500" */
+function formatAmount(amount: string | null): string {
+  if (amount == null || amount === "") return "—";
+  const digits = amount.replace(/\D/g, "");
+  if (digits === "") return "—";
+  return parseInt(digits, 10).toLocaleString();
+}
+
 function truncate(str: string, max: number): string {
   if (str.length <= max) return str;
   return str.slice(0, max).trim() + "...";
 }
 
-export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: Scholarship[] }) {
+const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+
+export function FeaturedScholarshipsCarousel({
+  scholarships,
+  enterScholarshipUrl = AWARDED_APP_STORE_URL,
+}: {
+  scholarships: Scholarship[];
+  enterScholarshipUrl?: string;
+}) {
   const [api, setApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -96,14 +111,16 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
                   key={s.id}
                   className="min-w-[88%] basis-[88%] pl-3 md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
-                  <Link
-                    href={`/scholarships/award/${s.slug}`}
-                    className="group block overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
+                  <a
+                    href={enterScholarshipUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}
-                    <div className="relative">
+                    <div className="relative flex min-h-0 flex-1 flex-col">
                       {/* Image area */}
-                      <div className="relative aspect-[385/274] w-full overflow-hidden rounded-t-[29px] bg-[#F7F7F7]">
+                      <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#F7F7F7]">
                         {s.image_url ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -116,55 +133,58 @@ export function FeaturedScholarshipsCarousel({ scholarships }: { scholarships: S
                             🎓
                           </div>
                         )}
-                        {/* Frosted rating badge */}
+                        {/* Frosted $ amount badge */}
                         <div
-                          className="absolute right-4 top-4 flex items-center gap-2 rounded-[22px] px-3 py-2"
+                          className="absolute right-4 top-4 flex items-center rounded-[22px] px-3 py-2"
                           style={{
                             backgroundColor: "rgba(12, 17, 32, 0.24)",
                             backdropFilter: "blur(8px)",
                             boxShadow: "inset 7px 0 19px rgba(255,255,255,0.15)",
                           }}
                         >
-                          <Star className="h-4 w-4 fill-[#FACD6B] text-[#FACD6B]" />
-                          <span className="text-base font-bold text-white">5.0</span>
+                          <span className="text-lg font-bold text-white">
+                            ${formatAmount(s.amount)}
+                          </span>
                         </div>
                       </div>
 
-                      {/* Content area - white block */}
-                      <div className="rounded-b-[29px] bg-white p-5 pb-6">
-                        <h3 className="text-lg font-bold text-[#181A1D] md:text-xl">
+                      {/* Content area - white block: amount + tags, title, provider/deadline, button */}
+                      <div className="flex min-h-0 flex-1 flex-col rounded-b-[29px] bg-white p-5 pb-8 pt-5">
+                        {/* Amount and tags on same row - flex-nowrap so tags stay next to amount (e.g. $20k) */}
+                        <div className="flex flex-nowrap items-center gap-x-3 gap-y-2">
+                          <p className="shrink-0 text-2xl font-bold text-[#181A1D] md:text-3xl">
+                            ${formatAmount(s.amount)}
+                          </p>
+                          {(s.highlight_1 || s.highlight_2) && (
+                            <div className="flex min-w-0 flex-shrink flex-nowrap items-center gap-2">
+                              {s.highlight_1 && (
+                                <span className="whitespace-nowrap rounded-full bg-[#EEEEEE] px-3 py-1.5 text-xs font-medium text-[#0C1120]/90">
+                                  {s.highlight_1}
+                                </span>
+                              )}
+                              {s.highlight_2 && (
+                                <span className="whitespace-nowrap rounded-full bg-[#EEEEEE] px-3 py-1.5 text-xs font-medium text-[#0C1120]/90">
+                                  {s.highlight_2}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                        <h3 className="mt-2 text-lg font-bold text-[#181A1D] md:text-xl">
                           {truncate(s.title, 40)}
                         </h3>
-                        <p className="mt-2 line-clamp-2 text-sm font-normal leading-relaxed text-[#0C1120]/60">
-                          {s.content
-                            ? truncate(s.content.replace(/\s+/g, " "), 80)
-                            : s.provider}
+                        <p className="mt-3 text-sm font-normal leading-relaxed text-[#0C1120]/60">
+                          {s.provider} | Closing Soon
                         </p>
-                        <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
-                          <div>
-                            <p className="text-sm font-normal text-[#0C1120]/60">{s.provider}</p>
-                            <div className="mt-1 flex items-baseline gap-2">
-                              <span className="text-lg font-bold text-[#181A1D]">
-                                {s.amount ?? "—"}
-                              </span>
-                              <span className="text-sm font-normal text-[#0C1120]/28">
-                                {formatDeadline(s.deadline)}
-                              </span>
-                            </div>
-                          </div>
-                          <span
-                            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-normal text-white transition-opacity group-hover:opacity-95"
-                            style={{
-                              background: "#956EFE",
-                            }}
-                          >
-                            See More
-                            <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                        <div className="mt-auto pt-8">
+                          <span className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] transition-opacity group-hover:opacity-95 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg">
+                            Enter
+                            <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
                           </span>
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </CarouselItem>
               ))}
             </CarouselContent>

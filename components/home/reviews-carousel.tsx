@@ -1,40 +1,33 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 
 const REVIEWS = [
   {
-    name: "Kate Gylambos",
-    quote:
-      '"I\'m a high school senior and had no idea what campus would fit me... this was SOO helpful!"',
-    initials: "KG",
+    name: "Maudie",
+    quote: "Itaque dolor fuga natus eveniet.",
+    initial: "M",
+    avatarColor: "bg-[#5D5DFF]", // rgb(0.365, 0.365, 1)
   },
   {
-    name: "Sarah Hueller",
-    quote:
-      '"Seeing my popularity stats and social rank was fun, but also getting a tailored financial roadmap to help me avoid debt traps was very cool"',
-    initials: "SH",
-  },
-  {
-    name: "Isaiah Rowe",
-    quote: '"They laid out my profile in a really cool way! It\'s like a wrapped for my personality lol"',
-    initials: "IR",
+    name: "Davion",
+    quote: "Laboriosam voluptatibus voluptatibus deserunt repellendus.",
+    initial: "D",
+    avatarColor: "bg-[#3E66DF]", // rgb(0.243, 0.4, 0.875)
   },
 ];
 
+const STAR_COLOR = "#F7871C"; // rgb(0.969, 0.529, 0.106)
+
 function StarRating() {
   return (
-    <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
+    <div className="flex gap-0" aria-hidden>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="h-4 w-4 fill-current" />
+        <Star
+          key={i}
+          className="h-7 w-7 fill-current"
+          style={{ color: STAR_COLOR }}
+        />
       ))}
     </div>
   );
@@ -43,40 +36,58 @@ function StarRating() {
 export function ReviewsCarousel() {
   return (
     <section className="w-full overflow-x-hidden py-8 md:py-24">
-      <div className="container mx-auto max-w-5xl px-4">
-        <h2 className="text-center text-xl font-bold tracking-tight text-[#181A1D] md:text-left md:text-4xl">
-          Why students love us.
-        </h2>
-        <Carousel opts={{ align: "start", loop: true }} className="mt-4 w-full md:mt-10">
-          <CarouselContent className="-ml-3 md:-ml-4">
-            {REVIEWS.map((review) => (
-              <CarouselItem key={review.name} className="min-w-[88%] basis-[88%] pl-3 md:basis-1/2 md:min-w-0 md:pl-4">
-                <Card className="relative overflow-hidden bg-white">
-                  <div
-                    className="absolute right-3 top-3 text-5xl font-serif text-black/[0.06] md:right-4 md:top-4 md:text-6xl"
-                    aria-hidden
-                  >
-                    &rdquo;
-                  </div>
-                  <CardContent className="relative p-4 md:p-6">
-                    <div className="flex items-center gap-3 md:gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black/[0.06] text-sm font-normal text-foreground md:h-12 md:w-12">
-                        {review.initials}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-bold text-foreground truncate">{review.name}</p>
-                        <StarRating />
-                      </div>
-                    </div>
-                    <p className="mt-3 text-sm font-normal text-foreground leading-relaxed md:mt-4 md:text-base">{review.quote}</p>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-2 h-10 w-10 md:left-0 md:h-8 md:w-8" />
-          <CarouselNext className="right-2 h-10 w-10 md:right-0 md:h-8 md:w-8" />
-        </Carousel>
+      <div className="container mx-auto max-w-3xl px-4 md:px-6">
+        {/* Frame 27: white card, rounded-2xl, shadow, vertical spacing 24 */}
+        <div
+          className="flex flex-col gap-6 rounded-2xl bg-white p-8 md:p-10"
+          style={{
+            boxShadow: "0 8px 20px rgba(0,0,0,0.16)",
+          }}
+        >
+          {/* Header row: Reviews (left) | 4.5 + 322+ reviews pill (right) */}
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h2 className="text-2xl font-bold tracking-tight text-black md:text-3xl">
+              Reviews
+            </h2>
+            <div className="flex flex-col items-end gap-0">
+              <span className="text-2xl font-bold text-black">4.5</span>
+              <span
+                className="mt-2 inline-flex items-center rounded-full px-3 py-1.5 text-sm font-medium text-white"
+                style={{ backgroundColor: "#5D5DFF" }}
+              >
+                322+ reviews
+              </span>
+            </div>
+          </div>
+
+          {/* Review cards: white, border, rounded-xl, shadow */}
+          {REVIEWS.map((review) => (
+            <div
+              key={review.name}
+              className="flex flex-col gap-4 rounded-xl border border-[#EFEFEF] bg-white p-4 shadow-[0_8px_20px_rgba(0,0,0,0.04)] sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+            >
+              <div className="flex min-w-0 flex-1 gap-3 sm:gap-4">
+                {/* Avatar: colored square with initial */}
+                <div
+                  className={`flex h-16 w-16 shrink-0 items-center justify-center rounded text-2xl font-semibold text-white ${review.avatarColor}`}
+                >
+                  {review.initial}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-lg font-bold text-[#050505]">
+                    {review.name}
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-[#868686]">
+                    {review.quote}
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0 sm:pt-1">
+                <StarRating />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
