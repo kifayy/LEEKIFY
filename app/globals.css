@@ -64,6 +64,15 @@
   }
 }
 
+@keyframes marquee-y {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -83,6 +92,9 @@
   .animate-marquee-x-fast {
     animation: marquee-x 10s linear infinite;
   }
+  .animate-marquee-y {
+    animation: marquee-y 20s linear infinite;
+  }
   .marquee-fade-edges {
     -webkit-mask-image: linear-gradient(
       to right,
@@ -93,6 +105,22 @@
     );
     mask-image: linear-gradient(
       to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+  .marquee-fade-edges-y {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
       transparent 0%,
       black 8%,
       black 92%,

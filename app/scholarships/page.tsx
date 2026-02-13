@@ -4,8 +4,6 @@ import { getScholarshipsForMonth, getFeaturedScholarships, getAllScholarships } 
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getRandomPublishedArticles } from "@/lib/supabase/queries/scholarships-page";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
-import { NewsletterCTA } from "@/components/newsletter-cta";
-
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return "No deadline";
   const d = new Date(deadline);
@@ -133,8 +131,6 @@ async function ScholarshipsPageContent() {
           </p>
         )}
       </div>
-
-      <NewsletterCTA variant="want-scholarships" />
     </div>
   );
 }

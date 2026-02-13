@@ -1,7 +1,9 @@
-import { redirect } from "next/navigation";
-
-const NEWSLETTER_URL = "https://awarded.app/newsletter";
+import { NewsletterWidget } from "@/components/newsletter-widget";
 
 export default function NewsletterPage() {
-  redirect(NEWSLETTER_URL);
+  return (
+    <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-20">
+      <NewsletterWidget />
+    </div>
+  );
 }

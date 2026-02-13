@@ -58,13 +58,13 @@ export function FeaturedScholarshipsCarousel({
   }, [api]);
 
   return (
-    <section className="w-full overflow-x-hidden bg-white py-10 md:py-20">
-      <div className="container mx-auto max-w-6xl px-4 md:px-6">
+    <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         {/* Header - Figma Frame 29 */}
         <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8 md:mb-10 md:items-end">
           <div className="space-y-1 text-center md:text-left">
             <p className="text-sm font-normal md:text-base" style={{ color: "#956EFE" }}>
-              fund your education
+              Fund Your Education
             </p>
             <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-4xl lg:text-[2.9rem]">
               Featured scholarships
@@ -103,13 +103,13 @@ export function FeaturedScholarshipsCarousel({
           <Carousel
             opts={{ align: "start", loop: false, containScroll: "trimSnaps" }}
             setApi={setApi}
-            className="overflow-hidden"
+            className="w-full min-w-0 overflow-hidden"
           >
             <CarouselContent className="-ml-3 gap-3 md:-ml-4 md:gap-4">
               {scholarships.map((s) => (
                 <CarouselItem
                   key={s.id}
-                  className="min-w-[88%] basis-[88%] pl-3 md:min-w-[380px] md:basis-[380px] md:pl-4"
+                  className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <a
                     href={enterScholarshipUrl}
@@ -150,13 +150,13 @@ export function FeaturedScholarshipsCarousel({
 
                       {/* Content area - white block: amount + tags, title, provider/deadline, button */}
                       <div className="flex min-h-0 flex-1 flex-col rounded-b-[29px] bg-white p-5 pb-8 pt-5">
-                        {/* Amount and tags on same row - flex-nowrap so tags stay next to amount (e.g. $20k) */}
-                        <div className="flex flex-nowrap items-center gap-x-3 gap-y-2">
+                        {/* Amount and tags - wrap on mobile when space is tight */}
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                           <p className="shrink-0 text-2xl font-bold text-[#181A1D] md:text-3xl">
                             ${formatAmount(s.amount)}
                           </p>
                           {(s.highlight_1 || s.highlight_2) && (
-                            <div className="flex min-w-0 flex-shrink flex-nowrap items-center gap-2">
+                            <div className="flex min-w-0 flex-wrap items-center gap-2">
                               {s.highlight_1 && (
                                 <span className="whitespace-nowrap rounded-full bg-[#EEEEEE] px-3 py-1.5 text-xs font-medium text-[#0C1120]/90">
                                   {s.highlight_1}

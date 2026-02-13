@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Send } from "lucide-react";
+import { Send, Star } from "lucide-react";
 
 const NEWSLETTER_URL = "https://awarded.app/newsletter";
 const NEWSLETTER_IMAGE_URL = "https://storage.googleapis.com/images_592/Which%20College%20Path%20Unlocks%20The%20Most%20Scholarships%20(4).png";
@@ -20,17 +20,48 @@ export function NewsletterCTA({
     window.open(NEWSLETTER_URL, "_blank", "noopener,noreferrer");
   };
 
+  const bannerImageUrl = "https://storage.googleapis.com/images_592/Group%201000005829.png";
+  const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+
   if (variant === "want-scholarships") {
     return (
-      <section className="w-full overflow-x-hidden py-10 md:py-20">
-        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+      <section className="w-full min-w-0 overflow-x-hidden py-10 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
+          <div className="mb-8 flex justify-center">
+            <a
+              href={AWARDED_APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full max-w-4xl"
+              aria-label="Download Awarded app on the App Store"
+            >
+              <Image
+                src={bannerImageUrl}
+                alt="Download Awarded - Win Scholarships on the App Store"
+                width={800}
+                height={200}
+                className="h-auto w-full object-contain"
+                unoptimized
+              />
+            </a>
+          </div>
           {/* Newsletter: white bg, slight purple stroke, image + Beehiiv embed */}
           <div
-            className="relative flex flex-col gap-6 rounded-[24px] border-2 bg-white px-5 py-10 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
+            className="relative flex min-w-0 flex-col gap-6 rounded-[24px] border-2 bg-white px-4 py-8 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
             style={{ borderColor: "rgba(149, 110, 254, 0.4)" }}
           >
             {/* Content - above image on mobile, left on desktop */}
             <div className="order-1 flex min-w-0 flex-1 flex-col gap-4 md:min-w-[320px] md:flex-shrink-0 md:order-1">
+              <div className="inline-flex w-fit items-center gap-2">
+                <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <span className="text-sm font-medium text-[#181A1D]">
+                  Join 20k+ Students
+                </span>
+              </div>
               <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
                 Sign up to our newsletter
               </h2>
@@ -40,7 +71,7 @@ export function NewsletterCTA({
               >
                 Get scholarship tips, new opportunities, and updates delivered to your inbox. Join thousands of students.
               </p>
-              <div className="h-[80px] w-full min-w-[280px] max-w-[450px] shrink-0 md:h-[80px]">
+              <div className="h-[80px] w-full max-w-full shrink-0 md:h-[80px] md:max-w-[450px]">
                 <iframe
                   src={BEEHIIV_EMBED_URL}
                   className="beehiiv-embed h-full w-full"
@@ -49,8 +80,8 @@ export function NewsletterCTA({
                   scrolling="no"
                   style={{
                     width: "100%",
-                    minWidth: "280px",
-                    maxWidth: "450px",
+                    minWidth: "0",
+                    maxWidth: "100%",
                     height: "80px",
                     margin: 0,
                     borderRadius: 0,
@@ -61,13 +92,13 @@ export function NewsletterCTA({
                 />
               </div>
             </div>
-            {/* Image - below content on mobile, right on desktop */}
-            <div className="order-2 shrink-0 md:order-2 md:max-w-[280px]">
+            {/* Image - below content on mobile, right on desktop (50% larger) */}
+            <div className="order-2 min-w-0 shrink-0 md:order-2 md:max-w-[420px]">
               <Image
                 src={NEWSLETTER_IMAGE_URL}
                 alt="Which College Path Unlocks The Most Scholarships"
-                width={450}
-                height={300}
+                width={675}
+                height={450}
                 className="w-full rounded-lg object-cover"
                 unoptimized
               />

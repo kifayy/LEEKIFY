@@ -4,8 +4,6 @@ import { FeaturesSection } from "@/components/home/features-section";
 import { HeroQuizCards } from "@/components/home/hero-quiz-cards";
 import { ReviewsCarousel } from "@/components/home/reviews-carousel";
 import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
-import { NewsletterCTA } from "@/components/newsletter-cta";
-
 export default function Home() {
   return (
     <>
@@ -16,7 +14,6 @@ export default function Home() {
         <FeaturedScholarshipsSection />
       </Suspense>
       <ReviewsCarousel />
-      <NewsletterCTA variant="want-scholarships" />
     </>
   );
 }

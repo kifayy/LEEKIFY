@@ -59,9 +59,16 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+          <div className="relative flex min-h-screen min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
             <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <main className="min-w-0 flex-1 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
+            <div className="w-full bg-white">
+              <img
+                src="https://storage.googleapis.com/images_592/Group%201000005829.png"
+                alt=""
+                className="mx-auto block w-full max-w-4xl object-contain px-4 py-6"
+              />
+            </div>
             <SiteFooter />
           </div>
         </ThemeProvider>

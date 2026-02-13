@@ -51,7 +51,7 @@ const CARDS = [
     cta: "Take Quiz",
   },
   {
-    href: "/student-archetype-quiz",
+    href: "http://my.pathpicker.com/archetype",
     title: "Archetype Quiz",
     description:
       "Find your archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",
@@ -71,19 +71,21 @@ export function HeroQuizCards() {
   }, []);
 
   return (
-    <section className="w-full overflow-x-hidden py-6 md:py-20">
-      <div className="container mx-auto max-w-6xl px-4 md:px-6">
+    <section className="w-full min-w-0 overflow-x-hidden py-6 md:py-20">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">
           {CARDS.map((card) => (
             <Link
               key={card.href}
               href={card.href}
+              target={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "_blank" : undefined}
+              rel={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "noopener noreferrer" : undefined}
               className="group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]"
             >
               {/* Card - Figma travel_card structure */}
               <div className="relative flex min-h-0 flex-1 flex-col">
                 {/* Image area - hidden for Archetype and Scholarship cards (they use marquee/Lottie) */}
-                {card.href !== "/student-archetype-quiz" && card.href !== "/scholarship-quiz" && (
+                {!card.href.includes("archetype") && card.href !== "/scholarship-quiz" && (
                   <div className="relative aspect-[389/276] w-full overflow-hidden rounded-t-[39px] bg-[#F7F7F7] md:aspect-[480/320] lg:aspect-[520/346]">
                     <Image
                       src={card.image}
@@ -114,7 +116,7 @@ export function HeroQuizCards() {
                 {/* Content - white section + gray bottom */}
                 <div
                   className={
-                    card.href === "/student-archetype-quiz" || card.href === "/scholarship-quiz"
+                    card.href.includes("archetype") || card.href === "/scholarship-quiz"
                       ? "flex min-h-0 flex-1 flex-col rounded-t-[29px] rounded-b-[29px] bg-white"
                       : "flex min-h-0 flex-1 flex-col rounded-b-[29px] bg-white"
                   }
@@ -122,7 +124,7 @@ export function HeroQuizCards() {
                   {/* Title + description */}
                   <div className="min-h-0 flex-1 px-5 pt-4 font-sans text-center md:text-left">
                     {/* Fixed-height slot so both cards match; h-[11rem] md:h-[13rem] */}
-                    {card.href === "/student-archetype-quiz" && (
+                    {card.href.includes("archetype") && (
                       <div className="mb-3 flex h-[11rem] min-h-[11rem] items-center md:h-[13rem] md:min-h-[13rem]">
                         <div className="marquee-fade-edges -mx-2 max-w-full overflow-hidden px-0 py-2">
                           <div className="flex w-max animate-marquee-x">

@@ -26,7 +26,7 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/student-archetype-quiz", label: "Archetype Quiz" },
+      { href: "http://my.pathpicker.com/archetype", label: "Archetype Quiz" },
       { href: "/scholarship-quiz", label: "Scholarship Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
     ],
@@ -34,8 +34,8 @@ const FOOTER_COLUMNS = [
   {
     title: "Support",
     links: [
-      { href: "/about", label: "Help Center" },
       { href: "/newsletter", label: "Newsletter" },
+      { href: "https://awarded.app/providers", label: "For Business" },
     ],
   },
   {
@@ -60,9 +60,9 @@ export function SiteFooter() {
               <Image
                 src={LOGO_URL}
                 alt="Pathpicker"
-                width={180}
-                height={54}
-                className="h-12 w-auto object-contain md:h-14"
+                width={540}
+                height={162}
+                className="h-36 w-auto object-contain md:h-[10.5rem]"
                 unoptimized
               />
             </Link>
@@ -100,6 +100,8 @@ export function SiteFooter() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="text-sm transition-colors hover:opacity-80"
                         style={{ color: "#6E6C8F" }}
                       >

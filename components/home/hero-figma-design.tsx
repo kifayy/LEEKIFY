@@ -46,68 +46,65 @@ export function HeroFigmaDesign() {
   }, [charIndex, isDeleting, word, wordIndex]);
 
   return (
-    <section className="relative w-full max-h-[100vh] overflow-x-hidden overflow-y-hidden bg-white pt-4 md:pt-12">
+    <section className="relative w-full shrink-0 overflow-x-hidden bg-white py-8 md:py-10 lg:py-12 min-w-0">
       {/* Blurred blue glow */}
       <div
         className="absolute left-1/2 top-8 -translate-x-1/2 h-[305px] w-[312px] rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12"
         style={{ backgroundColor: "rgb(61, 159, 251)" }}
       />
 
-      <div className="container relative mx-auto max-w-6xl px-4 md:px-6">
-        <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
-          {/* Left: Content */}
-          <div className="flex w-full max-w-[421px] flex-1 flex-col items-center gap-6 pt-4 md:items-start md:gap-8 md:pt-6 lg:pt-10">
-            {/* 5-star 40k+ Students Matched - above headline */}
-            <div className="inline-flex w-fit items-center gap-2">
-              <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <span className="text-sm font-medium text-[#181A1D]">
-                40k+ Students Matched
-              </span>
-            </div>
-
-            {/* Headline with typewriter rotating word (no cursor) */}
-            <h1 className="text-center text-[2.6rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[2.44rem] md:text-left md:text-[2.925rem] lg:text-[3.9rem]">
-              Find your{" "}
-              <br className="hidden md:block" />
-              <span className="md:whitespace-nowrap">
-                <span className="inline-block min-w-[10ch] text-[#956EFE] sm:min-w-[12ch]">
-                  {displayedText}
+      <div className="container relative mx-auto max-w-6xl px-4 md:px-6 min-w-0">
+        {/* Hero content as one centered block – text + image together, no huge gap */}
+        <div className="flex w-full justify-center">
+          <div className="flex max-w-[1400px] flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+            {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
+            <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
+              <div className="inline-flex items-center gap-1.5">
+                <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-[11px] w-[11px] fill-current" />
+                  ))}
+                </div>
+                <span className="text-[0.7rem] font-medium text-[#181A1D]">
+                  40k+ Students Matched
                 </span>
-              </span>
-            </h1>
-
-            {/* Buttons */}
-            <div className="flex flex-row flex-nowrap gap-3 sm:gap-4">
-              <Button
-                asChild
-                className="shrink-0 min-h-[52px] rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] hover:opacity-95 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg"
-              >
-                <Link href="/student-archetype-quiz" className="flex items-center gap-2">
-                  <span>🎭</span>
-                  Archetype Quiz
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                asChild
-                className="shrink-0 min-h-[52px] rounded-full border-[#EEE] bg-white px-6 py-4 text-base text-[#22231B] hover:bg-gray-50 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg"
-              >
-                <Link href="/scholarship-quiz" className="flex items-center gap-2">
-                  <span>💸</span>
-                  Scholarship Quiz
-                </Link>
-              </Button>
+              </div>
+              {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
+              <div className="min-h-[4.5rem] sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
+                <h1 className="text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
+                  <span className="block whitespace-nowrap">Find your</span>
+                  <span className="block min-w-[12ch] whitespace-nowrap text-[#956EFE]">
+                    {displayedText}
+                  </span>
+                </h1>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+                <Button
+                  asChild
+                  className="min-h-[48px] rounded-full bg-[#956EFE] px-5 py-3 text-sm text-[#EEE] shadow-[0_2px_8px_rgba(149,110,254,0.25)] hover:opacity-95 sm:min-h-[52px] sm:px-6 sm:text-base md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+                >
+                  <Link href="http://my.pathpicker.com/archetype" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    <span>🎭</span>
+                    Archetype Quiz
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  asChild
+                  className="min-h-[48px] rounded-full border-[#E5E5E7] bg-white px-5 py-3 text-sm text-[#181A1D] hover:bg-gray-50 sm:min-h-[52px] sm:px-6 sm:text-base md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+                >
+                  <Link href="/scholarship-quiz" className="flex items-center gap-2">
+                    <span>💸</span>
+                    Scholarship Quiz
+                  </Link>
+                </Button>
+              </div>
             </div>
-          </div>
 
-          {/* Right: Image + decorative elements */}
-          <div className="relative w-full max-w-[580px] lg:min-h-[520px]">
+            {/* Right: BSA image + badges – 1.5x size */}
+            <div className="relative h-[510px] w-full max-w-[570px] shrink-0 sm:h-[600px] sm:max-w-[630px] md:h-[660px] md:max-w-[660px] lg:h-[720px] lg:max-w-[690px]">
             {/* Hero image - mobile only (below md) */}
-            <div className="relative z-10 mx-auto mt-4 aspect-[3/4] max-h-[480px] w-full max-w-[400px] overflow-hidden rounded-2xl md:absolute md:right-0 md:top-8 md:mt-0 md:max-h-[520px] md:max-w-[420px] md:hidden lg:max-h-[560px] lg:max-w-[460px]">
+            <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl md:hidden">
               <Image
                 src={HERO_IMAGE}
                 alt="Traveler"
@@ -117,20 +114,21 @@ export function HeroFigmaDesign() {
                 priority
               />
             </div>
-            {/* Hero image - desktop (md and up), full image visible */}
-            <div className="relative z-10 mx-auto mt-4 hidden aspect-[3/4] max-h-[1027px] min-h-[830px] w-full max-w-[830px] overflow-hidden rounded-2xl md:block md:absolute md:right-0 md:top-0 md:mt-0 md:-translate-y-72 md:min-h-[949px] lg:max-h-[1187px] lg:min-h-[1027px]">
+            {/* Hero image - desktop (md and up) */}
+            <div className="absolute inset-0 z-10 hidden overflow-hidden rounded-2xl md:block">
               <Image
                 src={HERO_IMAGE_DESKTOP}
                 alt="Traveler"
                 fill
                 className="object-contain object-center"
-                sizes="830px"
+                sizes="(min-width: 1024px) 690px, (min-width: 768px) 660px, 630px"
                 priority
+                unoptimized
               />
             </div>
 
-            {/* 82% Ivy League Match overlay */}
-            <div className="animate-float absolute right-2 top-[45%] z-20 flex min-w-[120px] rounded-lg bg-white p-2 shadow-[0_9px_59px_rgba(174,165,114,0.08)] md:min-w-[130px] md:p-2.5 lg:right-4" style={{ animationDelay: "0s" }}>
+            {/* 82% Ivy League Match - over image, top-right */}
+            <div className="animate-float absolute right-1 top-[18%] z-20 flex min-w-[100px] rounded-lg bg-white p-2 shadow-[0_9px_59px_rgba(174,165,114,0.08)] md:min-w-[120px] md:right-2 md:p-2.5 lg:right-3" style={{ animationDelay: "0s" }}>
               <div className="flex items-center gap-2">
                 <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
                   <Image
@@ -141,28 +139,29 @@ export function HeroFigmaDesign() {
                     unoptimized
                   />
                 </div>
-                <p className="text-sm font-bold leading-tight" style={{ color: "#956EFE" }}>
+                <p className="text-xs font-bold leading-tight md:text-sm" style={{ color: "#956EFE" }}>
                   82% Ivy League Match
                 </p>
               </div>
             </div>
 
-            {/* $32,144 Scholarships Matched pill */}
-            <div className="animate-float absolute bottom-[28%] left-2 z-20 flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:left-12 md:px-5 md:py-2.5 lg:left-24" style={{ animationDelay: "0.5s" }}>
-              <span className="text-xl">💰</span>
-              <span className="text-sm font-normal text-[#3A3E46]">
+            {/* $32,144 Scholarships Matched - over image, bottom-left */}
+            <div className="animate-float absolute bottom-[32%] left-1 z-20 flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:left-3 md:px-4 md:py-2.5" style={{ animationDelay: "0.5s" }}>
+              <span className="text-lg md:text-xl">💰</span>
+              <span className="text-xs font-normal text-[#3A3E46] md:text-sm">
                 $32,144 Scholarships Matched
               </span>
             </div>
 
-            {/* Social Partier pill */}
-            <div className="animate-float absolute bottom-[12%] right-2 z-20 flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:right-8 md:px-5 md:py-2.5" style={{ animationDelay: "1s" }}>
-              <span className="text-xl">🎉</span>
-              <span className="text-sm font-normal text-[#3A3E46]">
+            {/* Social Partier - over image, bottom-right */}
+            <div className="animate-float absolute bottom-[12%] right-1 z-20 flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:right-3 md:px-4 md:py-2.5" style={{ animationDelay: "1s" }}>
+              <span className="text-lg md:text-xl">🎉</span>
+              <span className="text-xs font-normal text-[#3A3E46] md:text-sm">
                 Social Partier
               </span>
             </div>
           </div>
+        </div>
         </div>
       </div>
 
