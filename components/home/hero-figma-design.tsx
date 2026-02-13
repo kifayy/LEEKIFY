@@ -55,8 +55,8 @@ export function HeroFigmaDesign() {
 
       <div className="container relative mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         {/* Hero content – text + image, aligned with What's PathPicker section */}
-        <div className="flex w-full justify-center">
-          <div className="flex max-w-[1400px] -translate-x-[60%] flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+        <div className="flex w-full justify-center overflow-visible">
+          <div className="flex max-w-[1400px] origin-center flex-col items-center gap-8 lg:-translate-x-[60%] lg:scale-[1.3] lg:flex-row lg:items-center lg:gap-12">
             {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
             <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
               <div className="inline-flex items-center gap-1.5">
