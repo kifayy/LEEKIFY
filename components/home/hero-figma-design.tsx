@@ -46,7 +46,7 @@ export function HeroFigmaDesign() {
   }, [charIndex, isDeleting, word, wordIndex]);
 
   return (
-    <section className="relative w-full shrink-0 overflow-x-hidden bg-white py-8 md:py-10 lg:py-12 min-w-0">
+    <section className="relative w-full shrink-0 overflow-x-hidden bg-white py-6 md:py-8 lg:py-10 min-w-0">
       {/* Blurred blue glow */}
       <div
         className="absolute left-1/2 top-8 -translate-x-1/2 h-[305px] w-[312px] rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12"
@@ -54,9 +54,9 @@ export function HeroFigmaDesign() {
       />
 
       <div className="container relative mx-auto max-w-6xl px-4 md:px-6 min-w-0">
-        {/* Hero content as one centered block – text + image together, no huge gap */}
+        {/* Hero content – text + image, aligned with What's PathPicker section */}
         <div className="flex w-full justify-center">
-          <div className="flex max-w-[1400px] flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+          <div className="flex max-w-[1400px] -translate-x-[60%] flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
             {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
             <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
               <div className="inline-flex items-center gap-1.5">
@@ -73,8 +73,11 @@ export function HeroFigmaDesign() {
               <div className="min-h-[4.5rem] sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
                 <h1 className="text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
                   <span className="block whitespace-nowrap">Find your</span>
-                  <span className="block min-w-[12ch] whitespace-nowrap text-[#956EFE]">
-                    {displayedText}
+                  <span className="relative block whitespace-nowrap" style={{ minHeight: "1.2em" }}>
+                    <span className="invisible" aria-hidden>scholarships</span>
+                    <span className="absolute left-0 top-0 text-[#956EFE]">
+                      {displayedText}
+                    </span>
                   </span>
                 </h1>
               </div>
@@ -102,7 +105,7 @@ export function HeroFigmaDesign() {
             </div>
 
             {/* Right: BSA image + badges – 1.5x size */}
-            <div className="relative h-[510px] w-full max-w-[570px] shrink-0 sm:h-[600px] sm:max-w-[630px] md:h-[660px] md:max-w-[660px] lg:h-[720px] lg:max-w-[690px]">
+            <div className="relative h-[400px] w-full max-w-[570px] shrink-0 sm:h-[460px] sm:max-w-[630px] md:h-[500px] md:max-w-[660px] lg:h-[540px] lg:max-w-[690px]">
             {/* Hero image - mobile only (below md) */}
             <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl md:hidden">
               <Image
