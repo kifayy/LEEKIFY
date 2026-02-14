@@ -55,7 +55,6 @@ export function SiteHeader() {
     <>
       <header
         className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white md:h-32 lg:h-36 lg:border-b lg:border-[#E5E5E7] lg:bg-[#FAFAFB] lg:shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
-        style={{ touchAction: "none" }}
       >
         <div className="container mx-auto flex h-full max-h-full max-w-6xl items-center justify-between gap-2 overflow-hidden px-4 md:gap-6 md:px-6 lg:px-8 min-w-0">
           {/* Logo + mobile menu button - logo sized to fit header height */}

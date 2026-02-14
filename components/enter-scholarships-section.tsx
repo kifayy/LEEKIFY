@@ -1,0 +1,69 @@
+"use client";
+
+import Link from "next/link";
+import { Star } from "lucide-react";
+
+const SECTION_BG_IMAGE =
+  "https://storage.googleapis.com/images_592/sefction.png";
+const SECTION_BG_IMAGE_MOBILE =
+  "https://storage.googleapis.com/images_592/sectifffon.png";
+
+export function EnterScholarshipsSection() {
+  return (
+    <section
+      className="relative w-full min-w-0 overflow-hidden"
+      style={{ minHeight: 800 }}
+      aria-label="Enter scholarships CTA"
+    >
+      {/* Background image — mobile only (sectifffon) */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:hidden"
+        style={{ backgroundImage: `url(${SECTION_BG_IMAGE_MOBILE})` }}
+      />
+      {/* Background image — desktop (unchanged) */}
+      <div
+        className="absolute inset-0 z-0 hidden bg-cover bg-center bg-no-repeat md:block"
+        style={{ backgroundImage: `url(${SECTION_BG_IMAGE})` }}
+      />
+      <div className="container relative z-10 mx-auto flex min-h-[800px] max-w-[1400px] flex-col items-center px-4 py-16 text-center md:items-start md:px-10 md:py-20 md:text-left lg:flex-row lg:justify-between lg:gap-12 lg:py-24">
+        {/* Left: copy + CTAs */}
+        <div className="flex max-w-[760px] flex-1 flex-col gap-5 pt-6 text-white lg:pt-20">
+          {/* Rating — mobile only, above title */}
+          <div className="flex flex-col items-center gap-1.5 md:hidden" aria-hidden>
+            <div className="flex items-center gap-1.5 text-white">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-6 w-6 fill-current" />
+              ))}
+            </div>
+            <span className="text-sm font-medium text-white">5.0 Shopify Rating</span>
+          </div>
+          <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-[4.375rem]">
+            Enter Scholarships in Seconds
+          </h2>
+          <p className="text-base font-medium text-white md:text-xl">
+            Over 1k+ brands. Made for students.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6 md:justify-start md:gap-12">
+            <Link
+              href="/scholarship-quiz"
+              className="inline-flex h-14 min-w-[220px] items-center justify-center rounded-[19px] border-2 border-[#2E2F35] bg-white px-6 text-base font-medium text-[#2E2F35] shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-20 md:min-w-[262px] md:px-10 md:text-lg"
+            >
+              Download app
+            </Link>
+            {/* Rating — desktop only (next to button) */}
+            <div className="hidden flex-col gap-1.5 md:flex">
+              <div className="flex items-center gap-1.5 text-white" aria-hidden>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-8 w-8 fill-current" />
+                ))}
+              </div>
+              <span className="text-base font-medium text-white">
+                5.0 Shopify Rating
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -61,6 +61,7 @@ export default {
         script: ["var(--font-pathpicker-script)", "cursive"],
         volkhov: ["var(--font-volkhov)", "serif"],
         luckiest: ["var(--font-luckiest-guy)", "cursive"],
+        grace: ["var(--font-covered-by-your-grace)", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",

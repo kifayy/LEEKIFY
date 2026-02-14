@@ -46,7 +46,7 @@ export function HeroFigmaDesign() {
   }, [charIndex, isDeleting, word, wordIndex]);
 
   return (
-    <section className="relative w-full shrink-0 overflow-x-hidden bg-white py-6 md:py-8 lg:py-10 min-w-0">
+    <section className="relative w-full shrink-0 overflow-x-hidden overflow-y-hidden bg-[#F3F0FF] pt-6 pb-0 md:bg-white md:py-8 md:pb-8 lg:py-10 lg:pb-10 min-w-0">
       {/* Blurred blue glow */}
       <div
         className="absolute left-1/2 top-8 -translate-x-1/2 h-[305px] w-[312px] rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12"
@@ -70,12 +70,12 @@ export function HeroFigmaDesign() {
                 </span>
               </div>
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
-              <div className="min-h-[4.5rem] sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
-                <h1 className="text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
-                  <span className="block whitespace-nowrap">Find your</span>
-                  <span className="relative block whitespace-nowrap" style={{ minHeight: "1.2em" }}>
+              <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
+                <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
+                  <span className="block w-full text-center lg:text-left">Find your</span>
+                  <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
                     <span className="invisible" aria-hidden>scholarships</span>
-                    <span className="absolute left-0 top-0 text-[#956EFE]">
+                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[#956EFE] lg:left-0 lg:translate-x-0">
                       {displayedText}
                     </span>
                   </span>
@@ -112,7 +112,8 @@ export function HeroFigmaDesign() {
                 src={HERO_IMAGE}
                 alt="Traveler"
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: "center 20%" }}
                 sizes="(max-width: 768px) 100vw, 420px"
                 priority
               />
@@ -123,7 +124,8 @@ export function HeroFigmaDesign() {
                 src={HERO_IMAGE_DESKTOP}
                 alt="Traveler"
                 fill
-                className="object-contain object-center"
+                className="object-contain"
+                style={{ objectPosition: "center 20%" }}
                 sizes="(min-width: 1024px) 690px, (min-width: 768px) 660px, 630px"
                 priority
                 unoptimized
@@ -168,9 +170,9 @@ export function HeroFigmaDesign() {
         </div>
       </div>
 
-      {/* Soft pink glow bottom-right */}
+      {/* Soft pink glow bottom-right – inside section bounds so no layout gap */}
       <div
-        className="pointer-events-none absolute -bottom-20 right-0 h-[260px] w-[400px] opacity-10 md:-right-20"
+        className="pointer-events-none absolute bottom-0 right-0 h-[260px] w-[400px] opacity-10 md:-right-20"
         style={{
           background:
             "radial-gradient(ellipse at center, rgb(250, 134, 183) 0%, transparent 70%)",

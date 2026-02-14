@@ -24,7 +24,7 @@ const FEATURES = [
 
 export function FeaturesSection() {
   return (
-    <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-16">
+    <section className="w-full min-w-0 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16">
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="grid min-w-0 grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[244px_1fr] lg:gap-16">
           {/* Left: Header - Frame 48095467 */}
