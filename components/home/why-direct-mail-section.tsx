@@ -23,23 +23,23 @@ export function WhyDirectMailSection() {
           className="mx-auto mb-14 max-w-[603px] text-center text-3xl font-bold leading-tight tracking-tight md:mb-16 md:text-4xl lg:text-[2.5rem]"
           style={{ color: HEADING_COLOR }}
         >
-          Why use direct mail? It works like crazy.
+          Students who use PathPicker save like crazy
         </h2>
 
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-[2.5rem]">
-          {/* 28X stat */}
+          {/* 92% stat */}
           <div className="flex flex-col items-center text-center lg:w-[228px] lg:flex-shrink-0">
             <span
               className="text-5xl font-bold leading-none md:text-6xl"
               style={{ color: STAT_COLOR }}
             >
-              28X
+              92%
             </span>
             <p
               className="mt-4 max-w-[218px] text-sm leading-snug md:text-base"
               style={{ color: BODY_COLOR }}
             >
-              Higher response rate than email & digital
+              Of students said PathPicker was the easiest scholarship platform they&apos;ve ever used.
             </p>
           </div>
 
@@ -76,19 +76,19 @@ export function WhyDirectMailSection() {
             </p>
           </div>
 
-          {/* 17 Days stat */}
+          {/* 47 Seconds stat */}
           <div className="flex flex-col items-center text-center lg:w-[228px] lg:flex-shrink-0">
             <span
               className="text-5xl font-bold leading-none md:text-6xl"
               style={{ color: STAT_COLOR }}
             >
-              17 Days
+              47 Seconds
             </span>
             <p
               className="mt-4 max-w-[218px] text-sm leading-snug md:text-base"
               style={{ color: BODY_COLOR }}
             >
-              Lifespan of a postcard vs. seconds for email or SMS
+              Average time it takes PathPicker users to enter their first scholarship.
             </p>
           </div>
         </div>

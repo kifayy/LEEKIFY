@@ -71,7 +71,10 @@ export function HeroQuizCards() {
   }, []);
 
   return (
-    <section className="w-full min-w-0 overflow-x-hidden py-6 md:py-20">
+    <section
+      className="w-full min-w-0 overflow-x-hidden py-6 md:py-20"
+      style={{ backgroundColor: "#EEECFF" }}
+    >
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">
           {CARDS.map((card) => (
@@ -80,7 +83,8 @@ export function HeroQuizCards() {
               href={card.href}
               target={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "_blank" : undefined}
               rel={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "noopener noreferrer" : undefined}
-              className="group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]"
+              className="group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]"
+              style={{ backgroundColor: "#F0EEFF" }}
             >
               {/* Card - Figma travel_card structure */}
               <div className="relative flex min-h-0 flex-1 flex-col">
@@ -117,8 +121,8 @@ export function HeroQuizCards() {
                 <div
                   className={
                     card.href.includes("archetype") || card.href === "/scholarship-quiz"
-                      ? "flex min-h-0 flex-1 flex-col rounded-t-[29px] rounded-b-[29px] bg-white"
-                      : "flex min-h-0 flex-1 flex-col rounded-b-[29px] bg-white"
+                      ? "flex min-h-0 flex-1 flex-col rounded-t-[29px] rounded-b-[29px]"
+                      : "flex min-h-0 flex-1 flex-col rounded-b-[29px]"
                   }
                 >
                   {/* Title + description */}

@@ -26,9 +26,9 @@ export function FeaturesSection() {
   return (
     <section className="w-full min-w-0 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16">
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
-        <div className="grid min-w-0 grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[244px_1fr] lg:gap-16">
+        <div className="grid min-w-0 grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[244px_1fr_1fr_1fr] lg:gap-16">
           {/* Left: Header - Frame 48095467 */}
-          <div className="flex flex-col items-center gap-4 text-center md:items-start md:gap-6 md:text-left">
+          <div className="flex flex-col items-center gap-4 text-center md:items-start md:gap-6 md:text-left lg:col-span-1">
             <p
               className="text-sm font-bold uppercase tracking-wider"
               style={{ color: "#956EFE" }}
@@ -46,8 +46,8 @@ export function FeaturesSection() {
             </p>
           </div>
 
-          {/* Right: Feature cards - vertical stack on mobile/sm; on lg stacked vertically in single column */}
-          <div className="grid min-w-0 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-1 lg:gap-8">
+          {/* Right: Feature cards - vertical stack on mobile/sm; on lg all three in one row */}
+          <div className="grid min-w-0 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:col-span-3 lg:grid-cols-3 lg:gap-8">
             {FEATURES.map((feature) => (
               <div
                 key={feature.title}
