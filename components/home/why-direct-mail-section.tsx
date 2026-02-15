@@ -8,7 +8,7 @@ const STAT_COLOR = "rgb(46, 47, 53)"; // 0.18, 0.184, 0.208
 const BODY_COLOR = "rgb(88, 89, 93)"; // 0.345, 0.349, 0.365
 
 const CHART_IMAGE =
-  "https://storage.googleapis.com/images_592/Group%203d31.png";
+  "https://storage.googleapis.com/images_592/Group%20338.png";
 const CHART_ALT = "Response rate chart";
 const CHART_CAPTION = "We always find easy scholarships for you...";
 
@@ -43,21 +43,21 @@ export function WhyDirectMailSection() {
             </p>
           </div>
 
-          {/* Chart image + caption */}
-          <div className="flex flex-col items-center w-full max-w-[342px] lg:w-[342px] lg:max-w-none lg:flex-shrink-0">
-            <div className="relative h-[360px] w-full max-w-full overflow-hidden rounded-lg md:h-[302px] md:max-w-[342px]">
+          {/* Chart image + caption — 30% larger (342→445, 360→468, 302→393) */}
+          <div className="flex flex-col items-center w-full max-w-[445px] lg:w-[445px] lg:max-w-none lg:flex-shrink-0">
+            <div className="relative h-[468px] w-full max-w-full -translate-x-[-4%] overflow-hidden rounded-lg md:translate-x-0 md:h-[393px] md:max-w-[445px]">
               <Image
                 src={CHART_IMAGE}
                 alt={CHART_ALT}
                 fill
                 className="object-contain object-center"
-                sizes="(max-width: 768px) 100vw, 342px"
+                sizes="(max-width: 768px) 100vw, 445px"
                 unoptimized
                 onError={(e) => {
-                  const target = e.currentTarget;
-                  target.style.display = "none";
-                  const fallback = target.nextElementSibling;
-                  if (fallback) (fallback as HTMLElement).style.display = "block";
+                  const wrapper = e.currentTarget.parentElement;
+                  const fallback = wrapper?.nextElementSibling;
+                  if (wrapper) wrapper.style.display = "none";
+                  if (fallback) (fallback as HTMLElement).style.display = "flex";
                 }}
               />
               <div
@@ -69,7 +69,7 @@ export function WhyDirectMailSection() {
               </div>
             </div>
             <p
-              className="-mt-0.5 text-center text-sm italic md:mt-2 md:not-italic"
+              className="hidden -mt-0.5 text-center text-sm italic md:block md:mt-2 md:not-italic"
               style={{ color: BODY_COLOR }}
             >
               {CHART_CAPTION}
