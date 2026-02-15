@@ -214,13 +214,20 @@ export default function ScholarshipQuizPage() {
       <ReviewsCarousel />
 
       {/* Take quiz CTA – duplicate of hero button, centered, larger */}
-      <div className="flex justify-center px-4 py-10 md:py-14">
+      <div className="flex flex-col items-center gap-4 px-4 py-10 md:py-14">
         <Link
           href="/scholarship-quiz"
           className="inline-flex h-[4.5rem] min-w-[320px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-14 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[380px] md:px-16 md:text-3xl"
           style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
         >
           💸 Take quiz
+        </Link>
+        <Link
+          href="/scholarships"
+          className="text-sm font-medium underline underline-offset-2 transition hover:opacity-80"
+          style={{ color: TEXT_MUTED }}
+        >
+          Or browse scholarship guides &amp; articles →
         </Link>
       </div>
     </div>

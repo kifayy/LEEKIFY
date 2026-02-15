@@ -1,11 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 
+export type FAQItem = { question: string; answer: string };
+
 export type ScholarshipsPageArticle = {
   id: string;
   title: string;
   slug: string;
   meta_title: string | null;
   meta_description: string | null;
+  summary: string | null;
   content: string | null;
   published_at: string | null;
   og_image: string | null;
@@ -15,6 +18,7 @@ export type ScholarshipsPageArticle = {
   category_slug: string | null;
   filter_field: string | null;
   filter_type: string | null;
+  faq: FAQItem[] | null;
   created_at: string;
   updated_at: string;
 };

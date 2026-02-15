@@ -16,6 +16,7 @@ create index if not exists idx_scholarships_page_published_at on public.scholars
 
 alter table public.scholarships_page enable row level security;
 
+drop policy if exists "Allow public read access on scholarships_page" on public.scholarships_page;
 create policy "Allow public read access on scholarships_page"
   on public.scholarships_page for select
   using (true);

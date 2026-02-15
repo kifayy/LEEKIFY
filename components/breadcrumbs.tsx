@@ -5,7 +5,18 @@ export type BreadcrumbItem = {
   href?: string;
 };
 
+function getBaseUrl(): string {
+  if (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  if (typeof process !== "undefined" && process.env?.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "";
+}
+
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+  const baseUrl = getBaseUrl();
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -13,7 +24,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: item.label,
-      ...(item.href && { item: item.href }),
+      ...(item.href && baseUrl && { item: { "@id": `${baseUrl}${item.href}` } }),
     })),
   };
 

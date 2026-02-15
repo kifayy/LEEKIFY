@@ -19,6 +19,7 @@ create index if not exists idx_sas_article on public.scholarship_article_scholar
 create index if not exists idx_sas_scholarship on public.scholarship_article_scholarships(scholarship_id);
 
 alter table public.scholarship_article_scholarships enable row level security;
+drop policy if exists "Allow public read on scholarship_article_scholarships" on public.scholarship_article_scholarships;
 create policy "Allow public read on scholarship_article_scholarships"
   on public.scholarship_article_scholarships for select using (true);
 

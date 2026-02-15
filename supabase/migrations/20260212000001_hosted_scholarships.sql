@@ -22,6 +22,7 @@ create index if not exists idx_hosted_scholarships_is_active on public.hosted_sc
 create index if not exists idx_hosted_scholarships_deadline on public.hosted_scholarships (deadline);
 
 alter table public.hosted_scholarships enable row level security;
+drop policy if exists "Allow public read on hosted_scholarships" on public.hosted_scholarships;
 create policy "Allow public read on hosted_scholarships"
   on public.hosted_scholarships for select using (is_active = true);
 
@@ -41,5 +42,6 @@ create index if not exists idx_hosted_submissions_created on public.hosted_schol
 create index if not exists idx_hosted_submissions_exported on public.hosted_scholarship_submissions (exported_at) where exported_at is null;
 
 alter table public.hosted_scholarship_submissions enable row level security;
+drop policy if exists "Allow public insert on hosted_scholarship_submissions" on public.hosted_scholarship_submissions;
 create policy "Allow public insert on hosted_scholarship_submissions"
   on public.hosted_scholarship_submissions for insert with check (true);

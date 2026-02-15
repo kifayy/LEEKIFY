@@ -15,6 +15,7 @@ create table if not exists public.scholarship_categories (
 create index if not exists idx_scholarship_categories_slug on public.scholarship_categories (slug);
 
 alter table public.scholarship_categories enable row level security;
+drop policy if exists "Allow public read on scholarship_categories" on public.scholarship_categories;
 create policy "Allow public read on scholarship_categories"
   on public.scholarship_categories for select using (true);
 

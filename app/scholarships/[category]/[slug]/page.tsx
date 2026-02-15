@@ -2,8 +2,13 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getArticleByCategoryAndSlug, getSimilarArticles } from "@/lib/supabase/queries/scholarships-page";
+import type { FAQItem } from "@/lib/supabase/queries/scholarships-page";
 import { getScholarshipsForArticle } from "@/lib/supabase/queries/scholarships";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
 function formatDate(date: string | null): string {
   if (!date) return "";
@@ -57,9 +62,53 @@ async function ArticleContent({ params }: Props) {
     ? article.category_slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Scholarships";
 
+  const articleUrl = SITE_URL ? `${SITE_URL}/scholarships/${category}/${slug}` : "";
+  const articleSchema = SITE_URL
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: article.title,
+        description: article.meta_description ?? undefined,
+        image: article.og_image ?? undefined,
+        datePublished: article.published_at ?? undefined,
+        dateModified: article.updated_at ?? article.published_at ?? undefined,
+        author: { "@type": "Organization", name: "Pathpicker" },
+        publisher: { "@type": "Organization", name: "Pathpicker" },
+        mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+      }
+    : null;
+
+  const faqItems: FAQItem[] = Array.isArray(article.faq)
+    ? article.faq.filter((q): q is FAQItem => q && typeof q === "object" && "question" in q && "answer" in q)
+    : [];
+  const faqSchema =
+    faqItems.length > 0 && SITE_URL
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }
+      : null;
+
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto max-w-[1280px] px-4 py-8 md:px-6 md:py-12">
+        {articleSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+          />
+        )}
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -83,6 +132,13 @@ async function ArticleContent({ params }: Props) {
             )}
           </header>
 
+          {/* Summary (answer at top) - AI-overview friendly */}
+          {article.summary && (
+            <div className="mx-auto mt-6 max-w-[843px] rounded-lg border border-[#E5E5E7] bg-[#FAFAFA] px-5 py-4">
+              <p className="text-[#181A1D] leading-relaxed">{article.summary}</p>
+            </div>
+          )}
+
           {/* Hero image */}
           {article.og_image && (
             <div className="relative mt-8 aspect-[1280/582] w-full overflow-hidden rounded-lg bg-[#F5F5F5]">
@@ -101,6 +157,23 @@ async function ArticleContent({ params }: Props) {
               className="prose prose-neutral mx-auto mt-10 max-w-[843px] [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#181A1D] [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:my-6 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:space-y-2 [&_li]:mb-1 [&_a]:font-medium [&_a]:text-[#7C4EE4] [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-[#6B3ED4]"
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
+          )}
+
+          {/* FAQ block - visible + FAQPage schema */}
+          {faqItems.length > 0 && (
+            <section className="mx-auto mt-16 max-w-[843px]" aria-labelledby="faq-heading">
+              <h2 id="faq-heading" className="text-2xl font-bold text-[#181A1D] md:text-3xl">
+                FAQs
+              </h2>
+              <ul className="mt-6 space-y-6" role="list">
+                {faqItems.map((item, i) => (
+                  <li key={i} className="border-b border-[#E5E5E7] pb-6 last:border-0 last:pb-0">
+                    <h3 className="text-lg font-semibold text-[#181A1D]">{item.question}</h3>
+                    <p className="mt-2 text-[#6E6E73] leading-relaxed">{item.answer}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
 
           {/* Scholarships section - linked awards (slugs) */}

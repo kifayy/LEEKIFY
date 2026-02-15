@@ -21,6 +21,7 @@ create index if not exists idx_scholarships_deadline on public.scholarships (dea
 -- Enable RLS (optional; adjust policies as needed)
 alter table public.scholarships enable row level security;
 
+drop policy if exists "Allow public read access on scholarships" on public.scholarships;
 create policy "Allow public read access on scholarships"
   on public.scholarships for select
   using (true);
