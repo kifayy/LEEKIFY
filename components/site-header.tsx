@@ -19,7 +19,7 @@ const scholarshipCategories = [
 ];
 
 const navLinks = [
-  { href: "http://my.pathpicker.com/archetype", label: "Archetype Quiz" },
+  { href: "/archetype-quiz", label: "Archetype Quiz" },
   { href: "/scholarship-quiz", label: "Scholarship Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
   { href: "/newsletter", label: "Newsletter" },

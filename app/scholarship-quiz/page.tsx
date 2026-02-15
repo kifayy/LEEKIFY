@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ReviewsCarousel } from "@/components/home/reviews-carousel";
 
 const SECTION_BG = "#EEECFF";
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
@@ -17,19 +18,32 @@ const CAROUSEL_IMAGES = [
   "https://storage.googleapis.com/images_592/22.png",
 ];
 
+const WIN_MORE_FEATURES = [
+  {
+    icon: "https://storage.googleapis.com/images_592/click_18900262.png",
+    title: "Tap to Enter",
+    description:
+      "Scholarships are as simple as tapping your matches, and entering in seconds.",
+  },
+  {
+    icon: "https://storage.googleapis.com/images_592/pencil_768034.png",
+    title: "Autofill",
+    description:
+      "On our app, you can autofill scholarships to speed up the process by 3.2x.",
+  },
+  {
+    icon: "https://storage.googleapis.com/images_592/flying-money_3141991%20(3).png",
+    title: "Track Wins",
+    description:
+      "You'll get notified by email (or in app) if you win a scholarship so you'll never miss out.",
+  },
+];
+
 export const metadata = {
   title: "Scholarship Quiz | Pathpicker",
   description:
     "Find scholarships matched to your profile. Quick apply, no-essay options. Join thousands of students.",
 };
-
-const OUTCOMES = [
-  "Scholarships matched to your profile and goals",
-  "No-essay and quick-apply options",
-  "Deadline and amount at a glance",
-  "Direct links to apply",
-  "Updated monthly with new opportunities",
-];
 
 export default function ScholarshipQuizPage() {
   return (
@@ -160,37 +174,54 @@ export default function ScholarshipQuizPage() {
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="container mx-auto max-w-2xl px-4 py-8 md:py-16">
-        <h2 className="text-lg font-bold text-[#181A1D] md:text-xl">What you’ll get</h2>
-        <ul className="mt-2 list-inside list-disc space-y-1.5 text-sm font-normal text-muted-foreground md:mt-3 md:space-y-2">
-          {OUTCOMES.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <div className="mt-6 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
-          <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <span key={i} className="text-lg md:text-xl">★</span>
+      {/* Win More Scholarships – white card (Figma 4:3955) */}
+      <section className="px-4 py-10 md:py-14" aria-label="Win more scholarships">
+        <div className="mx-auto max-w-[1160px] rounded-[30px] bg-white px-4 py-12 md:px-10 md:py-14">
+          <h2 className="text-center text-xl font-bold text-black md:text-2xl lg:text-3xl">
+            Win More Scholarships, With Less Work
+          </h2>
+          <p className="mx-auto mt-6 max-w-[675px] text-center text-sm leading-relaxed text-[#090808] md:text-base">
+            The scholarship system sucks, let&apos;s be honest. That&apos;s why our algorithm searches your student profile criteria to thousands of scholarships and sees which ones you qualify for so you can enter in minutes, not hours.
+          </p>
+          <div className="mt-10 flex flex-col gap-10 md:mt-14 md:flex-row md:justify-center md:gap-8 lg:gap-12">
+            {WIN_MORE_FEATURES.map((feature) => (
+              <div
+                key={feature.title}
+                className="flex flex-1 flex-col items-center text-center md:max-w-[310px]"
+              >
+                <div className="relative h-[53px] w-[52px] shrink-0">
+                  <Image
+                    src={feature.icon}
+                    alt=""
+                    fill
+                    className="object-contain"
+                    sizes="52px"
+                    unoptimized
+                  />
+                </div>
+                <h3 className="mt-4 text-base font-bold text-black md:text-lg">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-black md:text-base">
+                  {feature.description}
+                </p>
+              </div>
             ))}
           </div>
-          <span className="text-sm text-muted-foreground">40k+ Students Matched</span>
         </div>
-        <div className="mt-6 md:mt-8">
-          <Button asChild size="lg" variant="pathpicker" className="w-full sm:w-auto">
-            <Link href="/scholarship-quiz">
-              <Sparkles className="mr-2 h-4 w-4" />
-              Start quiz
-            </Link>
-          </Button>
-        </div>
-        <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
-          Pathpicker is built by the same team as{" "}
-          <a href="https://awarded.app" className="text-pathpicker-purple underline" target="_blank" rel="noopener noreferrer">
-            Awarded
-          </a>
-          . We help students avoid scams and find real opportunities.
-        </p>
+      </section>
+
+      <ReviewsCarousel />
+
+      {/* Take quiz CTA – duplicate of hero button, centered, larger */}
+      <div className="flex justify-center px-4 py-10 md:py-14">
+        <Link
+          href="/scholarship-quiz"
+          className="inline-flex h-[4.5rem] min-w-[320px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-14 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[380px] md:px-16 md:text-3xl"
+          style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
+        >
+          💸 Take quiz
+        </Link>
       </div>
     </div>
   );
