@@ -7,6 +7,27 @@ import {
 import { FeaturedScholarshipsCarousel } from "@/components/home/featured-scholarships-carousel";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
 
+const PLACEHOLDER_FIELDS: Pick<
+  Scholarship,
+  | "description_short"
+  | "requirements_summary"
+  | "highlight_1"
+  | "highlight_2"
+  | "highlight_3"
+  | "highlight_4"
+  | "highlight_5"
+  | "is_sweepstake"
+> = {
+  description_short: null,
+  requirements_summary: null,
+  highlight_1: null,
+  highlight_2: null,
+  highlight_3: null,
+  highlight_4: null,
+  highlight_5: null,
+  is_sweepstake: null,
+};
+
 const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
   {
     id: "placeholder-1",
@@ -23,6 +44,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
   {
     id: "placeholder-2",
@@ -39,6 +61,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
   {
     id: "placeholder-3",
@@ -55,6 +78,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
   {
     id: "placeholder-4",
@@ -71,6 +95,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
   {
     id: "placeholder-5",
@@ -87,6 +112,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
   {
     id: "placeholder-6",
@@ -103,6 +129,7 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
     meta_description: null,
     created_at: "",
     updated_at: "",
+    ...PLACEHOLDER_FIELDS,
   },
 ];
 
