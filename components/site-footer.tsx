@@ -1,16 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
-
-const SOCIAL_LINKS = [
-  { href: "https://facebook.com", icon: Facebook, label: "Facebook" },
-  { href: "https://twitter.com", icon: Twitter, label: "Twitter" },
-  { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
-  { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://youtube.com", icon: Youtube, label: "YouTube" },
-];
 
 const FOOTER_COLUMNS = [
   {
@@ -26,7 +19,7 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "http://my.pathpicker.com/archetype", label: "Archetype Quiz" },
+      { href: "https://my.pathpicker.com/archetype", label: "Archetype Quiz" },
       { href: "/scholarship-quiz", label: "Scholarship Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
     ],
@@ -38,60 +31,45 @@ const FOOTER_COLUMNS = [
       { href: "https://awarded.app/providers", label: "For Business" },
     ],
   },
-  {
-    title: "Contact",
-    links: [
-      { href: "mailto:hello@pathpicker.com", label: "hello@pathpicker.com" },
-    ],
-  },
 ];
+
+const FOOTER_DARK = "#2E2F35";
+const FOOTER_MUTED = "#58595D";
+const FOOTER_BORDER = "#E6E6E7";
 
 export function SiteFooter() {
   return (
     <footer className="w-full bg-white">
-      {/* Top divider */}
-      <div className="h-px w-full shrink-0" style={{ backgroundColor: "#EFF0F7" }} />
-
-      <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
-          {/* Left: Logo, Copyright, Social */}
-          <div className="flex flex-col gap-6">
+      <div className="mx-auto flex max-w-[1290px] flex-col px-4 py-16 md:px-[75px] md:gap-24">
+        {/* Top row: logo + tagline, then link columns */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+          {/* Left: Logo + tagline (replaces eco-label block) */}
+          <div className="flex max-w-[295px] flex-col gap-6">
             <Link href="/" className="flex w-fit items-center active:opacity-80">
               <Image
                 src={LOGO_URL}
                 alt="Pathpicker"
-                width={540}
-                height={162}
-                className="h-36 w-auto object-contain md:h-[10.5rem]"
+                width={336}
+                height={126}
+                className="h-[7.5rem] w-auto object-contain md:h-36"
                 unoptimized
               />
             </Link>
-            <p className="max-w-[306px] text-sm font-normal leading-relaxed" style={{ color: "#6E6C8F" }}>
-              © {2026} Pathpicker. Find your student archetype and scholarships that fit.
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: FOOTER_MUTED }}
+            >
+              Find your student archetype and scholarships that fit.
             </p>
-            <div className="flex items-center gap-4">
-              {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: "#F2F2FF" }}
-                >
-                  <Icon className="h-4 w-4" style={{ color: "#F95F9F" }} strokeWidth={1.5} />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Right: Footer columns - flex row so they display horizontally */}
-          <div className="flex flex-row flex-wrap gap-x-12 gap-y-10">
+          {/* Link columns */}
+          <div className="flex flex-wrap gap-x-12 gap-y-10 lg:gap-x-16">
             {FOOTER_COLUMNS.map((column) => (
-              <div key={column.title} className="flex min-w-[120px] flex-col gap-4">
+              <div key={column.title} className="flex min-w-[120px] flex-col gap-6">
                 <h3
-                  className="text-sm font-bold text-[#181A1D]"
+                  className="text-sm font-bold"
+                  style={{ color: FOOTER_DARK }}
                 >
                   {column.title}
                 </h3>
@@ -103,7 +81,7 @@ export function SiteFooter() {
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="text-sm transition-colors hover:opacity-80"
-                        style={{ color: "#6E6C8F" }}
+                        style={{ color: FOOTER_DARK }}
                       >
                         {link.label}
                       </Link>
@@ -112,26 +90,61 @@ export function SiteFooter() {
                 </ul>
               </div>
             ))}
+
+            {/* Contact column */}
+            <div className="flex min-w-[120px] flex-col gap-6">
+              <h3
+                className="text-sm font-bold"
+                style={{ color: FOOTER_DARK }}
+              >
+                Contact
+              </h3>
+              <div className="flex flex-col gap-4">
+                <a
+                  href="mailto:hello@pathpicker.com"
+                  className="flex items-center gap-2.5 text-sm transition-colors hover:opacity-80"
+                  style={{ color: FOOTER_DARK }}
+                >
+                  <span className="text-lg" aria-hidden>✉</span>
+                  hello@pathpicker.com
+                </a>
+                <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
+                  ❤️ Built for students, by students.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom divider */}
+        {/* Bottom bar: divider + logo, copyright, buttons */}
         <div
-          className="my-10 h-px w-full shrink-0 md:my-12"
-          style={{ backgroundColor: "#D9DBE9" }}
-        />
-
-        {/* Footer bar */}
-        <div className="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row">
-          <p style={{ color: "#6E6C8F" }}>
-            © {2026} Pathpicker. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="transition-colors hover:opacity-80" style={{ color: "#6E6C8F" }}>
-              Privacy
+          className="flex flex-col gap-6 border-t pt-8 md:flex-row md:items-center md:justify-between md:gap-8"
+          style={{ borderColor: FOOTER_BORDER }}
+        >
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
+            <Link href="/" className="flex w-fit items-center active:opacity-80">
+              <Image
+                src={LOGO_URL}
+                alt="Pathpicker"
+                width={390}
+                height={72}
+                className="h-[4.5rem] w-auto object-contain"
+                unoptimized
+              />
             </Link>
-            <Link href="/terms" className="transition-colors hover:opacity-80" style={{ color: "#6E6C8F" }}>
-              Terms
+            <p className="text-sm" style={{ color: FOOTER_MUTED }}>
+              © {new Date().getFullYear()} Pathpicker. All rights reserved.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="https://my.pathpicker.com/archetype"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 min-w-[137px] items-center justify-center rounded-xl border-2 bg-white px-6 text-sm font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-90"
+              style={{ borderColor: FOOTER_DARK, color: FOOTER_DARK }}
+            >
+              Try Awarded
             </Link>
           </div>
         </div>

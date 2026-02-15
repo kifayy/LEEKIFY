@@ -1,20 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { Star } from "lucide-react";
 
 const BEEHIIV_EMBED_URL =
   "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";
-const WIDGET_IMAGE_URL =
-  "https://storage.googleapis.com/images_592/Group%201000005829.png";
 
 export function NewsletterWidget() {
   return (
     <div
-      className="relative flex min-w-0 flex-col gap-6 rounded-[24px] border-2 bg-white px-4 py-8 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
+      className="relative flex min-w-0 flex-col gap-6 rounded-[24px] border-2 bg-white px-4 py-8 md:flex-row md:items-center md:justify-center md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
       style={{ borderColor: "rgba(149, 110, 254, 0.4)" }}
     >
-      <div className="order-1 flex min-w-0 flex-1 flex-col gap-4 md:min-w-[320px] md:flex-shrink-0 md:order-1">
+      <div className="order-1 flex min-w-0 flex-1 flex-col gap-4 md:max-w-[450px] md:flex-shrink-0 md:order-1">
         <div className="inline-flex w-fit items-center gap-2">
           <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
             <Star className="h-4 w-4 fill-current" />
@@ -57,16 +54,6 @@ export function NewsletterWidget() {
             title="Newsletter signup"
           />
         </div>
-      </div>
-      <div className="order-2 min-w-0 shrink-0 md:order-2 md:max-w-[420px]">
-        <Image
-          src={WIDGET_IMAGE_URL}
-          alt="Newsletter"
-          width={675}
-          height={450}
-          className="w-full rounded-lg object-cover"
-          unoptimized
-        />
       </div>
     </div>
   );

@@ -20,31 +20,10 @@ export function NewsletterCTA({
     window.open(NEWSLETTER_URL, "_blank", "noopener,noreferrer");
   };
 
-  const bannerImageUrl = "https://storage.googleapis.com/images_592/Group%201000005829.png";
-  const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
-
   if (variant === "want-scholarships") {
     return (
       <section className="w-full min-w-0 overflow-x-hidden py-10 md:py-20">
         <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
-          <div className="mb-8 flex justify-center">
-            <a
-              href={AWARDED_APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full max-w-4xl"
-              aria-label="Download Awarded app on the App Store"
-            >
-              <Image
-                src={bannerImageUrl}
-                alt="Download Awarded - Win Scholarships on the App Store"
-                width={800}
-                height={200}
-                className="h-auto w-full object-contain"
-                unoptimized
-              />
-            </a>
-          </div>
           {/* Newsletter: white bg, slight purple stroke, image + Beehiiv embed */}
           <div
             className="relative flex min-w-0 flex-col gap-6 rounded-[24px] border-2 bg-white px-4 py-8 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[30px] md:px-16 md:py-16"
