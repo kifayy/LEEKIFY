@@ -8,25 +8,25 @@ const STAT_COLOR = "rgb(46, 47, 53)"; // 0.18, 0.184, 0.208
 const BODY_COLOR = "rgb(88, 89, 93)"; // 0.345, 0.349, 0.365
 
 const CHART_IMAGE =
-  "https://storage.googleapis.com/images_592/home-number-chart-p-500.webp";
+  "https://storage.googleapis.com/images_592/Group%203d31.png";
 const CHART_ALT = "Response rate chart";
-const CHART_CAPTION = "Your messages get read";
+const CHART_CAPTION = "We always find easy scholarships for you...";
 
 export function WhyDirectMailSection() {
   return (
     <section
-      className="w-full min-w-0 overflow-x-hidden py-16 md:py-20"
+      className="w-full min-w-0 overflow-x-hidden py-10 md:py-20"
       style={{ backgroundColor: SECTION_BG }}
     >
       <div className="container mx-auto max-w-[1024px] px-4 md:px-6 min-w-0">
         <h2
-          className="mx-auto mb-14 max-w-[603px] text-center text-3xl font-bold leading-tight tracking-tight md:mb-16 md:text-4xl lg:text-[2.5rem]"
+          className="mx-auto mb-8 max-w-[603px] text-center text-3xl font-bold leading-tight tracking-tight md:mb-16 md:text-4xl lg:text-[2.5rem]"
           style={{ color: HEADING_COLOR }}
         >
-          Students who use PathPicker save like crazy
+          Students who use PathPicker start on the right path
         </h2>
 
-        <div className="flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-[2.5rem]">
+        <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between lg:gap-[2.5rem]">
           {/* 92% stat */}
           <div className="flex flex-col items-center text-center lg:w-[228px] lg:flex-shrink-0">
             <span
@@ -39,19 +39,19 @@ export function WhyDirectMailSection() {
               className="mt-4 max-w-[218px] text-sm leading-snug md:text-base"
               style={{ color: BODY_COLOR }}
             >
-              Of students said PathPicker was the easiest scholarship platform they&apos;ve ever used.
+              Of students said PathPicker&apos;s results matched them to opportunities their school never told them about.
             </p>
           </div>
 
           {/* Chart image + caption */}
-          <div className="flex flex-col items-center lg:w-[228px] lg:flex-shrink-0">
-            <div className="relative h-[180px] w-full max-w-[228px] overflow-hidden rounded-lg bg-white/80 md:h-[201px]">
+          <div className="flex flex-col items-center w-full max-w-[342px] lg:w-[342px] lg:max-w-none lg:flex-shrink-0">
+            <div className="relative h-[360px] w-full max-w-full overflow-hidden rounded-lg md:h-[302px] md:max-w-[342px]">
               <Image
                 src={CHART_IMAGE}
                 alt={CHART_ALT}
                 fill
                 className="object-contain object-center"
-                sizes="228px"
+                sizes="(max-width: 768px) 100vw, 342px"
                 unoptimized
                 onError={(e) => {
                   const target = e.currentTarget;
@@ -69,20 +69,20 @@ export function WhyDirectMailSection() {
               </div>
             </div>
             <p
-              className="mt-2 text-center text-sm"
+              className="-mt-0.5 text-center text-sm italic md:mt-2 md:not-italic"
               style={{ color: BODY_COLOR }}
             >
               {CHART_CAPTION}
             </p>
           </div>
 
-          {/* 47 Seconds stat */}
+          {/* 47s stat */}
           <div className="flex flex-col items-center text-center lg:w-[228px] lg:flex-shrink-0">
             <span
               className="text-5xl font-bold leading-none md:text-6xl"
               style={{ color: STAT_COLOR }}
             >
-              47 Seconds
+              47s
             </span>
             <p
               className="mt-4 max-w-[218px] text-sm leading-snug md:text-base"

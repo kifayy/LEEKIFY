@@ -73,7 +73,7 @@ export function HeroQuizCards() {
   return (
     <section
       className="w-full min-w-0 overflow-x-hidden py-6 md:py-20"
-      style={{ backgroundColor: "#EEECFF" }}
+      style={{ backgroundColor: "#ffffff" }}
     >
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">

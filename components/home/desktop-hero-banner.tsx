@@ -79,7 +79,7 @@ export function DesktopHeroBanner() {
               className="max-w-[554px] text-base leading-relaxed md:text-lg"
               style={{ color: "#58595D" }}
             >
-              Students who use PathPicker save like crazy.
+              Students who use PathPicker start on the right path.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-start">
