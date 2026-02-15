@@ -30,12 +30,22 @@ export function EnterScholarshipsSection() {
         <div className="flex max-w-[760px] flex-1 flex-col gap-5 pt-6 text-white lg:pt-20">
           {/* Rating — mobile only, above title */}
           <div className="flex flex-col items-center gap-1.5 md:hidden" aria-hidden>
-            <div className="flex items-center gap-1.5 text-white">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-6 w-6 fill-current" />
-              ))}
+            <div className="flex items-center gap-1.5 text-amber-400">
+              {Array.from({ length: 5 }).map((_, i) =>
+                i === 4 ? (
+                  <span
+                    key={i}
+                    className="inline-block h-6 w-[1.125rem] overflow-hidden"
+                    aria-hidden
+                  >
+                    <Star className="h-6 w-6 shrink-0 fill-current" />
+                  </span>
+                ) : (
+                  <Star key={i} className="h-6 w-6 fill-current" />
+                )
+              )}
             </div>
-            <span className="text-sm font-medium text-white">5.0 Shopify Rating</span>
+            <span className="text-sm font-medium text-white">4.8/5 on iOS</span>
           </div>
           <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-[4.375rem]">
             Enter Scholarships in Seconds
@@ -46,19 +56,35 @@ export function EnterScholarshipsSection() {
           <div className="flex flex-wrap items-center justify-center gap-6 md:justify-start md:gap-12">
             <Link
               href="/scholarship-quiz"
-              className="inline-flex h-14 min-w-[220px] items-center justify-center rounded-[19px] border-2 border-[#2E2F35] bg-white px-6 text-base font-medium text-[#2E2F35] shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-20 md:min-w-[262px] md:px-10 md:text-lg"
+              className="inline-flex h-14 min-w-[220px] items-center justify-center gap-2 rounded-[19px] border-2 border-[#2E2F35] bg-white px-6 text-base font-medium text-[#2E2F35] shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-20 md:min-w-[262px] md:px-10 md:text-lg"
             >
-              Download app
+              <img
+              src="https://cdn-icons-png.flaticon.com/512/0/747.png"
+              alt=""
+              className="h-6 w-6 md:h-7 md:w-7 object-contain"
+              aria-hidden
+            />
+              Download on iOS
             </Link>
             {/* Rating — desktop only (next to button) */}
             <div className="hidden flex-col gap-1.5 md:flex">
-              <div className="flex items-center gap-1.5 text-white" aria-hidden>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-8 w-8 fill-current" />
-                ))}
+              <div className="flex items-center gap-1.5 text-amber-400" aria-hidden>
+                {Array.from({ length: 5 }).map((_, i) =>
+                  i === 4 ? (
+                    <span
+                      key={i}
+                      className="inline-block h-8 w-6 overflow-hidden"
+                      aria-hidden
+                    >
+                      <Star className="h-8 w-8 shrink-0 fill-current" />
+                    </span>
+                  ) : (
+                    <Star key={i} className="h-8 w-8 fill-current" />
+                  )
+                )}
               </div>
               <span className="text-base font-medium text-white">
-                5.0 Shopify Rating
+                4.8/5 on iOS
               </span>
             </div>
           </div>

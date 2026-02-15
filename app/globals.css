@@ -66,6 +66,7 @@
   }
 }
 
+
 @keyframes marquee-y {
   0% {
     transform: translateY(0);
