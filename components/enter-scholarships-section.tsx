@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Star } from "lucide-react";
 
 const SECTION_BG_IMAGE =
@@ -54,18 +55,35 @@ export function EnterScholarshipsSection() {
             Over 1k+ brands. Made for students.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:justify-start md:gap-12">
-            <Link
-              href="/scholarship-quiz"
-              className="inline-flex h-14 min-w-[220px] items-center justify-center gap-2 rounded-[19px] border-2 border-[#2E2F35] bg-white px-6 text-base font-medium text-[#2E2F35] shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-20 md:min-w-[262px] md:px-10 md:text-lg"
-            >
-              <img
-              src="https://cdn-icons-png.flaticon.com/512/0/747.png"
-              alt=""
-              className="h-6 w-6 md:h-7 md:w-7 object-contain"
-              aria-hidden
-            />
-              Download on iOS
-            </Link>
+            <div className="flex flex-col items-center gap-3 md:items-start">
+              <Link
+                href="/scholarship-quiz"
+                className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/0/747.png"
+                  alt=""
+                  className="h-6 w-6 object-contain"
+                  aria-hidden
+                />
+                Download on iOS
+              </Link>
+<p className="hidden self-center text-base font-medium text-white md:block">or…</p>
+            <a
+              href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+              className="relative hidden h-16 w-full max-w-[280px] overflow-hidden rounded-[15px] transition-opacity hover:opacity-95 active:opacity-90 md:block md:h-20 md:max-w-[320px]"
+                aria-label="Get started — text to get matched scholarships"
+              >
+                <Image
+                  src="https://storage.googleapis.com/images_592/Groussp%206.png"
+                  alt="Get started"
+                  fill
+                  className="object-contain object-center"
+                  sizes="(max-width: 768px) 280px, 320px"
+                  unoptimized
+                />
+              </a>
+            </div>
             {/* Rating — desktop only (next to button) */}
             <div className="hidden flex-col gap-1.5 md:flex">
               <div className="flex items-center gap-1.5 text-amber-400" aria-hidden>

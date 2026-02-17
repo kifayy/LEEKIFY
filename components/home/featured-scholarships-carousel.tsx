@@ -58,7 +58,10 @@ export function FeaturedScholarshipsCarousel({
   }, [api]);
 
   return (
-    <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
+    <section
+      className="w-full min-w-0 overflow-x-hidden py-10 md:py-20"
+      style={{ backgroundColor: "rgb(243, 250, 250)" }}
+    >
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         {/* Header - Figma Frame 29 */}
         <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8 md:mb-10 md:items-end">

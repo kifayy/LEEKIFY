@@ -65,7 +65,7 @@ export function SiteHeader() {
                 alt="Pathpicker"
                 width={600}
                 height={180}
-                className="h-14 w-auto max-w-[200px] object-contain object-left sm:h-16 sm:max-w-[220px] md:h-20 md:max-w-[260px] lg:h-24 lg:max-w-[280px]"
+                className="h-28 w-auto max-w-[400px] object-contain object-left sm:h-32 sm:max-w-[440px] md:h-40 md:max-w-[520px] lg:h-48 lg:max-w-[560px]"
                 unoptimized
               />
             </Link>
@@ -84,7 +84,7 @@ export function SiteHeader() {
 
         {/* Center nav links - desktop only */}
         <nav
-          className="hidden flex-1 items-center justify-center gap-10 lg:flex"
+          className="hidden flex-1 flex-nowrap items-center justify-center gap-10 lg:flex"
           aria-label="Main"
         >
           {navLinks.map((link) =>
@@ -101,7 +101,7 @@ export function SiteHeader() {
                 <Link
                   ref={scholarshipsTriggerRef}
                   href={link.href}
-                  className="relative inline-flex items-center gap-1 text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE]"
+                  className="relative inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE]"
                 >
                   {link.label}
                   <ChevronDown className={`h-4 w-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
@@ -143,7 +143,7 @@ export function SiteHeader() {
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="relative text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE] lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-[#956EFE] lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full"
+                className="relative shrink-0 whitespace-nowrap text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE] lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-[#956EFE] lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full"
               >
                 {link.label}
               </Link>
@@ -151,16 +151,22 @@ export function SiteHeader() {
           )}
         </nav>
 
-        {/* Right: Try Awarded button - desktop polish */}
+        {/* Right: Get Started image CTA — same SMS as hero */}
         <div className="flex shrink-0 items-center md:ml-6">
-          <Link
-            href="http://my.pathpicker.com/archetype"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-9 min-w-[90px] items-center justify-center rounded-full bg-[#956EFE] px-3 text-xs font-bold text-[#EEE] shadow-[0_3px_7px_rgba(149,110,254,0.2)] transition-all duration-200 hover:opacity-95 sm:h-10 sm:min-w-[100px] sm:px-4 sm:text-sm md:h-12 md:min-w-[140px] md:px-6 lg:shadow-[0_4px_12px_rgba(149,110,254,0.25)] lg:hover:-translate-y-0.5 lg:hover:shadow-[0_6px_16px_rgba(149,110,254,0.3)]"
+          <a
+            href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+            className="relative block h-[4.5rem] w-[180px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-20 sm:w-[200px] md:h-24 md:w-[280px]"
+            aria-label="Get started — text to get matched scholarships"
           >
-            Try Awarded
-          </Link>
+            <Image
+              src="https://storage.googleapis.com/images_592/Groussp%206.png"
+              alt="Get started"
+              fill
+              className="object-contain object-center"
+              sizes="(max-width: 768px) 200px, 280px"
+              unoptimized
+            />
+          </a>
         </div>
       </div>
     </header>
@@ -179,11 +185,11 @@ export function SiteHeader() {
             aria-label="Navigation menu"
             style={{ boxShadow: "4px 0 24px rgba(0,0,0,0.12)" }}
           >
-            {/* Top: logo + slogan + close */}
-            <div className="flex items-start justify-between gap-4 px-5 pt-6 pb-8">
+            {/* Top: logo + close */}
+            <div className="flex items-start justify-between gap-4 px-5 pt-6 pb-4">
               <Link
                 href="/"
-                className="flex min-w-0 flex-1 items-center gap-3 active:opacity-80"
+                className="flex min-w-0 flex-1 items-center active:opacity-80"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
@@ -191,15 +197,9 @@ export function SiteHeader() {
                   alt="Pathpicker"
                   width={480}
                   height={144}
-                  className="h-[5.25rem] w-auto shrink-0 object-contain"
+                  className="h-[10.5rem] w-auto shrink-0 object-contain"
                   unoptimized
                 />
-                <p
-                  className="min-w-0 text-[10px] italic leading-snug"
-                  style={{ color: "#956EFE" }}
-                >
-                  &ldquo;Finding your student path, made easy&rdquo;
-                </p>
               </Link>
               <button
                 type="button"
@@ -266,17 +266,29 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTA */}
-            <div className="p-5">
-              <Link
-                href="http://my.pathpicker.com/archetype"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-full items-center justify-center rounded-xl bg-[#956EFE] py-3.5 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 active:opacity-95"
+            {/* CTA - Get Started image (same as navbar/hero) + slogan underneath */}
+            <div className="p-5 pt-0">
+              <a
+                href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+                className="relative mb-3 block aspect-[640/176] w-full overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
+                aria-label="Get started — text to get matched scholarships"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Try Awarded
-              </Link>
+                <Image
+                  src="https://storage.googleapis.com/images_592/Groussp%206.png"
+                  alt="Get started"
+                  fill
+                  className="object-contain object-center"
+                  sizes="320px"
+                  unoptimized
+                />
+              </a>
+              <p
+                className="min-w-0 text-center text-[10px] italic leading-snug"
+                style={{ color: "#956EFE" }}
+              >
+                &ldquo;Finding your student path, made easy&rdquo;
+              </p>
             </div>
           </aside>
         </>

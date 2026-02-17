@@ -4,6 +4,17 @@ A structured plan for scholarship pages, articles (e.g. "Best scholarships for S
 
 ---
 
+## 0. Domain / SEO Structure
+
+| Domain | Purpose |
+|--------|---------|
+| **pathpicker.com** | Marketing, scholarships index, SEO articles, apply flows, hosted scholarships, about/terms/privacy |
+| **my.pathpicker.com** | Quizzes (archetype quiz, scholarship quiz, etc.). Quizzes stay here; no plan to move them to pathpicker.com. |
+
+All quiz entry points (hero, header, footer, archetype/scholarship quiz pages) link to `my.pathpicker.com` (e.g. `/archetype`). `next.config.ts` allows images from `my.pathpicker.com`.
+
+---
+
 ## 1. Content Architecture Overview
 
 | Type | URL | Purpose |
