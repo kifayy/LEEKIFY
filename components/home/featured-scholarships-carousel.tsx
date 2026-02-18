@@ -181,7 +181,7 @@ export function FeaturedScholarshipsCarousel({
                         </p>
                         <div className="mt-auto pt-8">
                           <span className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] transition-opacity group-hover:opacity-95 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg">
-                            Enter
+                            Quick Enter
                             <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
                           </span>
                         </div>

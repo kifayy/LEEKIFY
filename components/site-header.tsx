@@ -11,11 +11,11 @@ const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
 const scholarshipCategories = [
   { href: "/scholarships/by-major", label: "By Major" },
-  { href: "/scholarships/easy-to-win", label: "Easy to Win" },
   { href: "/scholarships/by-state", label: "By State" },
   { href: "/scholarships/by-grade-level", label: "By Grade Level" },
+  { href: "/scholarships/easy-to-win", label: "Easy to Win" },
+  { href: "/scholarships/by-ethnicity", label: "By Ethnicity" },
   { href: "/scholarships/by-amount", label: "By Amount" },
-  { href: "/scholarships/by-first-generation", label: "First-Gen" },
 ];
 
 const navLinks = [

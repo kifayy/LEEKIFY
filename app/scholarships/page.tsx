@@ -4,11 +4,8 @@ import { getScholarshipsForMonth, getFeaturedScholarships, getAllScholarships } 
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getRandomPublishedArticles } from "@/lib/supabase/queries/scholarships-page";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
-function formatDeadline(deadline: string | null): string {
-  if (!deadline) return "No deadline";
-  const d = new Date(deadline);
-  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-}
+import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
+import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-hero-section";
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim().slice(0, 140);
@@ -26,56 +23,42 @@ async function ScholarshipsPageContent() {
       let s = await getScholarshipsForMonth();
       if (s.length === 0) s = await getFeaturedScholarships();
       if (s.length === 0) s = await getAllScholarships();
-      return s;
+      // Sort so is_sweepstake = true appears first, then randomize within each group
+      const sweepstakes = s.filter((x) => x.is_sweepstake === true);
+      const nonSweepstakes = s.filter((x) => x.is_sweepstake !== true);
+      const shuffle = <T,>(arr: T[]): T[] => {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      };
+      return [...shuffle(sweepstakes), ...shuffle(nonSweepstakes)];
     })(),
     getCategories(),
     getRandomPublishedArticles(9),
   ]);
 
-  const recent = scholarshipsResult[0];
-
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
-      <div className="container mx-auto max-w-[1232px] px-4 py-8 md:px-6 md:py-12">
+      <div className="container mx-auto max-w-[1232px] px-4 pt-8 md:px-6 md:pt-12">
         <CategoryCarousel categories={categories} />
+      </div>
+      <ScholarshipHeroSection
+        title="Win Scholarships From Your Texts"
+        body="Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with."
+      />
+      <div className="container mx-auto max-w-[1232px] px-4 py-8 md:px-6 md:py-12">
 
-        {/* Our Recent Post */}
-        {recent && (
-          <section className="mt-8">
-            <h2 className="text-2xl font-bold text-[#333333] md:text-3xl">
-              Our Recent Post
-            </h2>
-            <Link
-              href={`/scholarships/award/${recent.slug}`}
-              className="mt-4 flex flex-col gap-6 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md md:flex-row"
-            >
-              <div className="relative h-[280px] w-full overflow-hidden rounded-t-2xl bg-[#CCE8FF] md:h-[360px] md:w-[48%] md:rounded-l-2xl md:rounded-tr-none">
-                {recent.image_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={recent.image_url}
-                    alt=""
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-5xl">
-                    🎓
-                  </div>
-                )}
-              </div>
-              <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
-                <div className="flex items-center gap-4 text-sm">
-                  <span className="font-medium text-[#333333]">{recent.provider}</span>
-                  <span className="text-[#999999]">{formatDeadline(recent.deadline)}</span>
-                </div>
-                <h3 className="mt-3 text-xl font-bold text-[#333333] md:text-2xl line-clamp-2">
-                  {recent.title}
-                </h3>
-                <p className="mt-3 text-[#666666] line-clamp-3">
-                  {recent.content ? stripHtml(recent.content) : `${recent.provider} – ${recent.amount ?? "Scholarship"}`}
-                </p>
-              </div>
-            </Link>
+        {/* Featured / recent scholarships */}
+        {scholarshipsResult.length > 0 && (
+          <section>
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 xl:gap-8">
+              {scholarshipsResult.map((s) => (
+                <ScholarshipCard key={s.id} scholarship={s} />
+              ))}
+            </div>
           </section>
         )}
 

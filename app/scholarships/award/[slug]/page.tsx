@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getScholarshipBySlug, getSweepstakeScholarships } from "@/lib/supabase/queries/scholarships";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return "Rolling";
@@ -154,43 +155,9 @@ async function ScholarshipDetail({ params }: Props) {
         {related.length > 0 && (
           <section className="mt-16">
             <h2 className="mb-6 text-xl font-bold text-[#181A1D]">Related scholarships</h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {related.map((s) => (
-                <Link
-                  key={s.id}
-                  href={`/scholarships/award/${s.slug}`}
-                  className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
-                >
-                  <div className="relative aspect-[400/360] w-full overflow-hidden rounded-t-2xl bg-[#CCE8FF]">
-                    {s.image_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={s.image_url}
-                        alt=""
-                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center text-5xl">
-                        🎓
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-xs text-[#999999]">{formatDeadline(s.deadline)}</p>
-                      {s.amount && (
-                        <span className="text-xs font-semibold text-[#7C4EE4]">{formatAmount(s.amount) ?? s.amount}</span>
-                      )}
-                    </div>
-                    <h3 className="mt-2 font-semibold text-[#333333] line-clamp-2">{s.title}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-[#666666]">
-                      {s.description_short ?? s.content?.replace(/<[^>]*>/g, "").slice(0, 120) ?? s.provider}…
-                    </p>
-                    <span className="mt-3 inline-block text-sm font-medium text-[#7C4EE4]">
-                      Read more
-                    </span>
-                  </div>
-                </Link>
+                <ScholarshipCard key={s.id} scholarship={s} />
               ))}
             </div>
           </section>

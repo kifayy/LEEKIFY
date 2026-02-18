@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getArticleByCategoryAndSlug, getSimilarArticles } from "@/lib/supabase/queries/scholarships-page";
 import type { FAQItem } from "@/lib/supabase/queries/scholarships-page";
 import { getScholarshipsForArticle } from "@/lib/supabase/queries/scholarships";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -16,23 +18,8 @@ function formatDate(date: string | null): string {
   return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
-function formatDeadline(deadline: string | null): string {
-  if (!deadline) return "Rolling";
-  const d = new Date(deadline);
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
-
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim().slice(0, 140);
-}
-
-function formatAmount(amount: string | null): string | null {
-  if (!amount) return null;
-  const cleaned = amount.replace(/[^0-9.]/g, "");
-  if (!cleaned) return amount;
-  const num = parseFloat(cleaned);
-  if (isNaN(num)) return amount;
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(num);
 }
 
 type Props = { params: Promise<{ category: string; slug: string }> };
@@ -176,44 +163,17 @@ async function ArticleContent({ params }: Props) {
             </section>
           )}
 
-          {/* Scholarships section - linked awards (slugs) */}
+          {/* Scholarships section - suggested scholarships (same card style as index) */}
           {items.length > 0 && (
             <section className="mx-auto mt-16 max-w-[1280px]">
               <h2 className="text-2xl font-bold text-[#181A1D] md:text-3xl">Scholarships</h2>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map(({ scholarship: s, ai_description }) => (
-                  <Link
-                    key={s.id}
-                    href={`/scholarships/award/${s.slug}`}
-                    className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
-                  >
-                    <div className="relative aspect-[405/318] w-full overflow-hidden rounded-t-2xl bg-[#CCE8FF]">
-                      {s.image_url ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={s.image_url}
-                          alt=""
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-5xl">
-                          🎓
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-5">
-                      <p className="text-xs text-[#999999]">{formatDeadline(s.deadline)}</p>
-                      {s.amount && (
-                        <p className="mt-2 text-xl font-bold text-[#7C4EE4]">
-                          {formatAmount(s.amount) ?? s.amount}
-                        </p>
-                      )}
-                      <h3 className="mt-2 font-semibold text-[#181A1D] line-clamp-2">{s.title}</h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-[#6E6E73]">
-                        {ai_description ? stripHtml(ai_description) : s.description_short ?? s.provider}
-                      </p>
-                    </div>
-                  </Link>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {items.map(({ scholarship, ai_description }) => (
+                  <ScholarshipCard
+                    key={scholarship.id}
+                    scholarship={scholarship}
+                    descriptionSnippet={ai_description}
+                  />
                 ))}
               </div>
             </section>

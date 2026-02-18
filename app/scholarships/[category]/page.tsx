@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getCategoryBySlug } from "@/lib/supabase/queries/scholarship-categories";
+import { getCategoryBySlug, getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getArticlesByCategory } from "@/lib/supabase/queries/scholarships-page";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CategoryCarousel } from "@/components/scholarships/category-carousel";
 import { ScholarshipArticleCard } from "@/components/scholarships/scholarship-article-card";
+import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-hero-section";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -25,7 +27,10 @@ async function CategoryContent({ params }: Props) {
   const cat = await getCategoryBySlug(category);
   if (!cat) notFound();
 
-  const articles = await getArticlesByCategory(category);
+  const [articles, categories] = await Promise.all([
+    getArticlesByCategory(category),
+    getCategories(),
+  ]);
   const categoryLabel = cat.name;
 
   const itemListJsonLd =
@@ -48,32 +53,33 @@ async function CategoryContent({ params }: Props) {
       : null;
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12 md:py-16">
+    <div className="min-h-screen bg-[#FAFAFA]">
+      <div className="container mx-auto max-w-[1232px] px-4 pt-8 md:px-6 md:pt-12">
+        <CategoryCarousel categories={categories} />
+      </div>
       {itemListJsonLd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
         />
       )}
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Scholarships", href: "/scholarships" },
-          { label: categoryLabel },
-        ]}
+      <ScholarshipHeroSection
+        title={`${cat.name} Scholarships`}
+        body={cat.description ?? ""}
+        category={cat.name}
       />
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-[#181A1D] md:text-4xl">
-          {cat.name} Scholarships
-        </h1>
-        {cat.description && (
-          <p className="mt-2 text-[#6B7280] md:text-lg">{cat.description}</p>
-        )}
-      </header>
-      {articles.length === 0 ? (
-        <p className="text-muted-foreground">No articles in this category yet. Check back soon.</p>
-      ) : (
-        <ul className="space-y-5 md:space-y-6" role="list">
+      <div className="container mx-auto max-w-4xl px-4 py-12 md:py-16">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Scholarships", href: "/scholarships" },
+            { label: categoryLabel },
+          ]}
+        />
+        {articles.length === 0 ? (
+          <p className="text-muted-foreground">No articles in this category yet. Check back soon.</p>
+        ) : (
+          <ul className="space-y-5 md:space-y-6" role="list">
           {articles.map((a) => (
             <li key={a.id}>
               <ScholarshipArticleCard
@@ -83,16 +89,17 @@ async function CategoryContent({ params }: Props) {
               />
             </li>
           ))}
-        </ul>
-      )}
-      <p className="mt-10">
-        <Link
-          href="/scholarships"
-          className="inline-flex items-center gap-1 text-sm font-medium text-[#6B7280] transition-colors hover:text-pathpicker-purple hover:underline"
-        >
-          ← Back to scholarships
-        </Link>
-      </p>
+          </ul>
+        )}
+        <p className="mt-10">
+          <Link
+            href="/scholarships"
+            className="inline-flex items-center gap-1 text-sm font-medium text-[#6B7280] transition-colors hover:text-pathpicker-purple hover:underline"
+          >
+            ← Back to scholarships
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

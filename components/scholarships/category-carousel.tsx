@@ -7,24 +7,10 @@ import type { ScholarshipCategory } from "@/lib/supabase/queries/scholarship-cat
 const CATEGORY_EMOJI: Record<string, string> = {
   "by-major": "📚",
   "by-state": "🗺️",
-  "by-city": "🏙️",
-  "by-ethnicity": "🤝",
-  "by-gender": "⚧️",
   "by-grade-level": "🎓",
-  "by-gpa": "📊",
-  "by-deadline": "📅",
-  "by-amount": "💰",
-  "by-type": "🏷️",
-  "by-sport": "⚽",
-  "by-interest": "💡",
-  "by-career-goal": "🎯",
-  "by-school-type": "🏫",
-  "by-military": "🎖️",
-  "by-disability": "♿",
-  "by-religion": "🙏",
-  "by-first-generation": "🌟",
-  "by-international": "🌍",
   "easy-to-win": "✨",
+  "by-ethnicity": "🤝",
+  "by-amount": "💰",
 };
 
 type Props = { categories: ScholarshipCategory[] };

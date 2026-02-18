@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { CopyrightYear } from "@/components/copyright-year";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
@@ -131,7 +132,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm" style={{ color: FOOTER_MUTED }}>
-              © {new Date().getFullYear()} Pathpicker. All rights reserved.
+              © <CopyrightYear /> Pathpicker. All rights reserved.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4">
