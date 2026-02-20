@@ -5,32 +5,26 @@ import { Star } from "lucide-react";
 
 const REVIEWS = [
   {
-    name: "Kate W.",
+    name: "Sharlet Gonzalez",
     quote:
-      "I got matched with scholarships I didn't even know existed. The archetype quiz showed me exactly what I needed to focus on.",
-    initial: "K",
-    avatarColor: "bg-[#956EFE]",
+      "My counselor told me about them and I had to try it out. 10/10 would recommend to all high school and college students!",
+    avatar:
+      "https://storage.googleapis.com/images_592/Gemini_Generated_Image_4poid84poid84poi.png",
   },
   {
-    name: "Marcus J.",
+    name: "Jeyson Dowle",
     quote:
-      "PathPicker matched me to scholarships that actually fit my profile. The archetype quiz was fun and super insightful.",
-    initial: "M",
-    avatarColor: "bg-[#0D9488]",
+      "hate signing up to things like this usually but they really do text only twice a week. thanks guys",
+    avatar:
+      "https://storage.googleapis.com/images_592/Gemini_Generated_Image_wqfcnkwqfcnkwqfc.png",
+    avatarPosition: "top",
   },
   {
-    name: "Sarah L.",
+    name: "Claudia Hader",
     quote:
-      "Finally found scholarships that match my background. The archetype quiz helped me see my strengths as a student.",
-    initial: "S",
-    avatarColor: "bg-[#E11D48]",
-  },
-  {
-    name: "Jordan K.",
-    quote:
-      "Got matched with scholarships in minutes. The archetype quiz made me realize how I actually study best.",
-    initial: "J",
-    avatarColor: "bg-[#7C3AED]",
+      "Entered $4k worth of nursing scholarships within 2 days! Love how all the ones they send are no-essays",
+    avatar:
+      "https://storage.googleapis.com/images_592/Gemini_Generated_Image_po0e4bpo0e4bpo0e.png",
   },
 ];
 
@@ -58,13 +52,15 @@ function ReviewCard({
       className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] sm:flex-row sm:items-start sm:justify-between sm:gap-4"
     >
       <div className="flex min-w-0 flex-1 gap-3 sm:gap-4">
-        <div
-          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg text-xl font-semibold text-white sm:h-16 sm:w-16 sm:text-2xl ${review.avatarColor}`}
-          style={{
-            boxShadow: "0 2px 8px rgba(149,110,254,0.25)",
-          }}
-        >
-          {review.initial}
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg sm:h-16 sm:w-16">
+          <Image
+            src={review.avatar}
+            alt=""
+            width={64}
+            height={64}
+            className={`h-full w-full object-cover ${"avatarPosition" in review && review.avatarPosition === "top" ? "object-top" : "object-center"}`}
+            unoptimized
+          />
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-base font-bold text-[#181A1D] sm:text-lg">
@@ -86,6 +82,28 @@ export function ReviewsCarousel() {
   return (
     <section className="w-full min-w-0 overflow-hidden py-10 md:py-24">
       <div className="container mx-auto max-w-3xl px-4 md:px-6 min-w-0">
+        {/* Get started button - SMS CTA */}
+        <div className="mb-6 flex flex-col items-center">
+          <a
+            href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+            className="relative mx-auto block w-full max-w-[448px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90"
+            aria-label="Text to get matched scholarships"
+          >
+            <Image
+              src="https://storage.googleapis.com/images_592/Group%201SS0.png"
+              alt="Get started - Text to get scholarships"
+              width={640}
+              height={176}
+              className="h-auto w-full object-contain object-center"
+              sizes="(max-width: 768px) 100vw, 448px"
+              unoptimized
+            />
+          </a>
+          <p className="mt-2 text-center text-sm font-medium text-[#58595D] md:text-base">
+            Free • No App Required • No Sign-up
+          </p>
+        </div>
+
         {/* White card - theme aligned */}
         <div
           className="flex flex-col gap-6 rounded-2xl bg-white p-8 md:p-10"
@@ -108,7 +126,7 @@ export function ReviewsCarousel() {
               >
                 <Image
                   src={TRUSTPILOT_BADGE_URL}
-                  alt="Trustpilot 4.5 stars"
+                  alt="Trustpilot 4.8 stars"
                   width={240}
                   height={180}
                   className="h-24 w-auto object-contain md:h-28"
@@ -118,7 +136,7 @@ export function ReviewsCarousel() {
             </div>
             <span className="inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
               <Star className="h-4 w-4 fill-white" />
-              4.5 · 322+ reviews
+              4.8 · 322+ reviews
             </span>
           </div>
 

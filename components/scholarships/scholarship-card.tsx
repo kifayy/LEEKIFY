@@ -32,8 +32,8 @@ export function ScholarshipCard({ scholarship: s }: ScholarshipCardProps) {
       className="block rounded-xl bg-white shadow-md transition-shadow hover:shadow-lg xl:rounded-2xl xl:shadow-lg"
     >
       <div className="flex min-h-0 flex-1 flex-col rounded-b-xl rounded-t-xl bg-white p-4 xl:p-6">
-        {/* Amount + highlight tags */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 xl:gap-x-3 xl:gap-y-2">
+        {/* Amount, then tags underneath */}
+        <div className="flex flex-col gap-1.5 xl:gap-2">
           <p className="shrink-0 text-xl font-bold text-[#181A1D] md:text-2xl xl:text-3xl">
             {amountFormatted ?? "—"}
           </p>

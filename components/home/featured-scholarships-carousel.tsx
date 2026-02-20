@@ -153,8 +153,8 @@ export function FeaturedScholarshipsCarousel({
 
                       {/* Content area - white block: amount + tags, title, provider/deadline, button */}
                       <div className="flex min-h-0 flex-1 flex-col rounded-b-[29px] bg-white p-5 pb-8 pt-5">
-                        {/* Amount and tags - wrap on mobile when space is tight */}
-                        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                        {/* Amount, then tags underneath */}
+                        <div className="flex flex-col gap-2">
                           <p className="shrink-0 text-2xl font-bold text-[#181A1D] md:text-3xl">
                             ${formatAmount(s.amount)}
                           </p>

@@ -62,7 +62,7 @@ export function DesktopHeroBanner() {
             </span>
           </div>
 
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-5xl lg:text-[3.5rem]">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[4.5rem] lg:text-[5.25rem]">
             Find your
             <br />
             <span

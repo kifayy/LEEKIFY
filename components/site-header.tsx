@@ -155,15 +155,15 @@ export function SiteHeader() {
         <div className="flex shrink-0 items-center md:ml-6">
           <a
             href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-            className="relative block h-[4.5rem] w-[180px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-20 sm:w-[200px] md:h-24 md:w-[280px]"
+            className="relative block h-[3.15rem] w-[126px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-14 sm:w-[140px] md:h-17 md:w-[196px]"
             aria-label="Get started — text to get matched scholarships"
           >
             <Image
-              src="https://storage.googleapis.com/images_592/Groussp%206.png"
+              src="https://storage.googleapis.com/images_592/Group%201SS0.png"
               alt="Get started"
               fill
               className="object-contain object-center"
-              sizes="(max-width: 768px) 200px, 280px"
+              sizes="(max-width: 768px) 140px, 196px"
               unoptimized
             />
           </a>
@@ -270,24 +270,21 @@ export function SiteHeader() {
             <div className="p-5 pt-0">
               <a
                 href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-                className="relative mb-3 block aspect-[640/176] w-full overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
+                className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[224px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
                 aria-label="Get started — text to get matched scholarships"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
-                  src="https://storage.googleapis.com/images_592/Groussp%206.png"
+                  src="https://storage.googleapis.com/images_592/Group%201SS0.png"
                   alt="Get started"
                   fill
                   className="object-contain object-center"
-                  sizes="320px"
+                  sizes="224px"
                   unoptimized
                 />
               </a>
-              <p
-                className="min-w-0 text-center text-[10px] italic leading-snug"
-                style={{ color: "#956EFE" }}
-              >
-                &ldquo;Finding your student path, made easy&rdquo;
+              <p className="min-w-0 text-center text-xs font-medium leading-snug text-[#58595D]">
+                Free • No App Required • No Sign-up
               </p>
             </div>
           </aside>
