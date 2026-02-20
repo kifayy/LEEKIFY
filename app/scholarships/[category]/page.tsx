@@ -68,7 +68,7 @@ async function CategoryContent({ params }: Props) {
         body={cat.description ?? ""}
         category={cat.name}
       />
-      <div className="container mx-auto max-w-4xl px-4 py-12 md:py-16">
+      <div className="container mx-auto max-w-5xl px-4 py-12 md:max-w-6xl md:px-6 md:py-16">
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -77,26 +77,31 @@ async function CategoryContent({ params }: Props) {
           ]}
         />
         {articles.length === 0 ? (
-          <p className="text-muted-foreground">No articles in this category yet. Check back soon.</p>
+          <p className="mt-8 text-[#6B7280]">No articles in this category yet. Check back soon.</p>
         ) : (
-          <ul className="space-y-5 md:space-y-6" role="list">
-          {articles.map((a) => (
-            <li key={a.id}>
-              <ScholarshipArticleCard
-                article={a}
-                categorySlug={category}
-                href={`/scholarships/${category}/${a.slug}`}
-              />
-            </li>
-          ))}
-          </ul>
+          <>
+            <h2 className="mt-8 text-xl font-semibold text-[#181A1D] md:text-2xl">
+              Guides &amp; articles
+            </h2>
+            <ul className="mt-6 space-y-6 md:space-y-8" role="list">
+              {articles.map((a) => (
+                <li key={a.id}>
+                  <ScholarshipArticleCard
+                    article={a}
+                    categorySlug={category}
+                    href={`/scholarships/${category}/${a.slug}`}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
         )}
-        <p className="mt-10">
+        <p className="mt-12">
           <Link
             href="/scholarships"
-            className="inline-flex items-center gap-1 text-sm font-medium text-[#6B7280] transition-colors hover:text-pathpicker-purple hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#6B7280] transition-colors hover:text-pathpicker-purple hover:underline"
           >
-            ← Back to scholarships
+            <span aria-hidden>←</span> Back to scholarships
           </Link>
         </p>
       </div>

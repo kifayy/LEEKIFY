@@ -22,6 +22,37 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim().slice(0, 140);
 }
 
+type TocItem = { id: string; text: string; level: 2 | 3 };
+
+/** Extract h2/h3 from HTML, add id attributes, return TOC and modified HTML. */
+function buildToc(html: string): { contentWithIds: string; toc: TocItem[] } {
+  const toc: TocItem[] = [];
+  const used = new Set<string>();
+  const slugify = (s: string) =>
+    s
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase()
+      .slice(0, 60) || "section";
+  const makeId = (text: string): string => {
+    let id = slugify(text);
+    if (used.has(id)) {
+      let n = 1;
+      while (used.has(`${id}-${n}`)) n++;
+      id = `${id}-${n}`;
+    }
+    used.add(id);
+    return id;
+  };
+  const contentWithIds = html.replace(/<h([23])>([\s\S]*?)<\/h\1>/gi, (_, level, inner) => {
+    const text = inner.replace(/<[^>]+>/g, "").trim();
+    const id = makeId(text);
+    toc.push({ id, text, level: parseInt(level, 10) as 2 | 3 });
+    return `<h${level} id="${id}">${inner}</h${level}>`;
+  });
+  return { contentWithIds, toc };
+}
+
 type Props = { params: Promise<{ category: string; slug: string }> };
 
 /** Dynamic hero image (template + article title). Used for hero and SEO. */
@@ -37,10 +68,32 @@ export async function generateMetadata({ params }: Props) {
   const article = await getArticleByCategoryAndSlug(category, slug);
   if (!article) return { title: "Article | Pathpicker" };
   const heroImage = getArticleHeroImageUrl(slug, article.title, SITE_URL);
+  const canonicalPath = article.canonical_url?.startsWith("http")
+    ? article.canonical_url
+    : article.canonical_url || `/scholarships/${category}/${slug}`;
+  const canonicalUrl =
+    canonicalPath.startsWith("http") ? canonicalPath : SITE_URL ? `${SITE_URL}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}` : undefined;
+  const ogImage = article.og_image ?? heroImage;
+  const fullOgImage = ogImage.startsWith("http") ? ogImage : SITE_URL ? `${SITE_URL}${ogImage}` : undefined;
   return {
     title: article.meta_title ?? `${article.title} | Pathpicker`,
     description: article.meta_description ?? undefined,
-    openGraph: { images: [article.og_image ?? heroImage] },
+    alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+    openGraph: {
+      type: "article",
+      title: article.meta_title ?? article.title,
+      description: article.meta_description ?? undefined,
+      images: fullOgImage ? [{ url: fullOgImage, width: 1280, height: 582, alt: article.title }] : undefined,
+      publishedTime: article.published_at ?? undefined,
+      modifiedTime: article.updated_at ?? undefined,
+      siteName: "Pathpicker",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.meta_title ?? article.title,
+      description: article.meta_description ?? undefined,
+      images: fullOgImage ? [fullOgImage] : undefined,
+    },
   };
 }
 
@@ -125,9 +178,13 @@ async function ArticleContent({ params }: Props) {
             <h1 className="text-3xl font-bold tracking-tight text-[#181A1D] md:text-4xl md:leading-tight">
               {article.title}
             </h1>
-            {article.published_at && (
-              <p className="mt-4 text-[#6E6E73]">Posted on {formatDate(article.published_at)}</p>
-            )}
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[#6E6E73]">
+              {article.published_at && (
+                <time dateTime={article.published_at}>Posted on {formatDate(article.published_at)}</time>
+              )}
+              {article.published_at && <span aria-hidden>·</span>}
+              <span>By Pathpicker</span>
+            </div>
           </header>
 
           {/* Summary (answer at top) - AI-overview friendly */}
@@ -138,24 +195,99 @@ async function ArticleContent({ params }: Props) {
           )}
 
           {/* Hero image: dynamic template with article title (SEO-friendly image) */}
-          <div className="relative mt-8 aspect-[1280/582] w-full overflow-hidden rounded-lg bg-[#F5F5F5]">
+          <div className="relative mt-8 aspect-[1280/582] w-full overflow-hidden rounded-lg bg-white">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/api/article-hero?slug=${encodeURIComponent(slug)}&title=${encodeURIComponent(article.title)}`}
-              alt=""
+              alt={article.title}
               className="h-full w-full object-cover"
               width={1280}
               height={582}
             />
           </div>
 
-          {/* Body content */}
-          {article.content && (
-            <div
-              className="prose prose-neutral mx-auto mt-10 max-w-[843px] [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#181A1D] [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:my-6 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:space-y-2 [&_li]:mb-1 [&_a]:font-medium [&_a]:text-[#7C4EE4] [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-[#6B3ED4]"
-              dangerouslySetInnerHTML={{ __html: article.content }}
-            />
-          )}
+          {/* Table of contents + body in a row on desktop when TOC has items */}
+          {article.content && (() => {
+            const { contentWithIds, toc } = buildToc(article.content);
+            const hasToc = toc.length > 0;
+            return (
+              <div
+                className={`mx-auto mt-10 ${hasToc ? "max-w-[843px] lg:flex lg:max-w-[1280px] lg:gap-12" : "max-w-[843px]"}`}
+              >
+                {hasToc && (
+                  <nav
+                    aria-label="Table of contents"
+                    className="mb-8 shrink-0 lg:sticky lg:top-8 lg:mb-0 lg:w-56 lg:self-start"
+                  >
+                    <h2 className="text-sm font-semibold uppercase tracking-wide text-[#6E6E73]">
+                      On this page
+                    </h2>
+                    <ul className="mt-3 space-y-2 border-l-2 border-[#E5E5E7] pl-4" role="list">
+                      {toc.map((item) => (
+                        <li key={item.id} className={item.level === 3 ? "pl-3" : ""}>
+                          <a
+                            href={`#${item.id}`}
+                            className="text-sm text-[#6E6E73] underline-offset-2 hover:text-[#7C4EE4] hover:underline"
+                          >
+                            {item.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                )}
+                <div
+                  className={`prose prose-neutral min-w-0 [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#181A1D] [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:my-6 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:space-y-2 [&_li]:mb-1 [&_a]:font-medium [&_a]:text-[#7C4EE4] [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-[#6B3ED4] ${hasToc ? "lg:max-w-[643px]" : ""}`}
+                  dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                />
+              </div>
+            );
+          })()}
+
+          {/* Internal links – explore more */}
+          <section className="mx-auto mt-12 max-w-[843px]" aria-label="Explore more">
+            <h2 className="text-xl font-bold text-[#181A1D] md:text-2xl">Explore more</h2>
+            <ul className="mt-4 flex flex-wrap gap-3" role="list">
+              <li>
+                <Link
+                  href="/scholarships"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5E7] bg-white px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#7C4EE4] hover:bg-[#7C4EE4]/5 hover:text-[#7C4EE4]"
+                >
+                  Browse all scholarships
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </li>
+              {article.category_slug && (
+                <li>
+                  <Link
+                    href={`/scholarships/${article.category_slug}`}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5E7] bg-white px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#7C4EE4] hover:bg-[#7C4EE4]/5 hover:text-[#7C4EE4]"
+                  >
+                    {categoryLabel} guides
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </li>
+              )}
+              <li>
+                <Link
+                  href="/scholarship-quiz"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5E7] bg-white px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#7C4EE4] hover:bg-[#7C4EE4]/5 hover:text-[#7C4EE4]"
+                >
+                  Scholarship quiz
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/student-archetype-quiz"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5E7] bg-white px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#7C4EE4] hover:bg-[#7C4EE4]/5 hover:text-[#7C4EE4]"
+                >
+                  Find your archetype
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </li>
+            </ul>
+          </section>
 
           {/* FAQ block - visible + FAQPage schema */}
           {faqItems.length > 0 && (
@@ -195,25 +327,24 @@ async function ArticleContent({ params }: Props) {
             <section className="mx-auto mt-16 max-w-[1280px] border-t border-[#E5E5E7] pt-12">
               <h2 className="text-2xl font-bold text-[#181A1D] md:text-3xl">Similar articles</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {similar.map((a) => (
+                {similar.map((a) => {
+                  const similarHref = a.category_slug ? `/scholarships/${a.category_slug}/${a.slug}` : "#";
+                  const similarImageUrl = `/api/article-hero?slug=${encodeURIComponent(a.slug ?? "")}&title=${encodeURIComponent(a.title ?? "")}`;
+                  return (
                   <Link
                     key={a.id}
-                    href={a.category_slug ? `/scholarships/${a.category_slug}/${a.slug}` : "#"}
+                    href={similarHref}
                     className="group block overflow-hidden"
                   >
-                    <div className="relative aspect-[405/318] w-full overflow-hidden rounded-t-2xl bg-[#CCE8FF]">
-                      {a.og_image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={a.og_image}
-                          alt=""
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-5xl">
-                          📚
-                        </div>
-                      )}
+                    <div className="relative flex aspect-[405/318] w-full items-center justify-center overflow-hidden rounded-t-2xl bg-white">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={similarImageUrl}
+                        alt={a.title}
+                        className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                     <div className="mt-4">
                       {a.published_at && (
@@ -227,7 +358,8 @@ async function ArticleContent({ params }: Props) {
                       </p>
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}
