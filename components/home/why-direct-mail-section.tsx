@@ -50,7 +50,7 @@ export function WhyDirectMailSection() {
         <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
           <a
             href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-            className="relative block h-[101px] w-full max-w-[448px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[123px] md:max-w-[532px]"
+            className="relative block h-[131px] w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[160px] md:max-w-[692px]"
             aria-label="Text to get matched scholarships"
           >
             <Image
@@ -58,7 +58,7 @@ export function WhyDirectMailSection() {
               alt="Text to get scholarships"
               fill
               className="object-contain object-center"
-              sizes="(max-width: 768px) 448px, 532px"
+              sizes="(max-width: 768px) 582px, 692px"
               unoptimized
             />
           </a>

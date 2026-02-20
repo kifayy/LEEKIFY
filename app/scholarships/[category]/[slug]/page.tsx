@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getArticleByCategoryAndSlug, getSimilarArticles } from "@/lib/supabase/queries/scholarships-page";
 import type { FAQItem } from "@/lib/supabase/queries/scholarships-page";
-import { getScholarshipsForArticle } from "@/lib/supabase/queries/scholarships";
+import { getRandomSweepstakeScholarships } from "@/lib/supabase/queries/scholarships";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 
@@ -24,14 +24,23 @@ function stripHtml(html: string): string {
 
 type Props = { params: Promise<{ category: string; slug: string }> };
 
+/** Dynamic hero image (template + article title). Used for hero and SEO. */
+function getArticleHeroImageUrl(slug: string, title: string, siteUrl: string): string {
+  const slugQ = encodeURIComponent(slug);
+  const titleQ = encodeURIComponent(title);
+  const base = siteUrl ? `${siteUrl}/api/article-hero` : "/api/article-hero";
+  return `${base}?slug=${slugQ}&title=${titleQ}`;
+}
+
 export async function generateMetadata({ params }: Props) {
   const { category, slug } = await params;
   const article = await getArticleByCategoryAndSlug(category, slug);
   if (!article) return { title: "Article | Pathpicker" };
+  const heroImage = getArticleHeroImageUrl(slug, article.title, SITE_URL);
   return {
     title: article.meta_title ?? `${article.title} | Pathpicker`,
     description: article.meta_description ?? undefined,
-    openGraph: article.og_image ? { images: [article.og_image] } : undefined,
+    openGraph: { images: [article.og_image ?? heroImage] },
   };
 }
 
@@ -40,23 +49,25 @@ async function ArticleContent({ params }: Props) {
   const article = await getArticleByCategoryAndSlug(category, slug);
   if (!article) notFound();
 
-  const [items, similar] = await Promise.all([
-    getScholarshipsForArticle(article.id, article.auto_tag),
+  const [sweepstakes, similar] = await Promise.all([
+    getRandomSweepstakeScholarships(4),
     getSimilarArticles(category, article.id, 3),
   ]);
+  const items = sweepstakes.map((scholarship) => ({ scholarship, ai_description: null as string | null }));
 
   const categoryLabel = article.category_slug
     ? article.category_slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Scholarships";
 
   const articleUrl = SITE_URL ? `${SITE_URL}/scholarships/${category}/${slug}` : "";
+  const heroImageUrl = getArticleHeroImageUrl(slug, article.title, SITE_URL);
   const articleSchema = SITE_URL
     ? {
         "@context": "https://schema.org",
         "@type": "Article",
         headline: article.title,
         description: article.meta_description ?? undefined,
-        image: article.og_image ?? undefined,
+        image: article.og_image ?? heroImageUrl,
         datePublished: article.published_at ?? undefined,
         dateModified: article.updated_at ?? article.published_at ?? undefined,
         author: { "@type": "Organization", name: "Pathpicker" },
@@ -126,17 +137,17 @@ async function ArticleContent({ params }: Props) {
             </div>
           )}
 
-          {/* Hero image */}
-          {article.og_image && (
-            <div className="relative mt-8 aspect-[1280/582] w-full overflow-hidden rounded-lg bg-[#F5F5F5]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={article.og_image}
-                alt=""
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )}
+          {/* Hero image: dynamic template with article title (SEO-friendly image) */}
+          <div className="relative mt-8 aspect-[1280/582] w-full overflow-hidden rounded-lg bg-[#F5F5F5]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/api/article-hero?slug=${encodeURIComponent(slug)}&title=${encodeURIComponent(article.title)}`}
+              alt=""
+              className="h-full w-full object-cover"
+              width={1280}
+              height={582}
+            />
+          </div>
 
           {/* Body content */}
           {article.content && (
@@ -166,7 +177,7 @@ async function ArticleContent({ params }: Props) {
           {/* Scholarships section - suggested scholarships (same card style as index) */}
           {items.length > 0 && (
             <section className="mx-auto mt-16 max-w-[1280px]">
-              <h2 className="text-2xl font-bold text-[#181A1D] md:text-3xl">Scholarships</h2>
+              <h2 className="text-2xl font-bold text-[#181A1D] md:text-3xl">Recommend Scholarships</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                 {items.map(({ scholarship, ai_description }) => (
                   <ScholarshipCard

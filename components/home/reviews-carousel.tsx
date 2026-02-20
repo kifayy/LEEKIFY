@@ -86,7 +86,7 @@ export function ReviewsCarousel() {
         <div className="mb-6 flex flex-col items-center">
           <a
             href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-            className="relative mx-auto block w-full max-w-[448px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90"
+            className="relative mx-auto block w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90"
             aria-label="Text to get matched scholarships"
           >
             <Image
@@ -95,7 +95,7 @@ export function ReviewsCarousel() {
               width={640}
               height={176}
               className="h-auto w-full object-contain object-center"
-              sizes="(max-width: 768px) 100vw, 448px"
+              sizes="(max-width: 768px) 100vw, 582px"
               unoptimized
             />
           </a>

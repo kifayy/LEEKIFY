@@ -155,7 +155,7 @@ export function SiteHeader() {
         <div className="flex shrink-0 items-center md:ml-6">
           <a
             href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-            className="relative block h-[3.15rem] w-[126px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-14 sm:w-[140px] md:h-17 md:w-[196px]"
+            className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
             aria-label="Get started — text to get matched scholarships"
           >
             <Image
@@ -163,7 +163,7 @@ export function SiteHeader() {
               alt="Get started"
               fill
               className="object-contain object-center"
-              sizes="(max-width: 768px) 140px, 196px"
+              sizes="(max-width: 768px) 182px, 255px"
               unoptimized
             />
           </a>
@@ -270,7 +270,7 @@ export function SiteHeader() {
             <div className="p-5 pt-0">
               <a
                 href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-                className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[224px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
+                className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
                 aria-label="Get started — text to get matched scholarships"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -279,7 +279,7 @@ export function SiteHeader() {
                   alt="Get started"
                   fill
                   className="object-contain object-center"
-                  sizes="224px"
+                  sizes="291px"
                   unoptimized
                 />
               </a>

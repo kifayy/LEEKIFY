@@ -68,24 +68,6 @@ export function EnterScholarshipsSection() {
                 />
                 Download on iOS
               </Link>
-<p className="self-center text-base font-medium text-white md:hidden">or…</p>
-            <a
-              href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
-              className="relative block h-11 w-full max-w-[196px] overflow-hidden rounded-[15px] transition-opacity hover:opacity-95 active:opacity-90 md:hidden md:h-14 md:max-w-[224px]"
-              aria-label="Get started — text to get matched scholarships"
-            >
-              <Image
-                src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-                alt="Get started"
-                fill
-                className="object-contain object-center"
-                sizes="(max-width: 768px) 196px, 224px"
-                unoptimized
-              />
-            </a>
-            <p className="text-sm font-medium text-white/90 md:hidden">
-              Free • No App Required • No Sign-up
-            </p>
             </div>
             {/* Rating — desktop only (next to button) */}
             <div className="hidden flex-col gap-1.5 md:flex">
