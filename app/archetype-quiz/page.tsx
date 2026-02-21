@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ReviewsCarousel } from "@/components/home/reviews-carousel";
+import { PhoneCtaSection } from "@/components/phone-cta";
 
 const SECTION_BG = "#E3F8F8";
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
@@ -102,7 +102,7 @@ export default function ArchetypeQuizPage() {
                 href="https://my.pathpicker.com/archetype"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-[5.6rem] min-w-[263px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-11 text-xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:hidden"
+                className="inline-flex h-[5.6rem] min-w-[263px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-11 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:hidden"
                 style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
               >
                 💸 Take quiz
@@ -123,7 +123,7 @@ export default function ArchetypeQuizPage() {
                   href="https://my.pathpicker.com/archetype"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden min-w-fit items-center justify-center rounded-[15px] border-2 bg-white px-11 font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:inline-flex md:h-[5.6rem] md:min-w-[263px] md:text-xl"
+                  className="hidden min-w-fit items-center justify-center rounded-[15px] border-2 bg-white px-11 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:inline-flex md:h-[5.6rem] md:min-w-[263px]"
                   style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
                 >
                   💸 Take quiz
@@ -190,7 +190,7 @@ export default function ArchetypeQuizPage() {
         </div>
       </section>
 
-      <ReviewsCarousel />
+      <PhoneCtaSection />
 
       {/* Take quiz CTA – duplicate of hero button, centered, larger */}
       <div className="flex justify-center px-4 py-10 md:py-14">

@@ -36,28 +36,26 @@ export type ScholarshipHeroSectionProps = {
 /**
  * Hero section matching the home page WhyDirectMailSection format 1:1.
  * Includes: subtext (9k+ Students | countdown), title, body, SMS CTA image, footer.
+ * Each category gets a distinct rephrased line.
  */
 function getCategoryBody(category: string): string {
   const trimmed = category.trim();
   const lower = trimmed.toLowerCase();
 
-  // Special cases that don't fit "your X" phrasing
-  if (lower === "easy to win") {
-    return "Beat the competition by entering easy-to-win scholarships in seconds with our algorithm.";
-  }
-  if (lower === "by amount") {
-    return "Beat the competition by entering scholarships tailored to your target amount in seconds with our algorithm.";
-  }
+  const copy: Record<string, string> = {
+    "by major":
+      "Find scholarships that match your field of study—our algorithm surfaces the best fits in seconds.",
+    "by state":
+      "Get matched to scholarships in your state and beat the competition with our algorithm.",
+    "high school students":
+      "Get matched to scholarships for high school students in seconds with our algorithm.",
+    "college students":
+      "Find scholarships built for undergrads and grad students—our algorithm matches you in seconds.",
+    "easy to win":
+      "Skip the essay pile—enter easy-to-win scholarships in seconds with our algorithm.",
+  };
 
-  // Default: strip "By " prefix and lowercase for "your X" (e.g. "By Major" -> "your major")
-  let x = trimmed;
-  if (trimmed.toLowerCase().startsWith("by ")) {
-    x = trimmed.slice(3).trim() || trimmed;
-  }
-  if (x.length > 0) {
-    x = x.charAt(0).toLowerCase() + x.slice(1);
-  }
-  return `Beat the competition by entering scholarships tailored for your ${x} in seconds with our algorithm.`;
+  return copy[lower] ?? `Beat the competition by entering scholarships tailored for you in seconds with our algorithm.`;
 }
 
 export function ScholarshipHeroSection({ title, body, category }: ScholarshipHeroSectionProps) {

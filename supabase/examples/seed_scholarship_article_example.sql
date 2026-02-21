@@ -1,13 +1,14 @@
 -- Example: Long-form scholarship article (ScholarshipOwl-style)
 -- Route: /scholarships/{category_slug}/{slug}
--- Includes: deep links (external + internal), 4 featured scholarships throughout, improved spacing
--- Replace placeholder slugs (smart-start-scholarship, etc.) with your actual scholarship slugs
+-- Template for all articles: include summary (answer-at-top) and faq (FAQ block + FAQPage schema).
+-- Replace placeholder slugs (smart-start-scholarship, etc.) with your actual scholarship slugs.
 
 insert into public.scholarships_page (
   title,
   slug,
   meta_title,
   meta_description,
+  summary,
   content,
   published_at,
   og_image,
@@ -16,12 +17,14 @@ insert into public.scholarships_page (
   category_id,
   category_slug,
   filter_field,
-  filter_type
+  filter_type,
+  faq
 ) values (
   'Student Debt 2026: Why No-Essay Sweepstakes Are the Smart Move—And Which Ones to Enter',
   'student-debt-sweepstakes-2026',
   'Student Debt 2026: Best No-Essay Sweepstake Scholarships | Pathpicker',
   'As student debt hits $1.75 trillion, no-essay sweepstakes offer a low-effort way to fund college. See our top picks for 2026.',
+  'As student debt tops $1.75 trillion, no-essay sweepstakes offer a low-effort way to fund college without loans. This guide covers the 2026 debt landscape, why sweepstakes are different from traditional scholarships, and how to build a debt-free path—plus top picks to enter now.',
   '<p>The start of a new year often brings a sense of renewal, but for millions of American students, there is a familiar, heavy shadow: student loan debt 2026. As tuition costs continue to climb and the economic landscape shifts, the dream of a debt-free education feels more like a financial gamble than a guarantee.</p>
 
 <p>Pathpicker believes that transparency is the first step toward change. That’s why we’re breaking down the current student debt landscape—and showing you a smarter path. Start with the <a href="/scholarships/award/smart-start-scholarship">Smart Start Scholarship</a>—a quick $750 opportunity that’s open to all students. No essay, no hassle.</p>
@@ -79,17 +82,25 @@ insert into public.scholarships_page (
   (select id from public.scholarship_categories where slug = 'easy-to-win' limit 1),
   'easy-to-win',
   'is_sweepstake',
-  'eq'
+  'eq',
+  '[
+    {"question": "What are no-essay sweepstake scholarships?", "answer": "No-essay sweepstakes are scholarships where you enter via a short form, quick quiz, or social follow instead of writing an essay. Winners are chosen at random from eligible entries, so applying is fast and your odds improve by entering more often."},
+    {"question": "How do I enter no-essay sweepstakes?", "answer": "Fill out the application form (often just contact and eligibility info), complete any quick action like following a brand on social media or answering a short quiz, and submit before the deadline. Many take under 5 minutes."},
+    {"question": "Are no-essay sweepstakes legitimate?", "answer": "Yes. Many brands and organizations run legitimate no-essay sweepstakes. Stick to well-known programs, check official rules, and never pay to enter. Pathpicker only links to vetted opportunities."},
+    {"question": "How can I avoid student loan debt?", "answer": "Maximize free aid (FAFSA), work part-time, prioritize scholarships and sweepstakes, and consider community college for your first two years. No-essay sweepstakes are one low-effort way to add scholarship money."}
+  ]'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
   meta_title = excluded.meta_title,
   meta_description = excluded.meta_description,
+  summary = excluded.summary,
   content = excluded.content,
   published_at = excluded.published_at,
   og_image = excluded.og_image,
   auto_tag = excluded.auto_tag,
   category_slug = excluded.category_slug,
+  faq = excluded.faq,
   updated_at = now();
 
 -- Link these 4 featured scholarships to the article (update slugs to match your data)

@@ -12,10 +12,9 @@ const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 const scholarshipCategories = [
   { href: "/scholarships/by-major", label: "By Major" },
   { href: "/scholarships/by-state", label: "By State" },
-  { href: "/scholarships/by-grade-level", label: "By Grade Level" },
+  { href: "/scholarships/high-school-students", label: "High School Students" },
+  { href: "/scholarships/college-students", label: "College Students" },
   { href: "/scholarships/easy-to-win", label: "Easy to Win" },
-  { href: "/scholarships/by-ethnicity", label: "By Ethnicity" },
-  { href: "/scholarships/by-amount", label: "By Amount" },
 ];
 
 const navLinks = [
@@ -31,6 +30,19 @@ export function SiteHeader() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownRect, setDropdownRect] = useState<{ top: number; left: number; width: number } | null>(null);
   const scholarshipsTriggerRef = useRef<HTMLAnchorElement>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimeout = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    clearCloseTimeout();
+    closeTimeoutRef.current = setTimeout(() => setDropdownOpen(false), 150);
+  };
 
   const updateDropdownRect = () => {
     const el = scholarshipsTriggerRef.current;
@@ -50,6 +62,8 @@ export function SiteHeader() {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
+
+  useEffect(() => () => clearCloseTimeout(), []);
 
   return (
     <>
@@ -93,10 +107,11 @@ export function SiteHeader() {
                 key={link.href}
                 className="relative"
                 onMouseEnter={() => {
+                  clearCloseTimeout();
                   updateDropdownRect();
                   setDropdownOpen(true);
                 }}
-                onMouseLeave={() => setDropdownOpen(false)}
+                onMouseLeave={scheduleClose}
               >
                 <Link
                   ref={scholarshipsTriggerRef}
@@ -113,8 +128,11 @@ export function SiteHeader() {
                     <div
                       className="fixed z-[60] w-48 rounded-xl border border-[#E5E5E7] bg-white py-2 shadow-lg"
                       style={{ top: dropdownRect.top, left: dropdownRect.left - 96 }}
-                      onMouseEnter={() => setDropdownOpen(true)}
-                      onMouseLeave={() => setDropdownOpen(false)}
+                      onMouseEnter={() => {
+                        clearCloseTimeout();
+                        setDropdownOpen(true);
+                      }}
+                      onMouseLeave={scheduleClose}
                     >
                       <Link
                         href="/scholarships"
