@@ -4,7 +4,7 @@ import { createClient, createAdminClient } from "@/lib/supabase/server";
 export type FormFieldDef = {
   key: string; // unique key for answers object, e.g. "full_name", "email"
   label: string;
-  type: "text" | "email" | "tel" | "select" | "textarea" | "number" | "date";
+  type: "text" | "email" | "tel" | "select" | "textarea" | "number" | "date" | "radio" | "checkbox";
   required?: boolean;
   options?: string[]; // for type "select"
   placeholder?: string;
@@ -64,10 +64,8 @@ export const DEFAULT_FORM_FIELDS: FormFieldDef[] = [
     ],
   },
   { key: "school_name", label: "School Name", type: "text", required: false },
-  { key: "intended_major", label: "Intended or Current Major", type: "text", required: false },
   { key: "gpa", label: "GPA (optional)", type: "text", required: false },
   { key: "state", label: "State", type: "text", required: false },
-  { key: "essay", label: "Short response (if applicable)", type: "textarea", required: false, maxLength: 1000 },
 ];
 
 /** Default form schema - clone and customize per scholarship */
