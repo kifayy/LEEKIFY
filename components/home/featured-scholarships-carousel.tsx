@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -29,14 +30,10 @@ function truncate(str: string, max: number): string {
   return str.slice(0, max).trim() + "...";
 }
 
-const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
-
 export function FeaturedScholarshipsCarousel({
   scholarships,
-  enterScholarshipUrl = AWARDED_APP_STORE_URL,
 }: {
   scholarships: Scholarship[];
-  enterScholarshipUrl?: string;
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -114,10 +111,8 @@ export function FeaturedScholarshipsCarousel({
                   key={s.id}
                   className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
-                  <a
-                    href={enterScholarshipUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/newsletter"
                     className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}
@@ -179,15 +174,9 @@ export function FeaturedScholarshipsCarousel({
                         <p className="mt-3 text-sm font-normal leading-relaxed text-[#0C1120]/60">
                           {s.provider} | Closing Soon
                         </p>
-                        <div className="mt-auto pt-8">
-                          <span className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_5px_rgba(149,110,254,0.2)] transition-opacity group-hover:opacity-95 sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-lg">
-                            Quick Enter
-                            <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
-                          </span>
-                        </div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </CarouselItem>
               ))}
             </CarouselContent>

@@ -133,8 +133,6 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
   },
 ];
 
-const AWARDED_APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
-
 export async function FeaturedScholarshipsSection() {
   // Prefer one each: Citizens Bank, Sofi, US Bank
   let scholarships = await getFeaturedPartnersScholarships();
@@ -151,9 +149,6 @@ export async function FeaturedScholarshipsSection() {
     scholarships = PLACEHOLDER_SCHOLARSHIPS;
   }
   return (
-    <FeaturedScholarshipsCarousel
-      scholarships={scholarships}
-      enterScholarshipUrl={AWARDED_APP_STORE_URL}
-    />
+    <FeaturedScholarshipsCarousel scholarships={scholarships} />
   );
 }

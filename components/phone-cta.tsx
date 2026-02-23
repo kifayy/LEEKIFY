@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 /** Reusable "Phone CTA" section: Win Scholarships From Your Texts + SMS CTA + phone mockups. Use on home, landing, or any page. */
 const HEADING_COLOR = "#181A1D";
@@ -43,20 +44,20 @@ export function PhoneCtaSection() {
         </p>
 
         <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
-          <a
-            href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+          <Link
+            href="/newsletter"
             className="relative block h-[131px] w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[160px] md:max-w-[692px]"
-            aria-label="Text to get matched scholarships"
+            aria-label="Go to newsletter signup"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Text to get scholarships"
+              alt="Get started — go to newsletter"
               fill
               className="object-contain object-center"
               sizes="(max-width: 768px) 582px, 692px"
               unoptimized
             />
-          </a>
+          </Link>
           <p className="mt-2 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
             Free • No App Required • No Sign-up
           </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Star } from "lucide-react";
 
 const REVIEWS = [
@@ -82,23 +83,23 @@ export function ReviewsCarousel() {
   return (
     <section className="w-full min-w-0 overflow-hidden py-10 md:py-24">
       <div className="container mx-auto max-w-3xl px-4 md:px-6 min-w-0">
-        {/* Get started button - SMS CTA */}
+        {/* Get started button — links to newsletter */}
         <div className="mb-6 flex flex-col items-center">
-          <a
-            href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+          <Link
+            href="/newsletter"
             className="relative mx-auto block w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90"
-            aria-label="Text to get matched scholarships"
+            aria-label="Get started — go to newsletter"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Get started - Text to get scholarships"
+              alt="Get started — go to newsletter"
               width={640}
               height={176}
               className="h-auto w-full object-contain object-center"
               sizes="(max-width: 768px) 100vw, 582px"
               unoptimized
             />
-          </a>
+          </Link>
           <p className="mt-2 text-center text-sm font-medium text-[#58595D] md:text-base">
             Free • No App Required • No Sign-up
           </p>

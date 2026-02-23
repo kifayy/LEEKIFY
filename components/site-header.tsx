@@ -19,7 +19,6 @@ const scholarshipCategories = [
 
 const navLinks = [
   { href: "/archetype-quiz", label: "Archetype Quiz" },
-  { href: "/scholarship-quiz", label: "Scholarship Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
   { href: "/newsletter", label: "Newsletter" },
 ];
@@ -171,10 +170,10 @@ export function SiteHeader() {
 
         {/* Right: Get Started image CTA — same SMS as hero */}
         <div className="flex shrink-0 items-center md:ml-6">
-          <a
-            href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+          <Link
+            href="/newsletter"
             className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
-            aria-label="Get started — text to get matched scholarships"
+            aria-label="Get started — go to newsletter"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
@@ -184,7 +183,7 @@ export function SiteHeader() {
               sizes="(max-width: 768px) 182px, 255px"
               unoptimized
             />
-          </a>
+          </Link>
         </div>
       </div>
     </header>
@@ -286,10 +285,10 @@ export function SiteHeader() {
 
             {/* CTA - Get Started image (same as navbar/hero) + slogan underneath */}
             <div className="p-5 pt-0">
-              <a
-                href="sms:+18559224190?body=yoo%21%20send%20me%20scholarships"
+              <Link
+                href="/newsletter"
                 className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
-                aria-label="Get started — text to get matched scholarships"
+                aria-label="Get started — go to newsletter"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
@@ -300,7 +299,7 @@ export function SiteHeader() {
                   sizes="291px"
                   unoptimized
                 />
-              </a>
+              </Link>
               <p className="min-w-0 text-center text-xs font-medium leading-snug text-[#58595D]">
                 Free • No App Required • No Sign-up
               </p>

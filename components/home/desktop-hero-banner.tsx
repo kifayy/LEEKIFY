@@ -16,7 +16,7 @@ export function DesktopHeroBanner() {
       aria-label="Hero"
       style={{
         backgroundImage: `url(${HERO_BG_URL})`,
-        backgroundSize: "90%",
+        backgroundSize: "72%",
       }}
     >
       <div className="container relative mx-auto flex max-w-[1400px] flex-col items-center px-4 py-12 md:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-16">
@@ -58,7 +58,7 @@ export function DesktopHeroBanner() {
               Archetype Quiz
             </Link>
             <Link
-              href="/scholarship-quiz"
+              href="/scholarships"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
             >
               <span>💸</span>

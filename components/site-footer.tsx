@@ -20,7 +20,6 @@ const FOOTER_COLUMNS = [
     title: "Product",
     links: [
       { href: "https://my.pathpicker.com/archetype", label: "Archetype Quiz" },
-      { href: "/scholarship-quiz", label: "Scholarship Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
     ],
   },
