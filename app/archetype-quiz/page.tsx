@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PhoneCtaSection } from "@/components/phone-cta";
 
-const SECTION_BG = "#E3F8F8";
+const SECTION_BG = "#F4E3FF";
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
 const TEXT_MUTED = "#58595D";  // 208:56, 208:60, 208:66
 const HERO_IMAGE_RIGHT =

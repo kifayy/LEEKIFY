@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CopyrightYear } from "@/components/copyright-year";
@@ -132,7 +133,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm" style={{ color: FOOTER_MUTED }}>
-              © <CopyrightYear /> Pathpicker. All rights reserved.
+              © <Suspense fallback={2025}><CopyrightYear /></Suspense> Pathpicker. All rights reserved.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4">
