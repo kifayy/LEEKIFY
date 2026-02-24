@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Star } from "lucide-react";
 
 const REVIEWS = [
@@ -128,39 +127,6 @@ export function ReviewsCarousel() {
   return (
     <section className="w-full min-w-0 overflow-hidden py-10 md:py-24">
       <div className="container mx-auto max-w-3xl px-4 md:px-6 min-w-0">
-        {/* Get started button — links to Scholarship Scanner */}
-        <div className="mb-6 flex flex-col items-center">
-          <div className="mx-auto mb-4 flex justify-center md:mb-6">
-            <Image
-              src="https://storage.googleapis.com/images_592/42adasd%20.png"
-              alt=""
-              width={400}
-              height={200}
-              className="h-auto w-full max-w-[280px] object-contain md:max-w-[360px]"
-              sizes="(max-width: 768px) 280px, 360px"
-              unoptimized
-            />
-          </div>
-          <Link
-            href="/newsletter"
-            className="relative mx-auto block w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90"
-            aria-label="Get started — Scholarship Scanner"
-          >
-            <Image
-              src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Get started — Scholarship Scanner"
-              width={640}
-              height={176}
-              className="h-auto w-full object-contain object-center"
-              sizes="(max-width: 768px) 100vw, 582px"
-              unoptimized
-            />
-          </Link>
-          <p className="mt-2 text-center text-sm font-medium text-[#58595D] md:text-base">
-            Free • No App Required • No Sign-up
-          </p>
-        </div>
-
         {/* White card - theme aligned */}
         <div
           className="flex flex-col gap-6 rounded-2xl bg-white p-8 md:p-10"

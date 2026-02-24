@@ -14,10 +14,10 @@ export default function Home() {
         <HeroFigmaDesign />
       </div>
       <FeaturesSection />
-      <HeroQuizCards />
       <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
         <FeaturedScholarshipsSection />
       </Suspense>
+      <HeroQuizCards />
       <WhyDirectMailSection />
       <ReviewsCarousel />
     </>

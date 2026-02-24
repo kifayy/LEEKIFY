@@ -34,7 +34,7 @@ const NEWSLETTER_FAQ = [
 export default function NewsletterPage() {
   return (
     <>
-      <PhoneCtaSection hideFirstPhoneMockup showReviewsSidebar />
+      <PhoneCtaSection showReviewsSidebar />
       <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-20">
         <section className="mx-auto max-w-2xl" aria-labelledby="scholarship-scanner-heading">
           <h1 id="scholarship-scanner-heading" className="sr-only">

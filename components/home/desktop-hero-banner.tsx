@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 
 const HERO_BG_URL =
-  "https://storage.googleapis.com/images_592/05.%20Grocery%20Store.png";
+  "https://storage.googleapis.com/images_592/13.%20Online%20Forusm.png";
 
-const REVIEW_PILL_BG = "#ffffff";
+const REVIEW_PILL_BG = "transparent";
 
 export function DesktopHeroBanner() {
   return (
@@ -16,7 +15,8 @@ export function DesktopHeroBanner() {
       aria-label="Hero"
       style={{
         backgroundImage: `url(${HERO_BG_URL})`,
-        backgroundSize: "72%",
+        backgroundSize: "contain",
+        minHeight: "min(95vw, 800px)",
       }}
     >
       <div className="container relative mx-auto flex max-w-[1400px] flex-col items-center px-4 py-12 md:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-16">
@@ -64,38 +64,6 @@ export function DesktopHeroBanner() {
               <span>💸</span>
               Get Scholarships
             </Link>
-          </div>
-        </div>
-
-        {/* Right: floating tags (hero background covers section) */}
-        <div className="relative mt-8 h-[315px] w-full max-w-[450px] shrink-0 lg:mt-0 lg:h-[473px] lg:max-w-[563px] xl:h-[585px] xl:max-w-[731px]">
-          <div className="animate-float absolute right-2 top-[18%] z-20 flex min-w-[100px] items-center gap-2 rounded-lg bg-white p-2.5 shadow-[0_9px_59px_rgba(174,165,114,0.08)] lg:right-4 lg:min-w-[120px]" style={{ animationDelay: "0s" }}>
-            <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
-              <Image
-                src="https://storage.googleapis.com/images_592/images.png"
-                alt=""
-                fill
-                className="object-contain"
-                unoptimized
-              />
-            </div>
-            <p className="text-sm font-bold leading-tight" style={{ color: "#956EFE" }}>
-              82% Ivy League Match
-            </p>
-          </div>
-
-          <div className="animate-float absolute bottom-[32%] left-2 z-20 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 shadow-[0_42px_26px_rgba(0,0,0,0.05)] lg:left-4" style={{ animationDelay: "0.5s" }}>
-            <span className="text-xl">💰</span>
-            <span className="text-sm font-normal text-[#3A3E46]">
-              $32,144 Scholarships Matched
-            </span>
-          </div>
-
-          <div className="animate-float absolute bottom-[22%] right-6 z-20 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 shadow-[0_42px_26px_rgba(0,0,0,0.05)] lg:right-10" style={{ animationDelay: "1s" }}>
-            <span className="text-xl">🎉</span>
-            <span className="text-sm font-normal text-[#3A3E46]">
-              Social Partier
-            </span>
           </div>
         </div>
       </div>

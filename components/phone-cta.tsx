@@ -9,13 +9,11 @@ const HEADING_COLOR = "#181A1D";
 const BODY_COLOR = "rgb(88, 89, 93)";
 
 type PhoneCtaSectionProps = {
-  /** When true, hide the first phone mockup (Scholarships to your phone) on this page only. */
-  hideFirstPhoneMockup?: boolean;
-  /** When true, show the Reviews card to the left of the phone mockup(s) (e.g. newsletter page). */
+  /** When true, show the Reviews card to the left (e.g. newsletter page). */
   showReviewsSidebar?: boolean;
 };
 
-export function PhoneCtaSection({ hideFirstPhoneMockup, showReviewsSidebar }: PhoneCtaSectionProps = {}) {
+export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {}) {
   return (
     <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
       <div className="container mx-auto max-w-[1024px] min-w-0 px-4 md:px-6">
@@ -77,37 +75,13 @@ export function PhoneCtaSection({ hideFirstPhoneMockup, showReviewsSidebar }: Ph
           Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with.
         </p>
 
-        <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12">
-          {showReviewsSidebar && (
+        {(showReviewsSidebar && (
+          <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12">
             <div className="w-full min-w-0 shrink-0 md:min-w-[380px] md:max-w-[420px] md:flex-1">
               <ReviewsCard />
             </div>
-          )}
-          <div className="flex flex-wrap items-center justify-center gap-8 md:flex-1 md:flex-nowrap md:gap-12">
-          {!hideFirstPhoneMockup && (
-            <div className="relative h-[560px] w-full min-w-0 max-w-[760px] overflow-hidden rounded-xl md:h-[760px] md:max-w-[840px] md:flex-1 md:min-w-0">
-              <Image
-                src="https://storage.googleapis.com/images_592/Secfftion.png"
-                alt="Scholarships to your phone"
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
-              />
-            </div>
-          )}
-          <div className="relative h-[560px] w-full min-w-0 max-w-[760px] overflow-hidden rounded-xl md:h-[760px] md:max-w-[840px] md:flex-1 md:min-w-0">
-            <Image
-              src="https://storage.googleapis.com/images_592/Gro2up%205.png"
-              alt="Only 2 texts a week"
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              unoptimized
-            />
           </div>
-          </div>
-        </div>
+        ))}
 
       </div>
     </section>
