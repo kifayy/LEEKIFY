@@ -136,7 +136,7 @@ export default function ArchetypeQuizPage() {
               <div className="relative aspect-[613/601.5] w-full max-w-[613px]">
                 <Image
                   src={HERO_IMAGE_RIGHT}
-                  alt=""
+                  alt="Student archetype quiz illustration"
                   fill
                   className="object-contain object-center"
                   sizes="(min-width: 1024px) 613px, 100vw"

@@ -16,9 +16,13 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const scholarship = await getHostedScholarshipBySlug(slug);
   if (!scholarship) return { title: "Apply | Pathpicker" };
+  const title = `Apply: ${scholarship.title} | Pathpicker`;
+  const description = scholarship.description ?? undefined;
   return {
-    title: `Apply: ${scholarship.title} | Pathpicker`,
-    description: scholarship.description ?? undefined,
+    title,
+    description,
+    openGraph: { title, description, siteName: "Pathpicker" },
+    twitter: { card: "summary_large_image" as const, title, description },
   };
 }
 

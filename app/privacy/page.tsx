@@ -1,7 +1,7 @@
 import { Shield } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | PathPicker",
+  title: "Privacy Policy | Pathpicker",
   description:
     "Our Privacy Policy outlines how we collect, use, and protect your personal information. Your privacy and security are our priorities.",
 };

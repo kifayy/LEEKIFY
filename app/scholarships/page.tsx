@@ -48,6 +48,7 @@ async function ScholarshipsPageContent() {
       <ScholarshipHeroSection
         title="Win Scholarships From Your Texts"
         body="Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with."
+        headingLevel="h1"
       />
       <div className="container mx-auto max-w-[1232px] px-4 py-8 md:px-6 md:py-12">
 

@@ -26,7 +26,7 @@ const FOOTER_COLUMNS = [
   {
     title: "Support",
     links: [
-      { href: "/newsletter", label: "Newsletter" },
+      { href: "/newsletter", label: "Scholarship Scanner" },
       { href: "https://awarded.app/providers", label: "For Business" },
     ],
   },

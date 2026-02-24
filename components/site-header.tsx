@@ -20,7 +20,7 @@ const scholarshipCategories = [
 const navLinks = [
   { href: "/archetype-quiz", label: "Archetype Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
-  { href: "/newsletter", label: "Newsletter" },
+  { href: "/newsletter", label: "Scholarship Scanner" },
 ];
 
 export function SiteHeader() {
@@ -173,11 +173,11 @@ export function SiteHeader() {
           <Link
             href="/newsletter"
             className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
-            aria-label="Get started — go to newsletter"
+            aria-label="Get started — Scholarship Scanner"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Get started"
+              alt="Get started — Scholarship Scanner"
               fill
               className="object-contain object-center"
               sizes="(max-width: 768px) 182px, 255px"
@@ -288,12 +288,12 @@ export function SiteHeader() {
               <Link
                 href="/newsletter"
                 className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
-                aria-label="Get started — go to newsletter"
+                aria-label="Get started — Scholarship Scanner"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
                   src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-                  alt="Get started"
+                  alt="Get started — Scholarship Scanner"
                   fill
                   className="object-contain object-center"
                   sizes="291px"

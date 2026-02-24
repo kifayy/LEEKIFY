@@ -25,14 +25,13 @@ export function NewsletterWidget() {
           </span>
         </div>
         <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
-          Sign up to our newsletter
+          Scholarship Scanner
         </h2>
         <p
           className="text-sm font-normal leading-relaxed md:text-base"
           style={{ color: "rgba(25, 24, 37, 0.75)" }}
         >
-          Get scholarship tips, new opportunities, and updates delivered to your
-          inbox. Join thousands of students.
+          Get matched scholarships sent to your inbox. Our algorithm scans 1,000+ opportunities and sends you two easy ones you qualify for. Join thousands of students.
         </p>
         <div className="h-[80px] w-full max-w-full shrink-0 md:h-[80px] md:max-w-[450px]">
           <iframe
@@ -51,7 +50,7 @@ export function NewsletterWidget() {
               backgroundColor: "transparent",
               boxShadow: "0 0 #0000",
             }}
-            title="Newsletter signup"
+            title="Scholarship Scanner signup"
           />
         </div>
       </div>

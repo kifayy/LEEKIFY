@@ -7,15 +7,29 @@ import { SiteFooter } from "@/components/site-footer";
 import { EnterScholarshipsSection } from "@/components/enter-scholarships-section";
 import "./globals.css";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const defaultUrl = siteUrl
+  ? (siteUrl.startsWith("http") ? siteUrl : `https://${siteUrl}`)
+  : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
+const defaultTitle = "Pathpicker: Personalized Student Quizzes & Scholarship Finder";
+const defaultDescription =
+  "What student path should you take? Take our viral student quizzes to find your archetype, scholarships & more.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "PathPicker: Personalized Student Quizzes & Scholarship Finder",
-  description:
-    "What student path should you take? Take our viral student quizzes to find your archetype, scholarships & more.",
+  title: defaultTitle,
+  description: defaultDescription,
+  openGraph: {
+    title: defaultTitle,
+    description: defaultDescription,
+    siteName: "Pathpicker",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 const poppins = Poppins({

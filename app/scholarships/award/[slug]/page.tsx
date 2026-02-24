@@ -26,9 +26,13 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const scholarship = await getScholarshipBySlug(slug);
   if (!scholarship) return { title: "Scholarship | Pathpicker" };
+  const title = `${scholarship.title} | Pathpicker`;
+  const description = `${scholarship.provider} – ${scholarship.amount ?? "Scholarship"}. Deadline: ${formatDeadline(scholarship.deadline)}.`;
   return {
-    title: `${scholarship.title} | Pathpicker`,
-    description: `${scholarship.provider} – ${scholarship.amount ?? "Scholarship"}. Deadline: ${formatDeadline(scholarship.deadline)}.`,
+    title,
+    description,
+    openGraph: { title, description, siteName: "Pathpicker" },
+    twitter: { card: "summary_large_image" as const, title, description },
   };
 }
 
@@ -59,7 +63,7 @@ async function ScholarshipDetail({ params }: Props) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={scholarship.image_url}
-                alt=""
+                alt={scholarship.title || "Scholarship"}
                 className="h-full w-full object-cover"
               />
             </div>

@@ -13,10 +13,12 @@ export type ScholarshipHeroSectionProps = {
   body: string;
   /** Optional category name (e.g. Gender, Ethnicity, STEM). When set, body becomes category-specific. */
   category?: string | null;
+  /** Heading level for the title. Use "h1" on the main scholarships index and category pages for SEO. */
+  headingLevel?: "h1" | "h2";
 };
 
 /**
- * Hero section: title, body, and CTA linking to /newsletter.
+ * Hero section: title, body, and CTA linking to Scholarship Scanner (/newsletter).
  * Each category gets a distinct rephrased body line.
  */
 function getCategoryBody(category: string): string {
@@ -39,18 +41,19 @@ function getCategoryBody(category: string): string {
   return copy[lower] ?? `Beat the competition by entering scholarships tailored for you in seconds with our algorithm.`;
 }
 
-export function ScholarshipHeroSection({ title, body, category }: ScholarshipHeroSectionProps) {
+export function ScholarshipHeroSection({ title, body, category, headingLevel = "h2" }: ScholarshipHeroSectionProps) {
   const displayBody = category?.trim() ? getCategoryBody(category) : body;
+  const HeadingTag = headingLevel;
 
   return (
     <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
       <div className="container mx-auto max-w-[1024px] px-4 md:px-6 min-w-0">
-        <h2
+        <HeadingTag
           className="mx-auto mb-4 max-w-[603px] text-center text-3xl font-bold leading-tight tracking-tight md:mb-5 md:text-4xl lg:mb-8 lg:leading-snug lg:text-[3.75rem]"
           style={{ color: HEADING_COLOR }}
         >
           {title}
-        </h2>
+        </HeadingTag>
         <p
           className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
           style={{ color: BODY_COLOR }}
@@ -58,12 +61,12 @@ export function ScholarshipHeroSection({ title, body, category }: ScholarshipHer
           {displayBody}
         </p>
 
-        {/* CTA — enter scholarships / newsletter */}
+        {/* CTA — Scholarship Scanner */}
         <div className="mx-auto mb-3 flex justify-center md:mb-4">
           <Link
             href="/newsletter"
             className="relative block h-[144px] w-full max-w-[640px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[176px] md:max-w-[760px]"
-            aria-label="Enter scholarships"
+            aria-label="Go to Scholarship Scanner"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Grou34p%206.png"

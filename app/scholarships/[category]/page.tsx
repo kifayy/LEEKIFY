@@ -10,15 +10,23 @@ import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-he
 
 type Props = { params: Promise<{ category: string }> };
 
-const SITE_URL = "https://pathpicker.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
 export async function generateMetadata({ params }: Props) {
   const { category } = await params;
   const cat = await getCategoryBySlug(category);
   if (!cat) return { title: "Category | Pathpicker" };
+  const title = cat.meta_title ?? `${cat.name} Scholarships | Pathpicker`;
+  const description = cat.meta_description ?? cat.description ?? undefined;
+  const canonicalUrl = SITE_URL ? `${SITE_URL}/scholarships/${category}` : undefined;
   return {
-    title: cat.meta_title ?? `${cat.name} Scholarships | Pathpicker`,
-    description: cat.meta_description ?? cat.description ?? undefined,
+    title,
+    description,
+    alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+    openGraph: { title, description, siteName: "Pathpicker" },
+    twitter: { card: "summary_large_image" as const, title, description },
   };
 }
 
@@ -67,6 +75,7 @@ async function CategoryContent({ params }: Props) {
         title={`${cat.name} Scholarships`}
         body={cat.description ?? ""}
         category={cat.name}
+        headingLevel="h1"
       />
       <div className="container mx-auto max-w-5xl px-4 py-12 md:max-w-6xl md:px-6 md:py-16">
         <Breadcrumbs

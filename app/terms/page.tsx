@@ -1,7 +1,7 @@
 import { FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Terms of Service | PathPicker",
+  title: "Terms of Service | Pathpicker",
   description:
     "By accessing or using PathPicker, you agree to these Terms of Service. If you do not agree, do not use the app or website.",
 };
