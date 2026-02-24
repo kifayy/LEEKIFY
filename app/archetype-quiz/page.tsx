@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { PhoneCtaSection } from "@/components/phone-cta";
 
-const SECTION_BG = "#F4E3FF";
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
 const TEXT_MUTED = "#58595D";  // 208:56, 208:60, 208:66
 const HERO_IMAGE_RIGHT =
@@ -76,13 +75,19 @@ export default function ArchetypeQuizPage() {
     <div className="min-w-0 overflow-x-hidden">
       {/* Section 208:40 – Figma section */}
       <section
-        className="w-full min-w-0"
-        style={{ backgroundColor: SECTION_BG }}
+        className="relative w-full min-w-0 overflow-hidden bg-white"
         aria-label="Archetype Quiz"
       >
+        {/* Light purple circles – mobile + desktop */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-[#E8D5FF] opacity-60 blur-3xl" />
+          <div className="absolute -right-32 top-1/3 h-96 w-96 rounded-full bg-[#F0E3FF] opacity-70 blur-3xl" />
+          <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-[#EAD9FF] opacity-50 blur-3xl" />
+          <div className="absolute right-1/4 top-0 h-72 w-72 rounded-full bg-[#F4E3FF] opacity-80 blur-3xl" />
+        </div>
         {/* div#w-node-... 208:41 – container 1290px, padding from frame */}
         <div
-          className="mx-auto flex min-w-0 max-w-[1290px] flex-col px-4 pt-12 pb-0 sm:px-10 md:px-[75px] md:pt-16 md:pb-0"
+          className="relative mx-auto flex min-w-0 max-w-[1290px] flex-col px-4 pt-12 pb-0 sm:px-10 md:px-[75px] md:pt-16 md:pb-0"
           style={{ maxWidth: 1290 }}
         >
           {/* Main row – content left + image right (archetype layout); below logo carousel on desktop */}

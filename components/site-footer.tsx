@@ -19,14 +19,15 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "https://my.pathpicker.com/archetype", label: "Archetype Quiz" },
+      { href: "/archetype-quiz", label: "Archetype Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
+      { href: "/scholarship-scanner", label: "Scholarship Scanner" },
     ],
   },
   {
     title: "Support",
     links: [
-      { href: "/scholarship-scanner", label: "Scholarship Scanner" },
+      { href: "mailto:hello@pathpicker.com", label: "Contact" },
       { href: "https://awarded.app/providers", label: "For Business" },
     ],
   },

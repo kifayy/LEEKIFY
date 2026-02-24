@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +11,24 @@ import {
 import type { CarouselApi } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-react";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
-import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
+
+/** Provider name (lowercase) -> logo URL for featured scholarship cards */
+const PROVIDER_LOGOS: Record<string, string> = {
+  "us bank": "https://logo.clearbit.com/usbank.com",
+  "u.s. bank": "https://logo.clearbit.com/usbank.com",
+  "citizens bank": "https://logo.clearbit.com/citizensbank.com",
+  "citizens": "https://logo.clearbit.com/citizensbank.com",
+  "sofi": "https://logo.clearbit.com/sofi.com",
+};
+
+function getProviderLogoUrl(provider: string | null): string | null {
+  if (!provider) return null;
+  const lower = provider.toLowerCase();
+  for (const [key, url] of Object.entries(PROVIDER_LOGOS)) {
+    if (lower.includes(key)) return url;
+  }
+  return null;
+}
 
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return "No deadline";
@@ -113,14 +131,32 @@ export function FeaturedScholarshipsCarousel({
                   className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <Link
-                    href={SCHOLARSHIP_SCANNER_SMS_URL}
+                    href="/scholarship-scanner"
                     className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}
                     <div className="relative flex min-h-0 flex-1 flex-col">
                       {/* Image area */}
                       <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#F7F7F7]">
-                        <div className="flex h-full items-center justify-center text-5xl">
+                        {getProviderLogoUrl(s.provider) ? (
+                          <Image
+                            src={getProviderLogoUrl(s.provider)!}
+                            alt=""
+                            fill
+                            className="object-contain object-center p-8"
+                            sizes="(max-width: 768px) 85vw, 380px"
+                            unoptimized
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                              if (fallback) fallback.style.display = "flex";
+                            }}
+                          />
+                        ) : null}
+                        <div
+                          className="flex h-full items-center justify-center text-5xl"
+                          style={getProviderLogoUrl(s.provider) ? { display: "none" } : undefined}
+                        >
                           🎓
                         </div>
                         {/* Frosted $ amount badge */}
