@@ -21,7 +21,7 @@ export function NewsletterWidget() {
             <Star className="h-4 w-4 fill-current" />
           </div>
           <span className="text-sm font-medium text-[#181A1D]">
-            Join 20k+ Students
+            Trusted by 20k+ students
           </span>
         </div>
         <h2 className="text-xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
@@ -31,7 +31,7 @@ export function NewsletterWidget() {
           className="text-sm font-normal leading-relaxed md:text-base"
           style={{ color: "rgba(25, 24, 37, 0.75)" }}
         >
-          Get matched scholarships sent to your inbox. Our algorithm scans 1,000+ opportunities and sends you two easy ones you qualify for. Join thousands of students.
+          Two scholarships matched to you every week—no essay required. We scan 1,000+ opportunities and send you only the ones you qualify for. Free, no app, no spam.
         </p>
         <div className="h-[80px] w-full max-w-full shrink-0 md:h-[80px] md:max-w-[450px]">
           <iframe

@@ -86,8 +86,8 @@ export function ReviewsCard() {
         boxShadow: "0 8px 24px rgba(149,110,254,0.12), 0 2px 8px rgba(0,0,0,0.06)",
       }}
     >
-      <div className="flex min-w-0 flex-wrap items-center justify-between gap-4">
-        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-4 sm:min-w-0">
+      <div className="flex min-w-0 flex-col gap-3">
+        <div className="flex min-w-0 flex-wrap items-center gap-4">
           <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
             Reviews
           </h2>
@@ -108,7 +108,7 @@ export function ReviewsCard() {
             />
           </a>
         </div>
-        <span className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
+        <span className="w-fit inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
           <Star className="h-4 w-4 fill-white" />
           4.8 · 322+ reviews
         </span>
@@ -168,8 +168,8 @@ export function ReviewsCarousel() {
             boxShadow: "0 8px 24px rgba(149,110,254,0.12), 0 2px 8px rgba(0,0,0,0.06)",
           }}
         >
-          {/* Header: Reviews + Trustpilot badge + rating pill */}
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* Header: Reviews + Trustpilot badge, then rating pill on its own row */}
+          <div className="flex flex-col gap-3">
             <div className="flex flex-wrap items-center gap-4">
               <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
                 Reviews
@@ -191,7 +191,7 @@ export function ReviewsCarousel() {
                 />
               </a>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
+            <span className="w-fit inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
               <Star className="h-4 w-4 fill-white" />
               4.8 · 322+ reviews
             </span>

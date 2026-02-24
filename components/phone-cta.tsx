@@ -38,25 +38,6 @@ export function PhoneCtaSection({ hideFirstPhoneMockup, showReviewsSidebar }: Ph
           Win Scholarships From <span style={{ color: "#007aff" }}>Your Texts</span>
         </h2>
 
-        <div className="mx-auto mb-4 flex justify-center md:mb-6">
-          <Image
-            src="https://storage.googleapis.com/images_592/Yellow%20and%20Blue%20Simple%20Message%20Conservation%20Instagram%20Post.png"
-            alt="Message conversation — win scholarships from your texts"
-            width={400}
-            height={200}
-            className="h-auto w-full max-w-[420px] object-contain md:max-w-[720px]"
-            sizes="(max-width: 768px) 420px, 720px"
-            unoptimized
-          />
-        </div>
-
-        <p
-          className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
-          style={{ color: BODY_COLOR }}
-        >
-          Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with.
-        </p>
-
         <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
           <Link
             href="/newsletter"
@@ -76,6 +57,25 @@ export function PhoneCtaSection({ hideFirstPhoneMockup, showReviewsSidebar }: Ph
             Free • No App Required • No Sign-up
           </p>
         </div>
+
+        <div className="mx-auto mb-4 flex justify-center md:mb-6">
+          <Image
+            src="https://storage.googleapis.com/images_592/Yellow%20and%20Blue%20Simple%20Message%20Conservation%20Instagram%20Post.png"
+            alt="Message conversation — win scholarships from your texts"
+            width={400}
+            height={200}
+            className="h-auto w-full max-w-[420px] object-contain md:max-w-[720px]"
+            sizes="(max-width: 768px) 420px, 720px"
+            unoptimized
+          />
+        </div>
+
+        <p
+          className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
+          style={{ color: BODY_COLOR }}
+        >
+          Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with.
+        </p>
 
         <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12">
           {showReviewsSidebar && (
