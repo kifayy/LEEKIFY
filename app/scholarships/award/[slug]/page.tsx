@@ -57,18 +57,6 @@ async function ScholarshipDetail({ params }: Props) {
         />
 
         <article className="overflow-hidden rounded-2xl bg-white shadow-sm">
-          {/* Hero image */}
-          {scholarship.image_url && (
-            <div className="relative aspect-[21/9] w-full overflow-hidden bg-[#5B4B8A]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={scholarship.image_url}
-                alt={scholarship.title || "Scholarship"}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )}
-
           <div className="p-6 md:p-10">
             {/* Meta badges */}
             <div className="mb-4 flex flex-wrap items-center gap-2">

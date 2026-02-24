@@ -23,7 +23,6 @@ async function ScholarshipsPageContent() {
       let s = await getScholarshipsForMonth();
       if (s.length === 0) s = await getFeaturedScholarships();
       if (s.length === 0) s = await getAllScholarships();
-      // Sort so is_sweepstake = true appears first, then randomize within each group
       const sweepstakes = s.filter((x) => x.is_sweepstake === true);
       const nonSweepstakes = s.filter((x) => x.is_sweepstake !== true);
       const shuffle = <T,>(arr: T[]): T[] => {
@@ -46,7 +45,7 @@ async function ScholarshipsPageContent() {
         <CategoryCarousel categories={categories} />
       </div>
       <ScholarshipHeroSection
-        title="Win Scholarships From Your Texts"
+        title="📲Get No-Essay Scholarships"
         body="Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with."
         headingLevel="h1"
       />

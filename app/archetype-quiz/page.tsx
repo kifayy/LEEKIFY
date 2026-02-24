@@ -115,7 +115,7 @@ export default function ArchetypeQuizPage() {
                   className="max-w-[556px] text-base leading-relaxed md:text-lg"
                   style={{ color: TEXT_MUTED }}
                 >
-                  Take our 16-question archetype quiz to reveal your student persona, social habits, and financial cheat codes built for your student profile.
+                  Take our archetype quiz to reveal your student persona, social habits, and other personality traits that fit one of our 16 archetypes.
                 </p>
 
                 {/* 208:67 – CTA link: 2x size, hidden on mobile (button under title there) */}
@@ -147,9 +147,9 @@ export default function ArchetypeQuizPage() {
             </div>
           </div>
 
-          {/* Logo carousel – 3 visible at a time, at top on desktop */}
+          {/* Logo carousel – 3 visible at a time, at top on desktop; left-aligned on desktop */}
           <div className="order-1 md:mt-2">
-            <div className="marquee-fade-edges mx-auto max-w-[min(100%,520px)] overflow-hidden py-1 md:py-2">
+            <div className="marquee-fade-edges mx-auto max-w-[min(100%,520px)] overflow-hidden py-1 md:mx-0 md:mr-auto md:py-2">
               <div className="flex w-max items-center animate-archetype-hero-marquee">
                 {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
                   <HeroLogoSlot key={i} src={src} />

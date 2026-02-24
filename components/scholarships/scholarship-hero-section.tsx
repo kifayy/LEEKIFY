@@ -18,7 +18,7 @@ export type ScholarshipHeroSectionProps = {
 };
 
 /**
- * Hero section: title, body, and CTA linking to Scholarship Scanner (/newsletter).
+ * Hero section: title, body, and CTA linking to Scholarship Scanner (/scholarship-scanner).
  * Each category gets a distinct rephrased body line.
  */
 function getCategoryBody(category: string): string {
@@ -61,12 +61,12 @@ export function ScholarshipHeroSection({ title, body, category, headingLevel = "
           {displayBody}
         </p>
 
-        {/* CTA — Scholarship Scanner */}
+        {/* CTA — Scholarship Scanner (goes to signup page) */}
         <div className="mx-auto mb-3 flex justify-center md:mb-4">
           <Link
-            href="/newsletter"
+            href="/scholarship-scanner"
             className="relative block h-[144px] w-full max-w-[640px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[176px] md:max-w-[760px]"
-            aria-label="Go to Scholarship Scanner"
+            aria-label="Get started — Scholarship Scanner"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Grou34p%206.png"

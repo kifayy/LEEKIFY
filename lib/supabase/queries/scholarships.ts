@@ -8,7 +8,6 @@ export type Scholarship = {
   deadline: string | null;
   is_featured: boolean;
   external_link: string | null;
-  image_url: string | null;
   slug: string;
   content: string | null;
   tags: string[] | null;

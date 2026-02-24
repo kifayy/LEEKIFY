@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ReviewsCard } from "@/components/home/reviews-carousel";
+import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
 
 /** Reusable "Phone CTA" section: Win Scholarships From Your Texts + SMS CTA + phone mockups. Use on home, landing, or any page. */
 const HEADING_COLOR = "#181A1D";
@@ -38,9 +39,9 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
 
         <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
           <Link
-            href="/newsletter"
+            href={SCHOLARSHIP_SCANNER_SMS_URL}
             className="relative block h-[131px] w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[160px] md:max-w-[692px]"
-            aria-label="Go to Scholarship Scanner"
+            aria-label="Get started — Scholarship Scanner (opens SMS)"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
@@ -76,8 +77,8 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
         </p>
 
         {(showReviewsSidebar && (
-          <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12">
-            <div className="w-full min-w-0 shrink-0 md:min-w-[380px] md:max-w-[420px] md:flex-1">
+          <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12 md:hidden">
+            <div className="w-full min-w-0 shrink-0 md:w-[420px] md:min-w-0 md:max-w-[420px] md:flex-none">
               <ReviewsCard />
             </div>
           </div>

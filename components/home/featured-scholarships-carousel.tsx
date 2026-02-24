@@ -10,6 +10,7 @@ import {
 import type { CarouselApi } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-react";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
+import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
 
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return "No deadline";
@@ -112,25 +113,16 @@ export function FeaturedScholarshipsCarousel({
                   className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <Link
-                    href="/newsletter"
+                    href={SCHOLARSHIP_SCANNER_SMS_URL}
                     className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}
                     <div className="relative flex min-h-0 flex-1 flex-col">
                       {/* Image area */}
                       <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#F7F7F7]">
-                        {s.image_url ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={s.image_url}
-                            alt=""
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-full items-center justify-center text-5xl">
-                            🎓
-                          </div>
-                        )}
+                        <div className="flex h-full items-center justify-center text-5xl">
+                          🎓
+                        </div>
                         {/* Frosted $ amount badge */}
                         <div
                           className="absolute right-4 top-4 flex items-center rounded-[22px] px-3 py-2"
