@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -169,12 +168,12 @@ export function SiteHeader() {
           )}
         </nav>
 
-        {/* Right: Get Started image CTA — opens SMS */}
+        {/* Right: Get Started image CTA — Scholarship Scanner page */}
         <div className="flex shrink-0 items-center md:ml-6">
           <Link
-            href={SCHOLARSHIP_SCANNER_SMS_URL}
+            href="/scholarship-scanner"
             className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
-            aria-label="Get started — Scholarship Scanner (opens SMS)"
+            aria-label="Get started — Scholarship Scanner"
           >
             <Image
               src="https://storage.googleapis.com/images_592/Group%201SS0.png"
@@ -284,12 +283,12 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTA - Get Started image (opens SMS) + slogan underneath */}
+            {/* CTA - Get Started image → Scholarship Scanner page + slogan underneath */}
             <div className="p-5 pt-0">
               <Link
-                href={SCHOLARSHIP_SCANNER_SMS_URL}
+                href="/scholarship-scanner"
                 className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
-                aria-label="Get started — Scholarship Scanner (opens SMS)"
+                aria-label="Get started — Scholarship Scanner"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
