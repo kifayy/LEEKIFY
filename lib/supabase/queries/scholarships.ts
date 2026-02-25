@@ -163,7 +163,7 @@ export async function getScholarshipsForArticle(
   if (!error) {
     const items = (junctionRows ?? [])
       .map((r) => {
-        const row = r as unknown as { scholarships: (Scholarship & { is_sweepstake?: boolean }) | null; ai_description: string | null };
+        const row = r as unknown as { scholarships: Scholarship | null; ai_description: string | null };
         const s = row.scholarships;
         if (!s || s.is_sweepstake !== true) return null;
         return {
