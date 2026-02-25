@@ -43,6 +43,13 @@
   html {
     -webkit-text-size-adjust: 100%;
     overflow-y: scroll;
+    scroll-padding-top: 6rem; /* Match fixed header: h-24 */
+  }
+  @media (min-width: 768px) {
+    html { scroll-padding-top: 8rem; } /* md:h-32 */
+  }
+  @media (min-width: 1024px) {
+    html { scroll-padding-top: 9rem; } /* lg:h-36 */
   }
   body {
     @apply bg-background text-foreground text-base font-normal;
@@ -54,6 +61,31 @@
   h1, h2, h3 {
     font-weight: 700;
     color: #181A1D;
+  }
+  /* Scroll targets: clear fixed header (h-24 / md:h-32 / lg:h-36) */
+  [id]:where(h1, h2, h3, h4, h5, h6),
+  pre,
+  [class*="prose"] pre {
+    scroll-margin-top: 6rem; /* h-24 mobile */
+  }
+  @media (min-width: 768px) {
+    [id]:where(h1, h2, h3, h4, h5, h6),
+    pre,
+    [class*="prose"] pre {
+      scroll-margin-top: 8rem; /* md:h-32 */
+    }
+  }
+  @media (min-width: 1024px) {
+    [id]:where(h1, h2, h3, h4, h5, h6),
+    pre,
+    [class*="prose"] pre {
+      scroll-margin-top: 9rem; /* lg:h-36 */
+    }
+  }
+  /* JSON/code blocks: no inner scroll – content flows with page */
+  pre, [class*="prose"] pre {
+    overflow-x: auto;
+    overflow-y: visible;
   }
 }
 

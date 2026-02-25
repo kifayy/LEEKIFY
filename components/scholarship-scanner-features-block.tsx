@@ -63,11 +63,21 @@ export function ScholarshipScannerFeaturesBlock() {
               </p>
             </div>
           ))}
+          {/* Mobile-only: 9_16 Lottie below feature cards */}
+          <div className="flex min-h-[200px] items-center justify-center overflow-hidden pb-10 touch-none lg:hidden">
+            {animationData && (
+              <Lottie
+                animationData={animationData}
+                loop
+                className="h-full max-h-[157px] w-full max-w-full object-contain"
+              />
+            )}
+          </div>
         </div>
 
-        {/* Right: partner brands — Lottie animation (same as Scholarship Quiz card) */}
+        {/* Right: partner brands — Lottie animation (same as Scholarship Quiz card); hidden on mobile, visible on desktop */}
         <div
-          className="flex min-h-[320px] min-w-0 flex-1 items-center justify-center bg-white lg:min-h-[510px] lg:max-w-[720px]"
+          className="hidden min-h-[320px] min-w-0 flex-1 items-center justify-center overflow-hidden bg-white lg:flex lg:min-h-[510px] lg:max-w-[720px]"
         >
           {animationData && (
             <Lottie

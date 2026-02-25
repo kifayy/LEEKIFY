@@ -106,7 +106,7 @@ const Carousel = React.forwardRef<
       <CarouselContext.Provider value={contextValue}>
         <div
           ref={setCarouselRef}
-          className={cn("relative overflow-hidden", className)}
+          className={cn("relative overflow-hidden touch-pan-y", className)}
           role="region"
           aria-roledescription="carousel"
           {...props}

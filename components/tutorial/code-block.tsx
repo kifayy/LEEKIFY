@@ -46,16 +46,21 @@ export function CodeBlock({ code }: { code: string }) {
   };
 
   return (
-    <pre className="bg-muted rounded-md p-6 my-6 relative">
-      <Button
-        size="icon"
-        onClick={copy}
-        variant={"outline"}
-        className="absolute right-2 top-2"
-      >
-        {icon}
-      </Button>
-      <code className="text-xs p-3">{code}</code>
-    </pre>
+    <section
+      className="isolate my-8 overflow-visible md:my-6 scroll-mt-24 md:scroll-mt-32 lg:scroll-mt-36"
+      aria-label="Code block"
+    >
+      <pre className="relative overflow-x-auto overflow-y-visible rounded-lg border border-border/60 bg-muted p-4 pt-11 pr-12 md:p-6 md:pr-14 scroll-mt-24 md:scroll-mt-32 lg:scroll-mt-36">
+        <Button
+          size="icon"
+          onClick={copy}
+          variant={"outline"}
+          className="absolute right-2 top-2 z-10 shrink-0"
+        >
+          {icon}
+        </Button>
+        <code className="block min-w-max text-xs leading-relaxed">{code}</code>
+      </pre>
+    </section>
   );
 }
