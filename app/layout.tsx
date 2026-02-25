@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: defaultTitle,
   description: defaultDescription,
+  other: { "impact-site-verification": "f3e4ac5b-cbf4-4dcb-bdf3-61eda8835162" },
   openGraph: {
     title: defaultTitle,
     description: defaultDescription,
