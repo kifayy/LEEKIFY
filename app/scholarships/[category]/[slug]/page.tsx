@@ -7,6 +7,7 @@ import type { FAQItem } from "@/lib/supabase/queries/scholarships-page";
 import { getRandomSweepstakeScholarships } from "@/lib/supabase/queries/scholarships";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
+import { ArticleCardImage } from "@/components/scholarships/article-card-image";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -329,21 +330,19 @@ async function ArticleContent({ params }: Props) {
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {similar.map((a) => {
                   const similarHref = a.category_slug ? `/scholarships/${a.category_slug}/${a.slug}` : "#";
-                  const similarImageUrl = `/api/article-hero?slug=${encodeURIComponent(a.slug ?? "")}&title=${encodeURIComponent(a.title ?? "")}`;
+                  const similarImageUrl = a.og_image ?? `/api/article-hero?slug=${encodeURIComponent(a.slug ?? "")}&title=${encodeURIComponent(a.title ?? "")}`;
                   return (
                   <Link
                     key={a.id}
                     href={similarHref}
                     className="group block overflow-hidden"
                   >
-                    <div className="relative flex aspect-[405/318] w-full items-center justify-center overflow-hidden rounded-t-2xl bg-white">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={similarImageUrl}
+                    <div className="relative aspect-[405/270] w-full overflow-hidden rounded-t-2xl bg-white">
+                      <ArticleCardImage
+                        primarySrc={a.og_image}
+                        fallbackSrc={`/api/article-hero?slug=${encodeURIComponent(a.slug ?? "")}&title=${encodeURIComponent(a.title ?? "")}`}
                         alt={a.title}
-                        className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
+                        className="size-full min-w-0 object-contain object-center transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <div className="mt-4">

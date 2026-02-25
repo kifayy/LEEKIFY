@@ -5,6 +5,7 @@ import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getRandomPublishedArticles } from "@/lib/supabase/queries/scholarships-page";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
+import { ArticleCardImage } from "@/components/scholarships/article-card-image";
 import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-hero-section";
 
 function stripHtml(html: string): string {
@@ -73,19 +74,13 @@ async function ScholarshipsPageContent() {
                     href={a.category_slug ? `/scholarships/${a.category_slug}/${a.slug}` : "#"}
                     className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
                   >
-                    <div className="relative aspect-[400/360] w-full overflow-hidden rounded-t-2xl bg-[#CCE8FF]">
-                      {a.og_image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={a.og_image}
-                          alt=""
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-5xl">
-                          📚
-                        </div>
-                      )}
+                    <div className="relative aspect-[400/270] w-full overflow-hidden rounded-t-2xl bg-white">
+                      <ArticleCardImage
+                        primarySrc={a.og_image}
+                        fallbackSrc={`/api/article-hero?slug=${encodeURIComponent(a.slug ?? "")}&title=${encodeURIComponent(a.title ?? "")}`}
+                        alt=""
+                        className="size-full min-w-0 object-contain object-center transition-transform group-hover:scale-105"
+                      />
                     </div>
                     <div className="p-5">
                       {a.category_slug && (

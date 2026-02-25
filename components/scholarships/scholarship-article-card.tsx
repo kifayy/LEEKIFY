@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { ScholarshipsPageArticle } from "@/lib/supabase/queries/scholarships-page";
+import { ArticleCardImage } from "@/components/scholarships/article-card-image";
 
-/** Preview image: use dynamic hero so listing always has a working image. */
-function getArticlePreviewImageUrl(article: ScholarshipsPageArticle): string {
+function getArticleHeroFallback(article: ScholarshipsPageArticle): string {
   const slug = encodeURIComponent(article.slug ?? "");
   const title = encodeURIComponent(article.title ?? "");
   return `/api/article-hero?slug=${slug}&title=${title}`;
@@ -22,7 +22,7 @@ export function ScholarshipArticleCard({ article, href }: Props) {
       day: "numeric",
       year: "numeric",
     });
-  const imageUrl = getArticlePreviewImageUrl(article);
+  const fallbackUrl = getArticleHeroFallback(article);
 
   return (
     <article>
@@ -32,16 +32,12 @@ export function ScholarshipArticleCard({ article, href }: Props) {
         aria-label={`Read: ${article.title}`}
       >
         {/* Preview image: same hero as article page; object-contain so title on image isn't cropped */}
-        <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden bg-white aspect-[1280/582] md:w-[400px] md:flex-shrink-0 md:rounded-l-2xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
+        <div className="relative w-full shrink-0 overflow-hidden bg-white aspect-[400/270] md:w-[280px] md:shrink-0 md:rounded-l-2xl">
+          <ArticleCardImage
+            primarySrc={article.og_image}
+            fallbackSrc={fallbackUrl}
             alt=""
-            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-            width={400}
-            height={183}
-            loading="lazy"
-            decoding="async"
+            className="size-full min-w-0 object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
           />
         </div>
 
