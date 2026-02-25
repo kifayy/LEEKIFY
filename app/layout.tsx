@@ -12,6 +12,8 @@ const defaultUrl = siteUrl
   ? (siteUrl.startsWith("http") ? siteUrl : `https://${siteUrl}`)
   : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
+const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
+
 const defaultTitle = "Pathpicker: Personalized Student Quizzes & Scholarship Finder";
 const defaultDescription =
   "What student path should you take? Take our viral student quizzes to find your archetype, scholarships & more.";
@@ -74,6 +76,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}>
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `}
+          </Script>
           <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="afterInteractive" />
         <ThemeProvider
           attribute="class"
