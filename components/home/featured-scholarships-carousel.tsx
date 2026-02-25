@@ -12,6 +12,10 @@ import type { CarouselApi } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-react";
 import type { Scholarship } from "@/lib/supabase/queries/scholarships";
 
+/** Default logo for featured scholarship cards when no provider-specific logo is set */
+const DEFAULT_FEATURED_LOGO =
+  "https://storage.googleapis.com/images_592/black%20white%20grow%20logo%20(2).png";
+
 /** Provider name (lowercase) -> logo URL for featured scholarship cards */
 const PROVIDER_LOGOS: Record<string, string> = {
   "us bank": "https://logo.clearbit.com/usbank.com",
@@ -137,7 +141,7 @@ export function FeaturedScholarshipsCarousel({
                     {/* Card - Figma travel_card structure */}
                     <div className="relative flex min-h-0 flex-1 flex-col">
                       {/* Image area */}
-                      <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#F7F7F7]">
+                      <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#956EFE]">
                         {getProviderLogoUrl(s.provider) ? (
                           <Image
                             src={getProviderLogoUrl(s.provider)!}
@@ -154,10 +158,17 @@ export function FeaturedScholarshipsCarousel({
                           />
                         ) : null}
                         <div
-                          className="flex h-full items-center justify-center text-5xl"
+                          className="absolute inset-0 flex items-center justify-center p-8"
                           style={getProviderLogoUrl(s.provider) ? { display: "none" } : undefined}
                         >
-                          🎓
+                          <Image
+                            src={DEFAULT_FEATURED_LOGO}
+                            alt=""
+                            fill
+                            className="object-contain object-center"
+                            sizes="(max-width: 768px) 85vw, 380px"
+                            unoptimized
+                          />
                         </div>
                         {/* Frosted $ amount badge */}
                         <div

@@ -108,9 +108,6 @@ export function SiteFooter() {
                   <span className="text-lg" aria-hidden>✉</span>
                   hello@pathpicker.com
                 </a>
-                <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
-                  ❤️ Built for students, by students.
-                </p>
               </div>
             </div>
           </div>
