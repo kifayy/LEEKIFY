@@ -14,9 +14,9 @@ const defaultUrl = siteUrl
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
-const defaultTitle = "Pathpicker: Personalized Student Quizzes & Scholarship Finder";
+const defaultTitle = "Pathpicker: Student Archetype Quiz & Scholarship Matches";
 const defaultDescription =
-  "What student path should you take? Take our viral student quizzes to find your archetype, scholarships & more.";
+  "What student path should you take? Discover your archetype with our viral quiz, then find scholarships that match your unique profile.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
