@@ -12,22 +12,19 @@ const FEATURES = [
     emoji: "🎯",
     title: "Scholarship texts that match you",
     body: "Our algorithm scans thousands of scholarships and brands every week and check them against your profile so you only see easy scholarships you actually qualify for.",
-    borderOpacity: 0.39,
-    bg: "bg-emerald-50/80",
+    borderColor: "border-emerald-300",
   },
   {
     emoji: "🎓",
     title: "Works for high school and college",
     body: "Whether you are in high school or college, we match based on what you are interested in, and what your student status is.",
-    borderOpacity: 0.12,
-    bg: "bg-pink-50/80",
+    borderColor: "border-pink-300",
   },
   {
     emoji: "✏️",
     title: "Edit profile anytime",
     body: "Wanna change what type of scholarships you get? Just simply respond with EDIT and you can change how our AI scans scholarships for you.",
-    borderOpacity: 0.12,
-    bg: "bg-violet-50/80",
+    borderColor: "border-violet-300",
   },
 ];
 
@@ -52,10 +49,10 @@ export function ScholarshipScannerFeaturesBlock() {
           {FEATURES.map((feature, i) => (
             <div
               key={i}
-              className={`flex flex-col gap-3 rounded-2xl border border-gray-200 p-6 ${feature.bg}`}
+              className={`flex flex-col gap-3 rounded-2xl border-2 bg-white p-6 ${feature.borderColor}`}
             >
               <h3 className="text-xl font-semibold leading-tight text-gray-900 md:text-2xl">
-                <span className="mr-2" aria-hidden>{feature.emoji}</span>
+                <span className="mr-2 inline-block text-3xl md:text-4xl" aria-hidden>{feature.emoji}</span>
                 {feature.title}
               </h3>
               <p className="max-w-[518px] text-base leading-relaxed text-gray-700 md:text-lg">

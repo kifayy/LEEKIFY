@@ -50,7 +50,7 @@ export function NewsletterCTA({
               >
                 Get scholarship tips, new opportunities, and updates delivered to your inbox. Join thousands of students.
               </p>
-              <div className="mx-auto h-[80px] w-full max-w-full shrink-0 md:mx-0 md:h-[80px] md:max-w-[450px]">
+              <div className="mx-auto h-[100px] w-full max-w-full shrink-0 md:mx-0 md:h-[80px] md:max-w-[450px]">
                 <iframe
                   src={BEEHIIV_EMBED_URL}
                   className="beehiiv-embed h-full w-full"
@@ -72,7 +72,7 @@ export function NewsletterCTA({
               </div>
             </div>
             {/* Image - below content on mobile, right on desktop (50% larger) */}
-            <div className="order-2 min-w-0 shrink-0 md:order-2 md:max-w-[420px]">
+            <div className="order-2 mt-8 min-w-0 shrink-0 md:mt-0 md:order-2 md:max-w-[420px]">
               <Image
                 src={NEWSLETTER_IMAGE_URL}
                 alt="Which College Path Unlocks The Most Scholarships"
