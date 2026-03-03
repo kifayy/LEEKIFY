@@ -64,7 +64,7 @@ export function FeaturesSection() {
               className="max-w-full text-sm font-normal leading-relaxed md:max-w-[244px]"
               style={{ color: "rgba(25, 24, 37, 0.75)" }}
             >
-              It's simple... we help high school and college students make money, and find out more about themselves along the way.
+              40k+ students use PathPicker to find scholarships, brand giveaways, and exclusive deals only for students.
             </p>
           </div>
 

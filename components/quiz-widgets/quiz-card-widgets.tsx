@@ -52,7 +52,7 @@ export function ScholarshipQuizWidget() {
 
   return (
     <Link
-      href="/scholarship-scanner"
+      href="/money-scanner"
       className={CARD_CLASS}
       style={{ backgroundColor: "#F0EEFF" }}
     >

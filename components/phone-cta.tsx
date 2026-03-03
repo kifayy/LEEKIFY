@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ReviewsCard } from "@/components/home/reviews-carousel";
 import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
 
-/** Reusable "Phone CTA" section: Win Scholarships From Your Texts + SMS CTA + phone mockups. Use on home, landing, or any page. */
+/** Reusable "Phone CTA" section: Student Money In Your Texts + SMS CTA + phone mockups. Use on home, landing, or any page. */
 const HEADING_COLOR = "#181A1D";
 const BODY_COLOR = "rgb(88, 89, 93)";
 
@@ -20,22 +20,28 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
       <div className="container mx-auto max-w-[1024px] min-w-0 px-4 md:px-6">
         <div className="mx-auto mb-4 flex justify-center md:mb-6">
           <Image
-            src="https://storage.googleapis.com/images_592/Group%2039885.png"
+            src="https://storage.googleapis.com/images_592/23adasd.png"
             alt=""
             width={512}
             height={200}
-            className="h-auto w-full max-w-[137px] object-contain md:max-w-[180px]"
-            sizes="(max-width: 768px) 137px, 180px"
+            className="h-auto w-full max-w-[274px] object-contain md:max-w-[360px]"
+            sizes="(max-width: 768px) 274px, 360px"
             unoptimized
           />
         </div>
 
         <h2
-          className="mx-auto mb-4 max-w-[603px] text-center text-3xl font-bold leading-tight tracking-tight md:mb-5 md:text-4xl lg:mb-8 lg:leading-snug lg:text-[3.75rem]"
+          className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:text-[2.93rem] lg:mb-8 lg:leading-snug lg:text-[4.875rem]"
           style={{ color: HEADING_COLOR }}
         >
-          Win Scholarships From <span style={{ color: "#007aff" }}>Your Texts</span>
+          Student Money In <span style={{ color: "#007aff" }}>Your Texts</span>
         </h2>
+        <p
+          className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:text-lg"
+          style={{ color: BODY_COLOR }}
+        >
+          Scholarships, brand giveaways, and exclusive student deals; Awarded scans and finds student money with your name on it.
+        </p>
 
         <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
           <Link
@@ -59,7 +65,7 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
 
         <div className="mx-auto mb-4 flex justify-center md:mb-6">
           <Image
-            src="https://storage.googleapis.com/images_592/Yellow%20and%20Blue%20Simple%20Message%20Conservation%20Instagram%20Post.png"
+            src="https://storage.googleapis.com/images_592/fas22.png"
             alt="Message conversation — win scholarships from your texts"
             width={400}
             height={200}
@@ -73,7 +79,7 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
           className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
           style={{ color: BODY_COLOR }}
         >
-          Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with.
+          Our algorithm only texts you tailored matches 2x/week :)
         </p>
 
         {(showReviewsSidebar && (

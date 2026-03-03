@@ -21,13 +21,12 @@ const FOOTER_COLUMNS = [
     links: [
       { href: "/archetype-quiz", label: "Archetype Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
-      { href: "/scholarship-scanner", label: "Scholarship Scanner" },
+      { href: "/money-scanner", label: "Money Scanner" },
     ],
   },
   {
     title: "Support",
     links: [
-      { href: "mailto:hello@pathpicker.com", label: "Contact" },
       { href: "https://awarded.app/providers", label: "For Business" },
     ],
   },
@@ -90,26 +89,6 @@ export function SiteFooter() {
                 </ul>
               </div>
             ))}
-
-            {/* Contact column */}
-            <div className="flex min-w-[120px] flex-col gap-6">
-              <h3
-                className="text-sm font-bold"
-                style={{ color: FOOTER_DARK }}
-              >
-                Contact
-              </h3>
-              <div className="flex flex-col gap-4">
-                <a
-                  href="mailto:hello@pathpicker.com"
-                  className="flex items-center gap-2.5 text-sm transition-colors hover:opacity-80"
-                  style={{ color: FOOTER_DARK }}
-                >
-                  <span className="text-lg" aria-hidden>✉</span>
-                  hello@pathpicker.com
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -135,13 +114,11 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="https://my.pathpicker.com/archetype"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 min-w-[137px] items-center justify-center rounded-xl border-2 bg-white px-6 text-sm font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-90"
+              href="/money-scanner"
+              className="inline-flex h-11 min-w-[137px] items-center justify-center gap-2 rounded-xl border-2 bg-white px-6 text-sm font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-90"
               style={{ borderColor: FOOTER_DARK, color: FOOTER_DARK }}
             >
-              Try Awarded
+              💸 Scholarship Scanner
             </Link>
           </div>
         </div>

@@ -47,7 +47,7 @@ async function ScholarshipsPageContent() {
       </div>
       <ScholarshipHeroSection
         title="📲Get No-Essay Scholarships"
-        body="Our algorithm scans 1,000+ scholarships every week and sends you two easy ones you personally matched with."
+        body="Our algorithm only texts you tailored matches 2x/week :)"
         headingLevel="h1"
       />
       <div className="container mx-auto max-w-[1232px] px-4 py-8 md:px-6 md:py-12">

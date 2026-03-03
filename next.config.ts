@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  async redirects() {
+    return [
+      { source: "/scholarship-scanner", destination: "/money-scanner", permanent: true },
+      { source: "/student-scanner", destination: "/money-scanner", permanent: true },
+    ];
+  },
   logging: {
     incomingRequests: false,
   },

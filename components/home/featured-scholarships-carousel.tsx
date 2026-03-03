@@ -135,7 +135,7 @@ export function FeaturedScholarshipsCarousel({
                   className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
                 >
                   <Link
-                    href="/scholarship-scanner"
+                    href="/money-scanner"
                     className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
                   >
                     {/* Card - Figma travel_card structure */}

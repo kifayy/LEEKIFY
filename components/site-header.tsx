@@ -20,7 +20,7 @@ const scholarshipCategories = [
 const navLinks = [
   { href: "/archetype-quiz", label: "Archetype Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
-  { href: "/scholarship-scanner", label: "Scholarship Scanner" },
+  { href: "/money-scanner", label: "Money Scanner" },
 ];
 
 export function SiteHeader() {
@@ -171,7 +171,7 @@ export function SiteHeader() {
         {/* Right: Get Started image CTA — Scholarship Scanner page */}
         <div className="flex shrink-0 items-center md:ml-6">
           <Link
-            href="/scholarship-scanner"
+            href="/money-scanner"
             className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
             aria-label="Get started — Scholarship Scanner"
           >
@@ -286,7 +286,7 @@ export function SiteHeader() {
             {/* CTA - Get Started image → Scholarship Scanner page + slogan underneath */}
             <div className="p-5 pt-0">
               <Link
-                href="/scholarship-scanner"
+                href="/money-scanner"
                 className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
                 aria-label="Get started — Scholarship Scanner"
                 onClick={() => setMobileMenuOpen(false)}

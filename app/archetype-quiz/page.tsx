@@ -31,7 +31,7 @@ function HeroLogoSlot({ src }: { src: string }) {
             ? "h-[4.5rem] w-auto object-contain md:h-[5.25rem]"
             : "h-16 w-auto object-contain md:h-[5rem]"
         }
-        unoptimized
+        loading="lazy"
       />
     </div>
   );
@@ -146,7 +146,8 @@ export default function ArchetypeQuizPage() {
                   className="object-contain object-center"
                   sizes="(min-width: 1024px) 613px, 100vw"
                   priority
-                  unoptimized
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUG/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMQYTQVFh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBEQACEQADAP/Z"
                 />
               </div>
             </div>

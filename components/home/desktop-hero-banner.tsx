@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Star } from "lucide-react";
 
 const HERO_BG_URL =
-  "https://storage.googleapis.com/images_592/13.%20Online%20Fforum.png";
+  "https://storage.googleapis.com/images_592/13.%20Online%20Fo33rum.png";
 
 const REVIEW_PILL_BG = "transparent";
 
@@ -52,15 +53,19 @@ export function DesktopHeroBanner() {
 
   return (
     <section
-      className="relative hidden w-full min-w-0 bg-contain bg-center bg-no-repeat md:block"
+      className="relative hidden w-full min-w-0 md:block"
       aria-label="Hero"
-      style={{
-        backgroundImage: `url(${HERO_BG_URL})`,
-        backgroundSize: "contain",
-        minHeight: "min(95vw, 800px)",
-      }}
+      style={{ minHeight: "min(95vw, 800px)" }}
     >
-      <div className="container relative mx-auto flex max-w-[1400px] flex-col items-center px-4 py-12 md:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-16">
+      <Image
+        src={HERO_BG_URL}
+        alt=""
+        fill
+        priority
+        className="object-contain object-center"
+        sizes="(min-width: 768px) 100vw, 0px"
+      />
+      <div className="container relative z-10 mx-auto flex max-w-[1400px] flex-col items-center px-4 py-12 md:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-16">
         {/* Left: title + subtitle + review pill + CTAs */}
         <div className="flex max-w-[1104px] flex-1 flex-col gap-6 text-center lg:max-w-[55%] lg:text-left">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[3.5rem] lg:text-[4rem]">
@@ -76,7 +81,7 @@ export function DesktopHeroBanner() {
           </h1>
 
           <p className="max-w-[554px] text-base leading-relaxed md:text-lg" style={{ color: "#949494" }}>
-            Being a student is hard. That&apos;s why 40k+ students use PathPicker to make it easier.
+            We help high school and college students find free money, and find themselves along the way.
           </p>
 
           {/* Review pill – 5 stars + "42.3k+ students matched" */}
@@ -105,7 +110,7 @@ export function DesktopHeroBanner() {
               Archetype Quiz
             </Link>
             <Link
-              href="/scholarship-scanner"
+              href="/money-scanner"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
             >
               <span>💸</span>
