@@ -19,10 +19,10 @@ const FEATURES = [
       "Get scholarships that match your profile and goals. We pull from 1,000+ partners.",
   },
   {
-    image: "https://storage.googleapis.com/images_592/laptop_10733804.png",
-    title: "Student Tips",
+    image: "https://storage.googleapis.com/images_592/money_2308887.png",
+    title: "Student Deals",
     description:
-      "Many paths exist for high school and college. We help you find ones that save money.",
+      "Brands give away free stuff to students all the time. We find it for you.",
   },
 ];
 
@@ -64,7 +64,7 @@ export function FeaturesSection() {
               className="max-w-full text-sm font-normal leading-relaxed md:max-w-[244px]"
               style={{ color: "rgba(25, 24, 37, 0.75)" }}
             >
-              Our algorithm scans your answers across various quizzes to help you learn more about yourself as a student... guiding you toward the path your future self will thank you for. Oh ya, we match you with scholarships along the way.
+              It's simple... we help high school and college students make money, and find out more about themselves along the way.
             </p>
           </div>
 

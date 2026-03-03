@@ -1,14 +1,55 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
 
 const HERO_BG_URL =
-  "https://storage.googleapis.com/images_592/13.%20Online%20Forusm.png";
+  "https://storage.googleapis.com/images_592/13.%20Online%20Fforum.png";
 
 const REVIEW_PILL_BG = "transparent";
 
+const ROTATING_WORDS = ["school", "future", "path"];
+const TYPE_MS = 80;
+const PAUSE_MS = 2000;
+const BACKSPACE_MS = 50;
+
 export function DesktopHeroBanner() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = ROTATING_WORDS[wordIndex];
+
+    if (!isDeleting) {
+      // Typing forward
+      if (displayText.length < word.length) {
+        const t = setTimeout(
+          () => setDisplayText(word.slice(0, displayText.length + 1)),
+          TYPE_MS
+        );
+        return () => clearTimeout(t);
+      }
+      // Pause at full word, then start backspace
+      const t = setTimeout(() => setIsDeleting(true), PAUSE_MS);
+      return () => clearTimeout(t);
+    }
+
+    // Backspacing
+    if (displayText.length > 0) {
+      const t = setTimeout(
+        () => setDisplayText(displayText.slice(0, -1)),
+        BACKSPACE_MS
+      );
+      return () => clearTimeout(t);
+    }
+    // Move to next word and start typing
+    setIsDeleting(false);
+    setWordIndex((i) => (i + 1) % ROTATING_WORDS.length);
+    return undefined;
+  }, [wordIndex, displayText, isDeleting]);
+
   return (
     <section
       className="relative hidden w-full min-w-0 bg-contain bg-center bg-no-repeat md:block"
@@ -25,7 +66,13 @@ export function DesktopHeroBanner() {
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[3.5rem] lg:text-[4rem]">
             Find your path.
             <br />
-            Fund <span style={{ color: "#956EFE" }}>your future.</span>
+            Fund{" "}
+            <span style={{ color: "#956EFE" }}>
+              your {displayText}.
+              <span className="animate-pulse" aria-hidden>
+                |
+              </span>
+            </span>
           </h1>
 
           <p className="max-w-[554px] text-base leading-relaxed md:text-lg" style={{ color: "#949494" }}>
