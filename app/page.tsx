@@ -13,9 +13,10 @@ export default function Home() {
         <HeroFigmaDesign />
       </div>
       <FeaturesSection />
-      <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
+      {/* Hidden for now – Featured scholarships carousel (Fund Your Education); restore when needed */}
+      {/* <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
         <FeaturedScholarshipsSection />
-      </Suspense>
+      </Suspense> */}
       <WhyDirectMailSection />
       <ReviewsCarousel />
     </>
