@@ -4,7 +4,7 @@ import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace }
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { EnterScholarshipsSection } from "@/components/enter-scholarships-section";
+import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -100,7 +100,7 @@ export default function RootLayout({
           <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
             <SiteHeader />
             <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
-            <EnterScholarshipsSection />
+            <EnterScholarshipsSectionLayout />
             <SiteFooter />
           </div>
         </ThemeProvider>

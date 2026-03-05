@@ -83,7 +83,7 @@ async function ScholarshipDetail({ params }: Props) {
             {/* CTA */}
             <div className="mb-8 flex flex-wrap gap-3">
               <a
-                href="https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938?platform=iphone"
+                href="https://awarded.short.gy/9iTh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-14 min-w-[200px] items-center justify-center rounded-xl bg-[#7C4EE4] px-10 text-lg font-semibold text-white shadow-sm transition-all hover:bg-[#6B3ED4] hover:shadow"
