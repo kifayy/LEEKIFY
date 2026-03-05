@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
@@ -91,19 +92,21 @@ export default function RootLayout({
             `}
           </Script>
           <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="afterInteractive" />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
-            <SiteHeader />
-            <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
-            <EnterScholarshipsSectionLayout />
-            <SiteFooter />
-          </div>
-        </ThemeProvider>
+        <Suspense fallback={<div className="min-h-screen bg-white" />}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+              <SiteHeader />
+              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
+              <EnterScholarshipsSectionLayout />
+              <SiteFooter />
+            </div>
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );

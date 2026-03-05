@@ -98,6 +98,28 @@ export async function getHostedScholarshipBySlug(
   return normalizeFormSchema(data) as HostedScholarship;
 }
 
+/**
+ * Fetch scholarship by slug for metadata only. Uses admin client (no cookies())
+ * so it can run in generateMetadata without triggering "uncached data outside Suspense".
+ */
+export async function getHostedScholarshipBySlugForMeta(
+  slug: string
+): Promise<HostedScholarship | null> {
+  try {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("hosted_scholarships")
+      .select("*")
+      .eq("slug", slug)
+      .eq("is_active", true)
+      .single();
+    if (error || !data) return null;
+    return normalizeFormSchema(data) as HostedScholarship;
+  } catch {
+    return null;
+  }
+}
+
 /** Get all submissions for a scholarship - for export. Uses admin client (bypasses RLS). */
 export async function getSubmissionsForExport(
   hostedScholarshipId: string

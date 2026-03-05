@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getHostedScholarshipBySlug } from "@/lib/supabase/queries/hosted-scholarships";
+import { getHostedScholarshipBySlugForMeta } from "@/lib/supabase/queries/hosted-scholarships";
 import { submitApplication } from "./actions";
 import { ApplyForm } from "./apply-form";
 
@@ -12,23 +12,19 @@ function formatDeadline(deadline: string | null): string {
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
-  const scholarship = await getHostedScholarshipBySlug(slug);
-  if (!scholarship) return { title: "Apply | Pathpicker" };
-  const title = `Apply: ${scholarship.title} | Pathpicker`;
-  const description = scholarship.description ?? undefined;
+/** Static metadata to avoid uncached data access outside Suspense (cacheComponents). */
+export function generateMetadata() {
   return {
-    title,
-    description,
-    openGraph: { title, description, siteName: "Pathpicker" },
-    twitter: { card: "summary_large_image" as const, title, description },
+    title: "Apply | Pathpicker",
+    description: "Apply for student scholarships.",
+    openGraph: { title: "Apply | Pathpicker", description: "Apply for student scholarships.", siteName: "Pathpicker" },
+    twitter: { card: "summary_large_image" as const, title: "Apply | Pathpicker", description: "Apply for student scholarships." },
   };
 }
 
 async function ApplyContent({ params }: Props) {
   const { slug } = await params;
-  const scholarship = await getHostedScholarshipBySlug(slug);
+  const scholarship = await getHostedScholarshipBySlugForMeta(slug);
   if (!scholarship) notFound();
 
   const fields = scholarship.form_schema?.fields ?? [];

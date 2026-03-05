@@ -1,12 +1,13 @@
+import { Suspense } from "react";
 import Link from "next/link";
-import { getHostedScholarshipBySlug } from "@/lib/supabase/queries/hosted-scholarships";
+import { getHostedScholarshipBySlugForMeta } from "@/lib/supabase/queries/hosted-scholarships";
 import { notFound } from "next/navigation";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export default async function ApplySuccessPage({ params }: Props) {
+async function SuccessContent({ params }: Props) {
   const { slug } = await params;
-  const scholarship = await getHostedScholarshipBySlug(slug);
+  const scholarship = await getHostedScholarshipBySlugForMeta(slug);
   if (!scholarship) notFound();
 
   return (
@@ -41,5 +42,13 @@ export default async function ApplySuccessPage({ params }: Props) {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function ApplySuccessPage(props: Props) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center text-[#4A4A4A]">Loading…</div>}>
+      <SuccessContent {...props} />
+    </Suspense>
   );
 }
