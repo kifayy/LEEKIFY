@@ -38,7 +38,7 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
         }
       >
         {/* Left: copy + CTAs */}
-        <div className="flex max-w-[760px] flex-1 flex-col gap-5 pt-6 text-white lg:pt-20">
+        <div className="flex max-w-[760px] flex-1 flex-col items-center gap-5 pt-6 text-white md:items-start lg:pt-20">
           {/* Rating — mobile only, above title */}
           <div className="flex flex-col items-center gap-1.5 md:hidden" aria-hidden>
             <div className="flex items-center gap-1.5 text-amber-400">
@@ -58,11 +58,16 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
             </div>
             <span className="text-sm font-medium text-white">4.8/5 on iOS</span>
           </div>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-[4.375rem]">
+          <h2 className="hidden text-3xl font-bold leading-tight tracking-tight text-white md:block md:text-left md:text-6xl lg:text-[4.375rem]">
             How Much Scholarship Cash?
           </h2>
-          <p className="text-base font-medium text-white md:text-xl">
-            Take the quiz and see how much your student profile is leaving on the table
+          <p className="text-base font-medium text-white md:hidden">
+            🤑How many scholarships do you qualify for?
+            <br className="block" />
+            <span className="mt-4 block">Take the scholarship quiz!</span>
+          </p>
+          <p className="hidden text-base font-medium text-white md:block md:text-left md:text-xl">
+            Take the quiz and see how much your student profile<br />is leaving on the table
           </p>
           <div className={`flex flex-wrap items-center justify-center gap-6 md:gap-12 ${centered ? "" : "md:justify-start"}`}>
             <div className={`flex flex-col items-center gap-3 ${centered ? "" : "md:items-start"}`}>
@@ -78,7 +83,7 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
                   className="h-6 w-6 object-contain"
                   aria-hidden
                 />
-                Take Quiz on iOS
+                Continue
               </a>
             </div>
             {/* Rating — desktop only (next to button) */}

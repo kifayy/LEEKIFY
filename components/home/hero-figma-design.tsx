@@ -84,7 +84,7 @@ export function HeroFigmaDesign() {
               <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
                 <Button
                   asChild
-                  className="min-h-[48px] rounded-full bg-[#956EFE] px-5 py-3 text-sm text-[#EEE] shadow-[0_2px_8px_rgba(149,110,254,0.25)] hover:opacity-95 sm:min-h-[52px] sm:px-6 sm:text-base md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+                  className="min-h-[56px] rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_8px_rgba(149,110,254,0.25)] hover:opacity-95 sm:min-h-[52px] sm:px-6 md:min-h-[56px] md:px-8 md:py-4 md:text-base"
                 >
                   <Link href="http://my.pathpicker.com/archetype" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <span>🎭</span>
@@ -94,7 +94,7 @@ export function HeroFigmaDesign() {
                 <Button
                   variant="outline"
                   asChild
-                  className="min-h-[48px] rounded-full border-[#E5E5E7] bg-white px-5 py-3 text-sm text-[#181A1D] hover:bg-gray-50 sm:min-h-[52px] sm:px-6 sm:text-base md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+                  className="min-h-[56px] rounded-full border-[#E5E5E7] bg-white px-6 py-4 text-base text-[#181A1D] hover:bg-gray-50 sm:min-h-[52px] sm:px-6 md:min-h-[56px] md:px-8 md:py-4 md:text-base"
                 >
                   <Link href="/money-quiz" className="flex items-center gap-2">
                     <span>💸</span>
