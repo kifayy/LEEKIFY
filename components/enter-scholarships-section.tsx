@@ -62,9 +62,9 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
             How Much Scholarship Cash?
           </h2>
           <p className="text-base font-medium text-white md:hidden">
-            🤑How many scholarships do you qualify for?
+            <span className="block text-2xl font-bold leading-tight tracking-tight sm:text-3xl">🤑 Can you get scholarships?</span>
             <br className="block" />
-            <span className="mt-4 block">Take the scholarship quiz!</span>
+            <span className="mt-4 block">Take the scholarship quiz and see!</span>
           </p>
           <p className="hidden text-base font-medium text-white md:block md:text-left md:text-xl">
             Take the quiz and see how much your student profile<br />is leaving on the table
