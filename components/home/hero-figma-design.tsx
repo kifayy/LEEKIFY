@@ -96,10 +96,10 @@ export function HeroFigmaDesign() {
                   asChild
                   className="min-h-[56px] rounded-full border-[#E5E5E7] bg-white px-6 py-4 text-base text-[#181A1D] hover:bg-gray-50 sm:min-h-[52px] sm:px-6 md:min-h-[56px] md:px-8 md:py-4 md:text-base"
                 >
-                  <Link href="/money-quiz" className="flex items-center gap-2">
+                  <a href="https://awarded.short.gy/9iTh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <span>💸</span>
-                    Money Quiz
-                  </Link>
+                    Scholarship Quiz
+                  </a>
                 </Button>
               </div>
             </div>
