@@ -112,10 +112,11 @@ export function HeroFigmaDesign() {
                 src={HERO_IMAGE}
                 alt="Traveler"
                 fill
+                priority
+                fetchPriority="high"
                 className="object-cover"
                 style={{ objectPosition: "center 20%" }}
                 sizes="(max-width: 768px) 100vw, 420px"
-                priority
               />
             </div>
             {/* Hero image - desktop (md and up) */}
@@ -124,10 +125,11 @@ export function HeroFigmaDesign() {
                 src={HERO_IMAGE_DESKTOP}
                 alt="Traveler"
                 fill
+                priority
+                fetchPriority="high"
                 className="object-contain"
                 style={{ objectPosition: "center 20%" }}
                 sizes="(min-width: 1024px) 690px, (min-width: 768px) 660px, 630px"
-                priority
                 unoptimized
               />
             </div>

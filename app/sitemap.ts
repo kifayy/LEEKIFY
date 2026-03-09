@@ -1,13 +1,31 @@
 import { MetadataRoute } from "next";
+import { headers } from "next/headers";
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getAllArticlePaths } from "@/lib/supabase/queries/scholarships-page";
 import { getAllScholarships } from "@/lib/supabase/queries/scholarships";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+function getBaseUrl(): string {
+  return (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+  );
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Use the request host so the sitemap always lists URLs for the domain serving it.
+  // Fixes Search Console "URL not allowed" when NEXT_PUBLIC_SITE_URL was unset and Vercel URL was used.
+  let baseUrl = getBaseUrl();
+  try {
+    const headersList = await headers();
+    const host = headersList.get("host") || headersList.get("x-forwarded-host");
+    const proto = headersList.get("x-forwarded-proto");
+    if (host) {
+      baseUrl = `${proto === "https" ? "https" : "http"}://${host}`;
+    }
+  } catch {
+    // keep baseUrl from env
+  }
+
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/scholarships`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },

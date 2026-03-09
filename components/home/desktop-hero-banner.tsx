@@ -62,6 +62,7 @@ export function DesktopHeroBanner() {
         alt=""
         fill
         priority
+        fetchPriority="high"
         className="object-contain object-center"
         sizes="(min-width: 768px) 100vw, 0px"
       />

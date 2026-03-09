@@ -5,13 +5,10 @@ import { ArrowRight } from "lucide-react";
 import { getArticleByCategoryAndSlug, getSimilarArticles } from "@/lib/supabase/queries/scholarships-page";
 import type { FAQItem } from "@/lib/supabase/queries/scholarships-page";
 import { getRandomSweepstakeScholarships } from "@/lib/supabase/queries/scholarships";
+import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 import { ArticleCardImage } from "@/components/scholarships/article-card-image";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
 function formatDate(date: string | null): string {
   if (!date) return "";
@@ -68,18 +65,19 @@ export async function generateMetadata({ params }: Props) {
   const { category, slug } = await params;
   const article = await getArticleByCategoryAndSlug(category, slug);
   if (!article) return { title: "Article | Pathpicker" };
-  const heroImage = getArticleHeroImageUrl(slug, article.title, SITE_URL);
+  const baseUrl = await getBaseUrlForMetadata();
+  const heroImage = getArticleHeroImageUrl(slug, article.title, baseUrl);
   const canonicalPath = article.canonical_url?.startsWith("http")
     ? article.canonical_url
     : article.canonical_url || `/scholarships/${category}/${slug}`;
   const canonicalUrl =
-    canonicalPath.startsWith("http") ? canonicalPath : SITE_URL ? `${SITE_URL}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}` : undefined;
+    canonicalPath.startsWith("http") ? canonicalPath : `${baseUrl}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
   const ogImage = article.og_image ?? heroImage;
-  const fullOgImage = ogImage.startsWith("http") ? ogImage : SITE_URL ? `${SITE_URL}${ogImage}` : undefined;
+  const fullOgImage = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
   return {
     title: article.meta_title ?? `${article.title} | Pathpicker`,
     description: article.meta_description ?? undefined,
-    alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       type: "article",
       title: article.meta_title ?? article.title,
@@ -103,6 +101,7 @@ async function ArticleContent({ params }: Props) {
   const article = await getArticleByCategoryAndSlug(category, slug);
   if (!article) notFound();
 
+  const baseUrl = await getBaseUrlForMetadata();
   const [sweepstakes, similar] = await Promise.all([
     getRandomSweepstakeScholarships(4),
     getSimilarArticles(category, article.id, 3),
@@ -113,28 +112,26 @@ async function ArticleContent({ params }: Props) {
     ? article.category_slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Scholarships";
 
-  const articleUrl = SITE_URL ? `${SITE_URL}/scholarships/${category}/${slug}` : "";
-  const heroImageUrl = getArticleHeroImageUrl(slug, article.title, SITE_URL);
-  const articleSchema = SITE_URL
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: article.title,
-        description: article.meta_description ?? undefined,
-        image: article.og_image ?? heroImageUrl,
-        datePublished: article.published_at ?? undefined,
-        dateModified: article.updated_at ?? article.published_at ?? undefined,
-        author: { "@type": "Organization", name: "Pathpicker" },
-        publisher: { "@type": "Organization", name: "Pathpicker" },
-        mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
-      }
-    : null;
+  const articleUrl = `${baseUrl}/scholarships/${category}/${slug}`;
+  const heroImageUrl = getArticleHeroImageUrl(slug, article.title, baseUrl);
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.meta_description ?? undefined,
+    image: article.og_image ?? heroImageUrl,
+    datePublished: article.published_at ?? undefined,
+    dateModified: article.updated_at ?? article.published_at ?? undefined,
+    author: { "@type": "Organization", name: "Pathpicker" },
+    publisher: { "@type": "Organization", name: "Pathpicker" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+  };
 
   const faqItems: FAQItem[] = Array.isArray(article.faq)
     ? article.faq.filter((q): q is FAQItem => q && typeof q === "object" && "question" in q && "answer" in q)
     : [];
   const faqSchema =
-    faqItems.length > 0 && SITE_URL
+    faqItems.length > 0
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",

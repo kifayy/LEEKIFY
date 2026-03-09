@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getScholarshipsForMonth, getFeaturedScholarships, getAllScholarships } from "@/lib/supabase/queries/scholarships";
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getRandomPublishedArticles } from "@/lib/supabase/queries/scholarships-page";
+import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 import { ArticleCardImage } from "@/components/scholarships/article-card-image";
@@ -12,11 +13,15 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim().slice(0, 140);
 }
 
-export const metadata = {
-  title: "Scholarships | Pathpicker",
-  description:
-    "Browse featured scholarships for students. Find opportunities matched to your profile and apply with ease.",
-};
+export async function generateMetadata() {
+  const baseUrl = await getBaseUrlForMetadata();
+  return {
+    title: "Scholarships | Pathpicker",
+    description:
+      "Browse featured scholarships for students. Find opportunities matched to your profile and apply with ease.",
+    alternates: { canonical: `${baseUrl}/scholarships` },
+  };
+}
 
 async function ScholarshipsPageContent() {
   const [scholarshipsResult, categories, articles] = await Promise.all([

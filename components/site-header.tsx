@@ -34,6 +34,8 @@ export function SiteHeader() {
   const [isMobile, setIsMobile] = useState(false);
   const scholarshipsTriggerRef = useRef<HTMLAnchorElement>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollRafRef = useRef<number | null>(null);
+  const scrollThresholdRef = useRef(false);
 
   const clearCloseTimeout = () => {
     if (closeTimeoutRef.current) {
@@ -78,10 +80,22 @@ export function SiteHeader() {
 
   useEffect(() => {
     const threshold = () => window.innerHeight * SCROLL_HIDE_THRESHOLD;
-    const onScroll = () => setScrolledPastThreshold(window.scrollY > threshold());
+    const onScroll = () => {
+      const past = window.scrollY > threshold();
+      if (scrollThresholdRef.current === past) return;
+      scrollThresholdRef.current = past;
+      if (scrollRafRef.current != null) cancelAnimationFrame(scrollRafRef.current);
+      scrollRafRef.current = requestAnimationFrame(() => {
+        scrollRafRef.current = null;
+        setScrolledPastThreshold(past);
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollRafRef.current != null) cancelAnimationFrame(scrollRafRef.current);
+    };
   }, []);
 
   return (
@@ -106,11 +120,11 @@ export function SiteHeader() {
               />
             </Link>
 
-            {/* Mobile menu trigger */}
+            {/* Mobile menu trigger - 48px min touch target for Mobile Usability */}
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 lg:hidden"
+              className="h-12 min-h-[48px] min-w-[48px] w-12 lg:hidden lg:h-10 lg:min-h-0 lg:min-w-0 lg:w-10"
               aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
             >
@@ -257,7 +271,7 @@ export function SiteHeader() {
               </Link>
               <button
                 type="button"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#6B7280] transition-colors hover:bg-white hover:text-[#181A1D]"
+                className="flex h-12 min-h-[48px] min-w-[48px] w-12 shrink-0 items-center justify-center rounded-lg text-[#6B7280] transition-colors hover:bg-white hover:text-[#181A1D]"
                 aria-label="Close menu"
                 onClick={() => setMobileMenuOpen(false)}
               >

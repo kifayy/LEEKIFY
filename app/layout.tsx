@@ -7,12 +7,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
+import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import "./globals.css";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-const defaultUrl = siteUrl
-  ? (siteUrl.startsWith("http") ? siteUrl : `https://${siteUrl}`)
-  : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
@@ -20,22 +16,26 @@ const defaultTitle = "Pathpicker: Student Archetype Quiz & Scholarship Matches";
 const defaultDescription =
   "What student path should you take? Discover your archetype with our viral quiz, then find scholarships that match your unique profile.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: defaultTitle,
-  description: defaultDescription,
-  other: { "impact-site-verification": "f3e4ac5b-cbf4-4dcb-bdf3-61eda8835162" },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = await getBaseUrlForMetadata();
+  return {
+    metadataBase: new URL(baseUrl),
     title: defaultTitle,
     description: defaultDescription,
-    siteName: "Pathpicker",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: defaultTitle,
-    description: defaultDescription,
-  },
-};
+    alternates: { canonical: baseUrl },
+    other: { "impact-site-verification": "f3e4ac5b-cbf4-4dcb-bdf3-61eda8835162" },
+    openGraph: {
+      title: defaultTitle,
+      description: defaultDescription,
+      siteName: "Pathpicker",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: defaultTitle,
+      description: defaultDescription,
+    },
+  };
+}
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -83,8 +83,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://storage.googleapis.com" />
       </head>
       <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
-          <Script id="google-analytics" strategy="afterInteractive">
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
+          <Script id="google-analytics" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -92,7 +92,7 @@ export default function RootLayout({
               gtag('config', '${GA_MEASUREMENT_ID}');
             `}
           </Script>
-          <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="afterInteractive" />
+          <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="lazyOnload" />
         <Suspense fallback={<div className="min-h-screen bg-white" />}>
           <ThemeProvider
             attribute="class"

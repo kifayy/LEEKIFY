@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     return [
       { source: "/scholarship-scanner", destination: "/money-scanner", permanent: true },
       { source: "/student-scanner", destination: "/money-scanner", permanent: true },
+      { source: "/browse", destination: "/scholarships", permanent: true },
+      { source: "/directory", destination: "/scholarships", permanent: true },
+      { source: "/blog", destination: "/scholarships", permanent: true },
     ];
   },
   logging: {

@@ -5,6 +5,13 @@ import { FeaturesSection } from "@/components/home/features-section";
 import { ReviewsCarousel } from "@/components/home/reviews-carousel";
 import { WhyDirectMailSection } from "@/components/home/why-direct-mail-section";
 import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
+import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+
+export async function generateMetadata() {
+  const baseUrl = await getBaseUrlForMetadata();
+  return { alternates: { canonical: baseUrl } };
+}
+
 export default function Home() {
   return (
     <>

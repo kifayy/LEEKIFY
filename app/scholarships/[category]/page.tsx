@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getCategoryBySlug, getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getArticlesByCategory } from "@/lib/supabase/queries/scholarships-page";
+import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
 import { ScholarshipArticleCard } from "@/components/scholarships/scholarship-article-card";
@@ -10,21 +11,18 @@ import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-he
 
 type Props = { params: Promise<{ category: string }> };
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
-
 export async function generateMetadata({ params }: Props) {
   const { category } = await params;
   const cat = await getCategoryBySlug(category);
   if (!cat) return { title: "Category | Pathpicker" };
+  const baseUrl = await getBaseUrlForMetadata();
   const title = cat.meta_title ?? `${cat.name} Scholarships | Pathpicker`;
   const description = cat.meta_description ?? cat.description ?? undefined;
-  const canonicalUrl = SITE_URL ? `${SITE_URL}/scholarships/${category}` : undefined;
+  const canonicalUrl = `${baseUrl}/scholarships/${category}`;
   return {
     title,
     description,
-    alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+    alternates: { canonical: canonicalUrl },
     openGraph: { title, description, siteName: "Pathpicker" },
     twitter: { card: "summary_large_image" as const, title, description },
   };
@@ -35,6 +33,7 @@ async function CategoryContent({ params }: Props) {
   const cat = await getCategoryBySlug(category);
   if (!cat) notFound();
 
+  const baseUrl = await getBaseUrlForMetadata();
   const [articles, categories] = await Promise.all([
     getArticlesByCategory(category),
     getCategories(),
@@ -52,7 +51,7 @@ async function CategoryContent({ params }: Props) {
           itemListElement: articles.map((a, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `${SITE_URL}/scholarships/${category}/${a.slug}`,
+            url: `${baseUrl}/scholarships/${category}/${a.slug}`,
             name: a.title,
             description: a.meta_description ?? undefined,
             datePublished: a.published_at ?? undefined,
