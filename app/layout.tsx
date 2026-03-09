@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
+import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -104,6 +105,7 @@ export default function RootLayout({
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
               <EnterScholarshipsSectionLayout />
               <SiteFooter />
+              <MobileSocialProofPopup />
             </div>
           </ThemeProvider>
         </Suspense>

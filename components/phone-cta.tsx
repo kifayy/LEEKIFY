@@ -12,9 +12,14 @@ const BODY_COLOR = "rgb(88, 89, 93)";
 type PhoneCtaSectionProps = {
   /** When true, show the Reviews card to the left (e.g. newsletter page). */
   showReviewsSidebar?: boolean;
+  /** When true (e.g. home page), use mobile-only alternate copy, image, and Continue CTA. */
+  isHomePage?: boolean;
 };
 
-export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {}) {
+const MOBILE_HOME_IMAGE =
+  "https://storage.googleapis.com/images_592/Untitled%20design%20(42).png";
+
+export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSectionProps = {}) {
   return (
     <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
       <div className="container mx-auto max-w-[1024px] min-w-0 px-4 md:px-6">
@@ -31,19 +36,35 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
         </div>
 
         <h2
-          className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:text-[2.93rem] lg:mb-8 lg:leading-snug lg:text-[4.875rem]"
+          className={`mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:text-[2.93rem] lg:mb-8 lg:leading-snug lg:text-[4.875rem] ${isHomePage ? "hidden md:block" : ""}`}
           style={{ color: HEADING_COLOR }}
         >
           Student Money In <span style={{ color: "#007aff" }}>Your Texts</span>
         </h2>
+        {isHomePage && (
+          <>
+            <h2
+              className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:hidden md:text-[2.93rem]"
+              style={{ color: HEADING_COLOR }}
+            >
+              Win Scholarships <span style={{ color: "#aa8afe" }}>4.2x FASTER</span>
+            </h2>
+            <p
+              className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:hidden md:text-lg"
+              style={{ color: BODY_COLOR }}
+            >
+              Awarded is used by students who want to beat the competition, with less work.
+            </p>
+          </>
+        )}
         <p
-          className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:text-lg"
+          className={`mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:text-lg ${isHomePage ? "max-md:hidden" : ""}`}
           style={{ color: BODY_COLOR }}
         >
           Scholarships, brand giveaways, and exclusive student deals; Awarded scans and finds student money with your name on it.
         </p>
 
-        <div className="mx-auto mb-3 flex flex-col items-center md:mb-4">
+        <div className={`mx-auto mb-3 flex flex-col items-center md:mb-4 ${isHomePage ? "hidden md:flex" : ""}`}>
           <Link
             href={SCHOLARSHIP_SCANNER_SMS_URL}
             className="relative block h-[131px] w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[160px] md:max-w-[692px]"
@@ -62,8 +83,26 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
             Free • No App Required • No Sign-up
           </p>
         </div>
+        {isHomePage && (
+          <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
+            <a
+              href="https://awarded.short.gy/9iTh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+                alt=""
+                className="h-6 w-6 object-contain"
+                aria-hidden
+              />
+              Continue
+            </a>
+          </div>
+        )}
 
-        <div className="mx-auto mb-4 flex justify-center md:mb-6">
+        <div className={`mx-auto mb-4 flex justify-center md:mb-6 ${isHomePage ? "hidden md:flex" : ""}`}>
           <Image
             src="https://storage.googleapis.com/images_592/fas22.png"
             alt="Message conversation — win scholarships from your texts"
@@ -74,9 +113,22 @@ export function PhoneCtaSection({ showReviewsSidebar }: PhoneCtaSectionProps = {
             unoptimized
           />
         </div>
+        {isHomePage && (
+          <div className="mx-auto mb-4 flex justify-center md:mb-6 md:hidden">
+            <Image
+              src={MOBILE_HOME_IMAGE}
+              alt="Student freebies you match with"
+              width={400}
+              height={200}
+              className="h-auto w-full max-w-[420px] object-contain"
+              sizes="(max-width: 768px) 420px, 720px"
+              unoptimized
+            />
+          </div>
+        )}
 
         <p
-          className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
+          className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed max-md:hidden md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
           style={{ color: BODY_COLOR }}
         >
           Our algorithm only texts you tailored matches 2x/week :)

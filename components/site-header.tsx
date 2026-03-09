@@ -23,11 +23,15 @@ const navLinks = [
   { href: "/money-scanner", label: "Money Scanner" },
 ];
 
+const SCROLL_HIDE_THRESHOLD = 0.1; // hide nav after 10% of viewport scrolled
+
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scholarshipsExpanded, setScholarshipsExpanded] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownRect, setDropdownRect] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [scrolledPastThreshold, setScrolledPastThreshold] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const scholarshipsTriggerRef = useRef<HTMLAnchorElement>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -64,10 +68,29 @@ export function SiteHeader() {
 
   useEffect(() => () => clearCloseTimeout(), []);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const setMobile = () => setIsMobile(mq.matches);
+    setMobile();
+    mq.addEventListener("change", setMobile);
+    return () => mq.removeEventListener("change", setMobile);
+  }, []);
+
+  useEffect(() => {
+    const threshold = () => window.innerHeight * SCROLL_HIDE_THRESHOLD;
+    const onScroll = () => setScrolledPastThreshold(window.scrollY > threshold());
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white md:h-32 lg:h-36 lg:border-b lg:border-[#E5E5E7] lg:bg-[#FAFAFB] lg:shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+        className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white transition-transform duration-300 ease-out md:h-32 lg:h-36 lg:border-b lg:border-[#E5E5E7] lg:bg-[#FAFAFB] lg:shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+        style={{
+          transform: isMobile && scrolledPastThreshold ? "translateY(-100%)" : undefined,
+        }}
       >
         <div className="container mx-auto flex h-full max-h-full max-w-6xl items-center justify-between gap-2 overflow-hidden px-4 md:gap-6 md:px-6 lg:px-8 min-w-0">
           {/* Logo + mobile menu button - logo sized to fit header height */}
@@ -168,11 +191,25 @@ export function SiteHeader() {
           )}
         </nav>
 
-        {/* Right: Get Started image CTA — Scholarship Scanner page */}
+        {/* Right: mobile = Continue pill; desktop = Get Started image */}
         <div className="flex shrink-0 items-center md:ml-6">
+          <a
+            href="https://awarded.short.gy/9iTh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 min-w-[140px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 md:hidden"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+              alt=""
+              className="h-5 w-5 object-contain"
+              aria-hidden
+            />
+            Win Scholarships
+          </a>
           <Link
             href="/money-scanner"
-            className="relative block h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:h-[5.5rem] md:w-[255px]"
+            className="relative hidden h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:block md:h-[5.5rem] md:w-[255px]"
             aria-label="Get started — Scholarship Scanner"
           >
             <Image
@@ -283,26 +320,23 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTA - Get Started image → Scholarship Scanner page + slogan underneath */}
+            {/* CTA - Continue pill (same as header) */}
             <div className="p-5 pt-0">
-              <Link
-                href="/money-scanner"
-                className="relative mx-auto mb-3 block aspect-[640/176] w-full max-w-[291px] overflow-hidden rounded-xl transition-opacity hover:opacity-95 active:opacity-90"
-                aria-label="Get started — Scholarship Scanner"
+              <a
+                href="https://awarded.short.gy/9iTh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-16 min-w-[200px] w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Image
-                  src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-                  alt="Get started — Scholarship Scanner"
-                  fill
-                  className="object-contain object-center"
-                  sizes="291px"
-                  unoptimized
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+                  alt=""
+                  className="h-6 w-6 object-contain"
+                  aria-hidden
                 />
-              </Link>
-              <p className="min-w-0 text-center text-xs font-medium leading-snug text-[#58595D]">
-                Free • No App Required • No Sign-up
-              </p>
+                Win Scholarships
+              </a>
             </div>
           </aside>
         </>

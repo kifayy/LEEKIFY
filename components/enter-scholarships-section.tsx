@@ -75,10 +75,10 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
                 href="https://awarded.short.gy/9iTh"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
+                className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
               >
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/0/747.png"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
                   alt=""
                   className="h-6 w-6 object-contain"
                   aria-hidden

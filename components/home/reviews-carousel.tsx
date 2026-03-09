@@ -107,9 +107,9 @@ export function ReviewsCard() {
             />
           </a>
         </div>
-        <span className="w-fit inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
-          <Star className="h-4 w-4 fill-white" />
-          4.8 · 322+ reviews
+        <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
+          <Star className="h-4 w-4 fill-current" />
+          4.8 · 20k+ students
         </span>
       </div>
       <div className="marquee-fade-edges-y min-w-0 max-h-[280px] overflow-hidden md:max-h-[320px]">
@@ -157,9 +157,9 @@ export function ReviewsCarousel() {
                 />
               </a>
             </div>
-            <span className="w-fit inline-flex items-center gap-2 rounded-full bg-[#956EFE] px-4 py-2 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.3)]">
-              <Star className="h-4 w-4 fill-white" />
-              4.8 · 322+ reviews
+            <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
+              <Star className="h-4 w-4 fill-current" />
+              4.8 · 20k+ students
             </span>
           </div>
 
