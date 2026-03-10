@@ -7,14 +7,15 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
+import { CountryLayout } from "@/components/country-layout";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
-const defaultTitle = "Pathpicker: Student Archetype Quiz & Scholarship Matches";
+const defaultTitle = "Discover Your Student Archetype & Future Path";
 const defaultDescription =
-  "What student path should you take? Discover your archetype with our viral quiz, then find scholarships that match your unique profile.";
+  "Find your path. Take our viral quizzes to discover your student archetype, explore study abroad matches, and unlock exclusive financial opportunities.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
@@ -100,6 +101,7 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
+            <CountryLayout>
             <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
               <SiteHeader />
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
@@ -107,6 +109,7 @@ export default function RootLayout({
               <SiteFooter />
               <MobileSocialProofPopup />
             </div>
+            </CountryLayout>
           </ThemeProvider>
         </Suspense>
       </body>
