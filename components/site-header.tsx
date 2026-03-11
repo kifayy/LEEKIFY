@@ -20,7 +20,6 @@ const scholarshipCategories = [
 const navLinks = [
   { href: "/archetype-quiz", label: "Archetype Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
-  { href: "/money-scanner", label: "Money Scanner" },
 ];
 
 const SCROLL_HIDE_THRESHOLD = 0.1; // hide nav after 10% of viewport scrolled
@@ -177,6 +176,13 @@ export function SiteHeader() {
                       >
                         All Scholarships
                       </Link>
+                      <Link
+                        href="/money-scanner"
+                        className="block border-b border-[#F0F0F0] px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        Money Scanner
+                      </Link>
                       {scholarshipCategories.map((cat) => (
                         <Link
                           key={cat.href}
@@ -304,6 +310,13 @@ export function SiteHeader() {
                             onClick={() => setMobileMenuOpen(false)}
                           >
                             All Scholarships
+                          </Link>
+                          <Link
+                            href="/money-scanner"
+                            className="block px-4 py-2.5 pl-6 text-[14px] font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            Money Scanner
                           </Link>
                           {scholarshipCategories.map((cat) => (
                             <Link
