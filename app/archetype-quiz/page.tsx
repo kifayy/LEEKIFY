@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ReviewsCarousel } from "@/components/home/reviews-carousel";
 
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
 const TEXT_MUTED = "#58595D";  // 208:56, 208:60, 208:66
@@ -96,7 +97,7 @@ export default function ArchetypeQuizPage() {
         </div>
         {/* div#w-node-... 208:41 – container 1290px, padding from frame */}
         <div
-          className="relative z-10 mx-auto flex min-w-0 max-w-[1290px] flex-col px-4 pt-12 pb-0 sm:px-10 md:px-[75px] md:pt-16 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:pb-12"
+          className="relative z-10 mx-auto flex min-w-0 max-w-[1290px] flex-col px-4 pt-12 pb-0 sm:px-10 md:px-[75px] md:pt-28 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:pb-12"
           style={{ maxWidth: 1290 }}
         >
           {/* Logo carousel – at top, left side */}
@@ -111,6 +112,11 @@ export default function ArchetypeQuizPage() {
 
             {/* Content column – heading, subtext, button (button directly under subtext) */}
             <div className="order-2 mt-6 flex min-w-0 flex-1 flex-col gap-6 lg:mt-0 lg:max-w-[620px]">
+              {/* Desktop only: 5 stars + 40k+ Matched */}
+              <div className="hidden md:flex md:items-center md:gap-2" aria-hidden>
+                <span className="text-amber-500 text-xl lg:text-2xl" style={{ letterSpacing: "0.05em" }}>★★★★★</span>
+                <span className="text-sm font-medium lg:text-base" style={{ color: TEXT_MUTED }}>40k+ Matched</span>
+              </div>
               <h2
                 className="max-w-[620px] text-[1.85rem] font-bold leading-tight tracking-tight md:text-[3.25rem] lg:text-[3.75rem] lg:max-w-[680px]"
                 style={{ color: TEXT_DARK }}
@@ -134,14 +140,14 @@ export default function ArchetypeQuizPage() {
               >
                 🎭 Take quiz
               </Link>
-              {/* Mobile only: image under Take quiz – 20% bigger, extra space from button */}
-              <div className="relative mt-8 w-[120%] max-w-none md:hidden mx-auto aspect-[16/10] overflow-visible" style={{ marginLeft: '-10%' }}>
+              {/* Mobile only: image under Take quiz – 30% bigger than before, extra space from button */}
+              <div className="relative mt-8 w-[156%] max-w-none md:hidden mx-auto aspect-[16/10] overflow-visible" style={{ marginLeft: '-28%' }}>
                 <Image
                   src={HERO_MOBILE_IMAGE}
                   alt=""
                   fill
                   className="object-contain object-center"
-                  sizes="(max-width: 768px) 120vw, 0"
+                  sizes="(max-width: 768px) 156vw, 0"
                 />
               </div>
             </div>
@@ -196,6 +202,14 @@ export default function ArchetypeQuizPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* User reviews carousel – pastel section (mobile + desktop) */}
+      <section
+        className="w-full min-w-0 bg-[#f5f0ff] py-12 md:py-16"
+        aria-label="What students say"
+      >
+        <ReviewsCarousel />
       </section>
 
       {/* Desktop only: logo marquee above bottom Take quiz CTA */}
