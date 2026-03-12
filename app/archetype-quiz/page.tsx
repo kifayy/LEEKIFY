@@ -7,10 +7,10 @@ const CARD_BORDER = "rgba(25, 24, 37, 0.1)";
 const ACCENT_PURPLE = "#956efe";
 const CARD_DARK = "#191825";
 const HERO_BG_IMAGE =
-  "https://storage.googleapis.com/images_592/13.%20Online%20Forsum.png";
-/** Mobile-only image under Take quiz (user URL: Onlinse/Forum) */
+  "https://storage.googleapis.com/images_592/13.%20Online%20Fof2rum.png";
+/** Mobile-only image under Take quiz */
 const HERO_MOBILE_IMAGE =
-  "https://storage.googleapis.com/images_592/13.%20Onlinse%20Forum.png";
+  "https://storage.googleapis.com/images_592/13.%20Online%20Fosrum.png";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
 const HERO_LOGOS = [
@@ -101,7 +101,7 @@ export default function ArchetypeQuizPage() {
         >
           {/* Logo carousel – at top, left side */}
           <div className="order-1 lg:order-1 lg:flex lg:flex-col lg:gap-10 lg:min-w-0 lg:flex-1">
-            <div className="marquee-fade-edges mx-auto max-w-[min(100%,520px)] overflow-hidden py-1 md:mx-0 md:mr-auto md:py-2 lg:mx-0">
+            <div className="marquee-fade-edges mx-auto max-w-[min(100%,520px)] overflow-hidden py-1 md:mx-0 md:mr-auto md:py-2 lg:mx-0 md:hidden">
               <div className="flex w-max items-center animate-archetype-hero-marquee">
                 {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
                   <HeroLogoSlot key={i} src={src} />
@@ -110,12 +110,14 @@ export default function ArchetypeQuizPage() {
             </div>
 
             {/* Content column – heading, subtext, button (button directly under subtext) */}
-            <div className="order-2 mt-6 flex min-w-0 flex-1 flex-col gap-6 lg:mt-0 lg:max-w-[520px]">
+            <div className="order-2 mt-6 flex min-w-0 flex-1 flex-col gap-6 lg:mt-0 lg:max-w-[620px]">
               <h2
-                className="max-w-[565px] text-[2.1rem] font-bold leading-tight tracking-tight md:text-[2.25rem] lg:text-[2.7rem]"
+                className="max-w-[620px] text-[1.85rem] font-bold leading-tight tracking-tight md:text-[3.25rem] lg:text-[3.75rem] lg:max-w-[680px]"
                 style={{ color: TEXT_DARK }}
               >
-                Find your <span style={{ color: ACCENT_PURPLE }}>student archetype.</span>
+                Find your
+                <br />
+                <span className="whitespace-nowrap" style={{ color: ACCENT_PURPLE }}>student archetype.</span>
               </h2>
               <p
                 className="max-w-[556px] text-base leading-relaxed md:text-lg"
@@ -127,10 +129,10 @@ export default function ArchetypeQuizPage() {
                 href="https://my.pathpicker.com/archetype"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-[5.6rem] min-w-[263px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-11 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.6rem] md:min-w-[263px]"
+                className="self-start inline-flex h-[5.6rem] w-fit min-w-[240px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-6 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.6rem] md:min-w-[280px]"
                 style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
               >
-                💸 Take quiz
+                🎭 Take quiz
               </Link>
               {/* Mobile only: image under Take quiz – 20% bigger, extra space from button */}
               <div className="relative mt-8 w-[120%] max-w-none md:hidden mx-auto aspect-[16/10] overflow-visible" style={{ marginLeft: '-10%' }}>
@@ -149,58 +151,73 @@ export default function ArchetypeQuizPage() {
 
       {/* Discover Your Student Archetype – white card */}
       <section className="px-4 pt-0 pb-10 md:pt-0 md:pb-14" aria-label="Discover your student archetype">
+        {/* Desktop only: logo carousel above the section */}
+        <div className="hidden md:flex md:justify-center mx-auto max-w-[1160px] mb-8">
+          <div className="marquee-fade-edges overflow-hidden py-2 w-full max-w-[520px]">
+            <div className="flex w-max items-center animate-archetype-hero-marquee">
+              {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
+                <HeroLogoSlot key={`desktop-${i}`} src={src} />
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="mx-auto max-w-[1160px] rounded-[30px] bg-white px-4 py-12 md:px-10 md:py-14">
-          <h2 className="text-center text-xl font-bold text-black md:text-2xl lg:text-3xl">
-            Discover Your <span style={{ color: ACCENT_PURPLE }}>Student Archetype</span> & See How You Stack Up
-          </h2>
-          <p className="mx-auto mt-6 max-w-[675px] text-center text-sm leading-relaxed text-[#090808] md:text-base">
-            Ever wonder what type of student you really are? Take our 2-minute quiz to unlock your unique Student Archetype based on your personality, habits, and goals—then see how you rank against thousands of other students just like you.
-          </p>
-          <div className="mt-10 flex flex-col gap-10 md:mt-14 md:flex-row md:flex-wrap md:justify-center md:gap-8 lg:gap-12">
-            {ARCHETYPE_FEATURES.map((feature) => (
-              <div
-                key={feature.title}
-                className="flex w-full flex-1 flex-col gap-[15.5px] rounded-[31px] border bg-white px-7 py-8 md:min-w-[260px] md:max-w-[320px]"
-                style={{
-                  borderColor: CARD_BORDER,
-                  borderWidth: 1,
-                }}
-              >
-                <span
-                  className="text-3xl md:text-4xl"
-                  style={{ color: ACCENT_PURPLE }}
-                  aria-hidden
+          {/* Desktop: two-column — text left, cards right. Mobile: stacked, centered */}
+          <div className="md:flex md:items-start md:gap-12 lg:gap-16">
+            <div className="md:flex-shrink-0 md:max-w-[380px] lg:max-w-[420px]">
+              <h2 className="text-center text-xl font-bold text-black md:text-left md:text-2xl lg:text-3xl">
+                Discover Your <span style={{ color: ACCENT_PURPLE }}>Student Archetype</span> & See How You Stack Up
+              </h2>
+              <p className="mx-auto mt-6 max-w-[675px] text-center text-sm leading-relaxed text-[#090808] md:mx-0 md:text-left md:text-base">
+                Ever wonder what type of student you really are? Take our 2-minute quiz to unlock your unique Student Archetype based on your personality, habits, and goals—then see how you rank against thousands of other students just like you.
+              </p>
+            </div>
+            <div className="mt-10 flex flex-1 flex-col gap-10 md:mt-0 md:flex-row md:flex-wrap md:justify-end md:gap-8 lg:gap-12">
+              {ARCHETYPE_FEATURES.map((feature) => (
+                <div
+                  key={feature.title}
+                  className="flex w-full flex-1 flex-col gap-[15.5px] rounded-[31px] border bg-white px-7 py-8 md:min-w-[260px] md:max-w-[320px]"
+                  style={{
+                    borderColor: CARD_BORDER,
+                    borderWidth: 1,
+                  }}
                 >
-                  {feature.emoji}
-                </span>
-                <h3
-                  className="text-base font-bold md:text-lg"
-                  style={{ color: CARD_DARK }}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: CARD_DARK }}
-                >
-                  {feature.description}
-                </p>
-              </div>
-            ))}
+                  <span
+                    className="text-3xl md:text-4xl"
+                    style={{ color: ACCENT_PURPLE }}
+                    aria-hidden
+                  >
+                    {feature.emoji}
+                  </span>
+                  <h3
+                    className="text-base font-bold md:text-lg"
+                    style={{ color: CARD_DARK }}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: CARD_DARK }}
+                  >
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Take quiz CTA – duplicate of hero button, centered, larger */}
+      {/* Take quiz CTA – duplicate of hero button, centered */}
       <div className="flex justify-center px-4 py-10 md:py-14">
         <Link
           href="https://my.pathpicker.com/archetype"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-[4.5rem] min-w-[320px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-14 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[380px] md:px-16 md:text-3xl"
+          className="inline-flex h-[4.5rem] min-w-[280px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-8 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[320px] md:px-10 md:text-3xl"
           style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
         >
-          💸 Take quiz
+          🎭 Take quiz
         </Link>
       </div>
     </div>
