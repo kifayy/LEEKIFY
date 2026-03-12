@@ -151,16 +151,6 @@ export default function ArchetypeQuizPage() {
 
       {/* Discover Your Student Archetype – white card */}
       <section className="px-4 pt-0 pb-10 md:pt-0 md:pb-14" aria-label="Discover your student archetype">
-        {/* Desktop only: logo carousel above the section */}
-        <div className="hidden md:flex md:justify-center mx-auto max-w-[1160px] mb-8">
-          <div className="marquee-fade-edges overflow-hidden py-2 w-full max-w-[520px]">
-            <div className="flex w-max items-center animate-archetype-hero-marquee">
-              {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
-                <HeroLogoSlot key={`desktop-${i}`} src={src} />
-              ))}
-            </div>
-          </div>
-        </div>
         <div className="mx-auto max-w-[1160px] rounded-[30px] bg-white px-4 py-12 md:px-10 md:py-14">
           {/* Desktop: two-column — text left, cards right. Mobile: stacked, centered */}
           <div className="md:flex md:items-start md:gap-12 lg:gap-16">
@@ -207,6 +197,17 @@ export default function ArchetypeQuizPage() {
           </div>
         </div>
       </section>
+
+      {/* Desktop only: logo marquee above bottom Take quiz CTA */}
+      <div className="hidden md:flex md:justify-center mx-auto max-w-[1160px] mb-8 px-4">
+        <div className="marquee-fade-edges overflow-hidden py-2 w-full max-w-[520px]">
+          <div className="flex w-max items-center animate-archetype-hero-marquee">
+            {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
+              <HeroLogoSlot key={`cta-${i}`} src={src} />
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Take quiz CTA – duplicate of hero button, centered */}
       <div className="flex justify-center px-4 py-10 md:py-14">

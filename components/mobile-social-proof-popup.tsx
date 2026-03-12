@@ -36,17 +36,26 @@ const AMOUNTS = [
   "5,500", "6,000", "6,500", "7,200", "8,000", "9,500", "10,000",
 ];
 
+const STORAGE_KEY = "pathpicker-mobile-social-proof-disabled";
+
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 export function MobileSocialProofPopup() {
   const [visible, setVisible] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [notification, setNotification] = useState(() => ({
     ...pickRandom(PEOPLE),
     amount: pickRandom(AMOUNTS),
   }));
   const [isMobile, setIsMobile] = useState(false);
+
+  // Respect user preference from localStorage (and sync on mount)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (localStorage.getItem(STORAGE_KEY)) setDisabled(true);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () =>
@@ -57,6 +66,7 @@ export function MobileSocialProofPopup() {
     let hideTimeout: ReturnType<typeof setTimeout> | null = null;
     const interval = setInterval(() => {
       if (typeof window !== "undefined" && window.innerWidth >= 768) return;
+      if (typeof window !== "undefined" && localStorage.getItem(STORAGE_KEY)) return;
       setNotification({
         ...pickRandom(PEOPLE),
         amount: pickRandom(AMOUNTS),
@@ -73,7 +83,15 @@ export function MobileSocialProofPopup() {
     };
   }, []);
 
-  if (!isMobile) return null;
+  const handleDisable = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, "1");
+      setDisabled(true);
+      setVisible(false);
+    }
+  };
+
+  if (!isMobile || disabled) return null;
 
   return (
     <div
@@ -98,6 +116,13 @@ export function MobileSocialProofPopup() {
           <p className="mt-0.5 text-[13px] leading-snug text-[#3A3E46]">
             just entered a ${notification.amount} scholarship in our app!
           </p>
+          <button
+            type="button"
+            onClick={handleDisable}
+            className="mt-1.5 text-xs text-[#6B7280] underline hover:text-[#181A1D]"
+          >
+            Disable
+          </button>
         </div>
         <a
           href={GO_LINK}
