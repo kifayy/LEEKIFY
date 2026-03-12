@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 
-const ROTATING_WORDS = ["archetype", "scholarships", "path"];
+const ROTATING_WORDS = ["Scholarship", "Abroad", "School", "Path"];
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;
 const DELETE_DELAY_MS = 55;
@@ -72,9 +72,9 @@ export function HeroFigmaDesign() {
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
               <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
                 <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
-                  <span className="block w-full text-center lg:text-left">Find your</span>
+                  <span className="block w-full text-center lg:text-left">Find your future</span>
                   <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
-                    <span className="invisible" aria-hidden>scholarships</span>
+                    <span className="invisible" aria-hidden>Scholarship</span>
                     <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[#956EFE] lg:left-0 lg:translate-x-0">
                       {displayedText}
                     </span>

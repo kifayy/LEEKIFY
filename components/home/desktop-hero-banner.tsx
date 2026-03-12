@@ -10,7 +10,7 @@ const HERO_BG_URL =
 
 const REVIEW_PILL_BG = "transparent";
 
-const ROTATING_WORDS = ["school", "future", "path"];
+const ROTATING_WORDS = ["Scholarship", "Abroad", "School", "Path"];
 const TYPE_MS = 80;
 const PAUSE_MS = 2000;
 const BACKSPACE_MS = 50;
@@ -70,11 +70,10 @@ export function DesktopHeroBanner() {
         {/* Left: title + subtitle + review pill + CTAs */}
         <div className="flex max-w-[1104px] flex-1 flex-col gap-6 text-center lg:max-w-[55%] lg:text-left">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[3.5rem] lg:text-[4rem]">
-            Find your path.
+            Find your future
             <br />
-            Fund{" "}
             <span style={{ color: "#956EFE" }}>
-              your {displayText}.
+              {displayText}.
               <span className="animate-pulse" aria-hidden>
                 |
               </span>
@@ -82,7 +81,7 @@ export function DesktopHeroBanner() {
           </h1>
 
           <p className="max-w-[554px] text-base leading-relaxed md:text-lg" style={{ color: "#949494" }}>
-            We help high school and college students find free money, and find themselves along the way.
+            Your student life personalized in one place. We simplify what you need to make the most of your student years.
           </p>
 
           {/* Review pill – 5 stars + "42.3k+ students matched" */}
