@@ -13,9 +13,9 @@ import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
-const defaultTitle = "Discover Your Student Archetype & Future Path";
+const defaultTitle = "Pathpicker: Discover Your Student Archetype & Future Path";
 const defaultDescription =
-  "Find your path. Take our viral quizzes to discover your student archetype, explore study abroad matches, and unlock exclusive financial opportunities.";
+  "Discover your unique student type and what paths fit you best. Take personality‑based quizzes to find scholarships, schools, and opportunities made for you.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
