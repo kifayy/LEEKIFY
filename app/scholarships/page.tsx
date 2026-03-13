@@ -7,7 +7,7 @@ import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { CategoryCarousel } from "@/components/scholarships/category-carousel";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 import { ArticleCardImage } from "@/components/scholarships/article-card-image";
-import { ScholarshipHeroSection } from "@/components/scholarships/scholarship-hero-section";
+import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim().slice(0, 140);
@@ -50,11 +50,9 @@ async function ScholarshipsPageContent() {
       <div className="container mx-auto max-w-[1232px] px-4 pt-8 md:px-6 md:pt-12">
         <CategoryCarousel categories={categories} />
       </div>
-      <ScholarshipHeroSection
-        title="📲Get No-Essay Scholarships"
-        body="Our algorithm only texts you tailored matches 2x/week :)"
-        headingLevel="h1"
-      />
+      <Suspense fallback={<div className="w-full min-w-0 overflow-x-hidden py-10 md:py-20" style={{ backgroundColor: "rgb(243, 250, 250)" }}><div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0 py-8 text-center text-sm text-[#181A1D]/60">Loading featured scholarships…</div></div>}>
+        <FeaturedScholarshipsSection />
+      </Suspense>
       <div className="container mx-auto max-w-[1232px] px-4 py-8 md:px-6 md:py-12">
 
         {/* Featured / recent scholarships */}

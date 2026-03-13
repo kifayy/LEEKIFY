@@ -142,7 +142,37 @@ export async function FeaturedScholarshipsSection() {
   if (scholarships.length === 0) {
     scholarships = PLACEHOLDER_SCHOLARSHIPS;
   }
+  // Exclude ISL Scholarship from featured carousel
+  const filtered = scholarships.filter(
+    (s) => !(s.title?.toLowerCase().includes("isl"))
+  );
+  // Ensure at least 3 cards so the 3rd can show "Coming Soon"
+  const COMING_SOON_PLACEHOLDER: Scholarship = {
+    id: "coming-soon",
+    title: "Coming Soon",
+    provider: "",
+    amount: null,
+    deadline: null,
+    is_featured: false,
+    external_link: null,
+    slug: "coming-soon",
+    content: null,
+    tags: null,
+    meta_description: null,
+    created_at: "",
+    updated_at: "",
+    description_short: null,
+    requirements_summary: null,
+    highlight_1: null,
+    highlight_2: null,
+    highlight_3: null,
+    highlight_4: null,
+    highlight_5: null,
+    is_sweepstake: null,
+  };
+  const withThird =
+    filtered.length >= 3 ? filtered : [...filtered, COMING_SOON_PLACEHOLDER];
   return (
-    <FeaturedScholarshipsCarousel scholarships={scholarships} />
+    <FeaturedScholarshipsCarousel scholarships={withThird} />
   );
 }

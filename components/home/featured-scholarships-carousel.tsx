@@ -34,6 +34,38 @@ function getProviderLogoUrl(provider: string | null): string | null {
   return null;
 }
 
+/** Card link: Citizens → Citizens Bank scholarship page; US Bank → PathPicker Excellence apply; else → Money Scanner */
+function getCardHref(provider: string | null): string {
+  if (!provider) return "/money-scanner";
+  const lower = provider.toLowerCase();
+  if (lower.includes("citizens")) return "https://www.citizensbank.com/student-loans/scholarship.aspx";
+  if (lower.includes("us bank") || lower.includes("u.s. bank")) return "/apply/pathpicker-excellence-2026";
+  return "/money-scanner";
+}
+
+/** Display name: US Bank → PathPicker; others unchanged */
+function getDisplayProviderName(provider: string | null): string {
+  if (!provider) return "";
+  const lower = provider.toLowerCase();
+  if (lower.includes("us bank") || lower.includes("u.s. bank")) return "PathPicker";
+  return provider;
+}
+
+/** Title: U.S. Bank Student Scholarship → PathPicker Scholarship; others unchanged */
+function getDisplayTitle(title: string | null, provider: string | null): string {
+  if (!title) return "";
+  const p = (provider ?? "").toLowerCase();
+  if (p.includes("us bank") || p.includes("u.s. bank")) return "PathPicker Scholarship";
+  return title;
+}
+
+/** Amount: PathPicker (US Bank) → $3,100; others use actual amount */
+function getDisplayAmount(amount: string | null, provider: string | null): string {
+  const p = (provider ?? "").toLowerCase();
+  if (p.includes("us bank") || p.includes("u.s. bank")) return "3,100";
+  return formatAmount(amount);
+}
+
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return "No deadline";
   const d = new Date(deadline);
@@ -129,17 +161,12 @@ export function FeaturedScholarshipsCarousel({
             className="w-full min-w-0 overflow-hidden"
           >
             <CarouselContent className="-ml-3 gap-3 md:-ml-4 md:gap-4">
-              {scholarships.map((s) => (
-                <CarouselItem
-                  key={s.id}
-                  className="min-w-[85%] basis-[85%] pl-3 sm:min-w-[80%] sm:basis-[80%] md:min-w-[380px] md:basis-[380px] md:pl-4"
-                >
-                  <Link
-                    href="/money-scanner"
-                    className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
-                  >
+              {scholarships.map((s, index) => {
+                const isComingSoon = index === 2;
+                const cardContent = (
+                  <>
                     {/* Card - Figma travel_card structure */}
-                    <div className="relative flex min-h-0 flex-1 flex-col">
+                    <div className={`relative flex min-h-0 flex-1 flex-col ${isComingSoon ? "blur-[6px] select-none" : ""}`}>
                       {/* Image area */}
                       <div className="relative aspect-[385/274] w-full shrink-0 overflow-hidden rounded-t-[29px] bg-[#956EFE]">
                         {getProviderLogoUrl(s.provider) ? (
@@ -148,7 +175,7 @@ export function FeaturedScholarshipsCarousel({
                             alt=""
                             fill
                             className="object-contain object-center p-8"
-                            sizes="(max-width: 768px) 85vw, 380px"
+                            sizes="(max-width: 768px) 92vw, 420px"
                             unoptimized
                             onError={(e) => {
                               e.currentTarget.style.display = "none";
@@ -166,7 +193,7 @@ export function FeaturedScholarshipsCarousel({
                             alt=""
                             fill
                             className="object-contain object-center"
-                            sizes="(max-width: 768px) 85vw, 380px"
+                            sizes="(max-width: 768px) 92vw, 420px"
                             unoptimized
                           />
                         </div>
@@ -180,7 +207,7 @@ export function FeaturedScholarshipsCarousel({
                           }}
                         >
                           <span className="text-lg font-bold text-white">
-                            ${formatAmount(s.amount)}
+                            ${getDisplayAmount(s.amount, s.provider)}
                           </span>
                         </div>
                       </div>
@@ -190,7 +217,7 @@ export function FeaturedScholarshipsCarousel({
                         {/* Amount, then tags underneath */}
                         <div className="flex flex-col gap-2">
                           <p className="shrink-0 text-2xl font-bold text-[#181A1D] md:text-3xl">
-                            ${formatAmount(s.amount)}
+                            ${getDisplayAmount(s.amount, s.provider)}
                           </p>
                           {(s.highlight_1 || s.highlight_2) && (
                             <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -208,16 +235,46 @@ export function FeaturedScholarshipsCarousel({
                           )}
                         </div>
                         <h3 className="mt-2 text-lg font-bold text-[#181A1D] md:text-xl">
-                          {truncate(s.title, 40)}
+                          {truncate(getDisplayTitle(s.title, s.provider), 40)}
                         </h3>
                         <p className="mt-3 text-sm font-normal leading-relaxed text-[#0C1120]/60">
-                          {s.provider} | Closing Soon
+                          {getDisplayProviderName(s.provider)} | Closing Soon
                         </p>
                       </div>
                     </div>
-                  </Link>
-                </CarouselItem>
-              ))}
+                    {isComingSoon && (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center rounded-[29px] bg-white/60 backdrop-blur-[2px]"
+                        aria-hidden
+                      >
+                        <span className="text-xl font-bold text-[#181A1D] md:text-2xl">
+                          Coming Soon
+                        </span>
+                      </div>
+                    )}
+                  </>
+                );
+                return (
+                  <CarouselItem
+                    key={s.id}
+                    className="min-w-[92%] basis-[92%] pl-3 sm:min-w-[88%] sm:basis-[88%] md:min-w-[420px] md:basis-[420px] md:pl-4"
+                  >
+                    {isComingSoon ? (
+                      <div className="group relative flex h-full flex-col overflow-hidden rounded-[29px] bg-white">
+                        {cardContent}
+                      </div>
+                    ) : (
+                      <Link
+                        href={getCardHref(s.provider)}
+                        className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
+                        {...(getCardHref(s.provider).startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      >
+                        {cardContent}
+                      </Link>
+                    )}
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
           </Carousel>
         )}
