@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
+import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { CountryLayout } from "@/components/country-layout";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import "./globals.css";
@@ -108,6 +109,7 @@ export default function RootLayout({
               <EnterScholarshipsSectionLayout />
               <SiteFooter />
               <MobileSocialProofPopup />
+              <CookieConsentBanner />
             </div>
             </CountryLayout>
           </ThemeProvider>
