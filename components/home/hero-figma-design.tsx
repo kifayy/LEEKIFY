@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 
 const ROTATING_WORDS = ["Scholarship", "Abroad", "School", "Path"];
@@ -81,26 +80,25 @@ export function HeroFigmaDesign() {
                   </span>
                 </h1>
               </div>
-              <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-                <Button
-                  asChild
-                  className="min-h-[56px] rounded-full bg-[#956EFE] px-6 py-4 text-base text-[#EEE] shadow-[0_2px_8px_rgba(149,110,254,0.25)] hover:opacity-95 sm:min-h-[52px] sm:px-6 md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+              <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-start">
+                <Link
+                  href="http://my.pathpicker.com/archetype"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
                 >
-                  <Link href="http://my.pathpicker.com/archetype" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <span>🎭</span>
-                    Archetype Quiz
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  asChild
-                  className="min-h-[56px] rounded-full border-[#E5E5E7] bg-white px-6 py-4 text-base text-[#181A1D] hover:bg-gray-50 sm:min-h-[52px] sm:px-6 md:min-h-[56px] md:px-8 md:py-4 md:text-base"
+                  <span>🎭</span>
+                  Archetype Quiz
+                </Link>
+                <Link
+                  href="https://awarded.short.gy/9iTh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
                 >
-                  <a href="https://awarded.short.gy/9iTh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <span>💸</span>
-                    Scholarship Quiz
-                  </a>
-                </Button>
+                  <span>💸</span>
+                  Scholarship Quiz
+                </Link>
               </div>
             </div>
 

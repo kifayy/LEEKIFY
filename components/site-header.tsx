@@ -213,33 +213,19 @@ export function SiteHeader() {
 
         {/* Right: mobile = Continue pill; desktop = Get Started image */}
         <div className="flex shrink-0 items-center md:ml-6">
-          <a
-            href="https://awarded.short.gy/9iTh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 min-w-[140px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 text-sm font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 md:hidden"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-              alt=""
-              className="h-5 w-5 object-contain"
-              aria-hidden
-            />
-            Win Scholarships
-          </a>
           <Link
-            href="/money-scanner"
-            className="relative hidden h-[4.1rem] w-[164px] overflow-hidden rounded-full transition-opacity hover:opacity-95 active:opacity-90 sm:h-[4.5rem] sm:w-[182px] md:block md:h-[5.5rem] md:w-[255px]"
-            aria-label="Get started — Scholarship Scanner"
+            href="https://my.pathpicker.com/login"
+            className="inline-flex h-12 min-w-[140px] items-center justify-center rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-6 text-sm font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95 md:hidden"
+            aria-label="Student Login"
           >
-            <Image
-              src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Get started — Scholarship Scanner"
-              fill
-              className="object-contain object-center"
-              sizes="(max-width: 768px) 182px, 255px"
-              unoptimized
-            />
+            <span>🎓</span>Student Login
+          </Link>
+          <Link
+            href="https://my.pathpicker.com/login"
+            className="hidden items-center justify-center rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_#181A1D] transition hover:opacity-95 md:inline-flex md:h-16 md:min-w-[200px]"
+            aria-label="Student Login"
+          >
+            <span>🎓</span>Student Login
           </Link>
         </div>
       </div>
@@ -347,23 +333,16 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTA - Continue pill (same as header) */}
+            {/* CTA - Login (same as header) */}
             <div className="p-5 pt-0">
-              <a
-                href="https://awarded.short.gy/9iTh"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-16 min-w-[200px] w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
+              <Link
+                href="https://my.pathpicker.com/login"
+                className="inline-flex h-16 min-w-[200px] w-full items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Student Login"
               >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-                  alt=""
-                  className="h-6 w-6 object-contain"
-                  aria-hidden
-                />
-                Win Scholarships
-              </a>
+                <span>🎓</span>Student Login
+              </Link>
             </div>
           </aside>
         </>

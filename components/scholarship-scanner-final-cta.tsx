@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-import { SCHOLARSHIP_SCANNER_SMS_URL } from "@/lib/constants";
 
 const HEADING_COLOR = "#181A1D";
 const BODY_COLOR = "rgb(88, 89, 93)";
@@ -18,18 +16,11 @@ export function ScholarshipScannerFinalCta() {
 
         <div className="mx-auto flex flex-col items-center">
           <Link
-            href={SCHOLARSHIP_SCANNER_SMS_URL}
-            className="relative block h-[131px] w-full max-w-[582px] overflow-hidden rounded-lg transition-opacity hover:opacity-95 active:opacity-90 md:h-[160px] md:max-w-[692px]"
-            aria-label="Get started — Scholarship Scanner (opens SMS)"
+            href="https://my.pathpicker.com/login"
+            className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
+            aria-label="Student Login"
           >
-            <Image
-              src="https://storage.googleapis.com/images_592/Group%201SS0.png"
-              alt="Get started — Scholarship Scanner"
-              fill
-              className="object-contain object-center"
-              sizes="(max-width: 768px) 582px, 692px"
-              unoptimized
-            />
+            <span>🎓</span>Student Login
           </Link>
           <p className="mt-2 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
             Free • No App Required • No Sign-up
