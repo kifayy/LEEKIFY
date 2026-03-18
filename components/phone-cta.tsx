@@ -64,14 +64,25 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
         </p>
 
         <div className={`mx-auto mb-3 flex flex-col items-center md:mb-4 ${isHomePage ? "hidden md:flex" : ""}`}>
-          <Link
-            href="https://my.pathpicker.com/login"
-            className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
-            aria-label="Student Login"
-          >
-            <span>🎓</span>Student Login
-          </Link>
-          <p className="mt-2 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
+          <p className="mb-3 text-center text-sm font-semibold text-[#007aff] md:text-base">
+            Scan with your phone
+          </p>
+          {/* Desktop: show centered QR code instead of SMS button */}
+          <div className="flex w-full max-w-[420px] items-center justify-center">
+            <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.18)]">
+              <Image
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+                  "sms:+18559224190?&body=Hey! Send me any scholarships!"
+                )}`}
+                alt="Scan to text us about scholarships"
+                width={220}
+                height={220}
+                className="h-[220px] w-[220px] object-contain"
+                unoptimized
+              />
+            </div>
+          </div>
+          <p className="mt-1 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
             Free • No App Required • No Sign-up
           </p>
         </div>

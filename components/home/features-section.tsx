@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 // Feature cards for "What's PathPicker?" section
@@ -26,6 +27,46 @@ const FEATURES = [
   },
 ];
 
+// Tools cards inspired by external "Tools for every step of your journey" section
+const TOOLS = [
+  {
+    href: "/colleges",
+    title: "Discover Your Student Archetype",
+    description:
+      "Uncover your strengths, style, and where you stand among other students.",
+    image:
+      "https://www.bigfuture.collegeboard.org/sites/default/files/styles/fun_card_image_1x_/public/2023-12/Collge%20Fit3.jpg?itok=LYXs_END",
+    accentColor: "#facc15", // yellow
+  },
+  {
+    href: "/scholarships",
+    title: "Your Smart College Matches",
+    description:
+      "Get matched with schools where you belong socially and academically.",
+    image:
+      "https://www.bigfuture.collegeboard.org/sites/default/files/styles/fun_card_image_1x_/public/2023-12/Scholarships4.jpg?itok=qQ53a9Fg",
+    accentColor: "#fb923c", // orange
+  },
+  {
+    href: "/virtual-college-tours",
+    title: "Match With Real Scholarships",
+    description:
+      "Use our iOS app to find scholarships you actually qualify for.",
+    image:
+      "https://www.bigfuture.collegeboard.org/sites/default/files/styles/fun_card_image_1x_/public/2023-12/Virtual%20Tours4.jpg?itok=TVlhdGdS",
+    accentColor: "#a855f7", // purple
+  },
+  {
+    href: "/guidance/majors-degrees",
+    title: "Where Should You Study Abroad?",
+    description:
+      "See what countries, cities, and programs you would thrive in studying abroad.",
+    image:
+      "https://www.bigfuture.collegeboard.org/sites/default/files/styles/fun_card_image_1x_/public/2023-12/Majors2.jpg?itok=KkWMyRgT",
+    accentColor: "#22c55e", // green
+  },
+];
+
 export function FeaturesSection() {
   const [mobileExpanded, setMobileExpanded] = useState(false);
 
@@ -47,7 +88,9 @@ export function FeaturesSection() {
         </div>
 
         <div
-          className={`grid min-w-0 grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[244px_1fr_1fr_1fr] lg:gap-16 ${!mobileExpanded ? "hidden md:grid" : ""}`}
+          className={`mt-6 md:mt-10 grid min-w-0 grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[244px_1fr_1fr_1fr] lg:gap-16 ${
+            !mobileExpanded ? "hidden md:grid" : ""
+          }`}
         >
           {/* Left: Header - Frame 48095467 */}
           <div className="flex flex-col items-center gap-4 text-center md:items-start md:gap-6 md:text-left lg:col-span-1">
@@ -58,13 +101,18 @@ export function FeaturesSection() {
               What's PathPicker?
             </p>
             <h2 className="hidden text-xl font-bold leading-tight text-[#181A1D] md:block md:text-3xl">
-              It's simple
+              It&apos;s{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">simple</span>
+                <span className="absolute inset-x-0 bottom-0 h-1 rounded-full bg-[#956EFE]/40" />
+              </span>
             </h2>
             <p
               className="max-w-full text-sm font-normal leading-relaxed md:max-w-[244px]"
               style={{ color: "rgba(25, 24, 37, 0.75)" }}
             >
-              40k+ students use PathPicker to find scholarships, brand giveaways, and exclusive deals only for students.
+              40k+ students use PathPicker to find scholarships, brand giveaways,
+              and exclusive deals only for students.
             </p>
           </div>
 
@@ -96,6 +144,68 @@ export function FeaturesSection() {
                 >
                   {feature.description}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tools section from external site, styled to match PathPicker */}
+        <div className="mt-12 border-t border-slate-200 pt-10">
+          <h2 className="text-center text-xl font-bold leading-tight text-[#181A1D] md:text-3xl">
+            Tools for{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">every</span>
+              <span className="absolute inset-x-0 bottom-0 h-1 rounded-full bg-[#956EFE]/40" />
+            </span>{" "}
+            step of your journey.
+          </h2>
+
+          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+            {TOOLS.map((tool) => (
+              <div key={tool.title} className="relative">
+                {/* Colored offset card behind */}
+                <div
+                  className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-3xl"
+                  style={{ backgroundColor: tool.accentColor }}
+                  aria-hidden="true"
+                />
+
+                {/* Foreground white fun-card */}
+                <Link
+                  href={tool.href}
+                  className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-transform transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
+                >
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-base font-bold leading-tight text-[#181A1D] md:text-lg">
+                      {tool.title}
+                    </h3>
+                    <p
+                      className="text-sm font-normal leading-relaxed"
+                      style={{ color: "rgba(25, 24, 37, 0.75)" }}
+                    >
+                      {tool.description}
+                    </p>
+                  </div>
+
+                  {/* Media image */}
+                  {tool.image && (
+                    <div className="mt-4 overflow-hidden rounded-2xl">
+                      <Image
+                        src={tool.image}
+                        alt=""
+                        width={481}
+                        height={270}
+                        className="h-full w-full object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  )}
+
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#181A1D]">
+                    Explore
+                    <span className="ml-1 text-lg leading-none">→</span>
+                  </span>
+                </Link>
               </div>
             ))}
           </div>

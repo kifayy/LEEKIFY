@@ -59,7 +59,7 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
             <span className="text-sm font-medium text-white">4.8/5 on iOS</span>
           </div>
           <h2 className="hidden text-3xl font-bold leading-tight tracking-tight text-white md:block md:text-left md:text-6xl lg:text-[4.375rem]">
-            How Much Scholarship Cash?
+            Can you win scholarships?
           </h2>
           <p className="text-base font-medium text-white md:hidden">
             <span className="block text-2xl font-bold leading-tight tracking-tight sm:text-3xl">🤑 Can you get scholarships?</span>

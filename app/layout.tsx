@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Image from "next/image";
 import { Suspense } from "react";
 import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { CountryLayout } from "@/components/country-layout";
@@ -105,8 +105,20 @@ export default function RootLayout({
             <CountryLayout>
             <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
               <SiteHeader />
-              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">{children}</main>
-              <EnterScholarshipsSectionLayout />
+              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">
+                {children}
+              </main>
+              {/* Image strip connecting into the footer (now shown on all viewports) */}
+              <div className="w-full">
+                <Image
+                  src="https://storage.googleapis.com/images_592/Grsoup%2013.png"
+                  alt="Students using Pathpicker"
+                  width={1600}
+                  height={400}
+                  className="block h-auto w-full object-cover"
+                  unoptimized
+                />
+              </div>
               <SiteFooter />
               <MobileSocialProofPopup />
               <CookieConsentBanner />
