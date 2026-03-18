@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ReviewsCarousel } from "@/components/home/reviews-carousel";
+import { ArchetypePreviewSection } from "@/components/archetype-quiz/archetype-preview";
 
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
 const TEXT_MUTED = "#58595D";  // 208:56, 208:60, 208:66
@@ -204,6 +205,9 @@ export default function ArchetypeQuizPage() {
         </div>
       </section>
 
+      {/* Archetype preview content (temporary) */}
+      <ArchetypePreviewSection />
+
       {/* User reviews carousel – pastel section (mobile + desktop) */}
       <section
         className="w-full min-w-0 bg-[#f5f0ff] py-12 md:py-16"
@@ -211,17 +215,6 @@ export default function ArchetypeQuizPage() {
       >
         <ReviewsCarousel />
       </section>
-
-      {/* Desktop only: logo marquee above bottom Take quiz CTA */}
-      <div className="hidden md:flex md:justify-center mx-auto max-w-[1160px] mb-8 px-4">
-        <div className="marquee-fade-edges overflow-hidden py-2 w-full max-w-[520px]">
-          <div className="flex w-max items-center animate-archetype-hero-marquee">
-            {[...HERO_LOGOS, ...HERO_LOGOS].map((src, i) => (
-              <HeroLogoSlot key={`cta-${i}`} src={src} />
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Take quiz CTA – duplicate of hero button, centered */}
       <div className="flex justify-center px-4 py-10 md:py-14">

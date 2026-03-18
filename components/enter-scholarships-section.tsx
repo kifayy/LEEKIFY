@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Star } from "lucide-react";
 
 const SECTION_BG_IMAGE =
@@ -27,7 +26,7 @@ export function EnterScholarshipsSection({ centered }: EnterScholarshipsSectionP
       />
       {/* Background image — desktop (unchanged) */}
       <div
-        className="absolute inset-0 z-0 hidden bg-cover bg-center bg-no-repeat md:block"
+        className="absolute inset-0 z-0 hidden bg-cover bg-center bg-no-repeat lg:block"
         style={{ backgroundImage: `url(${SECTION_BG_IMAGE})` }}
       />
       <div

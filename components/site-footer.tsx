@@ -110,11 +110,13 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="/money-scanner"
+              href="https://my.pathpicker.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-11 min-w-[137px] items-center justify-center gap-2 rounded-xl border-2 bg-white px-6 text-sm font-semibold text-[#181A1D] shadow-[3px_3px_0_0_rgba(15,23,42,0.85)] transition hover:opacity-90"
               style={{ borderColor: FOOTER_DARK }}
             >
-              💸 Scholarship Scanner
+              🎓 Student Login
             </Link>
           </div>
         </div>

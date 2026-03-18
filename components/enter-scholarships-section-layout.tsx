@@ -10,5 +10,10 @@ import { EnterScholarshipsSection } from "@/components/enter-scholarships-sectio
 export function EnterScholarshipsSectionLayout() {
   const pathname = usePathname();
   if (pathname === "/money-quiz") return null;
-  return <EnterScholarshipsSection />;
+  // Hide on mobile (md-). Money quiz page renders the section directly.
+  return (
+    <div className="hidden md:block">
+      <EnterScholarshipsSection />
+    </div>
+  );
 }

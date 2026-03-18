@@ -31,6 +31,33 @@ const REVIEWS = [
 const TRUSTPILOT_BADGE_URL =
   "https://zensignglobal.com/wp-content/uploads/2024/09/trustpilot-stars9095-696x522.jpg";
 
+const STATS = [
+  {
+    value: "2,000+",
+    unit: "Colleges in our system",
+    pillBg: "bg-[#FDE68A]", // pastel yellow
+    pillText: "text-[#181A1D]",
+  },
+  {
+    value: "$5.3m+",
+    unit: "In scholarships live",
+    pillBg: "bg-[#FDBA74]", // pastel orange
+    pillText: "text-[#181A1D]",
+  },
+  {
+    value: "96%",
+    unit: "Of students love their matches",
+    pillBg: "bg-[#5EEAD4]", // pastel teal
+    pillText: "text-[#181A1D]",
+  },
+  {
+    value: "$1.6m+",
+    unit: "In application fees waived",
+    pillBg: "bg-[#C4B5FD]", // pastel purple
+    pillText: "text-[#181A1D]",
+  },
+];
+
 function StarRating({ className = "" }: { className?: string }) {
   return (
     <div className={`flex gap-0.5 text-pathpicker-gold ${className}`} aria-hidden>
@@ -126,49 +153,82 @@ export function ReviewsCard() {
 export function ReviewsCarousel() {
   return (
     <section className="w-full min-w-0 overflow-hidden py-10 md:py-24">
-      <div className="container mx-auto max-w-3xl px-4 md:px-6 min-w-0">
-        {/* White card - theme aligned */}
-        <div
-          className="flex flex-col gap-6 rounded-2xl bg-white p-8 md:p-10"
-          style={{
-            boxShadow: "0 8px 24px rgba(149,110,254,0.12), 0 2px 8px rgba(0,0,0,0.06)",
-          }}
-        >
-          {/* Header: Reviews + Trustpilot badge, then rating pill on its own row */}
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-4">
-              <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
-                Reviews
-              </h2>
-              <a
-                href="https://www.trustpilot.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block shrink-0"
-                aria-label="Trustpilot"
-              >
-                <Image
-                  src={TRUSTPILOT_BADGE_URL}
-                  alt="Trustpilot 4.8 stars"
-                  width={240}
-                  height={180}
-                  className="h-24 w-auto object-contain md:h-28"
-                  unoptimized
-                />
-              </a>
-            </div>
-            <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
-              <Star className="h-4 w-4 fill-current" />
-              4.8 · 20k+ students
-            </span>
+      <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[340px_1fr] md:items-start">
+          {/* Left: stats */}
+          <div className="flex flex-col gap-6 items-center">
+            <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
+              Students love us.
+            </h2>
+            <ul className="stats-section__list flex flex-col gap-8">
+              {STATS.map((stat) => (
+                <li
+                  key={stat.unit}
+                  className="stats-section__item flex flex-col items-center justify-center text-center"
+                >
+                  <p
+                    className="paragraph paragraph--type--stat paragraph--view-mode--default flex flex-col items-center justify-center"
+                  >
+                    <span
+                      className={`stats-section__value inline-flex items-center justify-center rounded-full px-4 py-2 font-bold text-[1.5rem] leading-none ${stat.pillBg} ${stat.pillText}`}
+                    >
+                      {stat.value}
+                    </span>{" "}
+                    <span
+                      className="stats-section__unit mt-2 block"
+                      style={{ color: "rgba(25, 24, 37, 0.75)" }}
+                    >
+                      {stat.unit}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Vertical auto-loop carousel */}
-          <div className="marquee-fade-edges-y max-h-[280px] overflow-hidden md:max-h-[320px]">
-            <div className="flex flex-col animate-marquee-y gap-4">
-              {[...REVIEWS, ...REVIEWS].map((review, i) => (
-                <ReviewCard key={`${review.name}-${i}`} review={review} />
-              ))}
+          {/* Right: white card - reviews widget */}
+          <div
+            className="flex flex-col gap-6 rounded-2xl bg-white p-8 md:p-10"
+            style={{
+              boxShadow: "0 8px 24px rgba(149,110,254,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+            }}
+          >
+            {/* Header: Reviews + Trustpilot badge, then rating pill on its own row */}
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-wrap items-center gap-4">
+                <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
+                  Reviews
+                </h2>
+                <a
+                  href="https://www.trustpilot.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block shrink-0"
+                  aria-label="Trustpilot"
+                >
+                  <Image
+                    src={TRUSTPILOT_BADGE_URL}
+                    alt="Trustpilot 4.8 stars"
+                    width={240}
+                    height={180}
+                    className="h-24 w-auto object-contain md:h-28"
+                    unoptimized
+                  />
+                </a>
+              </div>
+              <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
+                <Star className="h-4 w-4 fill-current" />
+                4.8 · 20k+ students
+              </span>
+            </div>
+
+            {/* Vertical auto-loop carousel */}
+            <div className="marquee-fade-edges-y max-h-[280px] overflow-hidden md:max-h-[320px]">
+              <div className="flex flex-col animate-marquee-y gap-4">
+                {[...REVIEWS, ...REVIEWS].map((review, i) => (
+                  <ReviewCard key={`${review.name}-${i}`} review={review} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
