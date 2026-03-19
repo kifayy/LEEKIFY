@@ -63,28 +63,49 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
           Scholarships, brand giveaways, and exclusive student deals; Awarded scans and finds student money with your name on it.
         </p>
 
-        <div className={`mx-auto mb-3 flex flex-col items-center md:mb-4 ${isHomePage ? "hidden md:flex" : ""}`}>
-          <p className="mb-3 text-center text-sm font-semibold text-[#007aff] md:text-base">
-            Scan with your phone
-          </p>
-          {/* Desktop: show centered QR code instead of SMS button */}
-          <div className="flex w-full max-w-[420px] items-center justify-center">
-            <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.18)]">
-              <Image
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-                  "sms:+18559224190?&body=Hey! Send me any scholarships!"
-                )}`}
-                alt="Scan to text us about scholarships"
-                width={220}
-                height={220}
-                className="h-[220px] w-[220px] object-contain"
-                unoptimized
-              />
+        {/* Desktop: QR on the right, image on the left. Mobile stays stacked. */}
+        <div
+          className={`mx-auto mb-4 flex flex-col md:mb-6 md:flex-row-reverse md:items-center md:gap-8 ${
+            isHomePage ? "hidden md:flex" : ""
+          }`}
+        >
+          {/* QR column (visually right on desktop via md:flex-row-reverse) */}
+          <div className="flex flex-col items-center">
+            <p className="mb-3 text-center text-sm font-semibold text-[#007aff] md:text-base">
+              Scan with your phone
+            </p>
+            {/* Desktop: show centered QR code instead of SMS button */}
+            <div className="flex w-full max-w-[420px] items-center justify-center">
+              <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.18)]">
+                <Image
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+                    "sms:+18559224190?&body=Hey! Send me any scholarships!"
+                  )}`}
+                  alt="Scan to text us about scholarships"
+                  width={220}
+                  height={220}
+                  className="h-[220px] w-[220px] object-contain"
+                  unoptimized
+                />
+              </div>
             </div>
+            <p className="mt-1 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
+              Free • No App Required • No Sign-up
+            </p>
           </div>
-          <p className="mt-1 text-center text-sm font-medium md:text-base" style={{ color: BODY_COLOR }}>
-            Free • No App Required • No Sign-up
-          </p>
+
+          {/* Image column (visually left on desktop via md:flex-row-reverse) */}
+          <div className="flex justify-center">
+            <Image
+              src="https://storage.googleapis.com/images_592/fas22.png"
+              alt="Message conversation — win scholarships from your texts"
+              width={400}
+              height={200}
+              className="h-auto w-full max-w-[420px] object-contain md:max-w-[720px]"
+              sizes="(max-width: 768px) 420px, 720px"
+              unoptimized
+            />
+          </div>
         </div>
         {isHomePage && (
           <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
@@ -105,17 +126,6 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
           </div>
         )}
 
-        <div className={`mx-auto mb-4 flex justify-center md:mb-6 ${isHomePage ? "hidden md:flex" : ""}`}>
-          <Image
-            src="https://storage.googleapis.com/images_592/fas22.png"
-            alt="Message conversation — win scholarships from your texts"
-            width={400}
-            height={200}
-            className="h-auto w-full max-w-[420px] object-contain md:max-w-[720px]"
-            sizes="(max-width: 768px) 420px, 720px"
-            unoptimized
-          />
-        </div>
         {isHomePage && (
           <div className="mx-auto mb-4 flex justify-center md:mb-6 md:hidden">
             <Image
@@ -129,13 +139,6 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
             />
           </div>
         )}
-
-        <p
-          className="mx-auto mb-6 max-w-[560px] text-center text-base leading-relaxed max-md:hidden md:mb-8 md:text-lg lg:mb-10 lg:leading-loose"
-          style={{ color: BODY_COLOR }}
-        >
-          Our algorithm only texts you tailored matches 2x/week :)
-        </p>
 
         {(showReviewsSidebar && (
           <div className="mx-auto mb-10 flex flex-col items-stretch gap-8 md:mb-14 md:max-w-6xl md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-12 md:hidden">

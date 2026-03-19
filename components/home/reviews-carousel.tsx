@@ -152,11 +152,11 @@ export function ReviewsCard() {
 
 export function ReviewsCarousel() {
   return (
-    <section className="w-full min-w-0 overflow-hidden py-10 md:py-24">
-      <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[340px_1fr] md:items-start">
+    <section className="w-full min-w-0 overflow-hidden bg-[#F5F0FF] py-10 md:py-24">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 min-w-0">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[360px_1fr] md:items-start">
           {/* Left: stats */}
-          <div className="flex flex-col gap-6 items-center">
+          <div className="flex flex-col gap-6 items-center md:items-start">
             <h2 className="text-2xl font-bold tracking-tight text-[#181A1D] md:text-3xl">
               Students love us.
             </h2>

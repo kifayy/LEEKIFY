@@ -8,6 +8,7 @@ import { WhyDirectMailSection } from "@/components/home/why-direct-mail-section"
 import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
 import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
 
 export async function generateMetadata() {
   const baseUrl = await getBaseUrlForMetadata();
@@ -35,6 +36,7 @@ export default function Home() {
         </div>
       </section>
       <ReviewsCarousel />
+      <DesktopBottomCta />
     </>
   );
 }

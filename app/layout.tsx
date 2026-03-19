@@ -111,7 +111,7 @@ export default function RootLayout({
               {/* Image strip connecting into the footer (now shown on all viewports) */}
               <div className="w-full">
                 <Image
-                  src="https://storage.googleapis.com/images_592/Grsoup%2013.png"
+                  src="https://storage.googleapis.com/images_592/Icodn.png"
                   alt="Students using Pathpicker"
                   width={1600}
                   height={400}

@@ -7,7 +7,7 @@ import { ScholarshipScannerFinalCta } from "@/components/scholarship-scanner-fin
 export const metadata = {
   title: "Scholarship Scanner | Pathpicker",
   description:
-    "Sign up to get matched scholarships sent to your inbox. Our algorithm only texts you tailored matches 2x/week :)",
+    "Sign up to get matched scholarships sent to your inbox.",
 };
 
 export default function ScholarshipScannerPage() {
