@@ -18,6 +18,7 @@ const scholarshipCategories = [
 ];
 
 const navLinks = [
+  { href: "/browse-schools", label: "Browse Schools" },
   { href: "/archetype-quiz", label: "Archetype Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
 ];
@@ -177,11 +178,11 @@ export function SiteHeader() {
                         All Scholarships
                       </Link>
                       <Link
-                        href="/money-scanner"
+                        href="/scholarship-scanner"
                         className="block border-b border-[#F0F0F0] px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
                         onClick={() => setDropdownOpen(false)}
                       >
-                        Money Scanner
+                        Scholarship Scanner
                       </Link>
                       {scholarshipCategories.map((cat) => (
                         <Link
@@ -298,11 +299,11 @@ export function SiteHeader() {
                             All Scholarships
                           </Link>
                           <Link
-                            href="/money-scanner"
+                            href="/scholarship-scanner"
                             className="block px-4 py-2.5 pl-6 text-[14px] font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
                             onClick={() => setMobileMenuOpen(false)}
                           >
-                            Money Scanner
+                            Scholarship Scanner
                           </Link>
                           {scholarshipCategories.map((cat) => (
                             <Link

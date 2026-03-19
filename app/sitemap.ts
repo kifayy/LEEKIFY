@@ -12,8 +12,6 @@ function getBaseUrl(): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Use the request host so the sitemap always lists URLs for the domain serving it.
-  // Fixes Search Console "URL not allowed" when NEXT_PUBLIC_SITE_URL was unset and Vercel URL was used.
   let baseUrl = getBaseUrl();
   try {
     const headersList = await headers();
@@ -26,14 +24,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // keep baseUrl from env
   }
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/scholarships`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/money-scanner`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/archetype-quiz`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+  const now = new Date();
+
+  /** Home */
+  const home: MetadataRoute.Sitemap = [
+    { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+  ];
+
+  /**
+   * Main product pages (order reflects nav / SEO priority):
+   * 1. Archetype Quiz → /archetype-quiz
+   * 2. College Match Quiz → /college-match-quiz
+   * 3. Scholarship Scanner → /scholarship-scanner
+   * 4. Browse Schools → /browse-schools
+   */
+  const mainProductPages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/archetype-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    { url: `${baseUrl}/college-match-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    { url: `${baseUrl}/scholarship-scanner`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    { url: `${baseUrl}/browse-schools`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+  ];
+
+  const otherStatic: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/scholarships`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const categories = await getCategories();
@@ -60,5 +76,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...categoryPages, ...articlePages, ...awardPages];
+  return [
+    ...home,
+    ...mainProductPages,
+    ...otherStatic,
+    ...categoryPages,
+    ...articlePages,
+    ...awardPages,
+  ];
 }

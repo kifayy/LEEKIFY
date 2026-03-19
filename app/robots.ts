@@ -8,16 +8,14 @@ function getBaseUrl(): string {
   );
 }
 
-// Legacy paths from an older Pathpicker product (college/school pages, directory, blog, etc.)
-// that no longer exist. Disallow so crawlers stop requesting them and they drop from the index.
+// Legacy / dead paths. Main product URLs are allowed, including:
+// /archetype-quiz, /college-match-quiz, /scholarship-scanner (Scholarship Scanner), /browse-schools (Browse Schools).
 const legacyDisallow = [
-  "/browse",
   "/directory",
   "/school/",
   "/newsletter",
   "/blog",
   "/college-match",
-  "/college-match-quiz",
   "/quiz/",
   "/colleges/",
   "/articles",

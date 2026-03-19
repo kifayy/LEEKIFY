@@ -34,13 +34,13 @@ function getProviderLogoUrl(provider: string | null): string | null {
   return null;
 }
 
-/** Card link: Citizens → Citizens Bank scholarship page; US Bank → PathPicker Excellence apply; else → Money Scanner */
+/** Card link: Citizens → Citizens Bank scholarship page; US Bank → PathPicker Excellence apply; else → Scholarship Scanner */
 function getCardHref(provider: string | null): string {
-  if (!provider) return "/money-scanner";
+  if (!provider) return "/scholarship-scanner";
   const lower = provider.toLowerCase();
   if (lower.includes("citizens")) return "https://www.citizensbank.com/student-loans/scholarship.aspx";
   if (lower.includes("us bank") || lower.includes("u.s. bank")) return "/apply/pathpicker-excellence-2026";
-  return "/money-scanner";
+  return "/scholarship-scanner";
 }
 
 /** Display name: US Bank → PathPicker; others unchanged */

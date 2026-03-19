@@ -20,9 +20,10 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
+      { href: "/browse-schools", label: "Browse Schools" },
       { href: "/archetype-quiz", label: "Archetype Quiz" },
       { href: "/scholarships", label: "Featured Scholarships" },
-      { href: "/money-scanner", label: "Money Scanner" },
+      { href: "/scholarship-scanner", label: "Scholarship Scanner" },
     ],
   },
   {

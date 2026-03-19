@@ -14,7 +14,7 @@ import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
-const defaultTitle = "Pathpicker: Discover Your Student Archetype & Future Path";
+const defaultTitle = "PathPicker: Discover Your Student Archetype & Future Path";
 const defaultDescription =
   "Discover your unique student type and what paths fit you best. Take personality‑based quizzes to find scholarships, schools, and opportunities made for you.";
 
