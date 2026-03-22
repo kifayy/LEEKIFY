@@ -11,6 +11,7 @@ import type { College } from "@/types/college";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useVibeFilteredColleges } from "@/hooks/useVibeFilteredColleges";
 
 interface CollegeWithMatch extends College {
   matchScore?: number;
@@ -19,6 +20,8 @@ interface CollegeWithMatch extends College {
 interface SchoolGridProps {
   colleges: College[];
   selectedVibes: string[];
+  /** Debounced search string; used when exactly two vibes are selected (hook path). */
+  debouncedSearchTerm?: string;
   loading?: boolean;
   error?: string | null;
   hasMoreColleges?: boolean;
@@ -49,6 +52,7 @@ function CollegeWithMatchScore({
 export function SchoolGrid({
   colleges: initialColleges,
   selectedVibes,
+  debouncedSearchTerm = "",
   loading = false,
   error = null,
   hasMoreColleges = false,
@@ -62,7 +66,17 @@ export function SchoolGrid({
   const [collegesWithMatches, setCollegesWithMatches] = useState<CollegeWithMatch[]>([]);
   const [matchScores, setMatchScores] = useState<Map<string, number>>(new Map());
 
-  const collegesData = initialColleges;
+  const { colleges: vibeFilteredColleges, loading: vibeLoading, error: vibeError } = useVibeFilteredColleges(
+    selectedVibes,
+    debouncedSearchTerm,
+  );
+
+  const twoVibeMode = selectedVibes.length === 2;
+  const collegesData = twoVibeMode ? vibeFilteredColleges : initialColleges;
+  const isLoading = twoVibeMode ? vibeLoading : loading;
+  const currentError = twoVibeMode ? vibeError : error;
+  /** Sister Explore behavior: infinite scroll only with no vibe chips (0 vibes). */
+  const showLoadMore = !twoVibeMode && selectedVibes.length === 0 && hasMoreColleges;
 
   const handleMatchCalculated = useCallback((collegeId: string, matchScore: number) => {
     setMatchScores((prev) => {
@@ -103,7 +117,7 @@ export function SchoolGrid({
     router.push(`/schools/${encodeURIComponent(slug)}`);
   };
 
-  if (loading && collegesWithMatches.length === 0) {
+  if (isLoading && collegesWithMatches.length === 0) {
     return (
       <div className="text-center py-12">
         <div className="text-4xl mb-4">🔍</div>
@@ -112,7 +126,7 @@ export function SchoolGrid({
     );
   }
 
-  if (error) {
+  if (currentError) {
     return (
       <div className="text-center py-12">
         <div className="text-4xl mb-4">⚠️</div>
@@ -140,11 +154,21 @@ export function SchoolGrid({
 
   return (
     <div className="space-y-6">
-      {selectedVibes.length === 2 && (
+      {selectedVibes.length > 0 && (
         <div className="text-center py-6 bg-white rounded-3xl border border-gray-100 shadow-lg mb-8">
           <p className="text-gray-700 text-base sm:text-lg px-6 font-light">
-            Found <span className="font-semibold text-gray-900 text-xl">{collegesWithMatches.length}</span> colleges
-            matching: {selectedVibes.map((v) => vibeEmoji(v)).join(" ")}
+            {selectedVibes.length === 2 ? (
+              <>
+                Showing <span className="font-semibold text-gray-900 text-xl">{collegesWithMatches.length}</span>{" "}
+                colleges that match: {selectedVibes.map((v) => vibeEmoji(v)).join(" ")}
+              </>
+            ) : (
+              <>
+                Add a second vibe to filter — showing{" "}
+                <span className="font-semibold text-gray-900 text-xl">{collegesWithMatches.length}</span> colleges
+                matching search (vibe: {selectedVibes.map((v) => vibeEmoji(v)).join(" ")})
+              </>
+            )}
           </p>
         </div>
       )}
@@ -167,6 +191,8 @@ export function SchoolGrid({
               school_emoji: school.school_emoji ?? undefined,
               banner: school.banner ?? undefined,
               new_image_link: school.new_image_link ?? undefined,
+              featured_image_url: school.featured_image_url ?? undefined,
+              image_url: school.image_url ?? undefined,
               student_body_size: school.student_body_size ?? undefined,
               acceptance_rate: school.acceptance_rate ?? undefined,
               tuition_range: school.tuition_range ?? undefined,
@@ -186,15 +212,15 @@ export function SchoolGrid({
         ))}
       </div>
 
-      {hasMoreColleges && onLoadMore && collegesWithMatches.length > 0 && (
+      {showLoadMore && onLoadMore && collegesWithMatches.length > 0 && (
         <div className="text-center py-8">
           <Button
             onClick={onLoadMore}
-            disabled={loading}
+            disabled={isLoading}
             className="bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 px-8 py-3 text-lg rounded-full font-medium transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 mx-auto"
           >
             <div className="flex items-center gap-2">
-              {loading ? (
+              {isLoading ? (
                 "Loading..."
               ) : (
                 <>
@@ -214,7 +240,7 @@ export function SchoolGrid({
         </div>
       )}
 
-      {collegesWithMatches.length === 0 && !loading && <NoSchoolsFound onResetFilters={handleResetFilters} />}
+      {collegesWithMatches.length === 0 && !isLoading && <NoSchoolsFound onResetFilters={handleResetFilters} />}
     </div>
   );
 }

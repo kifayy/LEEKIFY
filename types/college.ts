@@ -9,6 +9,8 @@ export type College = {
   popular?: boolean | null;
   slug?: string | null;
   new_image_link?: string | null;
+  featured_image_url?: string | null;
+  image_url?: string | null;
   banner?: string | null;
   student_body_size?: number | null;
   acceptance_rate?: number | null;

@@ -14,6 +14,7 @@ import { SchoolFavoriteToastButton } from "./SchoolFavoriteToastButton";
 import { SchoolSEO } from "./SchoolSEO";
 import type { CollegeDetail } from "@/types/college-detail";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
+import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
 
 type SectionChip = { id: string; label: string; emoji: string };
 
@@ -96,6 +97,7 @@ export function SchoolDetailsLayout({
                     src={collegeData.new_image_link || collegeData.featured_image_url || ""}
                     alt={`${collegeData.name} campus banner`}
                     className="w-full h-52 sm:h-64 md:h-72 lg:h-80 object-cover"
+                    style={schoolHeroImageStyle(collegeData.id)}
                     loading="eager"
                   />
                   {bannerLogo && (

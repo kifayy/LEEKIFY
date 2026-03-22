@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useSchoolMatchScore } from "@/hooks/useSchoolMatchScore";
 import { MatchBreakdownModal } from "./MatchBreakdownModal";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
+import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
 
 interface SchoolCardProps {
   school: {
@@ -158,6 +159,7 @@ export function SchoolCard({
               src={heroUrls[heroIndex]}
               alt={`${school.name} campus`}
               className="w-full h-full object-cover"
+              style={schoolHeroImageStyle(school.id)}
               loading="lazy"
               onError={() => setHeroIndex((i) => i + 1)}
             />
