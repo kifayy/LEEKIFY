@@ -96,7 +96,7 @@ export function SchoolDetailsLayout({
                   <img
                     src={collegeData.new_image_link || collegeData.featured_image_url || ""}
                     alt={`${collegeData.name} campus banner`}
-                    className="w-full h-52 sm:h-64 md:h-72 lg:h-80 object-cover"
+                    className="w-full h-52 sm:h-64 md:h-72 lg:h-80 object-cover md:object-[center_25%]"
                     style={schoolHeroImageStyle(collegeData.id)}
                     loading="eager"
                   />

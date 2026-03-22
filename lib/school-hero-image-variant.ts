@@ -43,12 +43,12 @@ export type SchoolHeroImageVariant = {
 };
 
 /**
- * Deterministic “unique” look per school for the same source URL (flip, zoom, pan).
+ * Deterministic zoom/pan per school; all heroes are mirrored horizontally.
  * CSS-only — no re-encoding; not a legal substitute for licensing.
  */
 export function getSchoolHeroImageVariant(seed: string): SchoolHeroImageVariant {
   const h = fnv1a32(seed);
-  const flip = (h & 1) === 1;
+  const flip = true;
   const zoom = 1.08 + ((h >>> 16) % 60) / 500;
   const translateXPct = (((h >>> 4) % 11) - 5) * 0.9;
   const translateYPct = (((h >>> 12) % 11) - 5) * 0.9;
