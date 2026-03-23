@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { submitApplication } from "./actions";
 import type { FormFieldDef } from "@/lib/supabase/queries/hosted-scholarships";
 
@@ -118,7 +119,7 @@ type Props = {
 };
 
 export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) {
-  const [state, formAction] = useFormState(submitAction, null);
+  const [state, formAction] = useActionState(submitAction, null);
 
   return (
     <form action={formAction} id="scholarship-application-form" method="POST" className="space-y-0">

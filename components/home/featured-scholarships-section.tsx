@@ -1,6 +1,4 @@
 import {
-  getFeaturedPartnersScholarships,
-  getRandomSweepstakeScholarships,
   getFeaturedScholarships,
   getAllScholarships,
 } from "@/lib/supabase/queries/scholarships";
@@ -128,16 +126,10 @@ const PLACEHOLDER_SCHOLARSHIPS: Scholarship[] = [
 ];
 
 export async function FeaturedScholarshipsSection() {
-  // Prefer one each: Citizens Bank, Sofi, US Bank
-  let scholarships = await getFeaturedPartnersScholarships();
+  // Use explicit featured flag from Supabase for simplicity.
+  let scholarships = await getFeaturedScholarships();
   if (scholarships.length === 0) {
-    scholarships = await getRandomSweepstakeScholarships(4);
-  }
-  if (scholarships.length === 0) {
-    scholarships = await getFeaturedScholarships();
-  }
-  if (scholarships.length === 0) {
-    scholarships = (await getAllScholarships()).slice(0, 8);
+    scholarships = (await getAllScholarships()).slice(0, 8); // fallback only
   }
   if (scholarships.length === 0) {
     scholarships = PLACEHOLDER_SCHOLARSHIPS;

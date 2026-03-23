@@ -21,11 +21,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype notice someone cute and aren't afraid to strike up a conversation or make a joke. They enjoy meeting new people but also like hanging with friends. Confidence comes and goes, and that's totally normal for them. They notice small gestures that make interactions fun. A smile, a text, or a quick chat in class can make their day feel lively. They often remember little details about people, which makes follow-up conversations easier. Even if things don't go perfectly, they still enjoy putting themselves out there.",
     stats: [
-      "💬 Icebreakers",
-      "👀 Remember details",
-      "📱 Follow-up nudges",
-      "✨ Confidence boosts",
-      "🎯 Match tips",
+      "💬 Starts conversations easily",
+      "👀 Notices small details",
+      "😄 Keeps things playful",
+      "📱 Stays in touch naturally",
+      "✨ Reads social cues",
     ],
   },
   {
@@ -36,11 +36,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype like having a plan for schoolwork, side projects, or life after graduation. Checking things off a to-do list feels good to them, even if some days get messy. They focus when needed and take breaks with friends when they can. Deadlines motivate them instead of stressing them out. Finishing tasks makes them feel in control, even when life is unpredictable. They enjoy seeing progress and small wins, which keeps them moving forward. Even when plans get sidetracked, they find ways to get back on track without panicking.",
     stats: [
-      "📋 Goal tracker",
-      "⏰ Deadlines",
-      "📊 Progress",
-      "🚀 Opportunity alerts",
-      "✅ Planning tools",
+      "🎯 Sets clear goals",
+      "📋 Plans next steps",
+      "⏰ Manages time well",
+      "📊 Tracks progress",
+      "✅ Follows through",
     ],
   },
   {
@@ -51,11 +51,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype love fun and energy, whether it's campus events, parties, or hanging out with friends. Sometimes making memories wins over staying in, and that's okay. They laugh, joke, and enjoy being in the moment. Even with responsibilities, they find ways to fit in social time. Life feels best to them when it's exciting, even if a bit chaotic. They're usually up for spontaneous plans and last-minute adventures. Even when life gets stressful, they find ways to make it feel light and enjoyable.",
     stats: [
-      "🎉 Campus events",
-      "👥 Hangouts",
-      "⚡ Last-minute plans",
-      "📍 Local picks",
-      "🔥 Trending",
+      "🎉 Always down for plans",
+      "👥 Brings people together",
+      "⚡ Spontaneous decisions",
+      "📍 Knows what's going on",
+      "🔥 Chases the moment",
     ],
   },
   {
@@ -66,11 +66,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype like doing things their way, even if it's not the usual path. Freedom and flexibility matter more than strict schedules. They enjoy quiet moments, small hangouts, or spontaneous adventures. Little joys in everyday life make their days brighter. Being authentic is more important to them than keeping up with everyone else. They often notice things that others overlook, which makes their experiences feel richer. Even if they don't follow a strict plan, they feel content going with the flow.",
     stats: [
-      "🌿 Flexible plans",
-      "🧭 Path suggestions",
-      "🎨 Creative ideas",
-      "🌅 Daily inspo",
-      "🪶 Low-pressure goals",
+      "🌿 Goes with the flow",
+      "🧭 Follows what feels right",
+      "🎨 Expresses creatively",
+      "🌅 Lives in the moment",
+      "🪶 Avoids pressure",
     ],
   },
   {
@@ -81,11 +81,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype are curious about everything, from clubs and classes to hobbies and random experiences. They balance trying new things with keeping up with schoolwork and friends. Planning helps, but the best experiences often happen unexpectedly. Exploring different things helps them figure out what fits. Learning and discovering keeps life interesting. They enjoy comparing experiences and seeing how different things make them feel. Even if they don't stick with one activity for long, they gain something from every new thing they try.",
     stats: [
-      "🔍 Try new things",
-      "🧪 Interest quizzes",
-      "🗺️ Experience tracker",
-      "📚 Explore paths",
-      "⚖️ Compare options",
+      "🔍 Curious about everything",
+      "🧪 Tries new things",
+      "🗺️ Seeks new experiences",
+      "📚 Learns by doing",
+      "⚖️ Keeps options open",
     ],
   },
   {
@@ -96,11 +96,11 @@ const ARCHETYPES: ArchetypePreview[] = [
     description:
       "People with this archetype take the lead sometimes and step back to observe at other times. They're figuring out what works best for them while balancing classes, friends, and personal projects. They handle surprises and unexpected changes with ease. Uncertainty is just part of life, and they roll with it. Even while figuring things out, they naturally stand out and make an impact. They notice small details others might miss, giving them a unique perspective. Life feels like a story they're creating as they go, which makes it exciting and full of possibility.",
     stats: [
-      "🎬 Timeline",
-      "🌟 Highlights",
-      "📖 Progress story",
-      "🧠 Reflection prompts",
-      "🔥 Level up",
+      "🎬 Sees life as a story",
+      "🌟 Values meaningful moments",
+      "📖 Reflects on experiences",
+      "🧠 Thinks deeply",
+      "🔥 Focused on growth",
     ],
   },
 ];
@@ -148,11 +148,12 @@ function PreviewCard({ archetype }: { archetype: ArchetypePreview }) {
               <ul className="mt-3 flex flex-wrap items-start gap-x-2 gap-y-1.5">
                 {archetype.stats.map((s, idx) => {
                   const tagBg = [
-                    "bg-[#FDE68A]", // pastel yellow
-                    "bg-[#FDBA74]", // pastel orange
-                    "bg-[#5EEAD4]", // pastel teal
-                    "bg-[#C4B5FD]", // pastel purple
-                  ][idx % 4];
+                    "bg-[#FDF2BF]", // soft pastel yellow
+                    "bg-[#FBD8B4]", // soft pastel peach
+                    "bg-[#CFF7F0]", // soft pastel mint
+                    "bg-[#E2D7FF]", // soft pastel lavender
+                    "bg-[#D8ECFF]", // soft pastel blue
+                  ][idx % 5];
 
                   return (
                   <li

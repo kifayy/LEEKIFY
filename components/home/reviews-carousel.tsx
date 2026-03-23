@@ -136,7 +136,7 @@ export function ReviewsCard() {
         </div>
         <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
           <Star className="h-4 w-4 fill-current" />
-          4.8 · 20k+ students
+          4.8 · 40k+ students
         </span>
       </div>
       <div className="marquee-fade-edges-y min-w-0 max-h-[280px] overflow-hidden md:max-h-[320px]">
@@ -218,7 +218,7 @@ export function ReviewsCarousel() {
               </div>
               <span className="w-fit inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D]">
                 <Star className="h-4 w-4 fill-current" />
-                4.8 · 20k+ students
+                4.8 · 40k+ students
               </span>
             </div>
 

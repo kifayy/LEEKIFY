@@ -34,13 +34,14 @@ function getProviderLogoUrl(provider: string | null): string | null {
   return null;
 }
 
-/** Card link: Citizens → Citizens Bank scholarship page; US Bank → PathPicker Excellence apply; else → Scholarship Scanner */
-function getCardHref(provider: string | null): string {
-  if (!provider) return "/scholarship-scanner";
-  const lower = provider.toLowerCase();
-  if (lower.includes("citizens")) return "https://www.citizensbank.com/student-loans/scholarship.aspx";
-  if (lower.includes("us bank") || lower.includes("u.s. bank")) return "/apply/pathpicker-excellence-2026";
-  return "/scholarship-scanner";
+const DEFAULT_FEATURED_DESTINATION =
+  "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+
+/** Card link: scholarship external link when present; otherwise App Store */
+function getCardHref(scholarship: Scholarship): string {
+  const externalLink = scholarship.external_link?.trim();
+  if (externalLink) return externalLink;
+  return DEFAULT_FEATURED_DESTINATION;
 }
 
 /** Display name: US Bank → PathPicker; others unchanged */
@@ -265,9 +266,11 @@ export function FeaturedScholarshipsCarousel({
                       </div>
                     ) : (
                       <Link
-                        href={getCardHref(s.provider)}
+                        href={getCardHref(s)}
                         className="group flex h-full flex-col overflow-hidden rounded-[29px] bg-white transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)]"
-                        {...(getCardHref(s.provider).startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        {...(getCardHref(s).startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
                       >
                         {cardContent}
                       </Link>

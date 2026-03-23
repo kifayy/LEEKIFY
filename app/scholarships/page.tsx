@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { getScholarshipsForMonth, getFeaturedScholarships, getAllScholarships } from "@/lib/supabase/queries/scholarships";
+import { getAllScholarships } from "@/lib/supabase/queries/scholarships";
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getRandomPublishedArticles } from "@/lib/supabase/queries/scholarships-page";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
@@ -25,22 +25,7 @@ export async function generateMetadata() {
 
 async function ScholarshipsPageContent() {
   const [scholarshipsResult, categories, articles] = await Promise.all([
-    (async () => {
-      let s = await getScholarshipsForMonth();
-      if (s.length === 0) s = await getFeaturedScholarships();
-      if (s.length === 0) s = await getAllScholarships();
-      const sweepstakes = s.filter((x) => x.is_sweepstake === true);
-      const nonSweepstakes = s.filter((x) => x.is_sweepstake !== true);
-      const shuffle = <T,>(arr: T[]): T[] => {
-        const copy = [...arr];
-        for (let i = copy.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [copy[i], copy[j]] = [copy[j], copy[i]];
-        }
-        return copy;
-      };
-      return [...shuffle(sweepstakes), ...shuffle(nonSweepstakes)];
-    })(),
+    getAllScholarships(),
     getCategories(),
     getRandomPublishedArticles(9),
   ]);
