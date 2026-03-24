@@ -18,6 +18,9 @@ type PhoneCtaSectionProps = {
 const MOBILE_HOME_IMAGE =
   "https://storage.googleapis.com/images_592/Untitled%20design%20(42).png";
 
+const SMS_HREF =
+  "sms:+18559224190?&body=" + encodeURIComponent("Hey! Send me any scholarships!");
+
 export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSectionProps = {}) {
   return (
     <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
@@ -63,18 +66,32 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
           Scholarships, brand giveaways, and exclusive student deals; Awarded scans and finds student money with your name on it.
         </p>
 
-        {/* Desktop: QR on the right, image on the left. Mobile stays stacked. */}
+        {/* Mobile (non-home): tap-to-text — QR is desktop-only (scanning on same device is awkward). */}
+        {!isHomePage && (
+          <div className="mx-auto mb-4 flex flex-col items-center md:hidden">
+            <a
+              href={SMS_HREF}
+              className="inline-flex h-14 min-w-[220px] items-center justify-center rounded-full bg-[#007aff] px-8 text-base font-semibold text-white shadow-[0_2px_12px_rgba(0,122,255,0.25)] transition hover:opacity-95"
+            >
+              Text us to start
+            </a>
+            <p className="mt-2 text-center text-xs font-medium" style={{ color: BODY_COLOR }}>
+              Free • No App Required • No Sign-up
+            </p>
+          </div>
+        )}
+
+        {/* Desktop: QR on the right, image on the left. QR hidden below md — use SMS button above on mobile. */}
         <div
           className={`mx-auto mb-4 flex flex-col md:mb-6 md:flex-row-reverse md:items-center md:gap-8 ${
             isHomePage ? "hidden md:flex" : ""
           }`}
         >
-          {/* QR column (visually right on desktop via md:flex-row-reverse) */}
-          <div className="flex flex-col items-center">
+          {/* QR column (visually right on desktop via md:flex-row-reverse) — md+ only */}
+          <div className="hidden flex-col items-center md:flex">
             <p className="mb-3 text-center text-sm font-semibold text-[#007aff] md:text-base">
               Scan with your phone
             </p>
-            {/* Desktop: show centered QR code instead of SMS button */}
             <div className="flex w-full max-w-[420px] items-center justify-center">
               <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.18)]">
                 <Image
