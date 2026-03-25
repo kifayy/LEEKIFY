@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import { ArrowRight, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const SCHOLARSHIP_IMAGE =
   "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=778&h=552&fit=crop";
@@ -77,13 +78,25 @@ export function HeroQuizCards() {
     >
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">
-          {CARDS.map((card) => (
+          {CARDS.flatMap((card) => {
+            const isScholarshipQuiz = card.href === "/scholarship-quiz";
+            const linkVariants = isScholarshipQuiz
+              ? [
+                  { href: "/awarded-app", visibility: "md:hidden" as const },
+                  { href: "/scholarship-quiz", visibility: "hidden md:flex" as const },
+                ]
+              : [{ href: card.href, visibility: "" as const }];
+
+            return linkVariants.map(({ href, visibility }, variantIndex) => (
             <Link
-              key={card.href}
-              href={card.href}
-              target={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "_blank" : undefined}
-              rel={card.href.includes("archetype") || card.href.includes("pathpicker.com") ? "noopener noreferrer" : undefined}
-              className="group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]"
+              key={isScholarshipQuiz ? `scholarship-quiz-${variantIndex}` : card.href}
+              href={href}
+              target={href.includes("archetype") || href.includes("pathpicker.com") ? "_blank" : undefined}
+              rel={href.includes("archetype") || href.includes("pathpicker.com") ? "noopener noreferrer" : undefined}
+              className={cn(
+                "group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]",
+                visibility
+              )}
               style={{ backgroundColor: "#F0EEFF" }}
             >
               {/* Card - Figma travel_card structure */}
@@ -181,7 +194,8 @@ export function HeroQuizCards() {
                 />
               </div>
             </Link>
-          ))}
+            ));
+          })}
         </div>
       </div>
     </section>

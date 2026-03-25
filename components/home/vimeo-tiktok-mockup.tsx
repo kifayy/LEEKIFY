@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { Play } from "lucide-react";
 
 const VIMEO_URL =
@@ -22,8 +23,21 @@ interface VimeoPlayer {
   on(event: "play" | "pause", callback: () => void): void;
 }
 
+type VimeoInTikTokMockupProps = {
+  /** Overlay CTA label (default matches home). */
+  ctaLabel?: string;
+  /** Use `/…` for in-app navigation; default opens App Store short link. */
+  ctaHref?: string;
+};
+
+const CTA_CLASS =
+  "absolute bottom-4 left-1/2 z-20 -translate-x-1/2 inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black";
+
 /** Phone mockup with Vimeo video; tap to play/pause. */
-export function VimeoInTikTokMockup() {
+export function VimeoInTikTokMockup({
+  ctaLabel = "Get on iOS",
+  ctaHref = "https://awarded.short.gy/9iTh",
+}: VimeoInTikTokMockupProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<VimeoPlayer | null>(null);
   const [isPaused, setIsPaused] = useState(true);
@@ -109,20 +123,27 @@ export function VimeoInTikTokMockup() {
       )}
 
       {/* CTA overlay at bottom of video */}
-      <a
-        href="https://awarded.short.gy/9iTh"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2 inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
-      >
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-          alt=""
-          className="h-6 w-6 object-contain"
-          aria-hidden
-        />
-        Get on iOS
-      </a>
+      {ctaHref.startsWith("/") ? (
+        <Link href={ctaHref} className={CTA_CLASS}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+            alt=""
+            className="h-6 w-6 object-contain"
+            aria-hidden
+          />
+          {ctaLabel}
+        </Link>
+      ) : (
+        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className={CTA_CLASS}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+            alt=""
+            className="h-6 w-6 object-contain"
+            aria-hidden
+          />
+          {ctaLabel}
+        </a>
+      )}
 
     </div>
   );

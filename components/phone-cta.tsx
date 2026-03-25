@@ -11,7 +11,7 @@ const BODY_COLOR = "rgb(88, 89, 93)";
 type PhoneCtaSectionProps = {
   /** When true, show the Reviews card to the left (e.g. newsletter page). */
   showReviewsSidebar?: boolean;
-  /** When true (e.g. home page), use mobile-only alternate copy, image, and Continue CTA. */
+  /** When true (e.g. home page), use mobile-only alternate copy, image, and Take Quiz CTA. */
   isHomePage?: boolean;
 };
 
@@ -126,10 +126,8 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
         </div>
         {isHomePage && (
           <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
-            <a
-              href="https://awarded.short.gy/9iTh"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/awarded-app"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
             >
               <img
@@ -138,8 +136,8 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
                 className="h-6 w-6 object-contain"
                 aria-hidden
               />
-              Continue
-            </a>
+              Take Quiz
+            </Link>
           </div>
         )}
 

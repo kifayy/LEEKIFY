@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "my.pathpicker.com", pathname: "/**" },
       { protocol: "https", hostname: "zensignglobal.com", pathname: "/**" },
       { protocol: "https", hostname: "logo.clearbit.com", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.prod.website-files.com", pathname: "/**" },
     ],
   },
 };

@@ -111,9 +111,7 @@ export function DesktopHeroBanner() {
             </Link>
             {/* Scholarship Quiz on smaller viewports (tablet / large phone); Get Scholarships on lg+ */}
             <Link
-              href="https://awarded.short.gy/9iTh"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/awarded-app"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 lg:hidden"
             >
               <span>💸</span>

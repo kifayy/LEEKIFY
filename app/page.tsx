@@ -32,7 +32,7 @@ export default function Home() {
       {/* Mobile-only: Awarded app video in TikTok-style phone mockup */}
       <section className="w-full px-4 pt-0 pb-6 md:hidden" aria-label="Awarded app video">
         <div className="container mx-auto max-w-lg">
-          <VimeoInTikTokMockup />
+          <VimeoInTikTokMockup ctaLabel="Take Quiz" ctaHref="/awarded-app" />
         </div>
       </section>
       <ReviewsCarousel />
