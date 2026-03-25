@@ -24,8 +24,10 @@ export default function AwardedAppPage() {
             src="https://storage.googleapis.com/images_592/4.8%20(7).png"
             width={512}
             height={200}
-            className="h-auto w-full max-w-[192px] translate-x-2 object-contain md:max-w-[252px] md:translate-x-3"
-            unoptimized
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 768px) 154px, 202px"
+            className="h-auto w-full max-w-[154px] translate-x-2 object-contain md:max-w-[202px] md:translate-x-3"
           />
         </div>
         <h2

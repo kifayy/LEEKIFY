@@ -13,10 +13,10 @@ const REVIEWS = [
       "https://storage.googleapis.com/images_592/Gemini_Generated_Image_4poid84poid84poi.png",
   },
   {
-    name: "Jeyson D.",
+    name: "Valentina R.",
     quote: "actually unreal. matched with $72k in scholarships!!",
     avatar:
-      "https://storage.googleapis.com/images_592/Gemini_Generated_Image_wqfcnkwqfcnkwqfc.png",
+      "https://storage.googleapis.com/images_592/Gemini_Generated_Image_4pojec4pojec4poj.png",
   },
   {
     name: "Claudia H.",
@@ -84,11 +84,7 @@ export function AwardedReviewsCarousel() {
                     alt=""
                     width={48}
                     height={48}
-                    className={
-                      review.name === "Jeyson D."
-                        ? "h-full w-full origin-top scale-[1.18] translate-y-2 object-cover object-[50%_35%]"
-                        : "h-full w-full object-cover"
-                    }
+                    className="h-full w-full object-cover"
                     unoptimized
                   />
                 </div>
