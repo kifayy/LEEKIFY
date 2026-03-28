@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AwardedIosStickyFooter } from "./awarded-ios-sticky-footer";
 import { AwardedRotatingScholarshipCard } from "./rotating-scholarship-card";
 import { AwardedReviewsCarousel } from "./awarded-reviews-carousel";
 import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
@@ -20,14 +21,15 @@ export default function AwardedAppPage() {
       <div className="container mx-auto max-w-[1024px] min-w-0 px-4 md:px-6">
         <div className="mx-auto mb-4 flex justify-center md:mb-6">
           <Image
-            alt=""
-            src="https://storage.googleapis.com/images_592/4.8%20(7).png"
-            width={512}
+            alt="Student freebies you match with"
+            src="https://storage.googleapis.com/images_592/Untitled%20design%20(42).png"
+            width={400}
             height={200}
             priority
             fetchPriority="high"
-            sizes="(max-width: 768px) 154px, 202px"
-            className="h-auto w-full max-w-[154px] translate-x-2 object-contain md:max-w-[202px] md:translate-x-3"
+            sizes="(max-width: 768px) 240px, 316px"
+            className="h-auto w-full max-w-[240px] translate-x-2 object-contain md:max-w-[316px] md:translate-x-3"
+            unoptimized
           />
         </div>
         <h2
@@ -48,6 +50,23 @@ export default function AwardedAppPage() {
         >
           How many scholarships can you win? Take the quiz and see!
         </p>
+        <div className="mx-auto mb-4 flex justify-center md:mb-6 md:hidden">
+          <Link
+            href="https://awarded.short.gy/9iTh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-16 min-w-[200px] w-full max-w-sm animate-ios-cta-bounce items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-xl font-semibold text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition-opacity hover:opacity-95 active:opacity-90"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+              alt=""
+              className="h-6 w-6 object-contain"
+              aria-hidden
+            />
+            Take on iOS
+          </Link>
+        </div>
         <p
           className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:text-lg max-md:hidden"
           style={{ color: "rgb(88, 89, 93)" }}
@@ -90,44 +109,23 @@ export default function AwardedAppPage() {
         </div>
         <div className="mx-auto mb-4 flex flex-col items-center gap-5 md:mb-6 md:hidden">
           <Image
-            alt="Student freebies you match with"
-            src="https://storage.googleapis.com/images_592/Untitled%20design%20(42).png"
-            width={400}
+            alt=""
+            src="https://storage.googleapis.com/images_592/4.8%20(7).png"
+            width={512}
             height={200}
-            className="h-auto w-full max-w-[420px] object-contain"
+            className="h-auto w-full max-w-[179px] object-contain"
             unoptimized
           />
           <AwardedReviewsCarousel />
           <section className="w-full px-0 pt-1 pb-2" aria-label="Awarded app video">
             <div className="container mx-auto max-w-lg">
-              <VimeoInTikTokMockup ctaLabel="Take on iOS" />
+              <VimeoInTikTokMockup ctaLabel="Take on iOS" ctaBounce />
             </div>
           </section>
         </div>
       </div>
 
-      <div
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-black/[0.06] bg-white/95 px-4 py-3 shadow-[0_-4px_24px_rgba(15,23,42,0.08)] backdrop-blur-md supports-[backdrop-filter]:bg-white/85"
-        style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
-      >
-        <div className="mx-auto flex max-w-[1024px] justify-center">
-          <Link
-            href="https://awarded.short.gy/9iTh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-16 min-w-[200px] w-full max-w-sm items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-xl font-semibold text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 active:opacity-90"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-              alt=""
-              className="h-6 w-6 object-contain"
-              aria-hidden
-            />
-            Take on iOS
-          </Link>
-        </div>
-      </div>
+      <AwardedIosStickyFooter />
     </main>
   );
 }

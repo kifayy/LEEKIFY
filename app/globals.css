@@ -127,6 +127,26 @@
   }
 }
 
+/* Awarded “Take on iOS”: quick nudge every 3s (idle ~88% of cycle) */
+@keyframes ios-cta-bounce {
+  0%,
+  88% {
+    transform: translateY(0);
+  }
+  90% {
+    transform: translateY(-5px);
+  }
+  93% {
+    transform: translateY(0);
+  }
+  96% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -137,6 +157,14 @@
   }
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+  .animate-ios-cta-bounce {
+    animation: ios-cta-bounce 3s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ios-cta-bounce {
+      animation: none;
+    }
   }
   .animate-marquee-x {
     animation: marquee-x 15s linear infinite;

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
@@ -334,8 +334,19 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTA - Login (same as header) */}
-            <div className="p-5 pt-0">
+            {/* CTAs: Awarded App Store + Student Login */}
+            <div className="flex flex-col gap-3 p-5 pt-0">
+              <Link
+                href="https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938?platform=iphone"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E5E5E7] bg-white py-4 text-base font-normal text-[#181A1D] shadow-sm transition-opacity hover:opacity-90"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Win Scholarships — download Awarded on the App Store"
+              >
+                <span>💸</span>Win Scholarships
+                <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
+              </Link>
               <Link
                 href="https://my.pathpicker.com/login"
                 className="inline-flex h-16 min-w-[200px] w-full items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"

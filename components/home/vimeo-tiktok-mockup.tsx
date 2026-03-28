@@ -28,15 +28,26 @@ type VimeoInTikTokMockupProps = {
   ctaLabel?: string;
   /** Use `/…` for in-app navigation; default opens App Store short link. */
   ctaHref?: string;
+  /** Subtle repeating bounce (e.g. Awarded “Take on iOS”). */
+  ctaBounce?: boolean;
 };
 
-const CTA_CLASS =
-  "absolute bottom-4 left-1/2 z-20 -translate-x-1/2 inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black";
+const CTA_WRAP_CLASS =
+  "pointer-events-none absolute bottom-4 left-0 right-0 z-20 flex justify-center";
+
+const ctaButtonClass = (bounce: boolean) =>
+  [
+    "pointer-events-auto inline-flex h-14 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition-opacity hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black",
+    bounce ? "animate-ios-cta-bounce" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
 /** Phone mockup with Vimeo video; tap to play/pause. */
 export function VimeoInTikTokMockup({
   ctaLabel = "Get on iOS",
   ctaHref = "https://awarded.short.gy/9iTh",
+  ctaBounce = false,
 }: VimeoInTikTokMockupProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<VimeoPlayer | null>(null);
@@ -123,27 +134,29 @@ export function VimeoInTikTokMockup({
       )}
 
       {/* CTA overlay at bottom of video */}
-      {ctaHref.startsWith("/") ? (
-        <Link href={ctaHref} className={CTA_CLASS}>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-            alt=""
-            className="h-6 w-6 object-contain"
-            aria-hidden
-          />
-          {ctaLabel}
-        </Link>
-      ) : (
-        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className={CTA_CLASS}>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-            alt=""
-            className="h-6 w-6 object-contain"
-            aria-hidden
-          />
-          {ctaLabel}
-        </a>
-      )}
+      <div className={CTA_WRAP_CLASS}>
+        {ctaHref.startsWith("/") ? (
+          <Link href={ctaHref} className={ctaButtonClass(ctaBounce)}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+              alt=""
+              className="h-6 w-6 object-contain"
+              aria-hidden
+            />
+            {ctaLabel}
+          </Link>
+        ) : (
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className={ctaButtonClass(ctaBounce)}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
+              alt=""
+              className="h-6 w-6 object-contain"
+              aria-hidden
+            />
+            {ctaLabel}
+          </a>
+        )}
+      </div>
 
     </div>
   );
