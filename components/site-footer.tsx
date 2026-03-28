@@ -29,9 +29,7 @@ const FOOTER_COLUMNS = [
   },
   {
     title: "Support",
-    links: [
-      { href: "https://awarded.app/providers", label: "For Business" },
-    ],
+    links: [{ href: "/partners", label: "For Partners" }],
   },
 ];
 
