@@ -52,11 +52,22 @@ function getDisplayProviderName(provider: string | null): string {
   return provider;
 }
 
-/** Title: U.S. Bank Student Scholarship → PathPicker Scholarship; others unchanged */
-function getDisplayTitle(title: string | null, provider: string | null): string {
+/** Title: PathPicker-hosted / US Bank sweepstake → canonical carousel name; others unchanged */
+function getDisplayTitle(
+  title: string | null,
+  provider: string | null,
+  slug: string | null
+): string {
   if (!title) return "";
+  const sl = (slug ?? "").toLowerCase();
+  if (sl === "pathpicker-excellence-2026") return "PathPicker Excellence 2026";
+
   const p = (provider ?? "").toLowerCase();
-  if (p.includes("us bank") || p.includes("u.s. bank")) return "PathPicker Scholarship";
+  if (p.includes("us bank") || p.includes("u.s. bank")) return "PathPicker Excellence 2026";
+
+  const t = title.toLowerCase();
+  if (t.includes("awkward human")) return "PathPicker Excellence 2026";
+
   return title;
 }
 
@@ -236,7 +247,7 @@ export function FeaturedScholarshipsCarousel({
                           )}
                         </div>
                         <h3 className="mt-2 text-lg font-bold text-[#181A1D] md:text-xl">
-                          {truncate(getDisplayTitle(s.title, s.provider), 40)}
+                          {truncate(getDisplayTitle(s.title, s.provider, s.slug), 40)}
                         </h3>
                         <p className="mt-3 text-sm font-normal leading-relaxed text-[#0C1120]/60">
                           {getDisplayProviderName(s.provider)} | Closing Soon

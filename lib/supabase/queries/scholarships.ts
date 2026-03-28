@@ -24,6 +24,22 @@ export type Scholarship = {
   is_sweepstake: boolean | null;
 };
 
+/** Featured carousel: PathPicker Excellence / US Bank hosted card should lead the list */
+function isPathPickerExcellenceFeaturedFirst(s: Scholarship): boolean {
+  const sl = (s.slug ?? "").toLowerCase();
+  if (sl === "pathpicker-excellence-2026") return true;
+  if ((s.title ?? "").toLowerCase().includes("awkward human")) return true;
+  const p = (s.provider ?? "").toLowerCase();
+  if (p.includes("us bank") || p.includes("u.s. bank")) return true;
+  return false;
+}
+
+function sortFeaturedScholarshipsForDisplay(scholarships: Scholarship[]): Scholarship[] {
+  const lead = scholarships.filter(isPathPickerExcellenceFeaturedFirst);
+  const rest = scholarships.filter((s) => !isPathPickerExcellenceFeaturedFirst(s));
+  return [...lead, ...rest];
+}
+
 export async function getFeaturedScholarships(): Promise<Scholarship[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -32,7 +48,7 @@ export async function getFeaturedScholarships(): Promise<Scholarship[]> {
     .eq("is_featured", true)
     .order("deadline", { ascending: true, nullsFirst: false });
   if (error) return [];
-  return (data ?? []) as Scholarship[];
+  return sortFeaturedScholarshipsForDisplay((data ?? []) as Scholarship[]);
 }
 
 export async function getScholarshipsForMonth(): Promise<Scholarship[]> {
