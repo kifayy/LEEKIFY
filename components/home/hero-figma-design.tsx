@@ -71,6 +71,9 @@ export function HeroFigmaDesign() {
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
               <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
                 <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
+                  <span className="mb-1 block w-full text-center text-base font-semibold leading-snug text-[#956EFE] sm:text-lg lg:text-left">
+                    Student Discovery Engine
+                  </span>
                   <span className="block w-full text-center lg:text-left">Find your future</span>
                   <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
                     <span className="invisible" aria-hidden>Scholarship</span>

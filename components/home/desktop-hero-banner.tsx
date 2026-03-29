@@ -70,6 +70,9 @@ export function DesktopHeroBanner() {
         {/* Left: title + subtitle + review pill + CTAs */}
         <div className="flex max-w-[1104px] flex-1 flex-col gap-6 text-center lg:max-w-[55%] lg:text-left">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[3.5rem] lg:text-[4rem]">
+            <span className="mb-2 block text-lg font-semibold tracking-tight text-[#956EFE] md:text-xl lg:text-2xl">
+              Student Discovery Engine
+            </span>
             Find your future
             <br />
             <span style={{ color: "#956EFE" }}>

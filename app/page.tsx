@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
@@ -15,9 +14,23 @@ export async function generateMetadata() {
   return { alternates: { canonical: baseUrl } };
 }
 
-export default function Home() {
+export default async function Home() {
+  const baseUrl = await getBaseUrlForMetadata();
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${baseUrl}/#website`,
+    url: baseUrl,
+    name: "PathPicker",
+    alternateName: ["Pathpicker"],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <DesktopHeroBanner />
       <div className="md:hidden">
         <HeroFigmaDesign />
