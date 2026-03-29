@@ -1,28 +1,14 @@
 import { MetadataRoute } from "next";
-import { headers } from "next/headers";
+import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getAllArticlePaths } from "@/lib/supabase/queries/scholarships-page";
 import { getAllScholarships } from "@/lib/supabase/queries/scholarships";
 
-function getBaseUrl(): string {
-  return (
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
-  );
-}
+/** Avoid static snapshot at build using VERCEL_URL (preview/prod *.vercel.app) inside pathpicker.com/sitemap.xml */
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let baseUrl = getBaseUrl();
-  try {
-    const headersList = await headers();
-    const host = headersList.get("host") || headersList.get("x-forwarded-host");
-    const proto = headersList.get("x-forwarded-proto");
-    if (host) {
-      baseUrl = `${proto === "https" ? "https" : "http"}://${host}`;
-    }
-  } catch {
-    // keep baseUrl from env
-  }
+  const baseUrl = await getPublicSiteUrlForSitemap();
 
   const now = new Date();
 
