@@ -127,7 +127,7 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
         {isHomePage && (
           <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
             <Link
-              href="https://my.awarded.app/user-boarding"
+              href="https://awarded.short.gy/sIok"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
             >
               <img

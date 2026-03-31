@@ -82,7 +82,7 @@ export function HeroQuizCards() {
             const isScholarshipQuiz = card.href === "/scholarship-quiz";
             const linkVariants = isScholarshipQuiz
               ? [
-                  { href: "https://my.awarded.app/user-boarding", visibility: "md:hidden" as const },
+                  { href: "https://awarded.short.gy/sIok", visibility: "md:hidden" as const },
                   { href: "/scholarship-quiz", visibility: "hidden md:flex" as const },
                 ]
               : [{ href: card.href, visibility: "" as const }];
