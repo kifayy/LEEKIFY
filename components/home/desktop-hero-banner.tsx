@@ -15,6 +15,9 @@ const TYPE_MS = 80;
 const PAUSE_MS = 2000;
 const BACKSPACE_MS = 50;
 
+/** Home hero is md+ only; flip to `true` to restore the white "Scholarship Quiz" CTA on desktop. */
+const SHOW_DESKTOP_HERO_SCHOLARSHIP_QUIZ_CTA = false;
+
 export function DesktopHeroBanner() {
   const [wordIndex, setWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -70,9 +73,6 @@ export function DesktopHeroBanner() {
         {/* Left: title + subtitle + review pill + CTAs */}
         <div className="flex max-w-[1104px] flex-1 flex-col gap-6 text-center lg:max-w-[55%] lg:text-left">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-[3.5rem] lg:text-[4rem]">
-            <span className="mb-2 block text-lg font-semibold tracking-tight text-[#956EFE] md:text-xl lg:text-2xl">
-              Student Discovery Engine
-            </span>
             Find your future
             <br />
             <span style={{ color: "#956EFE" }}>
@@ -112,21 +112,15 @@ export function DesktopHeroBanner() {
               <span>🎭</span>
               Archetype Quiz
             </Link>
-            {/* Scholarship Quiz on smaller viewports (tablet / large phone); Get Scholarships on lg+ */}
-            <Link
-              href="/awarded-app"
-              className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 lg:hidden"
-            >
-              <span>💸</span>
-              Scholarship Quiz
-            </Link>
-            <Link
-              href="/scholarship-scanner"
-              className="hidden h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 lg:inline-flex"
-            >
-              <span>💸</span>
-              Get Scholarships
-            </Link>
+            {SHOW_DESKTOP_HERO_SCHOLARSHIP_QUIZ_CTA && (
+              <Link
+                href="/awarded-app"
+                className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
+              >
+                <span>💸</span>
+                Scholarship Quiz
+              </Link>
+            )}
           </div>
         </div>
       </div>

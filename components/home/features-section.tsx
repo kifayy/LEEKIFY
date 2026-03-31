@@ -75,6 +75,9 @@ export function FeaturesSection() {
 
         {/* Tools section from external site, styled to match PathPicker */}
         <div className="border-t border-slate-200 pt-10">
+          <span className="mb-1 block w-full text-center text-base font-semibold leading-snug text-[#956EFE] sm:text-lg lg:text-left">
+            Student Discovery Engine
+          </span>
           <h2 className="text-center text-xl font-bold leading-tight text-[#181A1D] md:text-3xl">
             What{" "}
             <span className="relative inline-block">

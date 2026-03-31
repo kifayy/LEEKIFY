@@ -6,8 +6,8 @@ import { AwardedRotatingScholarshipCard } from "./rotating-scholarship-card";
 import { AwardedReviewsCarousel } from "./awarded-reviews-carousel";
 import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 
-const QR_SRC =
-  "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=sms%3A%2B18559224190%3F%26body%3DHey!%20Send%20me%20any%20scholarships!";
+const APP_STORE_URL = "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+const QR_SRC = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(APP_STORE_URL)}`;
 
 export const metadata: Metadata = {
   title: "Awarded — Student money in your texts",
@@ -36,13 +36,13 @@ export default function AwardedAppPage() {
           className="mx-auto mb-4 hidden max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:block md:text-[2.93rem] lg:mb-8 lg:leading-snug lg:text-[4.875rem]"
           style={{ color: "#181A1D" }}
         >
-          Student Money In <span style={{ color: "#007aff" }}>Your Texts</span>
+          Win Scholarships <span className="text-[#956EFE]">4.2x Faster</span>
         </h2>
         <h2
           className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:hidden md:text-[2.93rem]"
           style={{ color: "#181A1D" }}
         >
-          Win Scholarships <span className="text-black">4.2x FASTER</span>
+          Win Scholarships <span className="text-[#956EFE]">4.2x Faster</span>
         </h2>
         <p
           className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:hidden md:text-lg"
@@ -74,9 +74,8 @@ export default function AwardedAppPage() {
           Scholarships, brand giveaways, and exclusive student deals; Awarded scans and finds student money
           with your name on it.
         </p>
-        <AwardedRotatingScholarshipCard />
-        <div className="mx-auto mb-4 hidden flex-col md:mb-6 md:flex md:flex-row-reverse md:items-center md:gap-8">
-          <div className="hidden flex-col items-center md:flex">
+        <div className="mx-auto mb-4 hidden md:mb-6 md:flex md:justify-center">
+          <div className="flex flex-col items-center">
             <p className="mb-3 text-center text-sm font-semibold text-[#007aff] md:text-base">
               Scan with your phone
             </p>
@@ -84,7 +83,7 @@ export default function AwardedAppPage() {
               <div className="flex items-center justify-center rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(15,23,42,0.18)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  alt="Scan to text us about scholarships"
+                  alt="Scan to download Awarded on the App Store"
                   src={QR_SRC}
                   width={220}
                   height={220}
@@ -92,21 +91,12 @@ export default function AwardedAppPage() {
                 />
               </div>
             </div>
-            <p className="mt-1 text-center text-sm font-medium md:text-base" style={{ color: "rgb(88, 89, 93)" }}>
-              Free • No App Required • No Sign-up
+            <p className="mt-1 text-center text-sm font-semibold md:text-base" style={{ color: "#007aff" }}>
+              Take Scholarship Quiz!
             </p>
           </div>
-          <div className="flex justify-center">
-            <Image
-              alt="Message conversation — win scholarships from your texts"
-              src="https://storage.googleapis.com/images_592/fas22.png"
-              width={400}
-              height={200}
-              className="h-auto w-full max-w-[420px] object-contain md:max-w-[720px]"
-              unoptimized
-            />
-          </div>
         </div>
+        <AwardedRotatingScholarshipCard />
         <div className="mx-auto mb-4 flex flex-col items-center gap-5 md:mb-6 md:hidden">
           <Image
             alt=""
