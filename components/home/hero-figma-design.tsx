@@ -94,7 +94,7 @@ export function HeroFigmaDesign() {
                   Archetype Quiz
                 </Link>
                 <Link
-                  href="/awarded-app"
+                  href="https://my.awarded.app/user-boarding"
                   className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
                 >
                   <span>💸</span>

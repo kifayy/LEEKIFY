@@ -9,9 +9,19 @@ import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
 
+const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
+
 export async function generateMetadata() {
   const baseUrl = await getBaseUrlForMetadata();
-  return { alternates: { canonical: baseUrl } };
+  return {
+    alternates: { canonical: baseUrl },
+    openGraph: {
+      images: [{ url: HOME_PREVIEW_IMAGE_URL }],
+    },
+    twitter: {
+      images: [HOME_PREVIEW_IMAGE_URL],
+    },
+  };
 }
 
 export default async function Home() {
@@ -45,7 +55,7 @@ export default async function Home() {
       {/* Mobile-only: Awarded app video in TikTok-style phone mockup */}
       <section className="w-full px-4 pt-0 pb-6 md:hidden" aria-label="Awarded app video">
         <div className="container mx-auto max-w-lg">
-          <VimeoInTikTokMockup ctaLabel="Take Quiz" ctaHref="/awarded-app" />
+          <VimeoInTikTokMockup ctaLabel="Take Quiz" ctaHref="https://my.awarded.app/user-boarding" />
         </div>
       </section>
       <ReviewsCarousel />

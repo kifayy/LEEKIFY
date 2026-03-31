@@ -1,7 +1,13 @@
 import { notFound, redirect } from "next/navigation";
 import { SchoolDetailsLayout } from "@/components/school/SchoolDetailsLayout";
+import { SchoolPageJsonLd } from "@/components/school/school-page-json-ld";
 import { fetchCollegeBySlugParam } from "@/lib/fetch-college-by-slug";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import {
+  buildSchoolPageDescription,
+  buildSchoolPageKeywords,
+  buildSchoolPageTitle,
+} from "@/lib/school-page-metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -9,29 +15,34 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const result = await fetchCollegeBySlugParam(slug);
   if (!result.ok) {
-    return { title: "School | Pathpicker" };
+    return { title: "School | PathPicker" };
   }
   const { college } = result;
   const baseUrl = await getBaseUrlForMetadata();
   const canonicalSlug = college.slug?.trim() || decodeURIComponent(slug);
   const canonical = `${baseUrl}/schools/${encodeURIComponent(canonicalSlug)}`;
-  const title = college.meta_title?.trim() || (college.name ? `${college.name} | Pathpicker` : "School | Pathpicker");
-  const description =
-    college.meta_description?.trim() ||
-    college.description?.slice(0, 160) ||
-    college.personality_line?.slice(0, 160) ||
-    undefined;
+  const title = buildSchoolPageTitle(college);
+  const description = buildSchoolPageDescription(college);
+  const ogImage = college.new_image_link || college.featured_image_url;
 
   return {
     title,
     description,
-    keywords: college.keywords?.length ? college.keywords : undefined,
+    keywords: buildSchoolPageKeywords(college),
     alternates: { canonical },
     openGraph: {
+      type: "website",
+      siteName: "PathPicker",
       title,
       description,
       url: canonical,
-      images: college.new_image_link || college.featured_image_url ? [college.new_image_link || college.featured_image_url!] : undefined,
+      images: ogImage ? [{ url: ogImage }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
     },
   };
 }
@@ -54,6 +65,7 @@ export default async function SchoolPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-white">
+      <SchoolPageJsonLd college={college} canonicalUrl={canonicalUrl} baseUrl={baseUrl} />
       <SchoolDetailsLayout collegeData={college} showSidebarNav={false} canonicalUrl={canonicalUrl} />
     </div>
   );

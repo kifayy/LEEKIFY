@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
 import { getCategories } from "@/lib/supabase/queries/scholarship-categories";
 import { getAllArticlePaths } from "@/lib/supabase/queries/scholarships-page";
+import { getAllCollegeSlugsForSitemap } from "@/lib/supabase/queries/colleges";
 import { getAllScholarships } from "@/lib/supabase/queries/scholarships";
 
 /** Avoid static snapshot at build using VERCEL_URL (preview/prod *.vercel.app) inside pathpicker.com/sitemap.xml */
@@ -63,6 +64,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const collegeSlugs = await getAllCollegeSlugsForSitemap();
+  const schoolPages: MetadataRoute.Sitemap = collegeSlugs.map((slug) => ({
+    url: `${baseUrl}/schools/${encodeURIComponent(slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
   return [
     ...home,
     ...mainProductPages,
@@ -70,5 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryPages,
     ...articlePages,
     ...awardPages,
+    ...schoolPages,
   ];
 }

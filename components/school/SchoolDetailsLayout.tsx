@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { SchoolHeader } from "./SchoolHeader";
 import { SchoolVibeSection } from "./SchoolVibeSection";
 import { SchoolHighlightsSection } from "./SchoolHighlightsSection";
@@ -11,7 +12,6 @@ import { SimilarSchoolsSection } from "./SimilarSchoolsSection";
 import { SchoolStickyHeader } from "./SchoolStickyHeader";
 import { FloatingBackButton } from "./FloatingBackButton";
 import { SchoolFavoriteToastButton } from "./SchoolFavoriteToastButton";
-import { SchoolSEO } from "./SchoolSEO";
 import type { CollegeDetail } from "@/types/college-detail";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
@@ -54,7 +54,6 @@ export function SchoolDetailsLayout({
 
   return (
     <>
-      <SchoolSEO college={collegeData} canonicalUrl={canonicalUrl} />
       <div className="min-h-screen bg-white flex-1">
         <SchoolStickyHeader showStickyHeader={showStickyHeader} collegeName={collegeData.name} />
         <SchoolFavoriteToastButton collegeId={collegeData.id} collegeName={collegeData.name} />
@@ -66,11 +65,15 @@ export function SchoolDetailsLayout({
             </div>
 
             <nav className="flex flex-wrap items-center gap-2 text-sm text-gray-500" aria-label="Breadcrumb">
-              <span>PathPicker</span>
+              <Link href="/" className="hover:text-violet-700 hover:underline">
+                PathPicker
+              </Link>
               <span aria-hidden>›</span>
-              <span>Colleges</span>
+              <Link href="/browse-schools" className="hover:text-violet-700 hover:underline">
+                Browse schools
+              </Link>
               <span aria-hidden>›</span>
-              <span className="text-gray-900 font-semibold">{collegeData.name}</span>
+              <span className="font-semibold text-gray-900">{collegeData.name}</span>
             </nav>
 
             {!showSidebarNav && (
