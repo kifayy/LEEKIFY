@@ -2,6 +2,10 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { getHostedScholarshipBySlugForMeta } from "@/lib/supabase/queries/hosted-scholarships";
 import { notFound } from "next/navigation";
+import { AwardedAppLanding } from "@/app/awarded-app/awarded-app-landing";
+import { ExcellenceApplySuccessSequence } from "./excellence-apply-success-sequence";
+
+const PATHPICKER_EXCELLENCE_2026_SLUG = "pathpicker-excellence-2026";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -9,6 +13,14 @@ async function SuccessContent({ params }: Props) {
   const { slug } = await params;
   const scholarship = await getHostedScholarshipBySlugForMeta(slug);
   if (!scholarship) notFound();
+
+  if (slug === PATHPICKER_EXCELLENCE_2026_SLUG) {
+    return (
+      <ExcellenceApplySuccessSequence scholarshipTitle={scholarship.title}>
+        <AwardedAppLanding />
+      </ExcellenceApplySuccessSequence>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
