@@ -72,7 +72,7 @@ export function AwardedReviewsCarousel() {
         className="flex touch-pan-x snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
-        {REVIEWS.map((review) => (
+        {REVIEWS.map((review, i) => (
           <article
             key={review.name}
             className="box-border flex-[0_0_100%] snap-center snap-always"
@@ -86,6 +86,9 @@ export function AwardedReviewsCarousel() {
                     height={48}
                     className="h-full w-full object-cover"
                     unoptimized
+                    priority={i === 0}
+                    fetchPriority={i === 0 ? "high" : "low"}
+                    loading={i === 0 ? undefined : "eager"}
                   />
                 </div>
                 <div className="min-w-0 flex-1">

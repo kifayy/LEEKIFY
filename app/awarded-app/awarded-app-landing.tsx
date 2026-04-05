@@ -22,8 +22,8 @@ export function AwardedAppLanding() {
             priority
             fetchPriority="high"
             sizes="(max-width: 768px) 240px, 316px"
-            className="h-auto w-full max-w-[240px] translate-x-2 object-contain md:max-w-[316px] md:translate-x-3"
             unoptimized
+            className="h-auto w-full max-w-[240px] translate-x-2 object-contain md:max-w-[316px] md:translate-x-3"
           />
         </div>
         <h2
@@ -97,8 +97,9 @@ export function AwardedAppLanding() {
             src="https://storage.googleapis.com/images_592/4.8%20(7).png"
             width={512}
             height={200}
-            className="h-auto w-full max-w-[179px] object-contain"
+            sizes="179px"
             unoptimized
+            className="h-auto w-full max-w-[179px] object-contain"
           />
           <AwardedReviewsCarousel />
           <section className="w-full px-0 pt-1 pb-2" aria-label="Awarded app video">
