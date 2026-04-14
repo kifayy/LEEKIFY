@@ -11,7 +11,7 @@ const BODY_COLOR = "rgb(88, 89, 93)";
 type PhoneCtaSectionProps = {
   /** When true, show the Reviews card to the left (e.g. newsletter page). */
   showReviewsSidebar?: boolean;
-  /** When true (e.g. home page), use mobile-only alternate copy, image, and Take Quiz CTA. */
+  /** When true (e.g. home page), use mobile-only alternate copy, image, and Scholarship Quiz CTA. */
   isHomePage?: boolean;
 };
 
@@ -49,7 +49,8 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
               className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:hidden md:text-[2.93rem]"
               style={{ color: HEADING_COLOR }}
             >
-              Win Scholarships <span style={{ color: "#aa8afe" }}>4.2x FASTER</span>
+              Scholarship Money{" "}
+              <span style={{ color: "#aa8afe" }}>In Minutes</span>
             </h2>
             <p
               className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:hidden md:text-lg"
@@ -127,16 +128,15 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
         {isHomePage && (
           <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
             <Link
-              href="/awarded-app"
+              href="https://joinawarded.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-                alt=""
-                className="h-6 w-6 object-contain"
-                aria-hidden
-              />
-              Take Quiz
+              <span className="text-xl leading-none" aria-hidden>
+                💸
+              </span>
+              Scholarship Quiz
             </Link>
           </div>
         )}

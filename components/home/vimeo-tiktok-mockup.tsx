@@ -30,6 +30,8 @@ type VimeoInTikTokMockupProps = {
   ctaHref?: string;
   /** Subtle repeating bounce (e.g. Awarded “Take on iOS”). */
   ctaBounce?: boolean;
+  /** Leading visual: Apple mark (default) or money emoji for web quiz CTAs. */
+  ctaLeading?: "apple" | "money";
 };
 
 const CTA_WRAP_CLASS =
@@ -44,10 +46,14 @@ const ctaButtonClass = (bounce: boolean) =>
     .join(" ");
 
 /** Phone mockup with Vimeo video; tap to play/pause. */
+const APPLE_IMG =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png";
+
 export function VimeoInTikTokMockup({
   ctaLabel = "Get on iOS",
   ctaHref = "https://awarded.short.gy/9iTh",
   ctaBounce = false,
+  ctaLeading = "apple",
 }: VimeoInTikTokMockupProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<VimeoPlayer | null>(null);
@@ -135,24 +141,21 @@ export function VimeoInTikTokMockup({
 
       {/* CTA overlay at bottom of video */}
       <div className={CTA_WRAP_CLASS}>
-        {ctaHref.startsWith("/") ? (
+        {ctaLeading === "money" ? (
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className={ctaButtonClass(ctaBounce)}>
+            <span className="text-xl leading-none" aria-hidden>
+              💸
+            </span>
+            {ctaLabel}
+          </a>
+        ) : ctaHref.startsWith("/") ? (
           <Link href={ctaHref} className={ctaButtonClass(ctaBounce)}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-              alt=""
-              className="h-6 w-6 object-contain"
-              aria-hidden
-            />
+            <img src={APPLE_IMG} alt="" className="h-6 w-6 object-contain" aria-hidden />
             {ctaLabel}
           </Link>
         ) : (
           <a href={ctaHref} target="_blank" rel="noopener noreferrer" className={ctaButtonClass(ctaBounce)}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1920px-Apple_logo_white.svg.png"
-              alt=""
-              className="h-6 w-6 object-contain"
-              aria-hidden
-            />
+            <img src={APPLE_IMG} alt="" className="h-6 w-6 object-contain" aria-hidden />
             {ctaLabel}
           </a>
         )}

@@ -334,15 +334,15 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            {/* CTAs: Awarded App Store + Student Login */}
+            {/* CTAs: Win Scholarships + Student Login */}
             <div className="flex flex-col gap-3 p-5 pt-0">
               <Link
-                href="https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938?platform=iphone"
+                href="https://joinawarded.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E5E5E7] bg-white py-4 text-base font-normal text-[#181A1D] shadow-sm transition-opacity hover:opacity-90"
                 onClick={() => setMobileMenuOpen(false)}
-                aria-label="Win Scholarships — download Awarded on the App Store"
+                aria-label="Win Scholarships — open scholarship quiz"
               >
                 <span>💸</span>Win Scholarships
                 <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />

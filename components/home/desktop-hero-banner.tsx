@@ -15,9 +15,6 @@ const TYPE_MS = 80;
 const PAUSE_MS = 2000;
 const BACKSPACE_MS = 50;
 
-/** Home hero is md+ only; flip to `true` to restore the white "Scholarship Quiz" CTA on desktop. */
-const SHOW_DESKTOP_HERO_SCHOLARSHIP_QUIZ_CTA = false;
-
 export function DesktopHeroBanner() {
   const [wordIndex, setWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -112,15 +109,15 @@ export function DesktopHeroBanner() {
               <span>🎭</span>
               Archetype Quiz
             </Link>
-            {SHOW_DESKTOP_HERO_SCHOLARSHIP_QUIZ_CTA && (
-              <Link
-                href="/awarded-app"
-                className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
-              >
-                <span>💸</span>
-                Scholarship Quiz
-              </Link>
-            )}
+            <Link
+              href="https://joinawarded.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
+            >
+              <span>💸</span>
+              Scholarship Quiz
+            </Link>
           </div>
         </div>
       </div>

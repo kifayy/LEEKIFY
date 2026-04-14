@@ -50,8 +50,7 @@ export function FeaturesSection() {
 
   // External destinations for the four home "Tools" cards.
   const ARCHETYPE_URL = "https://my.pathpicker.com/archetype";
-  const APP_STORE_AWARDED_URL =
-    "https://apps.apple.com/us/app/awarded-win-scholarships/id6749553938";
+  const JOIN_AWARDED_URL = "https://joinawarded.com";
 
   // Basic escape-key handling for the "Coming soon" popup.
   useEffect(() => {
@@ -95,7 +94,7 @@ export function FeaturesSection() {
                 tool.href === "/colleges" || tool.href === "/scholarships"
                   ? ARCHETYPE_URL
                   : tool.href === "/virtual-college-tours"
-                    ? APP_STORE_AWARDED_URL
+                    ? JOIN_AWARDED_URL
                     : tool.href;
 
               const resolvedTarget = resolvedHref.startsWith("http") ? "_blank" : undefined;
