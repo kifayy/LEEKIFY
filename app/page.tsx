@@ -9,6 +9,7 @@ import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
 import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
+import { HomeDesktopScholarshipQuizPopup } from "@/components/home/home-desktop-scholarship-quiz-popup";
 
 const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
 
@@ -38,6 +39,7 @@ export default async function Home() {
 
   return (
     <>
+      <HomeDesktopScholarshipQuizPopup />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
