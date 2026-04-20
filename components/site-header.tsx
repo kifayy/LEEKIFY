@@ -213,21 +213,27 @@ export function SiteHeader() {
           )}
         </nav>
 
-        {/* Right: mobile = Continue pill; desktop = Get Started image */}
+        {/* Right: Student Login — bordered text (no fill) */}
         <div className="flex shrink-0 items-center md:ml-6">
           <Link
             href="https://my.pathpicker.com/login"
-            className="inline-flex h-12 min-w-[140px] items-center justify-center rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-6 text-sm font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95 md:hidden"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[48px] min-w-0 items-center gap-1.5 rounded-[15px] border-2 border-[#E5E5E7] bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#956EFE] hover:text-[#956EFE] md:hidden"
             aria-label="Student Login"
           >
-            <span>🎓</span>Student Login
+            <span aria-hidden>🎓</span>
+            Student Login
           </Link>
           <Link
             href="https://my.pathpicker.com/login"
-            className="hidden items-center justify-center rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_#181A1D] transition hover:opacity-95 md:inline-flex md:h-16 md:min-w-[200px]"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden min-h-[48px] items-center gap-2 rounded-[15px] border-2 border-[#E5E5E7] bg-transparent px-5 py-2.5 text-[15px] font-medium text-[#181A1D] transition-colors hover:border-[#956EFE] hover:text-[#956EFE] md:inline-flex"
             aria-label="Student Login"
           >
-            <span>🎓</span>Student Login
+            <span aria-hidden>🎓</span>
+            Student Login
           </Link>
         </div>
       </div>
