@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
@@ -10,7 +11,7 @@ const HERO_BG_URL =
 
 const REVIEW_PILL_BG = "transparent";
 
-const ROTATING_WORDS = ["Scholarship", "Abroad", "School", "Path"];
+const ROTATING_WORDS = ["Scholarship", "Money", "School", "Path"];
 const TYPE_MS = 80;
 const PAUSE_MS = 2000;
 const BACKSPACE_MS = 50;
@@ -110,7 +111,7 @@ export function DesktopHeroBanner() {
               Archetype Quiz
             </Link>
             <Link
-              href="https://joinawarded.com"
+              href={SCHOLARSHIP_QUIZ_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"

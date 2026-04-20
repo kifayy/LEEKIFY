@@ -7,3 +7,6 @@ export const SCHOLARSHIP_SCANNER_SMS_BODY =
 
 /** SMS URI: opens default SMS app with number and body pre-filled (e.g. on phone). */
 export const SCHOLARSHIP_SCANNER_SMS_URL = `sms:${SCHOLARSHIP_SCANNER_PHONE}?body=${encodeURIComponent(SCHOLARSHIP_SCANNER_SMS_BODY)}`;
+
+/** Awarded web scholarship quiz (short link). */
+export const SCHOLARSHIP_QUIZ_URL = "https://awarded.short.gy/UwI8";

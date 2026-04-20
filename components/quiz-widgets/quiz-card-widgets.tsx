@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import { ArrowRight } from "lucide-react";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
 const PLACEHOLDER_LOGOS = [
@@ -52,7 +53,9 @@ export function ScholarshipQuizWidget() {
 
   return (
     <Link
-      href="/scholarship-scanner"
+      href={SCHOLARSHIP_QUIZ_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={CARD_CLASS}
       style={{ backgroundColor: "#F0EEFF" }}
     >

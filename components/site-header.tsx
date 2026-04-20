@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
@@ -337,7 +338,7 @@ export function SiteHeader() {
             {/* CTAs: Win Scholarships + Student Login */}
             <div className="flex flex-col gap-3 p-5 pt-0">
               <Link
-                href="https://joinawarded.com"
+                href={SCHOLARSHIP_QUIZ_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E5E5E7] bg-white py-4 text-base font-normal text-[#181A1D] shadow-sm transition-opacity hover:opacity-90"

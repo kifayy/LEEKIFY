@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
+import { MobileScholarshipQuizStickyFooterGate } from "@/components/home/mobile-scholarship-quiz-sticky-footer-gate";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { CountryLayout } from "@/components/country-layout";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
@@ -103,7 +104,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <CountryLayout>
-            <div className="relative flex min-w-0 flex-col overflow-x-hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+            <div className="relative flex min-w-0 flex-col overflow-x-hidden pb-28 md:pb-0">
               <SiteHeader />
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">
                 {children}
@@ -121,6 +122,7 @@ export default function RootLayout({
               </div>
               <SiteFooter />
               <MobileSocialProofPopup />
+              <MobileScholarshipQuizStickyFooterGate />
               <CookieConsentBanner />
             </div>
             </CountryLayout>

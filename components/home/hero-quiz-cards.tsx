@@ -6,6 +6,7 @@ import Image from "next/image";
 import Lottie from "lottie-react";
 import { ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const SCHOLARSHIP_IMAGE =
   "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=778&h=552&fit=crop";
@@ -44,7 +45,7 @@ function LogoSlot({ src }: { src: string }) {
 
 const CARDS = [
   {
-    href: "/scholarship-quiz",
+    href: SCHOLARSHIP_QUIZ_URL,
     title: "Scholarship Quiz",
     description:
       "Find scholarships matched to your profile. Quick apply, no-essay options. Get money without the grind.",
@@ -78,31 +79,25 @@ export function HeroQuizCards() {
     >
       <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">
-          {CARDS.flatMap((card) => {
-            const isScholarshipQuiz = card.href === "/scholarship-quiz";
-            const linkVariants = isScholarshipQuiz
-              ? [
-                  { href: "/awarded-app", visibility: "md:hidden" as const },
-                  { href: "/scholarship-quiz", visibility: "hidden md:flex" as const },
-                ]
-              : [{ href: card.href, visibility: "" as const }];
-
-            return linkVariants.map(({ href, visibility }, variantIndex) => (
+          {CARDS.map((card) => {
+            const isScholarshipQuiz = card.href === SCHOLARSHIP_QUIZ_URL;
+            const href = card.href;
+            const isExternal = href.startsWith("http");
+            return (
             <Link
-              key={isScholarshipQuiz ? `scholarship-quiz-${variantIndex}` : card.href}
+              key={card.title}
               href={href}
-              target={href.includes("archetype") || href.includes("pathpicker.com") ? "_blank" : undefined}
-              rel={href.includes("archetype") || href.includes("pathpicker.com") ? "noopener noreferrer" : undefined}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
               className={cn(
-                "group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]",
-                visibility
+                "group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]"
               )}
               style={{ backgroundColor: "#F0EEFF" }}
             >
               {/* Card - Figma travel_card structure */}
               <div className="relative flex min-h-0 flex-1 flex-col">
                 {/* Image area - hidden for Archetype and Scholarship cards (they use marquee/Lottie) */}
-                {!card.href.includes("archetype") && card.href !== "/scholarship-quiz" && (
+                {!card.href.includes("archetype") && !isScholarshipQuiz && (
                   <div className="relative aspect-[389/276] w-full overflow-hidden rounded-t-[39px] bg-[#F7F7F7] md:aspect-[480/320] lg:aspect-[520/346]">
                     <Image
                       src={card.image}
@@ -133,7 +128,7 @@ export function HeroQuizCards() {
                 {/* Content - white section + gray bottom */}
                 <div
                   className={
-                    card.href.includes("archetype") || card.href === "/scholarship-quiz"
+                    card.href.includes("archetype") || isScholarshipQuiz
                       ? "flex min-h-0 flex-1 flex-col rounded-t-[29px] rounded-b-[29px]"
                       : "flex min-h-0 flex-1 flex-col rounded-b-[29px]"
                   }
@@ -152,7 +147,7 @@ export function HeroQuizCards() {
                         </div>
                       </div>
                     )}
-                    {card.href === "/scholarship-quiz" && (
+                    {isScholarshipQuiz && (
                       <div className="mb-3 flex h-[11rem] min-h-[11rem] items-center justify-center md:h-[13rem] md:min-h-[13rem]">
                         {scholarshipAnimationData && (
                           <Lottie
@@ -194,7 +189,7 @@ export function HeroQuizCards() {
                 />
               </div>
             </Link>
-            ));
+            );
           })}
         </div>
       </div>

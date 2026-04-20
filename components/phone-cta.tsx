@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 import { ReviewsCard } from "@/components/home/reviews-carousel";
 
-/** Reusable "Phone CTA" section: Student Money In Your Texts + SMS CTA + phone mockups. Use on home, landing, or any page. */
+/** Reusable "Phone CTA" section: Student Money In Your Texts + SMS CTA + phone mockups. On home (`isHomePage`), the whole block is mobile-only (`md:hidden`). */
 const HEADING_COLOR = "#181A1D";
 const BODY_COLOR = "rgb(88, 89, 93)";
 
@@ -23,7 +24,9 @@ const SMS_HREF =
 
 export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSectionProps = {}) {
   return (
-    <section className="w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20">
+    <section
+      className={`w-full min-w-0 overflow-x-hidden bg-white py-10 md:py-20 ${isHomePage ? "md:hidden" : ""}`}
+    >
       <div className="container mx-auto max-w-[1024px] min-w-0 px-4 md:px-6">
         <div className="mx-auto mb-4 flex justify-center md:mb-6">
           <Image
@@ -49,8 +52,8 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
               className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:hidden md:text-[2.93rem]"
               style={{ color: HEADING_COLOR }}
             >
-              Scholarship Money{" "}
-              <span style={{ color: "#aa8afe" }}>In Minutes</span>
+              Scholarships Found{" "}
+              <span style={{ color: "#aa8afe" }}>4.2x Faster</span>
             </h2>
             <p
               className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:hidden md:text-lg"
@@ -128,7 +131,7 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
         {isHomePage && (
           <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
             <Link
-              href="https://joinawarded.com"
+              href={SCHOLARSHIP_QUIZ_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"

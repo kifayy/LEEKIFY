@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsPathPickerWidget } from "@/components/home/whats-pathpicker-widget";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 // Tools cards inspired by external "Tools for every step of your journey" section
 const TOOLS = [
@@ -29,7 +30,7 @@ const TOOLS = [
     href: "/virtual-college-tours",
     title: "Can you win scholarships?",
     description:
-      "Use our iOS app to find scholarships you actually qualify for.",
+      "Take our scholarship quiz to see how much scholarship money you match with.",
     image:
       "https://storage.googleapis.com/images_592/Untitled%20design%20(44).png",
     accentColor: "#A855F7", // purple
@@ -50,7 +51,6 @@ export function FeaturesSection() {
 
   // External destinations for the four home "Tools" cards.
   const ARCHETYPE_URL = "https://my.pathpicker.com/archetype";
-  const JOIN_AWARDED_URL = "https://joinawarded.com";
 
   // Basic escape-key handling for the "Coming soon" popup.
   useEffect(() => {
@@ -94,7 +94,7 @@ export function FeaturesSection() {
                 tool.href === "/colleges" || tool.href === "/scholarships"
                   ? ARCHETYPE_URL
                   : tool.href === "/virtual-college-tours"
-                    ? JOIN_AWARDED_URL
+                    ? SCHOLARSHIP_QUIZ_URL
                     : tool.href;
 
               const resolvedTarget = resolvedHref.startsWith("http") ? "_blank" : undefined;

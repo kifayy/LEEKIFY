@@ -30,13 +30,13 @@ export function AwardedAppLanding() {
           className="mx-auto mb-4 hidden max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:block md:text-[2.93rem] lg:mb-8 lg:leading-snug lg:text-[4.875rem]"
           style={{ color: "#181A1D" }}
         >
-          Scholarship Money <span className="text-[#956EFE]">In Minutes</span>
+          Scholarships Found <span className="text-[#956EFE]">4.2x Faster</span>
         </h2>
         <h2
           className="mx-auto mb-4 max-w-[603px] text-center text-[2.44rem] font-bold leading-tight tracking-tight md:mb-5 md:hidden md:text-[2.93rem]"
           style={{ color: "#181A1D" }}
         >
-          Scholarship Money <span className="text-[#956EFE]">In Minutes</span>
+          Scholarships Found <span className="text-[#956EFE]">4.2x Faster</span>
         </h2>
         <p
           className="mx-auto mb-4 max-w-[560px] text-center text-base leading-relaxed md:mb-6 md:hidden md:text-lg"

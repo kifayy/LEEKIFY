@@ -8,6 +8,7 @@ import { FeaturedScholarshipsSection } from "@/components/home/featured-scholars
 import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
 
@@ -57,7 +58,7 @@ export default async function Home() {
         <div className="container mx-auto max-w-lg">
           <VimeoInTikTokMockup
             ctaLabel="Scholarship Quiz"
-            ctaHref="https://joinawarded.com"
+            ctaHref={SCHOLARSHIP_QUIZ_URL}
             ctaLeading="money"
           />
         </div>

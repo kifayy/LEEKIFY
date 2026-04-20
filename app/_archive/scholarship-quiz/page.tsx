@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhoneCtaSection } from "@/components/phone-cta";
+import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const SECTION_BG = "#EEECFF";
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
@@ -85,7 +86,9 @@ export default function ScholarshipQuizPage() {
 
               {/* Take quiz button – under title on mobile only */}
               <Link
-                href="/scholarship-quiz"
+                href={SCHOLARSHIP_QUIZ_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-[5.6rem] min-w-[263px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-11 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:hidden"
                 style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
               >
@@ -138,7 +141,9 @@ export default function ScholarshipQuizPage() {
 
                 {/* 208:67 – CTA link: 2x size, hidden on mobile (button under title there) */}
                 <Link
-                  href="/scholarship-quiz"
+                  href={SCHOLARSHIP_QUIZ_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hidden min-w-fit items-center justify-center rounded-[15px] border-2 bg-white px-11 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:inline-flex md:h-[5.6rem] md:min-w-[263px]"
                   style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
                 >
@@ -192,7 +197,9 @@ export default function ScholarshipQuizPage() {
       {/* Take quiz CTA – duplicate of hero button, centered, larger */}
       <div className="flex flex-col items-center gap-4 px-4 py-10 md:py-14">
         <Link
-          href="/scholarship-quiz"
+          href={SCHOLARSHIP_QUIZ_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex h-[4.5rem] min-w-[320px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-14 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[380px] md:px-16 md:text-3xl"
           style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
         >
