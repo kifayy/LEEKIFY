@@ -9,7 +9,7 @@ import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 const DELAY_MS = 10_000;
 const SESSION_KEY = "pathpicker-home-scholarship-quiz-popup-dismissed";
 const IMAGE_URL =
-  "https://storage.googleapis.com/images_592/NY%20zeal%20(4).png";
+  "https://storage.googleapis.com/images_592/Untitled%20design%20(44).png";
 
 /** Desktop (md+): home only — modal after 10s with image, headline, and quiz CTA. */
 export function HomeDesktopScholarshipQuizPopup() {
