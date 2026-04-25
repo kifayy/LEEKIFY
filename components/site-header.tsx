@@ -20,8 +20,8 @@ const scholarshipCategories = [
 
 const navLinks = [
   { href: "/browse-schools", label: "Browse Schools" },
-  { href: SCHOLARSHIP_QUIZ_URL, label: "Scholarship Quiz" },
   { href: "/archetype-quiz", label: "Archetype Quiz" },
+  { href: SCHOLARSHIP_QUIZ_URL, label: "Scholarship Quiz" },
   { href: "/scholarships", label: "Scholarships", hasDropdown: true },
 ];
 

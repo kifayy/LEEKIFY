@@ -102,22 +102,22 @@ export function DesktopHeroBanner() {
 
           <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-start">
             <Link
-              href={SCHOLARSHIP_QUIZ_URL}
+              href="http://my.pathpicker.com/archetype"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
             >
-              <span>💸</span>
-              Scholarship Quiz
+              <span>🎭</span>
+              Archetype Quiz
             </Link>
             <Link
-              href="http://my.pathpicker.com/archetype"
+              href={SCHOLARSHIP_QUIZ_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
             >
-              <span>🎭</span>
-              Archetype Quiz
+              <span>💸</span>
+              Scholarship Quiz
             </Link>
           </div>
         </div>

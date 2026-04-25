@@ -45,19 +45,19 @@ function LogoSlot({ src }: { src: string }) {
 
 const CARDS = [
   {
-    href: SCHOLARSHIP_QUIZ_URL,
-    title: "Scholarship Quiz",
-    description:
-      "Find scholarships matched to your profile. Quick apply, no-essay options. Get money without the grind.",
-    image: SCHOLARSHIP_IMAGE,
-    cta: "Take Quiz",
-  },
-  {
     href: "http://my.pathpicker.com/archetype",
     title: "Archetype Quiz",
     description:
       "Find your archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",
     image: ARCHETYPE_IMAGE,
+    cta: "Take Quiz",
+  },
+  {
+    href: SCHOLARSHIP_QUIZ_URL,
+    title: "Scholarship Quiz",
+    description:
+      "Find scholarships matched to your profile. Quick apply, no-essay options. Get money without the grind.",
+    image: SCHOLARSHIP_IMAGE,
     cta: "Take Quiz",
   },
 ];
