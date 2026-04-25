@@ -6,7 +6,6 @@ import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace }
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { MobileSocialProofPopup } from "@/components/mobile-social-proof-popup";
 import { MobileScholarshipQuizStickyFooterGate } from "@/components/home/mobile-scholarship-quiz-sticky-footer-gate";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { CountryLayout } from "@/components/country-layout";
@@ -121,7 +120,6 @@ export default function RootLayout({
                 />
               </div>
               <SiteFooter />
-              <MobileSocialProofPopup />
               <MobileScholarshipQuizStickyFooterGate />
               <CookieConsentBanner />
             </div>
