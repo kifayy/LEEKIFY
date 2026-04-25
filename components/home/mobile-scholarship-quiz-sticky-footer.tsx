@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
+const ARCHETYPE_QUIZ_URL = "https://my.pathpicker.com/archetype";
 
 type MobileScholarshipQuizStickyFooterProps = {
   /** When false, bar is slid off-screen (still mounted for smooth transition). */
   visible?: boolean;
 };
 
-/** Site-wide (layout): fixed bottom bar on small screens — Scholarship Quiz CTA (purple pill). */
+/** Site-wide (layout): fixed bottom bar on small screens — Archetype Quiz CTA (purple pill). */
 export function MobileScholarshipQuizStickyFooter({
   visible = true,
 }: MobileScholarshipQuizStickyFooterProps) {
@@ -17,21 +17,21 @@ export function MobileScholarshipQuizStickyFooter({
       }`}
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       role="complementary"
-      aria-label="Scholarship quiz"
+      aria-label="Archetype quiz"
       aria-hidden={!visible}
     >
       <div className="mx-auto flex max-w-lg justify-center py-1">
         <Link
-          href={SCHOLARSHIP_QUIZ_URL}
+          href={ARCHETYPE_QUIZ_URL}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={visible ? undefined : -1}
           className="inline-flex h-12 w-full min-w-[200px] max-w-sm items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 text-base font-semibold text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition-opacity hover:opacity-95 active:opacity-90"
         >
           <span className="text-lg leading-none" aria-hidden>
-            💸
+            🎭
           </span>
-          Scholarship Quiz
+          Archetype Quiz
         </Link>
       </div>
     </div>

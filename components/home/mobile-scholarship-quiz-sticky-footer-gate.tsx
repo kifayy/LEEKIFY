@@ -16,7 +16,7 @@ function getScrollDepth(): number {
   return scrollTop / maxScroll;
 }
 
-/** Renders the global mobile quiz CTA except on `/awarded-app`, which uses its own iOS sticky footer. */
+/** Renders the global mobile Archetype CTA except on `/awarded-app`, which uses its own iOS sticky footer. */
 export function MobileScholarshipQuizStickyFooterGate() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
