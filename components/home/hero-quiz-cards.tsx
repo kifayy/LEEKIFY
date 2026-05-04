@@ -46,7 +46,7 @@ function LogoSlot({ src }: { src: string }) {
 const CARDS = [
   {
     href: "http://my.pathpicker.com/archetype",
-    title: "Archetype Quiz",
+    title: "College Match Quiz",
     description:
       "Find your archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",
     image: ARCHETYPE_IMAGE,

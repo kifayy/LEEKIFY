@@ -7,7 +7,7 @@ import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels"
 import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
 import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
-const ROTATING_WORDS = ["Scholarship", "Money", "School", "Path"];
+const ROTATING_WORDS = ["Dream School", "Chances", "Future Path"];
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;
 const DELETE_DELAY_MS = 55;
@@ -88,14 +88,15 @@ export function HeroFigmaDesign() {
         <div className="flex w-full justify-center overflow-visible">
           <div className="flex max-w-[1400px] origin-center flex-col items-center gap-8 lg:-translate-x-[60%] lg:scale-[1.3] lg:flex-row lg:items-center lg:gap-12">
             {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
-            <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
+            <div className="flex w-[min(100%,320px)] flex-col items-center gap-4 text-center sm:w-[360px] sm:gap-5 lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
               <HeroStudentsMatchedWidget />
+              <div className="flex w-full flex-col gap-2.5 md:gap-5">
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
               <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
                 <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-white sm:text-[3rem] [text-shadow:0_2px_24px_rgba(76,29,149,0.42)] md:text-[3.5rem] md:text-[#181A1D] md:[text-shadow:none] lg:text-[3.75rem]">
                   <span className="block w-full text-center lg:text-left">Find your</span>
                   <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
-                    <span className="invisible" aria-hidden>Scholarship</span>
+                    <span className="invisible" aria-hidden>Dream School</span>
                     <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[#F5F3FF] md:text-[#956EFE] lg:left-0 lg:translate-x-0">
                       {displayedText}
                     </span>
@@ -109,8 +110,8 @@ export function HeroFigmaDesign() {
                   rel="noopener noreferrer"
                   className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 md:rounded-[15px]"
                 >
-                  <span>🎭</span>
-                  Archetype Quiz
+                  <span>🎯</span>
+                  College Match Quiz
                 </Link>
                 <Link
                   href={SCHOLARSHIP_QUIZ_URL}
@@ -121,6 +122,7 @@ export function HeroFigmaDesign() {
                   <span>💸</span>
                   Scholarship Quiz
                 </Link>
+              </div>
               </div>
             </div>
 

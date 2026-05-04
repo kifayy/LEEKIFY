@@ -12,7 +12,7 @@ const HERO_BG_URL =
 /** Same asset as mobile `HeroFigmaDesign` hero image */
 const HERO_STUDENT_URL = "https://my.pathpicker.com/images/hero-student.png";
 
-const ROTATING_WORDS = ["Scholarship", "Money", "School", "Path"];
+const ROTATING_WORDS = ["Dream School", "Chances", "Future Path"];
 const TYPE_MS = 80;
 const PAUSE_MS = 2000;
 const BACKSPACE_MS = 50;

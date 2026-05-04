@@ -20,8 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * Main product pages (order reflects nav / SEO priority):
-   * 1. Archetype Quiz → /archetype-quiz
-   * 2. College Match Quiz → /college-match-quiz
+   * 1. College Match Quiz (external flow) → /archetype-quiz
+   * 2. College Match Quiz (on-site) → /college-match-quiz
    * 3. Scholarship Scanner → /scholarship-scanner
    * 4. Browse Schools → /browse-schools
    */

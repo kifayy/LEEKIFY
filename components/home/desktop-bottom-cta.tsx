@@ -85,7 +85,7 @@ export function DesktopBottomCta() {
             <div className="flex w-[52%] flex-col bg-white px-24 py-16">
               <div className="flex flex-col gap-6">
                 <h3 className="text-2xl font-bold leading-tight tracking-tight text-[#181A1D] md:text-4xl">
-                  🎭 Take the Archetype Quiz
+                  🎯 Take the College Match Quiz
                 </h3>
                 <p className="max-w-[520px] text-base leading-relaxed text-[#181A1D]">
                   40k+ Have taken the quiz. Which one are you?
@@ -99,8 +99,8 @@ export function DesktopBottomCta() {
                   rel="noopener noreferrer"
                   className="inline-flex h-20 min-w-[240px] items-center justify-center gap-2 rounded-[18px] border-2 border-[#181A1D] bg-[#956EFE] px-10 text-lg font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
                 >
-                  <span>🎭</span>
-                  Archetype Quiz
+                  <span>🎯</span>
+                  College Match Quiz
                 </a>
               </div>
 

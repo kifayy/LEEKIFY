@@ -15,7 +15,7 @@ const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => 
   alt: "",
 }));
 
-/** Avatars + 5★ + “42.3k+ students matched” — single row (faces before stars), compact. */
+/** Avatars + 5★ + “43.2k+ students matched” — single row (faces before stars), compact. */
 export function HeroStudentsMatchedWidget({ className }: { className?: string }) {
   return (
     <div
@@ -47,8 +47,8 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
             />
           ))}
         </div>
-        <span className="font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-tight tracking-[-0.02em] text-violet-950/85 md:text-[0.6875rem] md:text-violet-950/90">
-          42.3k+ students matched
+        <span className="font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-tight tracking-[-0.02em] text-white/80 md:text-[0.6875rem] md:text-violet-950/90">
+          43.2k+ students matched
         </span>
       </div>
     </div>
@@ -69,8 +69,8 @@ export function HeroBelongCta() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-4 py-2 text-[0.8125rem] font-semibold text-[#181A1D] shadow-[2px_2px_0_0_#181A1D] transition hover:bg-gray-50 md:px-5 md:py-2.5 md:text-[0.9375rem]"
           >
-            <span aria-hidden>🎭</span>
-            Archetype Quiz
+            <span aria-hidden>🎯</span>
+            College Match Quiz
           </Link>
         </div>
       </div>

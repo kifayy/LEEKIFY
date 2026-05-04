@@ -41,7 +41,7 @@ export default function CollegeMatchQuizPage() {
           </Link>{" "}
           without the quiz, or try the{" "}
           <Link href="/archetype-quiz" className="font-medium text-[#956EFE] hover:underline">
-            Archetype Quiz
+            College Match Quiz
           </Link>
           .
         </p>

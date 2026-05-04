@@ -6,7 +6,7 @@ type MobileScholarshipQuizStickyFooterProps = {
   visible?: boolean;
 };
 
-/** Site-wide (layout): fixed bottom bar on small screens — Archetype Quiz CTA (white pill). */
+/** Site-wide (layout): fixed bottom bar on small screens — College Match Quiz CTA (white pill). */
 export function MobileScholarshipQuizStickyFooter({
   visible = true,
 }: MobileScholarshipQuizStickyFooterProps) {
@@ -17,7 +17,7 @@ export function MobileScholarshipQuizStickyFooter({
       }`}
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       role="complementary"
-      aria-label="Archetype quiz"
+      aria-label="College Match Quiz"
       aria-hidden={!visible}
     >
       <div className="mx-auto flex max-w-lg justify-center py-1">
@@ -29,9 +29,9 @@ export function MobileScholarshipQuizStickyFooter({
           className="inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-semibold text-[#181A1D] shadow-[3px_3px_0_0_rgba(24,26,29,0.12)] transition hover:bg-gray-50 active:opacity-90"
         >
           <span className="text-lg leading-none" aria-hidden>
-            🎭
+            🎯
           </span>
-          Archetype Quiz
+          College Match Quiz
         </Link>
       </div>
     </div>

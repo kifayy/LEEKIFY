@@ -280,7 +280,7 @@ async function ArticleContent({ params }: Props) {
                   href="/archetype-quiz"
                   className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5E7] bg-white px-4 py-2.5 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#7C4EE4] hover:bg-[#7C4EE4]/5 hover:text-[#7C4EE4]"
                 >
-                  Find your archetype
+                  College Match Quiz
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </li>

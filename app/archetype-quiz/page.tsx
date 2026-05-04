@@ -71,7 +71,7 @@ const ARCHETYPE_FEATURES = [
 ];
 
 export const metadata = {
-  title: "Archetype Quiz | Pathpicker",
+  title: "College Match Quiz | Pathpicker",
   description:
     "Discover your archetype. Quick, fun quiz. Join thousands of students.",
 };
@@ -82,7 +82,7 @@ export default function ArchetypeQuizPage() {
       {/* Section 208:40 – Figma section */}
       <section
         className="relative w-full min-w-0 overflow-hidden bg-white min-h-0 md:min-h-[720px] lg:min-h-[860px]"
-        aria-label="Archetype Quiz"
+        aria-label="College Match Quiz"
       >
         {/* Hero image – desktop only; hidden on mobile so layout stays clean */}
         <div className="pointer-events-none absolute inset-0 z-0 hidden md:block" aria-hidden>
@@ -138,7 +138,7 @@ export default function ArchetypeQuizPage() {
                 className="self-start inline-flex h-[5.6rem] w-fit min-w-[240px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-6 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.6rem] md:min-w-[280px]"
                 style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
               >
-                🎭 Take quiz
+                🎯 Take quiz
               </Link>
               {/* Mobile only: image under Take quiz – 30% bigger than before, extra space from button */}
               <div className="relative mt-8 w-[156%] max-w-none md:hidden mx-auto aspect-[16/10] overflow-visible" style={{ marginLeft: '-28%' }}>
@@ -216,7 +216,7 @@ export default function ArchetypeQuizPage() {
           className="inline-flex h-[4.5rem] min-w-[280px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-8 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[320px] md:px-10 md:text-3xl"
           style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
         >
-          🎭 Take quiz
+          🎯 Take quiz
         </Link>
       </div>
     </div>

@@ -97,7 +97,7 @@ export function ScholarshipQuizWidget() {
   );
 }
 
-/** Reusable Archetype Quiz card widget. Use on any page that needs to promote the archetype quiz. */
+/** Reusable College Match Quiz card widget (same destination as archetype flow). */
 export function ArchetypeQuizWidget() {
   return (
     <Link
@@ -118,7 +118,7 @@ export function ArchetypeQuizWidget() {
               </div>
             </div>
           </div>
-          <h2 className="text-xl font-bold text-[#0C1120]">Archetype Quiz</h2>
+          <h2 className="text-xl font-bold text-[#0C1120]">College Match Quiz</h2>
           <p
             className="mt-2 line-clamp-2 text-sm font-sans leading-relaxed"
             style={{ color: "rgba(12, 17, 32, 0.6)" }}
