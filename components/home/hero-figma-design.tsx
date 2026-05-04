@@ -89,6 +89,7 @@ export function HeroFigmaDesign() {
           <div className="flex max-w-[1400px] origin-center flex-col items-center gap-8 lg:-translate-x-[60%] lg:scale-[1.3] lg:flex-row lg:items-center lg:gap-12">
             {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
             <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
+              <HeroStudentsMatchedWidget />
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
               <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
                 <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-white sm:text-[3rem] [text-shadow:0_2px_24px_rgba(76,29,149,0.42)] md:text-[3.5rem] md:text-[#181A1D] md:[text-shadow:none] lg:text-[3.75rem]">
@@ -121,7 +122,6 @@ export function HeroFigmaDesign() {
                   Scholarship Quiz
                 </Link>
               </div>
-              <HeroStudentsMatchedWidget className="pt-0" />
             </div>
 
             {/* Anchor for desktop overlays; inner mobile slab is true 100vw for logo reel + portrait */}

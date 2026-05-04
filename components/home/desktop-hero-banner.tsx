@@ -100,7 +100,13 @@ export function DesktopHeroBanner() {
 
           {/* Right: full-width column — logos + girl only here (not left copy) */}
           <div className="relative isolate mt-5 h-[min(52vw,400px)] min-h-[280px] w-full max-w-[420px] shrink-0 overflow-hidden rounded-2xl md:h-[min(48vw,440px)] md:max-w-[480px] lg:col-start-2 lg:row-start-1 lg:mt-0 lg:min-h-[min(520px,min(52vw,560px))] lg:h-full lg:max-w-none lg:self-stretch lg:overflow-hidden lg:rounded-none lg:rounded-t-2xl lg:-mr-6 lg:w-[calc(100%+1.5rem)]">
-            <HeroCollegeLogoReels idPrefix="desktop-hero" className="lg:rounded-t-2xl" />
+            <HeroCollegeLogoReels
+              idPrefix="desktop-hero"
+              className="lg:rounded-t-2xl"
+              tileClassName="relative block size-11 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/20 lg:size-14 lg:rounded-2xl xl:size-16"
+              spacerClassName="inline-block w-[3.75rem] shrink-0 md:w-[5.25rem] lg:w-32 xl:w-40"
+              imageSizes="(min-width: 1280px) 64px, (min-width: 1024px) 56px, 44px"
+            />
             <div className="absolute inset-0 z-10 overflow-hidden lg:rounded-t-2xl">
               <Image
                 src={HERO_STUDENT_URL}

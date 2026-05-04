@@ -15,7 +15,7 @@ const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => 
   alt: "",
 }));
 
-/** Avatars + 5★ + “43.2k+ students matched” — single row (faces before stars), compact. */
+/** Avatars + 5★ + “42.3k+ students matched” — single row (faces before stars), compact. */
 export function HeroStudentsMatchedWidget({ className }: { className?: string }) {
   return (
     <div
@@ -48,7 +48,7 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
           ))}
         </div>
         <span className="font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-tight tracking-[-0.02em] text-violet-950/85 md:text-[0.6875rem] md:text-violet-950/90">
-          43.2k+ students matched
+          42.3k+ students matched
         </span>
       </div>
     </div>
@@ -57,7 +57,7 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
 
 export function HeroBelongCta() {
   return (
-    <div className="mx-auto flex w-full max-w-[38rem] flex-col gap-5 lg:mx-0 lg:max-w-none">
+    <div className="mx-auto flex w-full max-w-[38rem] flex-col gap-5 lg:mx-0 lg:max-w-none lg:gap-8">
       <div className="flex justify-center lg:justify-start">
         <div className="flex w-full max-w-[min(100%,420px)] min-h-[52px] items-center gap-2 rounded-full border border-[#956EFE]/25 bg-white p-1.5 pl-4 shadow-[0_2px_12px_rgba(149,110,254,0.12)] md:min-h-[54px] md:gap-3 md:pl-5 lg:max-w-[440px]">
           <span className="min-w-0 flex-1 truncate py-2 text-left font-[family-name:var(--font-poppins)] text-[0.9375rem] font-medium tracking-[-0.02em] text-slate-500 md:text-base md:text-slate-600">
