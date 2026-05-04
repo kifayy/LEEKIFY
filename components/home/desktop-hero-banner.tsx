@@ -104,9 +104,9 @@ export function DesktopHeroBanner() {
               className="font-[family-name:var(--font-poppins)] text-[clamp(2.625rem,2.95vw+2rem,4.375rem)] font-extrabold leading-[0.96] tracking-[-0.045em] text-white [text-shadow:0_2px_28px_rgba(76,29,149,0.5),0_1px_2px_rgba(55,48,163,0.35)]"
             >
               <span className="block md:whitespace-nowrap">Find your future</span>
-              <span className="-mt-[0.04em] block whitespace-nowrap text-[#DDD6FE] [text-shadow:0_2px_16px_rgba(76,29,149,0.45)]">
+              <span className="-mt-[0.04em] block whitespace-nowrap text-[#F5F3FF]">
                 {displayText}.
-                <span className="animate-pulse font-light text-[#DDD6FE]" aria-hidden>
+                <span className="animate-pulse font-light text-[#F5F3FF]" aria-hidden>
                   {" "}
                   |
                 </span>

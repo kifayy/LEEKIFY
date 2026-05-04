@@ -75,15 +75,9 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-25%)" },
         },
-        /** Hero portrait: vertically scrolling diagonal reel (three identical tiles). */
-        "hero-diagonal-reel": {
-          "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-33.333333%)" },
-        },
       },
       animation: {
         "scholarship-quiz-marquee": "scholarship-quiz-marquee 20s linear infinite",
-        "hero-diagonal-reel": "hero-diagonal-reel 20s linear infinite",
       },
     },
   },
