@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Info } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -102,12 +103,8 @@ export function parseHumanStats(raw: unknown): Record<string, number> | null {
   return byNorm;
 }
 
-function barGradientClass(value: number): string {
-  if (value >= 75) return "bg-gradient-to-r from-purple-300 to-purple-400";
-  if (value >= 60) return "bg-gradient-to-r from-green-400 to-green-500";
-  if (value >= 40) return "bg-gradient-to-r from-yellow-300 to-amber-400";
-  return "bg-gradient-to-r from-red-400 to-red-500";
-}
+/** Uniform fill so color never hints at the underlying percentage (bars are blurred + gated). */
+const BAR_FILL_CLASS = "bg-gradient-to-r from-neutral-400 to-neutral-500";
 
 function StatRow({
   def,
@@ -170,30 +167,42 @@ function StatRow({
         )}
       </div>
       <p className="text-sm text-gray-500 mb-3 leading-snug">{def.line}</p>
-      <div
-        className={cn(
-          "relative h-5 w-full rounded-full bg-gray-200",
-          def.careerSpan && "md:max-w-md md:mx-auto",
-        )}
-      >
-        <div
-          className={cn(
-            "h-full flex items-center justify-end rounded-full transition-all duration-500 overflow-hidden",
-            barGradientClass(value),
-          )}
-          style={{ width: `${w}%` }}
-        >
-          {w >= 16 ? (
-            <span className="text-xs sm:text-sm font-bold text-white drop-shadow-sm pr-2.5 tabular-nums shrink-0">
-              {value}%
-            </span>
-          ) : null}
+      <div className="relative w-full">
+        <div className="select-none pointer-events-none blur-md opacity-40 sm:blur-lg sm:opacity-[0.35]" aria-hidden>
+          <div
+            className={cn(
+              "relative h-5 w-full rounded-full bg-gray-200",
+              def.careerSpan && "md:max-w-md md:mx-auto",
+            )}
+          >
+            <div
+              className={cn(
+                "h-full flex items-center justify-end rounded-full transition-all duration-500 overflow-hidden",
+                BAR_FILL_CLASS,
+              )}
+              style={{ width: `${w}%` }}
+            >
+              {w >= 16 ? (
+                <span className="text-xs sm:text-sm font-bold text-white drop-shadow-sm pr-2.5 tabular-nums shrink-0">
+                  {value}%
+                </span>
+              ) : null}
+            </div>
+            {w < 16 ? (
+              <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-700 tabular-nums pointer-events-none">
+                {value}%
+              </span>
+            ) : null}
+          </div>
         </div>
-        {w < 16 ? (
-          <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-700 tabular-nums pointer-events-none">
-            {value}%
-          </span>
-        ) : null}
+        <div className="absolute inset-0 flex items-center justify-center px-1">
+          <Link
+            href="/archetype-quiz"
+            className="max-w-[min(100%,280px)] rounded-full border border-gray-200/90 bg-white px-3 py-2 text-center text-[11px] font-semibold leading-tight text-gray-900 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition hover:bg-gray-50 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] active:scale-[0.98] sm:text-xs"
+          >
+            Unlock Full Stats
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -26,7 +26,10 @@ const FOOTER_COLUMNS = [
   },
   {
     title: "Support",
-    links: [{ href: "/partners", label: "For Partners" }],
+    links: [
+      { href: "/contact", label: "Contact" },
+      { href: "/partners", label: "For Partners" },
+    ],
   },
 ];
 

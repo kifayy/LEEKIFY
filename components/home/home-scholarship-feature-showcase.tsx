@@ -106,7 +106,10 @@ export function HomeScholarshipFeatureShowcase() {
           </div>
         </div>
 
-        <div className="flex flex-col items-stretch gap-8 md:flex-row-reverse md:items-center md:gap-12 lg:gap-16">
+        <div
+          id="deep-profile-rankings"
+          className="flex flex-col items-stretch gap-8 md:flex-row-reverse md:items-center md:gap-12 lg:gap-16 scroll-mt-28"
+        >
           <div className="w-full min-w-0 md:w-1/2">
             <FasterScholarshipsVisual />
           </div>

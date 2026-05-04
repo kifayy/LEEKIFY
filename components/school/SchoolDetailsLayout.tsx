@@ -12,6 +12,7 @@ import { SimilarSchoolsSection } from "./SimilarSchoolsSection";
 import { SchoolStickyHeader } from "./SchoolStickyHeader";
 import { FloatingBackButton } from "./FloatingBackButton";
 import { SchoolFavoriteToastButton } from "./SchoolFavoriteToastButton";
+import { SchoolAdmissionMatchTeaser } from "./school-admission-match-teaser";
 import type { CollegeDetail } from "@/types/college-detail";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
@@ -34,7 +35,10 @@ export function SchoolDetailsLayout({
   const bannerLogo = sanitizeCollegeBanner(collegeData.banner);
 
   const sectionChips = useMemo((): SectionChip[] => {
-    const chips: SectionChip[] = [{ id: "match", label: "Student Experience", emoji: "😊" }];
+    const chips: SectionChip[] = [
+      { id: "match", label: "Student Experience", emoji: "😊" },
+      { id: "admission-match", label: "Odds & match", emoji: "🎯" },
+    ];
     if (friday) chips.push({ id: "friday", label: "Typical Friday", emoji: "📅" });
     if (collegeData.highlights?.length) chips.push({ id: "why-perfect", label: "Why It's Perfect", emoji: "🎓" });
     if (collegeData.campus_vibe) chips.push({ id: "vibe", label: "School Stats", emoji: "📊" });
@@ -118,6 +122,8 @@ export function SchoolDetailsLayout({
             </div>
 
             <SchoolHeader collegeData={collegeData} />
+
+            <SchoolAdmissionMatchTeaser collegeData={collegeData} />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>

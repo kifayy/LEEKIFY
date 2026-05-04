@@ -11,7 +11,13 @@ const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 const navLinks = [
   { href: "/browse-schools", label: "Browse Schools" },
   { href: "/archetype-quiz", label: "College Match Quiz" },
+  { href: "/#commit-with-zero-regrets", label: "How it works" },
+  { href: "/#deep-profile-rankings", label: "Features" },
+  { href: "/contact", label: "Support" },
 ];
+
+/** Mobile drawer: omit quiz link + bottom CTA — same entry exists on the floating footer after scroll. */
+const mobileDrawerNavLinks = navLinks.filter((link) => link.href !== "/archetype-quiz");
 
 const SCROLL_HIDE_THRESHOLD = 0.1;
 
@@ -94,7 +100,7 @@ export function SiteHeader() {
           </div>
 
           <nav
-            className="hidden flex-1 flex-nowrap items-center justify-center gap-10 lg:flex"
+            className="hidden flex-1 flex-nowrap items-center justify-center gap-6 lg:flex xl:gap-8"
             aria-label="Main"
           >
             {navLinks.map((link) => (
@@ -173,7 +179,7 @@ export function SiteHeader() {
 
             <nav className="flex-1 px-3" aria-label="Main">
               <div className="rounded-2xl bg-white py-1 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-                {navLinks.map((link) => (
+                {mobileDrawerNavLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -186,24 +192,18 @@ export function SiteHeader() {
               </div>
             </nav>
 
-            <div className="flex flex-col gap-3 p-5 pt-0">
-              <Link
-                href="/browse-schools"
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E5E5E7] bg-white py-4 text-base font-normal text-[#181A1D] shadow-sm transition-opacity hover:opacity-90"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Browse schools"
-              >
-                <span>🏫</span>
-                Browse Schools
-                <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
-              </Link>
+            <div className="p-5 pt-0">
               <Link
                 href="https://my.pathpicker.com/login"
-                className="inline-flex h-16 min-w-[200px] w-full items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E5E5E7] bg-white py-4 text-base font-medium text-[#181A1D] shadow-sm transition-opacity hover:opacity-90"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Student Login"
               >
-                <span>🎓</span>Student Login
+                <span aria-hidden>🎓</span>
+                Student Login
+                <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} />
               </Link>
             </div>
           </aside>
