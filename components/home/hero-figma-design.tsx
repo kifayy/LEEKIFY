@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
 import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const ROTATING_WORDS = ["Dream School", "Chances", "Future Path"];
 const TYPE_DELAY_MS = 90;
@@ -108,19 +107,10 @@ export function HeroFigmaDesign() {
                   href="http://my.pathpicker.com/archetype"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 md:rounded-[15px]"
+                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
                 >
                   <span>🎯</span>
                   College Match Quiz
-                </Link>
-                <Link
-                  href={SCHOLARSHIP_QUIZ_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 md:inline-flex"
-                >
-                  <span>💸</span>
-                  Scholarship Quiz
                 </Link>
               </div>
               </div>
@@ -186,14 +176,6 @@ export function HeroFigmaDesign() {
                   82% Ivy League Match
                 </p>
               </div>
-            </div>
-
-            {/* $32,144 Scholarships Matched - over image, bottom-left (tablet/desktop only) */}
-            <div className="animate-float absolute bottom-[32%] left-1 z-20 hidden items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:flex md:left-3 md:px-4 md:py-2.5" style={{ animationDelay: "0.5s" }}>
-              <span className="text-lg md:text-xl">💰</span>
-              <span className="text-xs font-normal text-[#3A3E46] md:text-sm">
-                $32,144 Scholarships Matched
-              </span>
             </div>
 
             {/* Social Partier - over image, bottom-right (tablet/desktop only) */}

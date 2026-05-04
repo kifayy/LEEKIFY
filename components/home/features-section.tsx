@@ -1,188 +1,70 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { DiscoveryCardLottie } from "@/components/home/discovery-card-lottie";
 import { WhatsPathPickerWidget } from "@/components/home/whats-pathpicker-widget";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
-const TOOLS = [
+const DISCOVERY_CARDS = [
   {
-    href: "/colleges",
-    title: "What's your student archetype?",
+    title: "Commit With Zero Regrets",
     description:
-      "Uncover your strengths, style, and where you stand among other students.",
-    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(46).png",
+      "Most students feel doubt after choosing a school. We eliminate that. When you commit, you'll know, not hope if it's the right fit.",
+    lottieSrc: "/animations/meditating-brain.lottie",
     accentColor: "#FACC15",
   },
   {
-    href: "/scholarships",
-    title: "What colleges do you match with?",
+    title: "Clarity in Minutes, Not Months",
     description:
-      "Get matched with schools where you belong socially and academically.",
-    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(47).png",
+      "No endless campus visits or stressful nights researching. Answer a few questions and get your personalized college fit scores instantly.",
+    lottieSrc: "/animations/time.lottie",
     accentColor: "#FB923C",
   },
   {
-    href: "/virtual-college-tours",
-    title: "Can you win scholarships?",
+    title: "40,000 Students Can't Be Wrong",
     description:
-      "Take our scholarship quiz to see how much scholarship money you match with.",
-    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(44).png",
+      "98% of our students committed to one of their top matches after seeing their results.",
+    lottieSrc: "/animations/champion.lottie",
     accentColor: "#A855F7",
   },
-  {
-    href: "/guidance/majors-degrees",
-    title: "Where Should You Study Abroad?",
-    description:
-      "See what countries, cities, and programs you would thrive in studying abroad.",
-    image:
-      "https://storage.googleapis.com/images_592/Untitled%20design%20(45).png?v=20260318",
-    accentColor: "#14B8A6",
-  },
-];
+] as const;
 
 export function FeaturesSection() {
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
-
-  const ARCHETYPE_URL = "https://my.pathpicker.com/archetype";
-
-  useEffect(() => {
-    if (!comingSoonOpen) return;
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setComingSoonOpen(false);
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [comingSoonOpen]);
-
   const SHOW_WHATS_PATHPICKER_WIDGET = false;
 
   return (
     <section
       id="student-discovery-tools"
       className="w-full min-w-0 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16"
+      aria-label="How PathPicker helps you choose"
     >
       <div className="container mx-auto max-w-6xl min-w-0 px-4 md:px-6">
         {SHOW_WHATS_PATHPICKER_WIDGET ? <WhatsPathPickerWidget /> : null}
 
         <div className="border-t border-slate-200 pt-10">
-          <span className="mb-1 block w-full text-center text-base font-semibold leading-snug text-[#956EFE] sm:text-lg lg:text-left">
-            Student Discovery Engine
-          </span>
-          <h2 className="text-center text-xl font-bold leading-tight text-[#181A1D] md:text-3xl lg:text-left">
-            What{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10">path</span>
-              <span className="absolute inset-x-0 bottom-0 h-1 rounded-full bg-[#956EFE]/40" />
-            </span>{" "}
-            do you want to explore?
-          </h2>
-
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            {TOOLS.map((tool) => {
-              const isStudyAbroadComingSoon = tool.href === "/guidance/majors-degrees";
-
-              const resolvedHref =
-                tool.href === "/colleges" || tool.href === "/scholarships"
-                  ? ARCHETYPE_URL
-                  : tool.href === "/virtual-college-tours"
-                    ? SCHOLARSHIP_QUIZ_URL
-                    : tool.href;
-
-              const resolvedTarget = resolvedHref.startsWith("http") ? "_blank" : undefined;
-              const resolvedRel = resolvedHref.startsWith("http") ? "noopener noreferrer" : undefined;
-
-              const cardInner = (
-                <>
+          <div className="grid gap-8 md:grid-cols-3">
+            {DISCOVERY_CARDS.map((card) => (
+              <div key={card.title} className="relative">
+                <div
+                  className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-3xl"
+                  style={{ backgroundColor: card.accentColor }}
+                  aria-hidden
+                />
+                <div className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)]">
                   <div className="flex flex-col gap-3">
                     <h3 className="text-base font-bold leading-tight text-[#181A1D] md:text-lg">
-                      {tool.title}
+                      {card.title}
                     </h3>
                     <p className="text-sm font-normal leading-relaxed text-[rgba(25,24,37,0.75)]">
-                      {tool.description}
+                      {card.description}
                     </p>
                   </div>
-                  {tool.image && (
-                    <div className="mt-4 overflow-hidden rounded-2xl">
-                      <Image
-                        src={tool.image}
-                        alt=""
-                        width={481}
-                        height={270}
-                        className="h-full w-full object-cover"
-                        unoptimized
-                      />
-                    </div>
-                  )}
-                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#181A1D]">
-                    Explore
-                    <span className="ml-1 text-lg leading-none">→</span>
-                  </span>
-                </>
-              );
-
-              return (
-                <div key={tool.title} className="relative">
-                  <div
-                    className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-3xl"
-                    style={{ backgroundColor: tool.accentColor }}
-                    aria-hidden
-                  />
-                  {isStudyAbroadComingSoon ? (
-                    <button
-                      type="button"
-                      className="relative z-10 flex h-full w-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
-                      onClick={() => setComingSoonOpen(true)}
-                    >
-                      {cardInner}
-                    </button>
-                  ) : (
-                    <Link
-                      href={resolvedHref}
-                      target={resolvedTarget}
-                      rel={resolvedRel}
-                      className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
-                    >
-                      {cardInner}
-                    </Link>
-                  )}
+                  <div className="mt-4">
+                    <DiscoveryCardLottie src={card.lottieSrc} />
+                  </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
-
-        {comingSoonOpen && (
-          <div
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Coming soon"
-            onClick={() => setComingSoonOpen(false)}
-          >
-            <div
-              className="w-full max-w-md rounded-2xl bg-white p-6 shadow-[0_18px_60px_rgba(0,0,0,0.25)]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3 className="text-xl font-bold text-[#181A1D]">Coming soon!</h3>
-              <p className="mt-2 text-sm text-[#525252]">
-                We&apos;re working on this feature. Check back soon.
-              </p>
-              <div className="mt-5 flex justify-end">
-                <button
-                  type="button"
-                  className="inline-flex h-11 items-center justify-center rounded-xl bg-[#956EFE] px-5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95 active:scale-[0.98]"
-                  onClick={() => setComingSoonOpen(false)}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

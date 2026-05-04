@@ -2,19 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AWARDED_APP_NEW_TAB, QUIZ_HREF } from "@/components/landing/constants";
+import { AWARDED_APP_NEW_TAB } from "@/components/landing/constants";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import {
   HOME2_PURPLE,
   HOME2_PURPLE_DEEP,
   HOME2_SECTION_HEADLINE_CLASS,
   HOME2_SECTION_SUBTEXT_CLASS,
 } from "@/components/home2/constants";
-import { StudentsFindingScholarshipsBadge } from "@/components/home2/StudentsFindingScholarshipsBadge";
+import { StudentsDreamSchoolBadge } from "@/components/home2/students-dream-school-badge";
 import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
 } from "@/components/home2/testimonials";
-import { PricingNewsletterCollectiveSection } from "@/components/pricing/PricingNewsletterCollectiveSection";
 
 function triplicateRotated(items: Home2Testimonial[], rotateBy: number): Home2Testimonial[] {
   if (items.length === 0) return [];
@@ -79,11 +79,7 @@ function PhotoQuoteTile({
   );
 }
 
-type StudentsLoveCtaBandProps = {
-  showNewsletterMobile?: boolean;
-};
-
-export function StudentsLoveCtaBand({ showNewsletterMobile = true }: StudentsLoveCtaBandProps = {}) {
+export function StudentsLoveCtaBand() {
   const { row1, row2 } = splitTestimonialsForMarqueeRows(HOME2_TESTIMONIALS);
   const row1Strip = triplicateRotated(row1, 0);
   const row2Strip = triplicateRotated(row2, 0);
@@ -92,26 +88,27 @@ export function StudentsLoveCtaBand({ showNewsletterMobile = true }: StudentsLov
   return (
     <div className="flex w-full flex-col items-center px-4 pb-8 pt-2 md:pb-12 md:pt-4 lg:pb-14">
       <div className="w-full max-w-4xl md:mr-0 md:w-full">
-        <StudentsFindingScholarshipsBadge />
+        <StudentsDreamSchoolBadge />
         <h3 className={`text-center ${HOME2_SECTION_HEADLINE_CLASS}`}>
-          <span className="md:block">Win more scholarships,</span>{" "}
+          <span className="md:block">2k+ colleges. One decision.</span>{" "}
           <span className="md:mt-1 md:block" style={{ color: HOME2_PURPLE }}>
-            waste less time.
+            Make it confidently.
           </span>
         </h3>
         <p className={`mx-auto mt-4 max-w-2xl text-center ${HOME2_SECTION_SUBTEXT_CLASS}`}>
-          Thousands use Awarded. We make scholarships easy, because they made it so hard.
+          We match your goals, values, and strengths against thousands of schools to find your best
+          matches.
         </p>
         <div className="mt-6 flex justify-center md:mt-8">
           <Link
-            href={QUIZ_HREF}
+            href={COLLEGE_MATCH_QUIZ_URL}
             {...AWARDED_APP_NEW_TAB}
             className="inline-flex items-center justify-center rounded-full px-6 py-3 text-center text-lg font-bold text-white shadow-md transition hover:opacity-95 hover:shadow-lg md:px-8 md:py-3.5 md:text-xl"
             style={{
               background: `linear-gradient(180deg, ${HOME2_PURPLE} 0%, ${HOME2_PURPLE_DEEP} 100%)`,
             }}
           >
-            Take the Scholarship Quiz
+            College Match Quiz
           </Link>
         </div>
         <div className="relative mt-10 flex w-screen shrink-0 flex-col gap-3 overflow-hidden ml-[calc(50%-50vw)] md:mt-12 md:gap-4">
@@ -141,11 +138,6 @@ export function StudentsLoveCtaBand({ showNewsletterMobile = true }: StudentsLov
           </div>
         </div>
       </div>
-      {showNewsletterMobile ? (
-        <div className="w-full md:hidden">
-          <PricingNewsletterCollectiveSection placement="belowHomeMarquee" />
-        </div>
-      ) : null}
     </div>
   );
 }

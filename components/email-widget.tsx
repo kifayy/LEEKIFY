@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
 import { BEEHIIV_EMBED_SUBSCRIBE_URL } from "@/lib/constants";
 const NEWSLETTER_IMAGE_URL =
-  "https://storage.googleapis.com/images_592/Which%20College%20Path%20Unlocks%20The%20Most%20Scholarships%20(4).png";
+  "https://storage.googleapis.com/images_592/bsa.png";
 
 /**
  * Reusable email signup widget: purple-bordered card with stars, "Want emails instead?", Beehiiv embed, and image.
@@ -40,7 +40,7 @@ export function EmailWidget() {
               className="text-sm font-normal leading-relaxed md:text-base"
               style={{ color: "rgba(25, 24, 37, 0.75)" }}
             >
-              Get scholarship tips, new opportunities, and updates delivered to your inbox. Join thousands of students.
+              Get college-planning tips, product updates, and student stories in your inbox.
             </p>
             <div className="mx-auto h-[100px] w-full max-w-full shrink-0 md:mx-0 md:h-[80px] md:max-w-[450px]">
               <BeehiivEmbedIframe
@@ -67,7 +67,7 @@ export function EmailWidget() {
           <div className="order-2 mt-8 min-w-0 shrink-0 md:mt-0 md:order-2 md:max-w-[420px]">
             <Image
               src={NEWSLETTER_IMAGE_URL}
-              alt="Which College Path Unlocks The Most Scholarships"
+              alt="Students exploring colleges with PathPicker"
               width={675}
               height={450}
               className="w-full rounded-lg object-cover"

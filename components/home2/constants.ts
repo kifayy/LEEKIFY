@@ -1,5 +1,7 @@
-export const HOME2_PURPLE = "#9B42E9";
-export const HOME2_PURPLE_DEEP = "#9B42E9";
+/** Align with site accent (`#956EFE` / `--pathpicker-purple`). */
+export const HOME2_PURPLE = "#956EFE";
+/** Slightly darker for CTA gradients. */
+export const HOME2_PURPLE_DEEP = "hsl(258, 98%, 62%)";
 
 export const HOME2_SECTION_HEADLINE_SCALE_CLASS =
   "font-hero text-3xl font-extrabold leading-[1.1] tracking-tight md:text-[clamp(1.875rem,2.8vw+0.55rem,3.75rem)] md:leading-[1.08]";

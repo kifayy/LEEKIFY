@@ -2,7 +2,7 @@
 
 import { PhoneCtaSection } from "@/components/phone-cta";
 
-/** Home page: Awarded / SMS-style block (mobile only). Uses `PhoneCtaSection` with `isHomePage`. */
+/** Home page: "Win Scholarships From Your Texts" section. Uses the reusable Phone CTA section. */
 export function WhyDirectMailSection() {
   return <PhoneCtaSection isHomePage />;
 }

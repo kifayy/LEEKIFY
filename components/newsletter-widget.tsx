@@ -22,7 +22,7 @@ export function NewsletterWidget() {
           backgroundColor: "transparent",
           boxShadow: "0 0 #0000",
         }}
-        title="Scholarship Scanner signup"
+        title="Newsletter signup"
       />
     </div>
   );

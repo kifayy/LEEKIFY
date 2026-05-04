@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export const metadata = {
   title: "Partners | Pathpicker",
   description:
-    "Scholarship-hungry Gen Z, captured from first scroll. Qualified leads to your CRM. Partner with Pathpicker.",
+    "College-bound Gen Z, captured from first scroll. Qualified leads to your CRM. Partner with Pathpicker.",
 };
 
 const MEDIA_KIT_URL =
@@ -51,7 +51,7 @@ export default function PartnersPage() {
                 Partners
               </h1>
               <p className="text-base leading-relaxed text-[#181A1D]/85 md:text-lg lg:text-[1.0625rem] lg:leading-relaxed">
-                Our ecosystem captures scholarship-hungry students from first scroll. We go where
+                Our ecosystem captures motivated students from first scroll. We go where
                 Gen-Z lives, and turn them into qualified leads delivered straight to your CRM.
               </p>
             </div>

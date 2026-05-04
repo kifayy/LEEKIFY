@@ -50,7 +50,7 @@ export default function PrivacyPage() {
             Subject to applicable local, state, and federal laws, we reserve the right to process your Personal Information for the following business and commercial purposes:
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li><strong>Service Delivery:</strong> To operate the PathPicker quiz engine, deliver personalized scholarship and financial recommendations, and maintain your account.</li>
+            <li><strong>Service Delivery:</strong> To operate the PathPicker quiz engine, deliver personalized educational and financial insights, and maintain your account.</li>
             <li><strong>Proprietary Matching and Routing:</strong> To leverage algorithms that assess your demographic and financial intent data to dynamically route you to relevant third-party offers, affiliate links, or educational opportunities.</li>
             <li><strong>Marketing and Communications:</strong> To transmit transactional notifications, periodic newsletters, promotional materials, and targeted SMS campaigns (subject to your explicit consent).</li>
             <li><strong>Analytics and Ecosystem Optimization:</strong> To analyze aggregated User behavior, perform A/B testing, and optimize the efficacy of our matching algorithms and platform architecture.</li>

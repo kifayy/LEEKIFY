@@ -135,8 +135,7 @@ export default function ArchetypeQuizPage() {
                 href="https://my.pathpicker.com/archetype"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="self-start inline-flex h-[5.6rem] w-fit min-w-[240px] max-w-full items-center justify-center rounded-[15px] border-2 bg-white px-6 text-2xl font-medium shadow-[3px_3px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.6rem] md:min-w-[280px]"
-                style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
+                className="self-start inline-flex h-[5.6rem] w-fit min-w-[240px] max-w-full items-center justify-center rounded-[15px] border-2 border-[#7C3AED] bg-[#956EFE] px-6 text-2xl font-semibold text-white shadow-[0_4px_24px_rgba(149,110,254,0.4)] transition hover:opacity-95 md:h-[5.6rem] md:min-w-[280px]"
               >
                 🎯 Take quiz
               </Link>
@@ -213,8 +212,7 @@ export default function ArchetypeQuizPage() {
           href="https://my.pathpicker.com/archetype"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-[4.5rem] min-w-[280px] max-w-full items-center justify-center rounded-[18px] border-[3px] bg-white px-8 text-2xl font-semibold shadow-[4px_4px_0_0_#2E2F35] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[320px] md:px-10 md:text-3xl"
-          style={{ borderColor: TEXT_DARK, color: TEXT_DARK }}
+          className="inline-flex h-[4.5rem] min-w-[280px] max-w-full items-center justify-center rounded-[18px] border-[3px] border-[#7C3AED] bg-[#956EFE] px-8 text-2xl font-semibold text-white shadow-[0_4px_28px_rgba(149,110,254,0.4)] transition hover:opacity-95 md:h-[5.5rem] md:min-w-[320px] md:px-10 md:text-3xl"
         >
           🎯 Take quiz
         </Link>

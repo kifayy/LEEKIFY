@@ -44,7 +44,7 @@ export function WeeklyMatchingBentoLottie({ className }: { className?: string })
   return (
     <div className={`relative w-full max-w-[380px] ${className ?? ""}`}>
       <Lottie animationData={data} loop className="h-auto w-full" />
-      <span className="sr-only">Scholarship search and match illustration</span>
+      <span className="sr-only">College search and match illustration</span>
     </div>
   );
 }

@@ -3,26 +3,18 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+import { HERO_COLLEGE_LOGO_URLS } from "@/lib/hero-college-logos";
 
 /** Same CDN set as desktop hero (storage.googleapis.com/images_592) */
-export const HERO_COLLEGE_LOGOS = [
-  "https://storage.googleapis.com/images_592/EieCC2-WAAExIcV.png",
-  "https://storage.googleapis.com/images_592/4821_ucla_bruins-alternate-1996.png",
-  "https://storage.googleapis.com/images_592/USC_Trojans.webp",
-  "https://storage.googleapis.com/images_592/Harvard-Crest-Sticker-StickerMule-200045029.webp",
-  "https://storage.googleapis.com/images_592/images%20(2).jfif",
-  "https://storage.googleapis.com/images_592/EZz208WX0AAfEXm.png",
-  "https://storage.googleapis.com/images_592/images%20(3).png",
-  "https://storage.googleapis.com/images_592/SE_sdsulogo_screenshot.jpg",
-  "https://storage.googleapis.com/images_592/University%2Bof%2BTexas%2BFeatured%2BImage.webp",
-  "https://storage.googleapis.com/images_592/images%20(4).png",
-  "https://storage.googleapis.com/images_592/getimage.jfif",
-] as const;
+export const HERO_COLLEGE_LOGOS = HERO_COLLEGE_LOGO_URLS;
 
-/** Deterministic shuffle per row (seeded from `rowIndex`) — different order per strip, stable SSR/hydration. */
-function shuffledLogosForRow(rowIndex: number): (typeof HERO_COLLEGE_LOGOS)[number][] {
+/** Base seed; each row mixes in its index so SSR/hydration match and every row gets its own shuffle. */
+const LOGO_BASE_SEED = 0x24f2d7cb >>> 0;
+const ROW_SEED_MIX = 0x9e3779b9 >>> 0;
+
+function seededOrderFromLogos(seed: number): (typeof HERO_COLLEGE_LOGOS)[number][] {
   const a = [...HERO_COLLEGE_LOGOS];
-  let state = ((rowIndex + 1) * 7919 + 124537) >>> 0;
+  let state = seed >>> 0;
   if (state === 0) state = 0x6eed3849;
   for (let i = a.length - 1; i > 0; i--) {
     state = (Math.imul(state, 1103515245) + 12345) >>> 0;
@@ -30,6 +22,10 @@ function shuffledLogosForRow(rowIndex: number): (typeof HERO_COLLEGE_LOGOS)[numb
     [a[i], a[j]] = [a[j]!, a[i]!];
   }
   return a;
+}
+
+function logoOrderForRow(rowIndex: number): (typeof HERO_COLLEGE_LOGOS)[number][] {
+  return seededOrderFromLogos((LOGO_BASE_SEED + Math.imul(rowIndex, ROW_SEED_MIX)) >>> 0);
 }
 
 const HERO_LOGO_REEL_ROWS = [
@@ -55,7 +51,7 @@ const HERO_LOGO_REEL_ROWS = [
   },
 ] as const;
 
-const ROW_LOGO_ORDERS = HERO_LOGO_REEL_ROWS.map((_, rowIndex) => shuffledLogosForRow(rowIndex));
+const ROW_LOGO_ORDERS = HERO_LOGO_REEL_ROWS.map((_, rowIndex) => logoOrderForRow(rowIndex));
 
 type HeroLogoTrackCell =
   | { kind: "logo"; src: (typeof HERO_COLLEGE_LOGOS)[number] }

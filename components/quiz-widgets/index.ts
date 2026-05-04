@@ -1,1 +1,1 @@
-export { ScholarshipQuizWidget, ArchetypeQuizWidget } from "./quiz-card-widgets";
+export { ArchetypeQuizWidget } from "./quiz-card-widgets";

@@ -26,7 +26,7 @@ export function buildSchoolPageDescription(college: CollegeDetail): string {
     return core.length > 160 ? `${core.slice(0, 157)}…` : core;
   }
 
-  return `Explore ${name} on PathPicker: campus vibe, student fit, scholarships, and similar schools.`;
+  return `Explore ${name} on PathPicker: campus vibe, student fit, and similar schools.`;
 }
 
 export function buildSchoolPageKeywords(college: CollegeDetail): string[] | undefined {
@@ -37,7 +37,7 @@ export function buildSchoolPageKeywords(college: CollegeDetail): string[] | unde
     "PathPicker",
     "Pathpicker",
     "college",
-    "scholarships",
+    "college fit",
   ].filter(Boolean) as string[];
   return [...new Set(parts)];
 }

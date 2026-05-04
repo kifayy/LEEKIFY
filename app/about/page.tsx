@@ -34,12 +34,12 @@ export default function AboutPage() {
           <div className="space-y-5 text-[#181A1D]">
             <p className="text-base leading-relaxed text-[#181A1D]/85 md:text-lg">
               PathPicker exists to help students make better decisions—without the noise, scams, or
-              dead ends. We give you clear quizzes and matches so you can see your student archetype,
-              find scholarships that fit, and get a roadmap that actually works.
+              dead ends. We give you clear quizzes and matches so you can see your student archetype
+              and build a school list that actually fits.
             </p>
             <p className="text-base leading-relaxed text-[#181A1D]/85 md:text-lg">
-              We&apos;re built by the same team behind <strong>Awarded</strong>, the scholarship app.
-              Same trust, same mission: get money and clarity into students&apos; hands.
+              We&apos;re built by the same team behind <strong>Awarded</strong>, focused on getting
+              clarity and opportunity into students&apos; hands.
             </p>
           </div>
 

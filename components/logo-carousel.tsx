@@ -12,7 +12,7 @@ const LOGO_CAROUSEL_IMAGES = [
 export function LogoCarousel({ className = "" }: { className?: string }) {
   return (
     <div className={`marquee-fade-edges overflow-hidden ${className}`}>
-      <div className="flex w-max gap-6 py-4 animate-scholarship-quiz-marquee">
+      <div className="flex w-max gap-6 py-4 animate-logo-marquee-x">
         {[...LOGO_CAROUSEL_IMAGES, ...LOGO_CAROUSEL_IMAGES, ...LOGO_CAROUSEL_IMAGES, ...LOGO_CAROUSEL_IMAGES].map(
           (src, i) => (
             <div

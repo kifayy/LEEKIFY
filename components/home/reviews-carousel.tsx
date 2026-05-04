@@ -6,23 +6,20 @@ import { Star } from "lucide-react";
 const REVIEWS = [
   {
     name: "Sharlet Gonzalez",
-    quote:
-      "My counselor told me about them and I had to try it out. 10/10 would recommend to all high school and college students!",
+    quote: "Their matching system is insane!",
     avatar:
       "https://storage.googleapis.com/images_592/Gemini_Generated_Image_4poid84poid84poi.png",
   },
   {
     name: "Jeyson Dowle",
-    quote:
-      "I usually hate signing up to things like this, but they really do text only twice a week. Thanks, guys!",
+    quote: "Super helpful to know what environment I'd fit best in.",
     avatar:
       "https://storage.googleapis.com/images_592/Gemini_Generated_Image_wqfcnkwqfcnkwqfc.png",
     avatarPosition: "top",
   },
   {
     name: "Claudia Hader",
-    quote:
-      "I entered $4k worth of nursing scholarships within 2 days! Love how all the ones they send are no-essay.",
+    quote: "Narrowed my list fast—actually excited to tour these schools.",
     avatar:
       "https://storage.googleapis.com/images_592/Gemini_Generated_Image_po0e4bpo0e4bpo0e.png",
   },

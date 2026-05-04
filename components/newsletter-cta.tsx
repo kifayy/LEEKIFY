@@ -20,7 +20,7 @@ export function NewsletterCTA({
   return (
     <div className="space-y-4">
       <h3 className="text-base font-bold md:text-xl">
-        Join our <span className="font-script font-normal italic">newsletter</span> & win scholarships.
+        Join our <span className="font-script font-normal italic">newsletter</span> for college planning updates.
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2">
         <input

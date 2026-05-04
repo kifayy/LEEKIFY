@@ -71,13 +71,13 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        "scholarship-quiz-marquee": {
+        "logo-marquee-x": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-25%)" },
         },
       },
       animation: {
-        "scholarship-quiz-marquee": "scholarship-quiz-marquee 20s linear infinite",
+        "logo-marquee-x": "logo-marquee-x 20s linear infinite",
       },
     },
   },

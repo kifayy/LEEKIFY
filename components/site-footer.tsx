@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CopyrightYear } from "@/components/copyright-year";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const LOGO_URL =
   "https://storage.googleapis.com/images_592/black%20white%20grow%20logo%20(3).png";
@@ -13,8 +12,7 @@ const FOOTER_COLUMNS = [
     links: [
       { href: "/about", label: "About" },
       { href: "/partners", label: "Partners" },
-      { href: "/scholarships", label: "Scholarships" },
-      { href: "/scholarships/by-major", label: "Blog" },
+      { href: "/browse-schools", label: "Browse Schools" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
     ],
@@ -24,9 +22,6 @@ const FOOTER_COLUMNS = [
     links: [
       { href: "/browse-schools", label: "Browse Schools" },
       { href: "/archetype-quiz", label: "College Match Quiz" },
-      { href: SCHOLARSHIP_QUIZ_URL, label: "Scholarship Quiz" },
-      { href: "/scholarships", label: "Featured Scholarships" },
-      { href: "/scholarship-scanner", label: "Scholarship Scanner" },
     ],
   },
   {
@@ -62,7 +57,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
-              Find your student archetype and scholarships that fit.
+              Find your dream school, without the stress.
             </p>
           </div>
 

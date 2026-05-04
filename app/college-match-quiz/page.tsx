@@ -1,7 +1,6 @@
 import Link from "next/link";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
-
-const QUIZ_URL = "https://my.pathpicker.com/college-match-quiz";
 
 export async function generateMetadata() {
   const baseUrl = await getBaseUrlForMetadata();
@@ -28,10 +27,10 @@ export default function CollegeMatchQuizPage() {
           future.
         </p>
         <Link
-          href={QUIZ_URL}
+          href={COLLEGE_MATCH_QUIZ_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex h-14 min-w-[240px] items-center justify-center rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-lg font-semibold text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
+          className="mt-10 inline-flex h-14 min-w-[240px] items-center justify-center rounded-[15px] border-2 border-[#7C3AED] bg-[#956EFE] px-8 text-lg font-semibold text-white shadow-[0_4px_20px_rgba(149,110,254,0.35)] transition hover:opacity-95"
         >
           Start College Match Quiz
         </Link>

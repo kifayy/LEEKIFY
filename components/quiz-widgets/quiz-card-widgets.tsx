@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Lottie from "lottie-react";
 import { ArrowRight } from "lucide-react";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
 const PLACEHOLDER_LOGOS = [
@@ -39,63 +36,6 @@ function LogoSlot({ src }: { src: string }) {
 
 const CARD_CLASS =
   "group relative flex h-full w-full max-w-[389px] flex-col overflow-hidden rounded-[29px] transition-shadow hover:shadow-[0_9px_59px_rgba(174,165,114,0.12)] sm:w-[389px] sm:max-w-[480px] md:max-w-[480px] md:w-[480px] lg:max-w-[520px] lg:w-[520px]";
-
-/** Reusable Scholarship Quiz card widget. Use on any page that needs to promote the scholarship quiz. */
-export function ScholarshipQuizWidget() {
-  const [animationData, setAnimationData] = useState<object | null>(null);
-
-  useEffect(() => {
-    fetch("/animations/9_16.json")
-      .then((res) => res.json())
-      .then(setAnimationData)
-      .catch(() => {});
-  }, []);
-
-  return (
-    <Link
-      href={SCHOLARSHIP_QUIZ_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={CARD_CLASS}
-      style={{ backgroundColor: "#F0EEFF" }}
-    >
-      <div className="relative flex min-h-0 flex-1 flex-col rounded-t-[29px] rounded-b-[29px]">
-        <div className="min-h-0 flex-1 px-5 pt-4 font-sans text-center md:text-left">
-          <div className="mb-3 flex h-[11rem] min-h-[11rem] items-center justify-center md:h-[13rem] md:min-h-[13rem]">
-            {animationData && (
-              <Lottie
-                animationData={animationData}
-                loop
-                className="h-44 w-full max-w-[400px] md:h-52 md:max-w-[420px] lg:h-56 lg:max-w-[460px]"
-              />
-            )}
-          </div>
-          <h2 className="text-xl font-bold text-[#0C1120]">Scholarship Quiz</h2>
-          <p
-            className="mt-2 line-clamp-2 text-sm font-sans leading-relaxed"
-            style={{ color: "rgba(12, 17, 32, 0.6)" }}
-          >
-            Find scholarships matched to your profile. Quick apply, no-essay options. Get money without the grind.
-          </p>
-        </div>
-        <div className="mt-auto shrink-0 px-4 pb-5 pt-4">
-          <span
-            className="flex w-full items-center justify-center gap-2 rounded-full py-4 text-base font-normal text-white transition-opacity group-hover:opacity-95"
-            style={{ background: "#956EFE" }}
-          >
-            Take Quiz
-            <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
-          </span>
-        </div>
-        <div
-          className="pointer-events-none absolute -bottom-4 right-0 h-10 w-28 rounded-full opacity-50 blur-[33px]"
-          style={{ backgroundColor: "#7723FF" }}
-          aria-hidden
-        />
-      </div>
-    </Link>
-  );
-}
 
 /** Reusable College Match Quiz card widget (same destination as archetype flow). */
 export function ArchetypeQuizWidget() {

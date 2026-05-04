@@ -14,9 +14,9 @@ const FEATURES = [
   },
   {
     image: "https://storage.googleapis.com/images_592/flying-money_3141991%20(2).png",
-    title: "Scholarship Matches",
+    title: "School matches",
     description:
-      "Get scholarships that match your profile and goals. We pull from 1,000+ partners.",
+      "See colleges that fit your profile and goals—we rank options so you can compare faster.",
   },
   {
     image: "https://storage.googleapis.com/images_592/money_2308887.png",
@@ -69,8 +69,8 @@ export function WhatsPathPickerWidget() {
             className="max-w-full text-sm font-normal leading-relaxed md:max-w-[244px]"
             style={{ color: "rgba(25, 24, 37, 0.75)" }}
           >
-            40k+ students use PathPicker to find scholarships, brand giveaways,
-            and exclusive deals only for students.
+            40k+ students use PathPicker to explore schools, compare fit, and spot opportunities
+            built for students like them.
           </p>
         </div>
 

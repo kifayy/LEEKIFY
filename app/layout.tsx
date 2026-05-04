@@ -6,8 +6,8 @@ import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace }
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { MobileScholarshipQuizStickyFooterGate } from "@/components/home/mobile-scholarship-quiz-sticky-footer-gate";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import "./globals.css";
@@ -16,7 +16,7 @@ const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
 const defaultTitle = "PathPicker: Student Discovery Engine";
 const defaultDescription =
-  "Discover your unique student type and what paths fit you best. Take personality‑based quizzes to find scholarships, schools, and opportunities made for you.";
+  "Discover your unique student type and what paths fit you best. Take personality‑based quizzes to find schools and opportunities made for you.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
@@ -103,7 +103,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <CountryLayout>
-            <div className="relative flex min-w-0 flex-col overflow-x-hidden pb-28 md:pb-0">
+            <div className="relative flex min-w-0 flex-col overflow-x-hidden">
               <SiteHeader />
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">
                 {children}
@@ -120,8 +120,8 @@ export default function RootLayout({
                 />
               </div>
               <SiteFooter />
-              <MobileScholarshipQuizStickyFooterGate />
               <CookieConsentBanner />
+              <MobileScholarshipQuizStickyFooter />
             </div>
             </CountryLayout>
           </ThemeProvider>

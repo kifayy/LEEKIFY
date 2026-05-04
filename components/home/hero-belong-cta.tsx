@@ -67,7 +67,7 @@ export function HeroBelongCta() {
             href={ARCHETYPE_QUIZ_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-4 py-2 text-[0.8125rem] font-semibold text-[#181A1D] shadow-[2px_2px_0_0_#181A1D] transition hover:bg-gray-50 md:px-5 md:py-2.5 md:text-[0.9375rem]"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[#7C3AED] bg-[#956EFE] px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]"
           >
             <span aria-hidden>🎯</span>
             College Match Quiz

@@ -38,7 +38,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">3. NATURE OF SERVICES AND DISCLAIMER OF ADVICE</h2>
           <p className="mt-3 text-muted-foreground">
-            The Services provide a matching algorithm designed to present Users with scholarships, financial products, and educational pathways based on self-reported data. PACED STUDIOS LLC IS NOT A FINANCIAL ADVISOR, LENDER, BROKER, OR EDUCATIONAL INSTITUTION. All recommendations, content, and matches are provided for informational purposes only and do not constitute professional financial, legal, or educational advice. Paced Studios LLC does not guarantee that you will be approved for, or receive, any third-party scholarship, loan, bank account, or university admission. You are solely responsible for evaluating the merits and risks associated with any third-party offer.
+            The Services provide a matching algorithm designed to present Users with educational and financial options and pathways based on self-reported data. PACED STUDIOS LLC IS NOT A FINANCIAL ADVISOR, LENDER, BROKER, OR EDUCATIONAL INSTITUTION. All recommendations, content, and matches are provided for informational purposes only and do not constitute professional financial, legal, or educational advice. Paced Studios LLC does not guarantee that you will be approved for, or receive, any third-party aid offer, loan, bank account, or university admission. You are solely responsible for evaluating the merits and risks associated with any third-party offer.
           </p>
         </section>
 

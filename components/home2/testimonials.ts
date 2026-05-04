@@ -23,68 +23,63 @@ export function testimonialAvatarObjectClass(_index: TestimonialAvatarIndex): st
 export const HOME2_TESTIMONIALS: Home2Testimonial[] = [
   {
     id: "h2-1",
-    quote:
-      "Wish I would've heard about this in high school. Still insane for college students though",
+    quote: "Their matching system is insane!",
     name: "Sarah Motin",
     avatarIndex: 0,
     photoUrl: testimonialAvatarUrl(0),
   },
   {
     id: "h2-2",
-    quote:
-      "The autopilot feature they have is sooo nice it applies for you outside the app too!",
+    quote: "Super helpful to know what environment I'd fit best in.",
     name: "Katie Rosetta",
     avatarIndex: 1,
     photoUrl: testimonialAvatarUrl(1),
   },
   {
     id: "h2-3",
-    quote: "If you want to apply for more scholarships in less time, this is it.",
+    quote: "Cut my list way down—every school on it actually feels like me.",
     name: "Brian Campbell",
     avatarIndex: 2,
     photoUrl: testimonialAvatarUrl(2),
   },
   {
     id: "h2-4",
-    quote:
-      "I'm shocked by how little time I spent. Awarded streamlines everything.",
+    quote: "No more doom-scrolling random college sites. This gave me clarity.",
     name: "Marbella Gusman",
     avatarIndex: 3,
     photoUrl: testimonialAvatarUrl(3),
   },
   {
     id: "h2-5",
-    quote:
-      "Seeing Michigan-specific matches next to national ones helped me prioritize fast.",
+    quote: "Reach, target, safety finally made sense. I applied with a plan.",
     name: "Riley Chen",
     avatarIndex: 5,
     photoUrl: testimonialAvatarUrl(5),
   },
   {
     id: "h2-6",
-    quote:
-      "Finally one place for matches, deadlines, and what I’ve won. Game changer.",
+    quote: "Took the quiz once and my short list basically wrote itself.",
     name: "Emma Clarke",
     avatarIndex: 4,
     photoUrl: testimonialAvatarUrl(4),
   },
   {
     id: "h2-7",
-    quote: "Clean layout, zero clutter—I actually check it between classes.",
+    quote: "The fit scores matched how I learn and social life—not just rankings.",
     name: "Olivia Park",
     avatarIndex: 6,
     photoUrl: testimonialAvatarUrl(6),
   },
   {
     id: "h2-8",
-    quote: "Feels like the app gets how hectic campus weeks really are.",
+    quote: "As a transfer, I needed real options for my credits. Huge help.",
     name: "Maya Thompson",
     avatarIndex: 7,
     photoUrl: testimonialAvatarUrl(7),
   },
   {
     id: "h2-9",
-    quote: "Autofill saved me on the longer apps—worth it before midterms hit.",
+    quote: "Found schools I'd never have searched on my own. Game changer.",
     name: "Marcus Williams",
     avatarIndex: 8,
     photoUrl: testimonialAvatarUrl(8),

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
 
 // Legacy / dead paths. Main product URLs are allowed, including:
-// /archetype-quiz, /college-match-quiz, /scholarship-scanner (Scholarship Scanner), /browse-schools (Browse Schools).
+// /archetype-quiz, /college-match-quiz, /browse-schools.
 const legacyDisallow = [
   "/directory",
   "/school/",

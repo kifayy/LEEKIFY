@@ -1,19 +1,13 @@
-import Image from "next/image";
 import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
 import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
-import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
-import { WhyDirectMailSection } from "@/components/home/why-direct-mail-section";
-import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
-import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
+import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
+import { HomeBottomStatCards } from "@/components/home/home-bottom-stat-cards";
 
 const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
-
-const PUBLISHED_ON_BANNER_URL =
-  "https://storage.googleapis.com/images_592/chicago%20(1).png";
 
 export async function generateMetadata() {
   const baseUrl = await getBaseUrlForMetadata();
@@ -49,28 +43,11 @@ export default async function Home() {
       <div className="md:hidden">
         <HeroFigmaDesign />
       </div>
-      <section className="w-full bg-background" aria-label="Published on">
-        <div className="mx-auto w-full max-w-[1600px] px-4 py-6 md:py-8">
-          <Image
-            src={PUBLISHED_ON_BANNER_URL}
-            alt="Published on The Reportly, NY Zeal, and WhoChicago"
-            width={1000}
-            height={500}
-            className="mx-auto block h-auto w-[52%] md:w-[40%]"
-            sizes="(max-width: 767px) 52vw, (max-width: 1600px) 40vw, 640px"
-          />
-        </div>
-      </section>
+      <AboutProfileSchoolsSection />
       <HomeScholarshipFeatureShowcase />
-      <FeaturesSection />
-      <EnterScholarshipsSectionLayout />
       <StudentsLoveSection />
-      {/* Hidden for now – Featured scholarships carousel (Fund Your Education); restore when needed */}
-      {/* <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
-        <FeaturedScholarshipsSection />
-      </Suspense> */}
-      <WhyDirectMailSection />
-      <DesktopBottomCta />
+      <FeaturesSection />
+      <HomeBottomStatCards />
     </>
   );
 }

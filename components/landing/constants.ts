@@ -1,16 +1,7 @@
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
-
-export const QUIZ_HREF = SCHOLARSHIP_QUIZ_URL;
-
 export const AWARDED_APP_NEW_TAB = {
   target: "_blank" as const,
   rel: "noopener noreferrer" as const,
 };
-
-export const BEEHIIV_EMBED_SCRIPT_SRC = "https://subscribe-forms.beehiiv.com/embed.js";
-
-export const BEEHIIV_SUBSCRIBE_IFRAME_SRC =
-  "https://subscribe-forms.beehiiv.com/5816d6e7-43de-41b2-bfa7-fb996a33745f";
 
 export const BRAND_MEDIA = {
   testimonialAvatars: [

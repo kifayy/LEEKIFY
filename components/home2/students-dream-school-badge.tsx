@@ -9,7 +9,7 @@ import {
 
 const TESTIMONIAL_STACK_MAX = 9;
 
-/** Overlapping headshots (`BRAND_MEDIA.testimonialAvatars` — awarded-stie facepile). */
+/** Overlapping headshots (`BRAND_MEDIA.testimonialAvatars`). */
 export function TestimonialAvatarStack({
   className,
   count,
@@ -77,7 +77,7 @@ export function StudentsLoveHeroPillBody({
   );
 }
 
-export function StudentsFindingScholarshipsBadge({
+export function StudentsDreamSchoolBadge({
   className = "mb-8",
 }: {
   className?: string;
@@ -86,8 +86,8 @@ export function StudentsFindingScholarshipsBadge({
     <div className={`flex flex-col items-center ${className}`.trim()}>
       <div className="-mb-2 flex flex-col items-center">
         <p className="mb-2 text-center text-xs font-bold text-neutral-800 md:text-sm">
-          <span style={{ color: HOME2_PURPLE }}>20k+ students</span> beating the
-          scholarship competition
+          <span style={{ color: HOME2_PURPLE }}>$40k+ students</span> found their dream
+          school
         </p>
         <TestimonialAvatarStack count={9} loadEager />
       </div>

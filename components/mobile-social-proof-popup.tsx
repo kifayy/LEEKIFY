@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const FLAG_IMAGE = "https://em-content.zobj.net/source/facebook/65/flag-for-united-states_1f1fa-1f1f8.png";
-const GO_LINK = "https://awarded.short.gy/DSNy";
+const GO_LINK = "https://my.pathpicker.com/archetype";
 const SHOW_INTERVAL_MS = 7000;
 const VISIBLE_DURATION_MS = 3500;
 
@@ -31,9 +31,7 @@ const PEOPLE: { name: string; location: string }[] = [
 ];
 
 const AMOUNTS = [
-  "1,200", "1,500", "1,750", "2,000", "2,250", "2,500", "2,800", "3,000",
-  "3,200", "3,500", "3,800", "4,000", "4,200", "4,500", "4,900", "5,100",
-  "5,500", "6,000", "6,500", "7,200", "8,000", "9,500", "10,000",
+  "82", "84", "86", "88", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99",
 ];
 
 const STORAGE_KEY = "pathpicker-mobile-social-proof-disabled";
@@ -114,7 +112,7 @@ export function MobileSocialProofPopup() {
             />
           </div>
           <p className="mt-0.5 text-[13px] leading-snug text-[#3A3E46]">
-            just entered a ${notification.amount} scholarship in our app!
+            just saw a {notification.amount}% college match on PathPicker!
           </p>
           <button
             type="button"
