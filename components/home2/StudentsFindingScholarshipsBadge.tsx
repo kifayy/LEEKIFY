@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { HOME2_PURPLE } from "./constants";
 import {
   testimonialAvatarObjectClass,
@@ -6,13 +7,12 @@ import {
   type TestimonialAvatarIndex,
 } from "./testimonials";
 
-/** Must stay ≤9: only indices 0–8 have URLs in `BRAND_MEDIA.testimonialAvatars`. */
-const AVATAR_STACK_COUNT = 9;
+const TESTIMONIAL_STACK_MAX = 9;
 
-/** Overlapping testimonial headshots (same asset strip as the “students” badges). */
+/** Overlapping headshots (`BRAND_MEDIA.testimonialAvatars` — awarded-stie facepile). */
 export function TestimonialAvatarStack({
   className,
-  count = AVATAR_STACK_COUNT,
+  count,
   compact,
   loadEager = false,
 }: {
@@ -21,7 +21,8 @@ export function TestimonialAvatarStack({
   compact?: boolean;
   loadEager?: boolean;
 }) {
-  const n = Math.min(9, Math.max(1, Math.floor(count)));
+  const n = Math.min(TESTIMONIAL_STACK_MAX, Math.max(1, Math.floor(count ?? TESTIMONIAL_STACK_MAX)));
+
   const size = compact ? 24 : 32;
   const stackGap = compact ? "-space-x-1.5" : "-space-x-2";
   const ring = compact ? "ring-1" : "ring-2";
@@ -29,28 +30,28 @@ export function TestimonialAvatarStack({
   const imgClass = compact
     ? `inline-block h-6 w-6 rounded-full ${ring} ring-white object-cover`
     : `inline-block h-8 w-8 rounded-full ${ring} ring-white object-cover md:h-9 md:w-9`;
+
   return (
     <div
       className={`flex max-w-full shrink-0 justify-center overflow-hidden p-1 ${className ?? ""}`.trim()}
     >
       <div className={`flex ${stackGap}`}>
         {Array.from({ length: n }, (_, i) => {
-          const idx = (i % 9) as TestimonialAvatarIndex;
           const isFirst = i === 0;
+          const testimonialIdx = i as TestimonialAvatarIndex;
           return (
             <Image
               key={i}
-              src={testimonialAvatarUrl(idx)}
+              src={testimonialAvatarUrl(testimonialIdx)}
               alt=""
               width={size}
               height={size}
               sizes={sizes}
-              quality={60}
-              unoptimized
+              quality={70}
               priority={Boolean(loadEager && isFirst)}
               loading={loadEager ? "eager" : "lazy"}
               fetchPriority={loadEager ? (isFirst ? "high" : "auto") : "low"}
-              className={`${imgClass} ${testimonialAvatarObjectClass(idx)}`}
+              className={`${imgClass} ${testimonialAvatarObjectClass(testimonialIdx)}`}
             />
           );
         })}
@@ -88,7 +89,7 @@ export function StudentsFindingScholarshipsBadge({
           <span style={{ color: HOME2_PURPLE }}>20k+ students</span> beating the
           scholarship competition
         </p>
-        <TestimonialAvatarStack loadEager />
+        <TestimonialAvatarStack count={9} loadEager />
       </div>
     </div>
   );

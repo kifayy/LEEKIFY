@@ -10,3 +10,10 @@ export const SCHOLARSHIP_SCANNER_SMS_URL = `sms:${SCHOLARSHIP_SCANNER_PHONE}?bod
 
 /** Awarded web scholarship quiz (short link). */
 export const SCHOLARSHIP_QUIZ_URL = "https://awarded.short.gy/UwI8";
+
+/**
+ * Beehiiv hosted signup (iframe/embed). Used as fallback when server-side
+ * `BEEHIIV_API_KEY` + `BEEHIIV_PUBLICATION_ID` are not set — see `/api/newsletter/subscribe`.
+ */
+export const BEEHIIV_EMBED_SUBSCRIBE_URL =
+  "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";

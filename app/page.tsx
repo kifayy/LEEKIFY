@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
@@ -6,13 +7,13 @@ import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { WhyDirectMailSection } from "@/components/home/why-direct-mail-section";
 import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
-import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DesktopBottomCta } from "@/components/home/desktop-bottom-cta";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
-import { HomeDesktopScholarshipQuizPopup } from "@/components/home/home-desktop-scholarship-quiz-popup";
 
 const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
+
+const PUBLISHED_ON_BANNER_URL =
+  "https://storage.googleapis.com/images_592/chicago%20(1).png";
 
 export async function generateMetadata() {
   const baseUrl = await getBaseUrlForMetadata();
@@ -40,7 +41,6 @@ export default async function Home() {
 
   return (
     <>
-      <HomeDesktopScholarshipQuizPopup />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -49,6 +49,18 @@ export default async function Home() {
       <div className="md:hidden">
         <HeroFigmaDesign />
       </div>
+      <section className="w-full bg-background" aria-label="Published on">
+        <div className="mx-auto w-full max-w-[1600px] px-4 py-6 md:py-8">
+          <Image
+            src={PUBLISHED_ON_BANNER_URL}
+            alt="Published on The Reportly, NY Zeal, and WhoChicago"
+            width={1000}
+            height={500}
+            className="mx-auto block h-auto w-[52%] md:w-[40%]"
+            sizes="(max-width: 767px) 52vw, (max-width: 1600px) 40vw, 640px"
+          />
+        </div>
+      </section>
       <HomeScholarshipFeatureShowcase />
       <FeaturesSection />
       <EnterScholarshipsSectionLayout />
@@ -59,16 +71,6 @@ export default async function Home() {
       </Suspense> */}
       <WhyDirectMailSection />
       <DesktopBottomCta />
-      {/* Mobile-only: Awarded app video in TikTok-style phone mockup */}
-      <section className="w-full px-4 pt-0 pb-6 md:hidden" aria-label="Awarded app video">
-        <div className="container mx-auto max-w-lg">
-          <VimeoInTikTokMockup
-            ctaLabel="Scholarship Quiz"
-            ctaHref={SCHOLARSHIP_QUIZ_URL}
-            ctaLeading="money"
-          />
-        </div>
-      </section>
     </>
   );
 }

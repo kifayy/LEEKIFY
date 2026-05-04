@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
+import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
 import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
-import { Star } from "lucide-react";
 
 const ROTATING_WORDS = ["Scholarship", "Money", "School", "Path"];
 const TYPE_DELAY_MS = 90;
@@ -13,6 +14,10 @@ const DELETE_DELAY_MS = 55;
 
 const HERO_IMAGE = "https://my.pathpicker.com/images/hero-student.png";
 const HERO_IMAGE_DESKTOP = "https://storage.googleapis.com/images_592/bsa.png";
+
+/** Same Framer wash as `DesktopHeroBanner` — mobile hero backdrop */
+const MOBILE_HERO_BG_URL =
+  "https://framerusercontent.com/images/ZWl7RlbHmOvw03wGj5AUDAKZB4.jpg";
 
 export function HeroFigmaDesign() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -46,36 +51,51 @@ export function HeroFigmaDesign() {
   }, [charIndex, isDeleting, word, wordIndex]);
 
   return (
-    <section className="relative w-full shrink-0 overflow-x-hidden overflow-y-hidden bg-[#F3F0FF] pt-6 pb-0 md:bg-white md:py-8 md:pb-8 lg:py-10 lg:pb-10 min-w-0">
-      {/* Blurred blue glow */}
+    <section className="relative w-full shrink-0 overflow-x-hidden overflow-y-hidden bg-[#956EFE] pt-6 pb-0 md:bg-white md:py-8 md:pb-8 lg:py-10 lg:pb-10 min-w-0">
+      {/* Mobile (< md): layered backdrop aligned with desktop hero */}
+      <div className="pointer-events-none absolute inset-0 z-0 md:hidden" aria-hidden>
+        <Image
+          src={MOBILE_HERO_BG_URL}
+          alt=""
+          fill
+          className="object-cover object-right-top opacity-[0.22]"
+          sizes="100vw"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden md:hidden" aria-hidden>
+        <div className="absolute -left-[18%] top-[8%] h-[min(280px,70vw)] w-[min(280px,70vw)] rounded-full bg-white/55 blur-[72px]" />
+        <div className="absolute left-[35%] top-[45%] h-[min(200px,50vw)] w-[min(240px,55vw)] rounded-full bg-white/40 blur-[56px]" />
+        <div className="absolute -right-[12%] bottom-[28%] h-[min(260px,62vw)] w-[min(260px,62vw)] rounded-full bg-white/38 blur-[64px]" />
+        <div className="absolute right-[22%] top-[6%] h-[min(120px,32vw)] w-[min(160px,38vw)] rounded-full bg-white/45 blur-[40px]" />
+      </div>
       <div
-        className="absolute left-1/2 top-8 -translate-x-1/2 h-[305px] w-[312px] rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12"
+        className="pointer-events-none absolute inset-0 z-[2] md:hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, #956EFE 0%, rgba(149, 110, 254, 0.45) 48%, #FFFFFF 100%)",
+        }}
+        aria-hidden
+      />
+
+      {/* Blurred blue glow — tablet/desktop only (mobile uses lavender wash above) */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-8 z-[1] hidden h-[305px] w-[312px] -translate-x-1/2 rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12 md:block md:translate-x-0"
         style={{ backgroundColor: "rgb(61, 159, 251)" }}
       />
 
-      <div className="container relative mx-auto max-w-6xl px-4 md:px-6 min-w-0">
+      <div className="container relative z-[3] mx-auto max-w-6xl px-4 md:px-6 min-w-0">
         {/* Hero content – text + image, aligned with What's PathPicker section */}
         <div className="flex w-full justify-center overflow-visible">
           <div className="flex max-w-[1400px] origin-center flex-col items-center gap-8 lg:-translate-x-[60%] lg:scale-[1.3] lg:flex-row lg:items-center lg:gap-12">
             {/* Left: Copy – fixed width so typewriter doesn’t shift image */}
             <div className="flex w-[min(100%,320px)] flex-col items-center gap-5 text-center sm:w-[360px] lg:w-[400px] lg:min-w-[400px] lg:shrink-0 lg:items-start lg:text-left">
-              <div className="inline-flex items-center gap-1.5">
-                <div className="flex gap-0.5 text-pathpicker-gold" aria-hidden>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-[11px] w-[11px] fill-current" />
-                  ))}
-                </div>
-                <span className="text-[0.7rem] font-medium text-[#181A1D]">
-                  40k+ Students Matched
-                </span>
-              </div>
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
               <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
-                <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-[#181A1D] sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]">
-                  <span className="block w-full text-center lg:text-left">Find your future</span>
+                <h1 className="w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight text-white sm:text-[3rem] [text-shadow:0_2px_24px_rgba(76,29,149,0.42)] md:text-[3.5rem] md:text-[#181A1D] md:[text-shadow:none] lg:text-[3.75rem]">
+                  <span className="block w-full text-center lg:text-left">Find your</span>
                   <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
                     <span className="invisible" aria-hidden>Scholarship</span>
-                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[#956EFE] lg:left-0 lg:translate-x-0">
+                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[#F5F3FF] md:text-[#956EFE] lg:left-0 lg:translate-x-0">
                       {displayedText}
                     </span>
                   </span>
@@ -86,7 +106,7 @@ export function HeroFigmaDesign() {
                   href="http://my.pathpicker.com/archetype"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-[#956EFE] px-8 text-base font-medium text-white shadow-[3px_3px_0_0_#181A1D] transition hover:opacity-95"
+                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 md:rounded-[15px]"
                 >
                   <span>🎭</span>
                   Archetype Quiz
@@ -95,29 +115,44 @@ export function HeroFigmaDesign() {
                   href={SCHOLARSHIP_QUIZ_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"
+                  className="hidden h-16 min-w-[200px] items-center justify-center gap-2 rounded-[15px] border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50 md:inline-flex"
                 >
                   <span>💸</span>
                   Scholarship Quiz
                 </Link>
               </div>
+              <HeroStudentsMatchedWidget className="pt-0" />
             </div>
 
-            {/* Right: BSA image + badges – 1.5x size */}
-            <div className="relative h-[400px] w-full max-w-[570px] shrink-0 sm:h-[460px] sm:max-w-[630px] md:h-[500px] md:max-w-[660px] lg:h-[540px] lg:max-w-[690px]">
-            {/* Hero image - mobile only (below md) */}
-            <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl md:hidden">
-              <Image
-                src={HERO_IMAGE}
-                alt="Traveler"
-                fill
-                priority
-                fetchPriority="high"
-                className="object-cover"
-                style={{ objectPosition: "center 20%" }}
-                sizes="(max-width: 768px) 100vw, 420px"
-              />
-            </div>
+            {/* Anchor for desktop overlays; inner mobile slab is true 100vw for logo reel + portrait */}
+            <div className="relative mx-auto min-h-[400px] w-full max-w-[570px] overflow-x-clip overflow-y-visible sm:min-h-[450px] md:h-[500px] md:max-w-[660px] lg:h-[540px] lg:max-w-[690px]">
+              <div className="relative isolate left-1/2 z-[2] h-[400px] w-screen max-w-[100vw] shrink-0 -translate-x-1/2 overflow-hidden rounded-2xl sm:h-[450px] md:hidden">
+                <HeroCollegeLogoReels
+                  idPrefix="mobile-hero"
+                  className="rounded-none"
+                  rowGapClassName="gap-2 py-3"
+                  spacerClassName="inline-block w-8 shrink-0 sm:w-11"
+                  tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/20 sm:size-11"
+                  trackPaddingClassName="px-0"
+                  rowWrapperClassName="w-full overflow-hidden opacity-[0.58] saturate-[0.92] brightness-105"
+                  imageSizes="(min-width:640px) 44px, 40px"
+                />
+                <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl">
+                  <Image
+                    src={HERO_IMAGE}
+                    alt="Traveler"
+                    fill
+                    priority
+                    fetchPriority="high"
+                    className="translate-y-3 object-cover object-[center_11%] sm:translate-y-4"
+                    sizes="100vw"
+                  />
+                </div>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[36%] rounded-b-2xl bg-gradient-to-t from-white via-white/45 to-transparent"
+                />
+              </div>
             {/* Hero image - desktop (md and up) */}
             <div className="absolute inset-0 z-10 hidden overflow-hidden rounded-2xl md:block">
               <Image
@@ -133,8 +168,8 @@ export function HeroFigmaDesign() {
               />
             </div>
 
-            {/* 82% Ivy League Match - over image, top-right */}
-            <div className="animate-float absolute right-1 top-[18%] z-20 flex min-w-[100px] rounded-lg bg-white p-2 shadow-[0_9px_59px_rgba(174,165,114,0.08)] md:min-w-[120px] md:right-2 md:p-2.5 lg:right-3" style={{ animationDelay: "0s" }}>
+            {/* 82% Ivy League Match - over image, top-right (tablet/desktop only) */}
+            <div className="animate-float absolute right-1 top-[18%] z-20 hidden min-w-[100px] rounded-lg bg-white p-2 shadow-[0_9px_59px_rgba(174,165,114,0.08)] md:flex md:min-w-[120px] md:right-2 md:p-2.5 lg:right-3" style={{ animationDelay: "0s" }}>
               <div className="flex items-center gap-2">
                 <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
                   <Image
@@ -151,16 +186,16 @@ export function HeroFigmaDesign() {
               </div>
             </div>
 
-            {/* $32,144 Scholarships Matched - over image, bottom-left */}
-            <div className="animate-float absolute bottom-[32%] left-1 z-20 flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:left-3 md:px-4 md:py-2.5" style={{ animationDelay: "0.5s" }}>
+            {/* $32,144 Scholarships Matched - over image, bottom-left (tablet/desktop only) */}
+            <div className="animate-float absolute bottom-[32%] left-1 z-20 hidden items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:flex md:left-3 md:px-4 md:py-2.5" style={{ animationDelay: "0.5s" }}>
               <span className="text-lg md:text-xl">💰</span>
               <span className="text-xs font-normal text-[#3A3E46] md:text-sm">
                 $32,144 Scholarships Matched
               </span>
             </div>
 
-            {/* Social Partier - over image, bottom-right */}
-            <div className="animate-float absolute bottom-[12%] right-1 z-20 flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:right-3 md:px-4 md:py-2.5" style={{ animationDelay: "1s" }}>
+            {/* Social Partier - over image, bottom-right (tablet/desktop only) */}
+            <div className="animate-float absolute bottom-[12%] right-1 z-20 hidden items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_42px_26px_rgba(0,0,0,0.05)] md:flex md:right-3 md:px-4 md:py-2.5" style={{ animationDelay: "1s" }}>
               <span className="text-lg md:text-xl">🎉</span>
               <span className="text-xs font-normal text-[#3A3E46] md:text-sm">
                 Social Partier
@@ -173,7 +208,7 @@ export function HeroFigmaDesign() {
 
       {/* Soft pink glow bottom-right – inside section bounds so no layout gap */}
       <div
-        className="pointer-events-none absolute bottom-0 right-0 h-[260px] w-[400px] opacity-10 md:-right-20"
+        className="pointer-events-none absolute bottom-0 right-0 z-[1] hidden h-[260px] w-[400px] opacity-10 md:-right-20 md:block"
         style={{
           background:
             "radial-gradient(ellipse at center, rgb(250, 134, 183) 0%, transparent 70%)",

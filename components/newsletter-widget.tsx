@@ -1,13 +1,13 @@
 "use client";
 
-const BEEHIIV_EMBED_URL =
-  "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";
+import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
+import { BEEHIIV_EMBED_SUBSCRIBE_URL } from "@/lib/constants";
 
 export function NewsletterWidget() {
   return (
     <div className="h-[80px] w-full max-w-[450px] shrink-0">
-      <iframe
-        src={BEEHIIV_EMBED_URL}
+      <BeehiivEmbedIframe
+        src={BEEHIIV_EMBED_SUBSCRIBE_URL}
         className="beehiiv-embed h-full w-full"
         data-test-id="beehiiv-embed"
         frameBorder={0}

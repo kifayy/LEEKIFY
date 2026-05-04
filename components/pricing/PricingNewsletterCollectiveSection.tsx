@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Script from "next/script";
+import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
 import {
   BRAND_MEDIA,
   BEEHIIV_EMBED_SCRIPT_SRC,
@@ -92,7 +93,7 @@ export function PricingNewsletterCollectiveSection({
                   </p>
                 </div>
                 <div className="w-full shrink-0 lg:mt-0">
-                  <iframe
+                  <BeehiivEmbedIframe
                     title="Subscribe to the Awarded newsletter"
                     src={BEEHIIV_SUBSCRIBE_IFRAME_SRC}
                     className={iframeClass}

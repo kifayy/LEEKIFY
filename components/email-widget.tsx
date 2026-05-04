@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-const BEEHIIV_EMBED_URL = "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";
+import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
+import { BEEHIIV_EMBED_SUBSCRIBE_URL } from "@/lib/constants";
 const NEWSLETTER_IMAGE_URL =
   "https://storage.googleapis.com/images_592/Which%20College%20Path%20Unlocks%20The%20Most%20Scholarships%20(4).png";
 
@@ -42,8 +43,8 @@ export function EmailWidget() {
               Get scholarship tips, new opportunities, and updates delivered to your inbox. Join thousands of students.
             </p>
             <div className="mx-auto h-[100px] w-full max-w-full shrink-0 md:mx-0 md:h-[80px] md:max-w-[450px]">
-              <iframe
-                src={BEEHIIV_EMBED_URL}
+              <BeehiivEmbedIframe
+                src={BEEHIIV_EMBED_SUBSCRIBE_URL}
                 className="beehiiv-embed h-full w-full"
                 data-test-id="beehiiv-embed"
                 frameBorder={0}

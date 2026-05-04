@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 import { ReviewsCard } from "@/components/home/reviews-carousel";
 
 /** Reusable "Phone CTA" section: Student Money In Your Texts + SMS CTA + phone mockups. On home (`isHomePage`), the whole block is mobile-only (`md:hidden`). */
@@ -12,7 +10,7 @@ const BODY_COLOR = "rgb(88, 89, 93)";
 type PhoneCtaSectionProps = {
   /** When true, show the Reviews card to the left (e.g. newsletter page). */
   showReviewsSidebar?: boolean;
-  /** When true (e.g. home page), use mobile-only alternate copy, image, and Scholarship Quiz CTA. */
+  /** When true (e.g. home page), use mobile-only alternate copy and imagery. */
   isHomePage?: boolean;
 };
 
@@ -128,22 +126,6 @@ export function PhoneCtaSection({ showReviewsSidebar, isHomePage }: PhoneCtaSect
             />
           </div>
         </div>
-        {isHomePage && (
-          <div className="mx-auto mb-3 flex flex-col items-center md:mb-4 md:hidden">
-            <Link
-              href={SCHOLARSHIP_QUIZ_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full bg-[#956EFE] px-8 text-base font-medium text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition hover:opacity-95"
-            >
-              <span className="text-xl leading-none" aria-hidden>
-                💸
-              </span>
-              Scholarship Quiz
-            </Link>
-          </div>
-        )}
-
         {isHomePage && (
           <div className="mx-auto mb-4 flex justify-center md:mb-6 md:hidden">
             <Image

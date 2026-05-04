@@ -6,7 +6,7 @@ type MobileScholarshipQuizStickyFooterProps = {
   visible?: boolean;
 };
 
-/** Site-wide (layout): fixed bottom bar on small screens — Archetype Quiz CTA (purple pill). */
+/** Site-wide (layout): fixed bottom bar on small screens — Archetype Quiz CTA (white pill). */
 export function MobileScholarshipQuizStickyFooter({
   visible = true,
 }: MobileScholarshipQuizStickyFooterProps) {
@@ -26,7 +26,7 @@ export function MobileScholarshipQuizStickyFooter({
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={visible ? undefined : -1}
-          className="inline-flex h-12 w-full min-w-[200px] max-w-sm items-center justify-center gap-2 rounded-full bg-[#956EFE] px-6 text-base font-semibold text-white shadow-[0_2px_8px_rgba(149,110,254,0.25)] transition-opacity hover:opacity-95 active:opacity-90"
+          className="inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-semibold text-[#181A1D] shadow-[3px_3px_0_0_rgba(24,26,29,0.12)] transition hover:bg-gray-50 active:opacity-90"
         >
           <span className="text-lg leading-none" aria-hidden>
             🎭

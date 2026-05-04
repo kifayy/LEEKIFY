@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
 
 const PATHPICKER_LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 const ARCHETYPE_QUIZ_URL = "http://my.pathpicker.com/archetype";
@@ -50,7 +51,7 @@ export function DesktopBottomCta() {
 
                 <div>
                   <script async src={BEEHIIIV_EMBED_SCRIPT_SRC} />
-                  <iframe
+                  <BeehiivEmbedIframe
                     src={BEEHIIIV_IFRAME_SRC}
                     className="beehiiv-embed"
                     data-test-id="beehiiv-embed"
@@ -65,7 +66,8 @@ export function DesktopBottomCta() {
                       boxShadow: "0 0 #0000",
                       maxWidth: "100%",
                     }}
-                  ></iframe>
+                    placeholderClassName="beehiiv-embed min-h-[187px] w-full max-w-full"
+                  />
                 </div>
 
               <div className="relative mx-auto w-full max-w-[520px] aspect-[4/3] -mt-3">
