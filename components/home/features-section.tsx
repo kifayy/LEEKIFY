@@ -6,34 +6,30 @@ import Link from "next/link";
 import { WhatsPathPickerWidget } from "@/components/home/whats-pathpicker-widget";
 import { SCHOLARSHIP_QUIZ_URL } from "@/lib/constants";
 
-// Tools cards inspired by external "Tools for every step of your journey" section
 const TOOLS = [
   {
     href: "/colleges",
     title: "What's your student archetype?",
     description:
       "Uncover your strengths, style, and where you stand among other students.",
-    image:
-      "https://storage.googleapis.com/images_592/Untitled%20design%20(46).png",
-    accentColor: "#FACC15", // yellow
+    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(46).png",
+    accentColor: "#FACC15",
   },
   {
     href: "/scholarships",
     title: "What colleges do you match with?",
     description:
       "Get matched with schools where you belong socially and academically.",
-    image:
-      "https://storage.googleapis.com/images_592/Untitled%20design%20(47).png",
-    accentColor: "#FB923C", // orange
+    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(47).png",
+    accentColor: "#FB923C",
   },
   {
     href: "/virtual-college-tours",
     title: "Can you win scholarships?",
     description:
       "Take our scholarship quiz to see how much scholarship money you match with.",
-    image:
-      "https://storage.googleapis.com/images_592/Untitled%20design%20(44).png",
-    accentColor: "#A855F7", // purple
+    image: "https://storage.googleapis.com/images_592/Untitled%20design%20(44).png",
+    accentColor: "#A855F7",
   },
   {
     href: "/guidance/majors-degrees",
@@ -42,17 +38,15 @@ const TOOLS = [
       "See what countries, cities, and programs you would thrive in studying abroad.",
     image:
       "https://storage.googleapis.com/images_592/Untitled%20design%20(45).png?v=20260318",
-    accentColor: "#14B8A6", // teal
+    accentColor: "#14B8A6",
   },
 ];
 
 export function FeaturesSection() {
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
-  // External destinations for the four home "Tools" cards.
   const ARCHETYPE_URL = "https://my.pathpicker.com/archetype";
 
-  // Basic escape-key handling for the "Coming soon" popup.
   useEffect(() => {
     if (!comingSoonOpen) return;
 
@@ -67,17 +61,18 @@ export function FeaturesSection() {
   const SHOW_WHATS_PATHPICKER_WIDGET = false;
 
   return (
-    <section className="w-full min-w-0 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16">
-      <div className="container mx-auto max-w-6xl px-4 md:px-6 min-w-0">
-        {/* Saved for later: "What's PathPicker?" widget (disabled for now) */}
+    <section
+      id="student-discovery-tools"
+      className="w-full min-w-0 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16"
+    >
+      <div className="container mx-auto max-w-6xl min-w-0 px-4 md:px-6">
         {SHOW_WHATS_PATHPICKER_WIDGET ? <WhatsPathPickerWidget /> : null}
 
-        {/* Tools section from external site, styled to match PathPicker */}
         <div className="border-t border-slate-200 pt-10">
           <span className="mb-1 block w-full text-center text-base font-semibold leading-snug text-[#956EFE] sm:text-lg lg:text-left">
             Student Discovery Engine
           </span>
-          <h2 className="text-center text-xl font-bold leading-tight text-[#181A1D] md:text-3xl">
+          <h2 className="text-center text-xl font-bold leading-tight text-[#181A1D] md:text-3xl lg:text-left">
             What{" "}
             <span className="relative inline-block">
               <span className="relative z-10">path</span>
@@ -100,99 +95,66 @@ export function FeaturesSection() {
               const resolvedTarget = resolvedHref.startsWith("http") ? "_blank" : undefined;
               const resolvedRel = resolvedHref.startsWith("http") ? "noopener noreferrer" : undefined;
 
+              const cardInner = (
+                <>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-base font-bold leading-tight text-[#181A1D] md:text-lg">
+                      {tool.title}
+                    </h3>
+                    <p className="text-sm font-normal leading-relaxed text-[rgba(25,24,37,0.75)]">
+                      {tool.description}
+                    </p>
+                  </div>
+                  {tool.image && (
+                    <div className="mt-4 overflow-hidden rounded-2xl">
+                      <Image
+                        src={tool.image}
+                        alt=""
+                        width={481}
+                        height={270}
+                        className="h-full w-full object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#181A1D]">
+                    Explore
+                    <span className="ml-1 text-lg leading-none">→</span>
+                  </span>
+                </>
+              );
+
               return (
                 <div key={tool.title} className="relative">
-                {/* Colored offset card behind */}
-                <div
-                  className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-3xl"
-                  style={{ backgroundColor: tool.accentColor }}
-                  aria-hidden="true"
-                />
-
-                {/* Foreground white fun-card */}
-                {isStudyAbroadComingSoon ? (
-                  <button
-                    type="button"
-                    className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-transform transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
-                    onClick={() => setComingSoonOpen(true)}
-                  >
-                    <div className="flex flex-col gap-3">
-                      <h3 className="text-base font-bold leading-tight text-[#181A1D] md:text-lg">
-                        {tool.title}
-                      </h3>
-                      <p
-                        className="text-sm font-normal leading-relaxed"
-                        style={{ color: "rgba(25, 24, 37, 0.75)" }}
-                      >
-                        {tool.description}
-                      </p>
-                    </div>
-
-                    {/* Media image */}
-                    {tool.image && (
-                      <div className="mt-4 overflow-hidden rounded-2xl">
-                        <Image
-                          src={tool.image}
-                          alt=""
-                          width={481}
-                          height={270}
-                          className="h-full w-full object-cover"
-                          unoptimized
-                        />
-                      </div>
-                    )}
-
-                    <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#181A1D]">
-                      Explore
-                      <span className="ml-1 text-lg leading-none">→</span>
-                    </span>
-                  </button>
-                ) : (
-                  <Link
-                    href={resolvedHref}
-                    target={resolvedTarget}
-                    rel={resolvedRel}
-                    className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-transform transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
-                  >
-                    <div className="flex flex-col gap-3">
-                      <h3 className="text-base font-bold leading-tight text-[#181A1D] md:text-lg">
-                        {tool.title}
-                      </h3>
-                      <p
-                        className="text-sm font-normal leading-relaxed"
-                        style={{ color: "rgba(25, 24, 37, 0.75)" }}
-                      >
-                        {tool.description}
-                      </p>
-                    </div>
-
-                    {/* Media image */}
-                    {tool.image && (
-                      <div className="mt-4 overflow-hidden rounded-2xl">
-                        <Image
-                          src={tool.image}
-                          alt=""
-                          width={481}
-                          height={270}
-                          className="h-full w-full object-cover"
-                          unoptimized
-                        />
-                      </div>
-                    )}
-
-                    <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#181A1D]">
-                      Explore
-                      <span className="ml-1 text-lg leading-none">→</span>
-                    </span>
-                  </Link>
-                )}
-              </div>
+                  <div
+                    className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-3xl"
+                    style={{ backgroundColor: tool.accentColor }}
+                    aria-hidden
+                  />
+                  {isStudyAbroadComingSoon ? (
+                    <button
+                      type="button"
+                      className="relative z-10 flex h-full w-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
+                      onClick={() => setComingSoonOpen(true)}
+                    >
+                      {cardInner}
+                    </button>
+                  ) : (
+                    <Link
+                      href={resolvedHref}
+                      target={resolvedTarget}
+                      rel={resolvedRel}
+                      className="relative z-10 flex h-full flex-col justify-between rounded-3xl bg-white p-6 text-left shadow-[0_18px_40px_rgba(35,57,91,0.12)] transition-shadow hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(35,57,91,0.18)]"
+                    >
+                      {cardInner}
+                    </Link>
+                  )}
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* Coming soon popup for "Study Abroad" */}
         {comingSoonOpen && (
           <div
             className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4"

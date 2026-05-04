@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ReviewsCarousel } from "@/components/home/reviews-carousel";
 import { ArchetypePreviewSection } from "@/components/archetype-quiz/archetype-preview";
 
 const TEXT_DARK = "#2E2F35";   // 208:54, 208:59, 208:65, 208:68
@@ -207,14 +206,6 @@ export default function ArchetypeQuizPage() {
 
       {/* Archetype preview content (temporary) */}
       <ArchetypePreviewSection />
-
-      {/* User reviews carousel – pastel section (mobile + desktop) */}
-      <section
-        className="w-full min-w-0 bg-[#f5f0ff] py-12 md:py-16"
-        aria-label="What students say"
-      >
-        <ReviewsCarousel />
-      </section>
 
       {/* Take quiz CTA – duplicate of hero button, centered */}
       <div className="flex justify-center px-4 py-10 md:py-14">

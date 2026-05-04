@@ -58,6 +58,8 @@ export default {
         },
       },
       fontFamily: {
+        /** Section headlines (home2, newsletter) — matches root Poppins stack */
+        hero: ["var(--font-poppins)", "ui-sans-serif", "system-ui", "sans-serif"],
         script: ["var(--font-pathpicker-script)", "cursive"],
         volkhov: ["var(--font-volkhov)", "serif"],
         luckiest: ["var(--font-luckiest-guy)", "cursive"],
@@ -73,9 +75,15 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-25%)" },
         },
+        /** Hero portrait: vertically scrolling diagonal reel (three identical tiles). */
+        "hero-diagonal-reel": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-33.333333%)" },
+        },
       },
       animation: {
         "scholarship-quiz-marquee": "scholarship-quiz-marquee 20s linear infinite",
+        "hero-diagonal-reel": "hero-diagonal-reel 20s linear infinite",
       },
     },
   },

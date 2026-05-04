@@ -98,6 +98,44 @@
   }
 }
 
+/* home-2 testimonial marquee */
+@keyframes home2-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.home2-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: home2-marquee 88s linear infinite;
+}
+
+@keyframes home2-marquee-back {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.home2-marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: home2-marquee-back 88s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home2-marquee-track,
+  .home2-marquee-track-reverse {
+    animation: none;
+  }
+}
+
 /* Seamless infinite: exactly 2 copies, translate -50% so reset is invisible */
 @keyframes archetype-hero-marquee {
   0% {

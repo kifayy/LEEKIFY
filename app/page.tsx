@@ -1,8 +1,9 @@
 import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
+import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
 import { EnterScholarshipsSectionLayout } from "@/components/enter-scholarships-section-layout";
-import { ReviewsCarousel } from "@/components/home/reviews-carousel";
+import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { WhyDirectMailSection } from "@/components/home/why-direct-mail-section";
 import { FeaturedScholarshipsSection } from "@/components/home/featured-scholarships-section";
 import { VimeoInTikTokMockup } from "@/components/home/vimeo-tiktok-mockup";
@@ -48,14 +49,15 @@ export default async function Home() {
       <div className="md:hidden">
         <HeroFigmaDesign />
       </div>
+      <HomeScholarshipFeatureShowcase />
       <FeaturesSection />
       <EnterScholarshipsSectionLayout />
+      <StudentsLoveSection />
       {/* Hidden for now – Featured scholarships carousel (Fund Your Education); restore when needed */}
       {/* <Suspense fallback={<div className="container mx-auto max-w-5xl px-4 py-10 text-center text-sm text-muted-foreground md:py-16">Loading scholarships…</div>}>
         <FeaturedScholarshipsSection />
       </Suspense> */}
       <WhyDirectMailSection />
-      <ReviewsCarousel />
       <DesktopBottomCta />
       {/* Mobile-only: Awarded app video in TikTok-style phone mockup */}
       <section className="w-full px-4 pt-0 pb-6 md:hidden" aria-label="Awarded app video">
