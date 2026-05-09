@@ -47,7 +47,7 @@ export function TestimonialAvatarStack({
               width={size}
               height={size}
               sizes={sizes}
-              quality={70}
+              unoptimized
               priority={Boolean(loadEager && isFirst)}
               loading={loadEager ? "eager" : "lazy"}
               fetchPriority={loadEager ? (isFirst ? "high" : "auto") : "low"}

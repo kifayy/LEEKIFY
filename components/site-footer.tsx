@@ -12,7 +12,6 @@ const FOOTER_COLUMNS = [
     links: [
       { href: "/about", label: "About" },
       { href: "/partners", label: "Partners" },
-      { href: "/browse-schools", label: "Browse Schools" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
     ],
@@ -20,14 +19,16 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/browse-schools", label: "Browse Schools" },
       { href: "/archetype-quiz", label: "College Match Quiz" },
+      { href: "/browse-schools", label: "Browse Schools" },
+      { href: "/#deep-profile-rankings", label: "Features" },
+      { href: "/#commit-with-zero-regrets", label: "How it Works" },
     ],
   },
   {
     title: "Support",
     links: [
-      { href: "/contact", label: "Contact" },
+      { href: "/contact", label: "Support" },
       { href: "/partners", label: "For Partners" },
     ],
   },

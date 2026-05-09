@@ -5,10 +5,6 @@ import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pil
 const SCHOLARSHIPS_FASTER_IMAGE =
   "https://storage.googleapis.com/images_592/image-Photoroom%20(1).png";
 
-/** Foreground sticker on the Photoroom hero illustration */
-const SCHOLARSHIPS_GEMINI_OVERLAY_URL =
-  "https://storage.googleapis.com/images_592/Gemini_Generated_Image_244rxf244rxf244r-Photoroom.png";
-
 /** Tint strongest at top, fades to white / transparent toward the bottom edge. */
 const LAVENDER_PANEL =
   "linear-gradient(180deg, #F5F3FF 0%, rgba(245,243,255,0.55) 55%, rgba(255,255,255,0) 100%)";
@@ -26,28 +22,14 @@ function FasterScholarshipsVisual() {
         style={{ background: LAVENDER_PANEL }}
       />
       <div className="relative z-[1] flex min-h-[260px] w-full items-center justify-center px-4 py-6 sm:min-h-[280px] sm:px-6 sm:py-8 md:min-h-[300px]">
-        <div className="relative mx-auto w-full max-w-[480px]">
-          <Image
-            src={SCHOLARSHIPS_FASTER_IMAGE}
-            alt="Student with university logos"
-            width={800}
-            height={600}
-            className="relative z-0 h-auto w-full object-contain"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          <div
-            className="pointer-events-none absolute -bottom-7 left-[12%] z-10 sm:-bottom-9 sm:left-[14%] md:-bottom-10 md:left-[16%] lg:-bottom-9"
-            aria-hidden
-          >
-            <Image
-              src={SCHOLARSHIPS_GEMINI_OVERLAY_URL}
-              alt=""
-              width={675}
-              height={675}
-              className="h-auto w-[14.34375rem] object-contain drop-shadow-[0_10px_28px_rgba(76,29,149,0.3)] sm:w-[16.875rem] md:w-[17.71875rem]"
-            />
-          </div>
-        </div>
+        <Image
+          src={SCHOLARSHIPS_FASTER_IMAGE}
+          alt="Student with university logos"
+          width={800}
+          height={600}
+          className="mx-auto h-auto w-full max-w-[480px] object-contain"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
     </div>
   );

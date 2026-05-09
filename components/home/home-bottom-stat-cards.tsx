@@ -1,17 +1,15 @@
 import Link from "next/link";
 
-import { FooterCollegeLogoReel } from "@/components/home/footer-college-logo-reel";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
-/** Home page footer band: college logo reel + quiz CTA */
+/** Home page footer band: match quiz CTA */
 export function HomeBottomStatCards() {
   return (
     <section
       className="w-full border-t border-slate-200/80 bg-white py-10 md:py-14 lg:py-16"
-      aria-label="College logos and match quiz"
+      aria-label="College match quiz"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <FooterCollegeLogoReel className="mb-8 md:mb-10" />
         <div className="mx-auto flex max-w-xl flex-col items-center gap-3 text-center sm:gap-4">
           <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[#181A1D] md:text-xl">
             Ready to see your matches?

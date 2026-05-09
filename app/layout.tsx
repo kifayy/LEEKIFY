@@ -14,9 +14,9 @@ import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
 
-const defaultTitle = "PathPicker: Student Discovery Engine";
+const defaultTitle = "PathPicker: Find Your Dream School";
 const defaultDescription =
-  "Discover your unique student type and what paths fit you best. Take personality‑based quizzes to find schools and opportunities made for you.";
+  "We analyze your personality and academic indicators across 2,000+ schools to find your true college path.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
@@ -83,6 +83,8 @@ export default function RootLayout({
       <head>
         <meta name="impact-site-verification" content="506f7160-3dd6-4477-8a3e-bb29d178f99a" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
+        <link rel="preconnect" href="https://my.pathpicker.com" />
+        <link rel="preconnect" href="https://framerusercontent.com" />
       </head>
       <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />

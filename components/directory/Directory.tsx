@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useVibeFilteredColleges } from "@/hooks/useVibeFilteredColleges";
 import { createClient } from "@/lib/supabase/client";
 import type { College } from "@/types/college";
 import { SchoolGrid } from "@/components/directory/SchoolGrid";
@@ -13,11 +14,14 @@ import { useAuth } from "@/hooks/useAuth";
 import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
+import { hasEnvVars, withTimeout } from "@/lib/utils";
 
 const COLLEGES_PER_PAGE = 20;
 
 /** PostgREST often defaults to 1k rows; keep headroom for 2k+ school datasets. */
 const BROWSE_FETCH_LIMIT = 5000;
+
+const COLLEGES_QUERY_TIMEOUT_MS = 45_000;
 
 const vibeOptions = [
   { value: "nature-lover", label: "🌿 Nature", emoji: "🌿" },
@@ -52,6 +56,8 @@ export function Directory() {
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMoreColleges, setHasMoreColleges] = useState(true);
 
+  const vibeFilterResult = useVibeFilteredColleges(selectedVibes, debouncedSearchTerm);
+
   const selectedVibesKey = useMemo(() => [...selectedVibes].sort().join(","), [selectedVibes]);
   const filtersKeyRef = useRef("");
   const shuffleSeedRef = useRef(Math.random());
@@ -72,7 +78,7 @@ export function Directory() {
     }
 
     const run = async () => {
-      /* Two-vibe Explore list comes from `useVibeFilteredColleges` inside SchoolGrid — skip this fetch. */
+      /* Two-vibe Explore list uses `useVibeFilteredColleges` in Directory — skip this fetch. */
       if (selectedVibes.length === 2) {
         if (!ac.signal.aborted && gen === fetchGenerationRef.current) {
           setColleges([]);
@@ -88,6 +94,7 @@ export function Directory() {
       const seed = shuffleSeedRef.current;
 
       try {
+        if (!hasEnvVars) throw new Error("Supabase URL or key missing");
         const supabase = createClient();
 
         let query = supabase.from("colleges").select("*", { count: "exact" }).limit(BROWSE_FETCH_LIMIT);
@@ -97,7 +104,11 @@ export function Directory() {
           query = query.or(`name.ilike.%${safe}%,location.ilike.%${safe}%,description.ilike.%${safe}%`);
         }
 
-        const { data, error: qErr } = await query;
+        const { data, error: qErr } = await withTimeout(
+          query,
+          COLLEGES_QUERY_TIMEOUT_MS,
+          "Loading colleges timed out",
+        );
         if (ac.signal.aborted || gen !== fetchGenerationRef.current) return;
         if (qErr) throw qErr;
 
@@ -119,14 +130,23 @@ export function Directory() {
       } catch (e) {
         if (ac.signal.aborted || gen !== fetchGenerationRef.current) return;
         console.error(e);
-        setError("Failed to load colleges. Please try again.");
+        setError(
+          e instanceof Error && e.message.includes("timed out")
+            ? e.message
+            : e instanceof Error && e.message.includes("missing")
+              ? "Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to .env.local"
+              : "Failed to load colleges. Please try again.",
+        );
       } finally {
         if (!ac.signal.aborted && gen === fetchGenerationRef.current) setLoading(false);
       }
     };
 
     void run();
-    return () => ac.abort();
+    return () => {
+      ac.abort();
+      setLoading(false);
+    };
   }, [debouncedSearchTerm, selectedVibesKey, selectedVibes.length, currentPage]);
 
   useEffect(() => {
@@ -269,7 +289,7 @@ export function Directory() {
             <SchoolGrid
               colleges={colleges}
               selectedVibes={selectedVibes}
-              debouncedSearchTerm={debouncedSearchTerm}
+              vibeFiltered={vibeFilterResult}
               loading={loading}
               error={error}
               hasMoreColleges={hasMoreColleges}
@@ -287,7 +307,7 @@ export function Directory() {
           <SchoolGrid
             colleges={colleges}
             selectedVibes={selectedVibes}
-            debouncedSearchTerm={debouncedSearchTerm}
+            vibeFiltered={vibeFilterResult}
             loading={loading}
             error={error}
             hasMoreColleges={hasMoreColleges}

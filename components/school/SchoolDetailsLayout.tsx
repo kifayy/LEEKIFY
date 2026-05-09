@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { SchoolHeader } from "./SchoolHeader";
 import { SchoolVibeSection } from "./SchoolVibeSection";
@@ -23,10 +23,13 @@ export function SchoolDetailsLayout({
   collegeData,
   showSidebarNav = true,
   canonicalUrl,
+  seoHubSlot,
 }: {
   collegeData: CollegeDetail;
   showSidebarNav?: boolean;
   canonicalUrl: string;
+  /** Server-rendered SEO / FAQ hub (`SchoolSeoHubSection`). */
+  seoHubSlot?: ReactNode;
 }) {
   const [highlightsOpen, setHighlightsOpen] = useState(true);
   const [studentFoodOpen, setStudentFoodOpen] = useState(true);
@@ -39,6 +42,7 @@ export function SchoolDetailsLayout({
       { id: "match", label: "Student Experience", emoji: "😊" },
       { id: "admission-match", label: "Odds & match", emoji: "🎯" },
     ];
+    if (seoHubSlot) chips.push({ id: "seo-hub", label: "Common questions", emoji: "❓" });
     if (friday) chips.push({ id: "friday", label: "Typical Friday", emoji: "📅" });
     if (collegeData.highlights?.length) chips.push({ id: "why-perfect", label: "Why It's Perfect", emoji: "🎓" });
     if (collegeData.campus_vibe) chips.push({ id: "vibe", label: "School Stats", emoji: "📊" });
@@ -46,7 +50,7 @@ export function SchoolDetailsLayout({
     if (collegeData.student_food?.length) chips.push({ id: "food", label: "Food & Dining", emoji: "🍕" });
     chips.push({ id: "similar", label: "Similar Schools", emoji: "🎯" });
     return chips;
-  }, [friday, collegeData]);
+  }, [friday, collegeData, seoHubSlot]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -172,6 +176,8 @@ export function SchoolDetailsLayout({
             </div>
 
             <SimilarSchoolsSection currentCollege={collegeData} />
+
+            {seoHubSlot}
 
             <div className="sr-only">
               <h2>About {collegeData.name}</h2>

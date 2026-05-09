@@ -1,13 +1,17 @@
 import type { CollegeDetail } from "@/types/college-detail";
 
+type FaqItem = { question: string; answer: string };
+
 type Props = {
   college: CollegeDetail;
   canonicalUrl: string;
   baseUrl: string;
+  /** Must match visible FAQ copy on the page (same strings as `buildSchoolSeoHubFaq`). */
+  faqItems?: FaqItem[] | null;
 };
 
 /** Server-rendered JSON-LD (CollegeOrUniversity + BreadcrumbList) for crawlers without relying on client JS. */
-export function SchoolPageJsonLd({ college, canonicalUrl, baseUrl }: Props) {
+export function SchoolPageJsonLd({ college, canonicalUrl, baseUrl, faqItems }: Props) {
   const description =
     college.meta_description?.trim() ||
     college.description?.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim().slice(0, 500) ||
@@ -16,7 +20,7 @@ export function SchoolPageJsonLd({ college, canonicalUrl, baseUrl }: Props) {
 
   const image = college.new_image_link || college.featured_image_url;
 
-  const payload = [
+  const payload: Record<string, unknown>[] = [
     {
       "@context": "https://schema.org",
       "@type": "CollegeOrUniversity",
@@ -43,6 +47,21 @@ export function SchoolPageJsonLd({ college, canonicalUrl, baseUrl }: Props) {
       ],
     },
   ];
+
+  if (faqItems?.length) {
+    payload.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    });
+  }
 
   return (
     <script

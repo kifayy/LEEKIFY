@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
 import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const ROTATING_WORDS = ["Dream School", "Chances", "Future Path"];
 const TYPE_DELAY_MS = 90;
@@ -20,7 +21,7 @@ const MOBILE_HERO_BG_URL =
 
 export function HeroFigmaDesign() {
   const [wordIndex, setWordIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(ROTATING_WORDS[0].length);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const word = ROTATING_WORDS[wordIndex];
@@ -57,6 +58,7 @@ export function HeroFigmaDesign() {
           src={MOBILE_HERO_BG_URL}
           alt=""
           fill
+          fetchPriority="high"
           className="object-cover object-right-top opacity-[0.22]"
           sizes="100vw"
         />
@@ -104,7 +106,7 @@ export function HeroFigmaDesign() {
               </div>
               <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-start">
                 <Link
-                  href="http://my.pathpicker.com/archetype"
+                  href={COLLEGE_MATCH_QUIZ_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-16 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#181A1D] bg-white px-8 text-base font-medium text-[#181A1D] shadow-[3px_3px_0_0_#181A1D] transition hover:bg-gray-50"

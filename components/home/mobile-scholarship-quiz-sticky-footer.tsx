@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const ARCHETYPE_QUIZ_URL = "https://my.pathpicker.com/archetype";
 
 /** 0–1: how far the page has been scrolled through its scrollable range. */
 function scrollDepthRatio(): number {
@@ -45,7 +44,7 @@ export function MobileScholarshipQuizStickyFooter() {
     >
       <div className={cn("pointer-events-auto py-2", !visible && "pointer-events-none")}>
         <Link
-          href={ARCHETYPE_QUIZ_URL}
+          href={COLLEGE_MATCH_QUIZ_URL}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={visible ? undefined : -1}

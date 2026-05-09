@@ -6,8 +6,11 @@ import type { College } from "@/types/college";
 import { exploreCollegeMatchesVibe } from "@/lib/explore-vibe-match";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
+import { hasEnvVars, withTimeout } from "@/lib/utils";
 
 const BROWSE_FETCH_LIMIT = 5000;
+
+const COLLEGES_QUERY_TIMEOUT_MS = 45_000;
 
 /**
  * When exactly two browse vibes are selected, loads a search-filtered college pool and
@@ -36,6 +39,7 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
       return;
     }
 
+    let abandoned = false;
     const ac = new AbortController();
 
     const run = async () => {
@@ -44,6 +48,7 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
       shuffleSeedRef.current = Math.random();
 
       try {
+        if (!hasEnvVars) throw new Error("Supabase URL or key missing");
         const supabase = createClient();
         let query = supabase.from("colleges").select("*").limit(BROWSE_FETCH_LIMIT);
 
@@ -52,8 +57,8 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
           query = query.or(`name.ilike.%${safe}%,location.ilike.%${safe}%,description.ilike.%${safe}%`);
         }
 
-        const { data, error: qErr } = await query;
-        if (ac.signal.aborted) return;
+        const { data, error: qErr } = await withTimeout(query, COLLEGES_QUERY_TIMEOUT_MS, "Loading colleges timed out");
+        if (abandoned || ac.signal.aborted) return;
         if (qErr) throw qErr;
 
         const raw = (data || []) as College[];
@@ -70,20 +75,24 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
         );
 
         const ordered = orderCollegesForBrowse(filtered, shuffleSeedRef.current);
-        if (ac.signal.aborted) return;
+        if (abandoned || ac.signal.aborted) return;
         setColleges(ordered);
       } catch (e) {
-        if (ac.signal.aborted) return;
+        if (abandoned || ac.signal.aborted) return;
         console.error(e);
-        setError("Failed to load colleges. Please try again.");
+        setError(e instanceof Error && e.message.includes("timed out") ? e.message : "Failed to load colleges. Please try again.");
         setColleges([]);
       } finally {
-        if (!ac.signal.aborted) setLoading(false);
+        if (!abandoned) setLoading(false);
       }
     };
 
     void run();
-    return () => ac.abort();
+    return () => {
+      abandoned = true;
+      ac.abort();
+      setLoading(false);
+    };
   }, [debouncedSearch, selectedVibes.length, v0, v1]);
 
   return { colleges, loading, error };

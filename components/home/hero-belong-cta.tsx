@@ -6,8 +6,7 @@ import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { BRAND_MEDIA } from "@/components/landing/constants";
-
-const ARCHETYPE_QUIZ_URL = "http://my.pathpicker.com/archetype";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 /** Same facepile CDN as testimonials / StudentsFinding badge (first four in hero strip). */
 const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => ({
@@ -64,7 +63,7 @@ export function HeroBelongCta() {
             See Where You Belong
           </span>
           <Link
-            href={ARCHETYPE_QUIZ_URL}
+            href={COLLEGE_MATCH_QUIZ_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[#7C3AED] bg-[#956EFE] px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]"

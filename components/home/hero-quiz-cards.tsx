@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const ARCHETYPE_IMAGE =
   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=778&h=552&fit=crop";
@@ -39,7 +40,7 @@ function LogoSlot({ src }: { src: string }) {
 }
 
 const CARD = {
-  href: "http://my.pathpicker.com/archetype",
+  href: COLLEGE_MATCH_QUIZ_URL,
   title: "College Match Quiz",
   description:
     "Find your archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",

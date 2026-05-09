@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
 const navLinks = [
-  { href: "/browse-schools", label: "Browse Schools" },
   { href: "/archetype-quiz", label: "College Match Quiz" },
-  { href: "/#commit-with-zero-regrets", label: "How it works" },
+  { href: "/browse-schools", label: "Browse Schools" },
   { href: "/#deep-profile-rankings", label: "Features" },
+  { href: "/#commit-with-zero-regrets", label: "How it Works" },
   { href: "/contact", label: "Support" },
 ];
 

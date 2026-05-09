@@ -11,17 +11,22 @@ import type { College } from "@/types/college";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { useVibeFilteredColleges } from "@/hooks/useVibeFilteredColleges";
 
 interface CollegeWithMatch extends College {
   matchScore?: number;
 }
 
+/** Result of `useVibeFilteredColleges` from Directory (single source; avoids duplicate fetches for mobile + desktop grids). */
+export type VibeFilteredBundle = {
+  colleges: College[];
+  loading: boolean;
+  error: string | null;
+};
+
 interface SchoolGridProps {
   colleges: College[];
   selectedVibes: string[];
-  /** Debounced search string; used when exactly two vibes are selected (hook path). */
-  debouncedSearchTerm?: string;
+  vibeFiltered: VibeFilteredBundle;
   loading?: boolean;
   error?: string | null;
   hasMoreColleges?: boolean;
@@ -52,7 +57,7 @@ function CollegeWithMatchScore({
 export function SchoolGrid({
   colleges: initialColleges,
   selectedVibes,
-  debouncedSearchTerm = "",
+  vibeFiltered,
   loading = false,
   error = null,
   hasMoreColleges = false,
@@ -66,15 +71,10 @@ export function SchoolGrid({
   const [collegesWithMatches, setCollegesWithMatches] = useState<CollegeWithMatch[]>([]);
   const [matchScores, setMatchScores] = useState<Map<string, number>>(new Map());
 
-  const { colleges: vibeFilteredColleges, loading: vibeLoading, error: vibeError } = useVibeFilteredColleges(
-    selectedVibes,
-    debouncedSearchTerm,
-  );
-
   const twoVibeMode = selectedVibes.length === 2;
-  const collegesData = twoVibeMode ? vibeFilteredColleges : initialColleges;
-  const isLoading = twoVibeMode ? vibeLoading : loading;
-  const currentError = twoVibeMode ? vibeError : error;
+  const collegesData = twoVibeMode ? vibeFiltered.colleges : initialColleges;
+  const isLoading = twoVibeMode ? vibeFiltered.loading : loading;
+  const currentError = twoVibeMode ? vibeFiltered.error : error;
   /** Sister Explore behavior: infinite scroll only with no vibe chips (0 vibes). */
   const showLoadMore = !twoVibeMode && selectedVibes.length === 0 && hasMoreColleges;
 

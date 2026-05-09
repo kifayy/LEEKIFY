@@ -1,7 +1,9 @@
 import { notFound, redirect } from "next/navigation";
 import { SchoolDetailsLayout } from "@/components/school/SchoolDetailsLayout";
+import { SchoolSeoHubSection } from "@/components/school/SchoolSeoHubSection";
 import { SchoolPageJsonLd } from "@/components/school/school-page-json-ld";
 import { fetchCollegeBySlugParam } from "@/lib/fetch-college-by-slug";
+import { buildSchoolSeoHubFaq } from "@/lib/school-seo-hub-faq";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import {
   buildSchoolPageDescription,
@@ -62,11 +64,22 @@ export default async function SchoolPage({ params }: Props) {
 
   const baseUrl = await getBaseUrlForMetadata();
   const canonicalUrl = `${baseUrl}${canonicalPath}`;
+  const faqItems = buildSchoolSeoHubFaq(college);
 
   return (
     <div className="min-h-screen bg-white">
-      <SchoolPageJsonLd college={college} canonicalUrl={canonicalUrl} baseUrl={baseUrl} />
-      <SchoolDetailsLayout collegeData={college} showSidebarNav={false} canonicalUrl={canonicalUrl} />
+      <SchoolPageJsonLd
+        college={college}
+        canonicalUrl={canonicalUrl}
+        baseUrl={baseUrl}
+        faqItems={faqItems}
+      />
+      <SchoolDetailsLayout
+        collegeData={college}
+        showSidebarNav={false}
+        canonicalUrl={canonicalUrl}
+        seoHubSlot={<SchoolSeoHubSection college={college} items={faqItems} />}
+      />
     </div>
   );
 }

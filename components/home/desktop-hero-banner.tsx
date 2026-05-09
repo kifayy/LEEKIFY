@@ -19,7 +19,7 @@ const BACKSPACE_MS = 50;
 
 export function DesktopHeroBanner() {
   const [wordIndex, setWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
+  const [displayText, setDisplayText] = useState(ROTATING_WORDS[0]);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -60,6 +60,7 @@ export function DesktopHeroBanner() {
             src={HERO_BG_URL}
             alt=""
             fill
+            fetchPriority="high"
             className="object-cover object-right-top opacity-[0.22]"
             sizes="(min-width: 768px) 100vw, 0px"
           />
