@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { HOME2_PURPLE } from "./constants";
 import {
   testimonialAvatarObjectClass,
   testimonialAvatarUrl,
@@ -77,20 +76,3 @@ export function StudentsLoveHeroPillBody({
   );
 }
 
-export function StudentsDreamSchoolBadge({
-  className = "mb-8",
-}: {
-  className?: string;
-}) {
-  return (
-    <div className={`flex flex-col items-center ${className}`.trim()}>
-      <div className="-mb-2 flex flex-col items-center">
-        <p className="mb-2 text-center text-xs font-bold text-neutral-800 md:text-sm">
-          <span style={{ color: HOME2_PURPLE }}>$40k+ students</span> found their dream
-          school
-        </p>
-        <TestimonialAvatarStack count={9} loadEager />
-      </div>
-    </div>
-  );
-}

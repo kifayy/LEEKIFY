@@ -27,6 +27,7 @@ function FasterScholarshipsVisual() {
           alt="Student with university logos"
           width={800}
           height={600}
+          unoptimized
           className="mx-auto h-auto w-full max-w-[480px] object-contain"
           sizes="(max-width: 768px) 100vw, 50vw"
         />

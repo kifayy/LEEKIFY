@@ -10,7 +10,6 @@ import {
   HOME2_SECTION_HEADLINE_CLASS,
   HOME2_SECTION_SUBTEXT_CLASS,
 } from "@/components/home2/constants";
-import { StudentsDreamSchoolBadge } from "@/components/home2/students-dream-school-badge";
 import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
@@ -88,7 +87,6 @@ export function StudentsLoveCtaBand() {
   return (
     <div className="flex w-full flex-col items-center px-4 pb-8 pt-2 md:pb-12 md:pt-4 lg:pb-14">
       <div className="w-full max-w-4xl md:mr-0 md:w-full">
-        <StudentsDreamSchoolBadge />
         <h3 className={`text-center ${HOME2_SECTION_HEADLINE_CLASS}`}>
           <span className="md:block">2k+ colleges. One decision.</span>{" "}
           <span className="md:mt-1 md:block" style={{ color: HOME2_PURPLE }}>

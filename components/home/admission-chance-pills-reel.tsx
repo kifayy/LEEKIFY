@@ -34,24 +34,22 @@ function seededShuffle<T>(seedStr: string, arr: readonly T[]): T[] {
   return out;
 }
 
-/**
- * Slots per marquee row are logo list × 2 (looped seam). Both rows share one pool of unique ints in 32–80.
- */
-function uniquePercentsBothRows(slotCountBothRows: number): { rowA: number[]; rowB: number[] } {
+/** One percent per logo (32–80), stable for both marquee rows and both loop halves. */
+function logoUrlToPercent(): Map<(typeof HERO_COLLEGE_LOGO_URLS)[number], number> {
+  const n = HERO_COLLEGE_LOGO_URLS.length;
   const poolSize = PCT_POOL_MAX - PCT_POOL_MIN + 1;
-  if (slotCountBothRows > poolSize) {
+  if (n > poolSize) {
     throw new Error(
-      `admission-chance-pills-reel: need ${slotCountBothRows} unique percents but pool is only ${poolSize}`
+      `admission-chance-pills-reel: need ${n} unique percents but pool is only ${poolSize}`
     );
   }
   const pool = Array.from({ length: poolSize }, (_, i) => i + PCT_POOL_MIN);
   const shuffled = seededShuffle(
-    `admission-pills-pcts-v1:${HERO_COLLEGE_LOGO_URLS.join("|")}`,
+    `admission-pills-pcts-v2:${HERO_COLLEGE_LOGO_URLS.join("|")}`,
     pool
   );
-  const pick = shuffled.slice(0, slotCountBothRows);
-  const half = slotCountBothRows / 2;
-  return { rowA: pick.slice(0, half), rowB: pick.slice(half) };
+  const chosen = shuffled.slice(0, n);
+  return new Map(HERO_COLLEGE_LOGO_URLS.map((url, i) => [url, chosen[i]!]));
 }
 
 function rotateOrder<T>(arr: readonly T[], shift: number): T[] {
@@ -61,25 +59,25 @@ function rotateOrder<T>(arr: readonly T[], shift: number): T[] {
   return [...arr.slice(s), ...arr.slice(0, s)];
 }
 
+/**
+ * Doubled for seamless infinity scroll: second half repeats the same (logo, percent) pairs as the first.
+ */
 function buildChanceTrack(
   order: readonly (typeof HERO_COLLEGE_LOGO_URLS)[number][],
-  slotPercents: readonly number[]
+  pctByUrl: ReadonlyMap<(typeof HERO_COLLEGE_LOGO_URLS)[number], number>
 ): { src: (typeof HERO_COLLEGE_LOGO_URLS)[number]; percent: number }[] {
-  const doubled = [...order, ...order];
-  if (doubled.length !== slotPercents.length) {
-    throw new Error("admission-chance-pills-reel: slotPercents length must match doubled order");
-  }
-  return doubled.map((src, i) => ({
-    src,
-    percent: slotPercents[i]!,
-  }));
+  const once = order.map((src) => {
+    const percent = pctByUrl.get(src);
+    if (percent === undefined) throw new Error(`admission-chance-pills-reel: missing percent for ${src}`);
+    return { src, percent };
+  });
+  return [...once, ...once];
 }
 
-const SLOT_COUNT_TOTAL = HERO_COLLEGE_LOGO_URLS.length * 2 * 2;
-const { rowA: ROW1_PERCENTS, rowB: ROW2_PERCENTS } = uniquePercentsBothRows(SLOT_COUNT_TOTAL);
+const PCT_BY_LOGO_URL = logoUrlToPercent();
 
-const ROW1 = buildChanceTrack(HERO_COLLEGE_LOGO_URLS, ROW1_PERCENTS);
-const ROW2 = buildChanceTrack(rotateOrder(HERO_COLLEGE_LOGO_URLS, 5), ROW2_PERCENTS);
+const ROW1 = buildChanceTrack(HERO_COLLEGE_LOGO_URLS, PCT_BY_LOGO_URL);
+const ROW2 = buildChanceTrack(rotateOrder(HERO_COLLEGE_LOGO_URLS, 5), PCT_BY_LOGO_URL);
 
 /** Below this → amber/orange styling and cautionary BAD_STAT_SUFFIXES. */
 const PILLS_BAD_STATS_BELOW_PERCENT = 57;
@@ -147,18 +145,21 @@ const BAD_STAT_SUFFIXES = [
   }
 })();
 
+function canonicalLogoIndex(src: string): number {
+  const i = HERO_COLLEGE_LOGO_URLS.indexOf(src as (typeof HERO_COLLEGE_LOGO_URLS)[number]);
+  return i >= 0 ? i : 0;
+}
+
 function ChancePill({
   src,
   percent,
-  lineIndex,
 }: {
   src: string;
   percent: number;
-  lineIndex: number;
 }) {
   const isBadFitCopy = percent < PILLS_BAD_STATS_BELOW_PERCENT;
   const suffixPool = isBadFitCopy ? BAD_STAT_SUFFIXES : GOOD_STAT_SUFFIXES;
-  const suffix = suffixPool[lineIndex % suffixPool.length]!;
+  const suffix = suffixPool[canonicalLogoIndex(src) % suffixPool.length]!;
   const tier = matchStrengthClasses(percent);
   return (
     <div
@@ -197,12 +198,7 @@ export function AdmissionChancePillsReel({ className }: { className?: string }) 
           )}
         >
           {ROW1.map((item, i) => (
-            <ChancePill
-              key={`r1-${i}-${item.src}`}
-              src={item.src}
-              percent={item.percent}
-              lineIndex={i}
-            />
+            <ChancePill key={`r1-${i}`} src={item.src} percent={item.percent} />
           ))}
         </div>
       </div>
@@ -215,12 +211,7 @@ export function AdmissionChancePillsReel({ className }: { className?: string }) 
           style={{ animationDelay: "-4s" }}
         >
           {ROW2.map((item, i) => (
-            <ChancePill
-              key={`r2-${i}-${item.src}`}
-              src={item.src}
-              percent={item.percent}
-              lineIndex={i}
-            />
+            <ChancePill key={`r2-${i}`} src={item.src} percent={item.percent} />
           ))}
         </div>
       </div>
