@@ -10,31 +10,28 @@ import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
-
-const defaultTitle = "PathPicker: Find Your Dream School";
-const defaultDescription =
-  "We analyze your personality and academic indicators across 2,000+ schools to find your true college path.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
   return {
     metadataBase: new URL(baseUrl),
-    title: defaultTitle,
-    description: defaultDescription,
+    title: DEFAULT_SITE_TITLE,
+    description: DEFAULT_SITE_DESCRIPTION,
     alternates: { canonical: baseUrl },
     other: { "impact-site-verification": "f3e4ac5b-cbf4-4dcb-bdf3-61eda8835162" },
     openGraph: {
-      title: defaultTitle,
-      description: defaultDescription,
-      siteName: "Pathpicker",
+      title: DEFAULT_SITE_TITLE,
+      description: DEFAULT_SITE_DESCRIPTION,
+      siteName: "PathPicker",
     },
     twitter: {
       card: "summary_large_image",
-      title: defaultTitle,
-      description: defaultDescription,
+      title: DEFAULT_SITE_TITLE,
+      description: DEFAULT_SITE_DESCRIPTION,
     },
   };
 }

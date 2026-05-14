@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
-
-const BROWSE_FIT_IMAGE = "https://storage.googleapis.com/images_592/Groasddasup%20787.png";
-
-const DEEP_PROFILE_FEATURE_IMAGE =
-  "https://storage.googleapis.com/images_592/Grdsadoup%20786.png";
+import {
+  HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
+  HOME_FEATURE_DEEP_PROFILE_IMAGE_URL,
+} from "@/lib/home-feature-showcase-images";
 
 /** Tint strongest at top, fades to white / transparent toward the bottom edge. */
 const LAVENDER_PANEL =
@@ -89,11 +88,14 @@ function BrowseFitVisual() {
       {/* In-flow image so tall art isn’t clipped (absolute + short min-h hid the top). */}
       <div className="relative z-[1] w-full px-0 pb-0 pt-1 sm:pt-2">
         <Image
-          src={BROWSE_FIT_IMAGE}
+          src={HOME_FEATURE_BROWSE_FIT_IMAGE_URL}
           alt=""
           width={800}
           height={600}
           unoptimized
+          priority
+          fetchPriority="high"
+          decoding="async"
           className="block h-auto w-full max-w-[min(100%,520px)] object-contain object-left sm:max-w-[560px] md:max-w-[600px] lg:max-w-[640px]"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
@@ -113,11 +115,14 @@ function DeepProfileFeatureVisual() {
       />
       <div className="relative z-[1] flex min-h-[260px] w-full items-center justify-center px-4 py-6 sm:min-h-[280px] sm:px-6 sm:py-8 md:min-h-[300px]">
         <Image
-          src={DEEP_PROFILE_FEATURE_IMAGE}
+          src={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL}
           alt=""
           width={800}
           height={600}
           unoptimized
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="mx-auto h-auto w-full max-w-[480px] object-contain"
           sizes="(max-width: 768px) 100vw, 50vw"
         />

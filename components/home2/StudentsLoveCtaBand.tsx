@@ -135,20 +135,19 @@ export function StudentsLoveCtaBand() {
   return (
     <div className="flex w-full flex-col items-center px-4 pb-8 pt-2 md:pb-12 md:pt-4 lg:pb-14">
       <div className="w-full max-w-4xl md:mr-0 md:w-full">
-        <div className="mb-3 flex flex-col items-center gap-1.5 md:mb-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-            <div className="flex items-center gap-0.5" aria-hidden>
-              {Array.from({ length: 5 }, (_, i) => (
-                <Star
-                  key={i}
-                  className="h-4 w-4 fill-amber-400 text-amber-400 md:h-[1.125rem] md:w-[1.125rem]"
-                  strokeWidth={0}
-                />
-              ))}
-            </div>
-            <span className="text-sm font-medium tracking-tight text-neutral-500 md:text-base">
-              Loved by 50k+ Students
-            </span>
+        <div className="mb-3 flex justify-center md:mb-4">
+          <div
+            className="flex items-center gap-0.5"
+            role="img"
+            aria-label="Rated 5 out of 5 stars"
+          >
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                key={i}
+                className="h-4 w-4 fill-amber-400 text-amber-400 md:h-[1.125rem] md:w-[1.125rem]"
+                strokeWidth={0}
+              />
+            ))}
           </div>
         </div>
         <h3 className={`text-center ${HOME2_SECTION_HEADLINE_CLASS}`}>

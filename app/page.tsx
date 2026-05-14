@@ -1,23 +1,37 @@
+import type { Metadata } from "next";
+import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
 import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
-import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
-import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
+import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
+import { HomeBottomStatCards } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
+import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
-import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
-import { HomeBottomStatCards } from "@/components/home/home-bottom-stat-cards";
+import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
+import {
+  HOME_FEATURE_DEEP_PROFILE_IMAGE_URL,
+} from "@/lib/home-feature-showcase-images";
 
 const HOME_PREVIEW_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
   return {
+    title: DEFAULT_SITE_TITLE,
+    description: DEFAULT_SITE_DESCRIPTION,
     alternates: { canonical: baseUrl },
     openGraph: {
+      title: DEFAULT_SITE_TITLE,
+      description: DEFAULT_SITE_DESCRIPTION,
+      url: baseUrl,
+      siteName: "PathPicker",
       images: [{ url: HOME_PREVIEW_IMAGE_URL }],
     },
     twitter: {
+      card: "summary_large_image",
+      title: DEFAULT_SITE_TITLE,
+      description: DEFAULT_SITE_DESCRIPTION,
       images: [HOME_PREVIEW_IMAGE_URL],
     },
   };
@@ -34,6 +48,7 @@ export default async function Home() {
         url: baseUrl,
         name: "PathPicker",
         alternateName: ["Pathpicker"],
+        description: DEFAULT_SITE_DESCRIPTION,
       },
       {
         "@type": "ItemList",
@@ -92,6 +107,7 @@ export default async function Home() {
 
   return (
     <>
+      <link rel="preload" href={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL} as="image" fetchPriority="high" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

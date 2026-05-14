@@ -182,7 +182,7 @@ export function SchoolGrid({
         {collegesWithMatches.map((school, index) => (
           <SchoolCard
             key={school.id}
-            imageLoadPriority={index < 6}
+            imageLoadPriority={index < 9}
             school={{
               id: school.id,
               name: school.name,

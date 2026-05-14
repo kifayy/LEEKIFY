@@ -54,7 +54,7 @@ interface SchoolCardProps {
   buttonText?: string;
   buttonPosition?: "overlay" | "bottom";
   hideImageOverlay?: boolean;
-  /** First screen of cards: eager + high fetch priority so LCP heroes resolve faster. */
+  /** First grid cells: eager + high fetch priority so hero photos resolve faster. */
   imageLoadPriority?: boolean;
 }
 
