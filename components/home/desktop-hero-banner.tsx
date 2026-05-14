@@ -104,7 +104,7 @@ export function DesktopHeroBanner() {
             <HeroCollegeLogoReels
               idPrefix="desktop-hero"
               className="lg:rounded-t-2xl"
-              tileClassName="relative block size-11 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/20 lg:size-14 lg:rounded-2xl xl:size-16"
+              tileClassName="relative block size-11 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/25 lg:size-14 lg:rounded-2xl xl:size-16"
               spacerClassName="inline-block w-[3.75rem] shrink-0 md:w-[5.25rem] lg:w-32 xl:w-40"
               imageSizes="(min-width: 1280px) 64px, (min-width: 1024px) 56px, 44px"
             />

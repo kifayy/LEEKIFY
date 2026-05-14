@@ -2,6 +2,7 @@ import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
 import { FeaturesSection } from "@/components/home/features-section";
 import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
+import { HomePageFaqs } from "@/components/home/home-page-faqs";
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
@@ -102,6 +103,7 @@ export default async function Home() {
       <AboutProfileSchoolsSection />
       <HomeScholarshipFeatureShowcase />
       <StudentsLoveSection />
+      <HomePageFaqs />
       <FeaturesSection />
       <HomeBottomStatCards />
     </>

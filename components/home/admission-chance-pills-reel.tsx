@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { HERO_COLLEGE_LOGO_URLS } from "@/lib/hero-college-logos";
+import { HERO_COLLEGE_LOGO_URLS, heroCollegeLogoTileBgClass } from "@/lib/hero-college-logos";
 
 const PCT_POOL_MIN = 32;
 const PCT_POOL_MAX = 80;
@@ -169,7 +169,12 @@ function ChancePill({
         tier.card
       )}
     >
-      <span className="relative mt-0.5 size-8 shrink-0 overflow-hidden rounded-full bg-white/80 ring-1 ring-neutral-200/70">
+      <span
+        className={cn(
+          "relative mt-0.5 size-8 shrink-0 overflow-hidden rounded-full ring-1 ring-white/35",
+          heroCollegeLogoTileBgClass(src)
+        )}
+      >
         <Image
           src={src}
           alt=""

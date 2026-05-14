@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { HERO_COLLEGE_LOGO_URLS } from "@/lib/hero-college-logos";
+import { HERO_COLLEGE_LOGO_URLS, heroCollegeLogoTileBgClass } from "@/lib/hero-college-logos";
 
 /** Same CDN set as desktop hero (storage.googleapis.com/images_592) */
 export const HERO_COLLEGE_LOGOS = HERO_COLLEGE_LOGO_URLS;
@@ -75,6 +75,8 @@ export type HeroCollegeLogoReelsProps = {
   trackPaddingClassName?: string;
   rowWrapperClassName?: string;
   imageSizes?: string;
+  /** Hide the first N rows when viewport is below `md` (e.g. 2 for a denser mobile hero). */
+  hiddenFirstRowsBelowMd?: number;
 };
 
 export function HeroCollegeLogoReels({
@@ -82,10 +84,11 @@ export function HeroCollegeLogoReels({
   className,
   rowGapClassName = "gap-3 py-5 md:gap-3.5",
   spacerClassName = "inline-block w-[3.75rem] shrink-0 md:w-[5.25rem] lg:w-28",
-  tileClassName = "relative block size-11 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/20",
+  tileClassName = "relative block size-11 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/25",
   trackPaddingClassName = "px-6 lg:px-8",
-  rowWrapperClassName = "marquee-fade-edges mx-auto w-full overflow-hidden opacity-[0.58] saturate-[0.92] brightness-105",
+  rowWrapperClassName = "marquee-fade-edges mx-auto w-full overflow-hidden",
   imageSizes = "44px",
+  hiddenFirstRowsBelowMd,
 }: HeroCollegeLogoReelsProps) {
   return (
     <div
@@ -99,10 +102,18 @@ export function HeroCollegeLogoReels({
       {HERO_LOGO_REEL_ROWS.map(({ animationClass, delaySec }, rowIndex) => {
         const track = buildHeroLogoTrack(ROW_LOGO_ORDERS[rowIndex]!);
         return (
-          <div key={`${idPrefix}-row-${rowIndex}`} className={rowWrapperClassName}>
+          <div
+            key={`${idPrefix}-row-${rowIndex}`}
+            className={cn(
+              rowWrapperClassName,
+              hiddenFirstRowsBelowMd !== undefined &&
+                rowIndex < hiddenFirstRowsBelowMd &&
+                "max-md:hidden"
+            )}
+          >
             <div
               className={cn(
-                "flex w-max shrink-0 items-center gap-0 motion-reduce:animate-none motion-reduce:opacity-70",
+                "flex w-max shrink-0 items-center gap-0 motion-reduce:animate-none",
                 trackPaddingClassName,
                 animationClass
               )}
@@ -116,7 +127,10 @@ export function HeroCollegeLogoReels({
                     aria-hidden
                   />
                 ) : (
-                  <span key={`${idPrefix}-${rowIndex}-logo-${i}`} className={tileClassName}>
+                  <span
+                    key={`${idPrefix}-${rowIndex}-logo-${i}`}
+                    className={cn(tileClassName, heroCollegeLogoTileBgClass(cell.src))}
+                  >
                     <Image
                       src={cell.src}
                       alt=""

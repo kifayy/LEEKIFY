@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { REMOTE_IMAGE_PATTERNS } from "./lib/remote-image-patterns";
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   async redirects() {
@@ -22,16 +24,7 @@ const nextConfig: NextConfig = {
     incomingRequests: false,
   },
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
-      { protocol: "https", hostname: "storage.googleapis.com", pathname: "/**" },
-      { protocol: "https", hostname: "storage.cloud.google.com", pathname: "/**" },
-      { protocol: "https", hostname: "my.pathpicker.com", pathname: "/**" },
-      { protocol: "https", hostname: "zensignglobal.com", pathname: "/**" },
-      { protocol: "https", hostname: "logo.clearbit.com", pathname: "/**" },
-      { protocol: "https", hostname: "cdn.prod.website-files.com", pathname: "/**" },
-      { protocol: "https", hostname: "framerusercontent.com", pathname: "/**" },
-    ],
+    remotePatterns: [...REMOTE_IMAGE_PATTERNS],
   },
 };
 

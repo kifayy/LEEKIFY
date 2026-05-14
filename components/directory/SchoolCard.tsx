@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginToSaveSchoolDialog } from "@/components/schools/login-to-save-dialog";
@@ -10,6 +11,10 @@ import { useSchoolMatchScore } from "@/hooks/useSchoolMatchScore";
 import { MatchBreakdownModal } from "./MatchBreakdownModal";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
+import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
+
+/** `sizes` for directory grid: 1 / 2 / 3 columns (~full-bleed card image). */
+const SCHOOL_CARD_HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
 interface SchoolCardProps {
   school: {
@@ -49,6 +54,8 @@ interface SchoolCardProps {
   buttonText?: string;
   buttonPosition?: "overlay" | "bottom";
   hideImageOverlay?: boolean;
+  /** First screen of cards: eager + high fetch priority so LCP heroes resolve faster. */
+  imageLoadPriority?: boolean;
 }
 
 export function SchoolCard({
@@ -66,6 +73,7 @@ export function SchoolCard({
   compactPadding = false,
   buttonText = "Explore",
   buttonPosition = "overlay",
+  imageLoadPriority = false,
 }: SchoolCardProps) {
   const { user } = useAuth();
   const isSignedIn = !!user;
@@ -147,22 +155,43 @@ export function SchoolCard({
   }, [school.id, school.new_image_link, school.featured_image_url, school.image_url, school.banner]);
 
   const showHero = heroIndex < heroUrls.length;
+  const heroSrc = showHero ? heroUrls[heroIndex] : "";
+  const optimizeHero = Boolean(heroSrc && shouldUseNextImageOptimizer(heroSrc));
 
   return (
     <>
       <div className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white rounded-2xl overflow-hidden relative h-full border border-gray-100 shadow-sm">
         <div className={`relative ${imageHeight} overflow-hidden`}>
           {showHero ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={heroUrls[heroIndex]}
-              src={heroUrls[heroIndex]}
-              alt={`${school.name} campus`}
-              className="w-full h-full object-cover"
-              style={schoolHeroImageStyle(school.id)}
-              loading="lazy"
-              onError={() => setHeroIndex((i) => i + 1)}
-            />
+            optimizeHero ? (
+              <Image
+                key={heroSrc}
+                src={heroSrc}
+                alt={`${school.name} campus`}
+                fill
+                className="object-cover"
+                style={schoolHeroImageStyle(school.id)}
+                sizes={SCHOOL_CARD_HERO_SIZES}
+                quality={72}
+                priority={imageLoadPriority}
+                loading={imageLoadPriority ? "eager" : "lazy"}
+                fetchPriority={imageLoadPriority ? "high" : "auto"}
+                onError={() => setHeroIndex((i) => i + 1)}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={heroSrc}
+                src={heroSrc}
+                alt={`${school.name} campus`}
+                className="w-full h-full object-cover"
+                style={schoolHeroImageStyle(school.id)}
+                loading={imageLoadPriority ? "eager" : "lazy"}
+                fetchPriority={imageLoadPriority ? "high" : "auto"}
+                decoding="async"
+                onError={() => setHeroIndex((i) => i + 1)}
+              />
+            )
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 flex items-center justify-center">
               <div className="text-6xl sm:text-7xl opacity-30">{displayEmoji}</div>

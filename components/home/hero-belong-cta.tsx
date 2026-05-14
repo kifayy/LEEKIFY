@@ -14,7 +14,7 @@ const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => 
   alt: "",
 }));
 
-/** Avatars + 5★ + “43.2k+ students matched” — single row (faces before stars), compact. */
+/** Avatars + 5★ + “50k+ students matched” — single row (faces before stars), compact. */
 export function HeroStudentsMatchedWidget({ className }: { className?: string }) {
   return (
     <div
@@ -47,7 +47,7 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
           ))}
         </div>
         <span className="font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-tight tracking-[-0.02em] text-white/80 md:text-[0.6875rem] md:text-violet-950/90">
-          43.2k+ students matched
+          50k+ students matched
         </span>
       </div>
     </div>

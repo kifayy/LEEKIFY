@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Star } from "lucide-react";
 import { AWARDED_APP_NEW_TAB } from "@/components/landing/constants";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import {
@@ -14,6 +15,34 @@ import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
 } from "@/components/home2/testimonials";
+import { HERO_COLLEGE_LOGO_ENTRIES } from "@/lib/hero-college-logos";
+
+type MatchBadge = { src: string; tileBgClass: string };
+
+const RILEY_CHEN_MATCH_BADGE: MatchBadge = {
+  src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Michigan_Wolverines_logo.svg/250px-Michigan_Wolverines_logo.svg.png",
+  tileBgClass: "bg-[#00274C]",
+};
+
+/** One distinct college mark per testimonial (repeated marquee tiles reuse `t.id`). */
+const TESTIMONIAL_ID_TO_MATCH_BADGE: Record<string, MatchBadge> = {
+  ...Object.fromEntries(
+    HOME2_TESTIMONIALS.map((t, i) => {
+      const e = HERO_COLLEGE_LOGO_ENTRIES[i % HERO_COLLEGE_LOGO_ENTRIES.length];
+      return [t.id, { src: e.src, tileBgClass: e.tileBgClass }];
+    }),
+  ),
+  "h2-5": RILEY_CHEN_MATCH_BADGE,
+};
+
+function matchBadgeForTestimonialId(id: string): MatchBadge {
+  return (
+    TESTIMONIAL_ID_TO_MATCH_BADGE[id] ?? {
+      src: HERO_COLLEGE_LOGO_ENTRIES[0].src,
+      tileBgClass: HERO_COLLEGE_LOGO_ENTRIES[0].tileBgClass,
+    }
+  );
+}
 
 function triplicateRotated(items: Home2Testimonial[], rotateBy: number): Home2Testimonial[] {
   if (items.length === 0) return [];
@@ -36,12 +65,14 @@ function PhotoQuoteTile({
   quote,
   name,
   imageSrc,
+  matchBadge,
   eager,
   eagerHighFetch,
 }: {
   quote: string;
   name: string;
   imageSrc?: string;
+  matchBadge: MatchBadge;
   /** Leading strip: eager so visible tiles aren’t deferred on load */
   eager?: boolean;
   /** Only use on the band’s first tile so we don’t starve hero LCP */
@@ -70,6 +101,23 @@ function PhotoQuoteTile({
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/80 via-black/45 to-transparent"
         aria-hidden
       />
+      <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-full bg-white/95 py-0.5 pl-0.5 pr-2 shadow-md ring-1 ring-black/10 backdrop-blur-[2px]">
+        <span
+          className={`relative h-6 w-6 shrink-0 overflow-hidden rounded-full ring-1 ring-black/10 ${matchBadge.tileBgClass}`}
+        >
+          <Image
+            src={matchBadge.src}
+            alt=""
+            fill
+            unoptimized
+            sizes="24px"
+            className="rounded-full object-cover"
+          />
+        </span>
+        <span className="pr-0.5 text-[10px] font-bold leading-none tracking-tight text-neutral-900 md:text-[11px]">
+          #1 Match
+        </span>
+      </div>
       <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
         <p className="text-sm font-bold italic leading-snug">&ldquo;{quote}&rdquo;</p>
         <p className="mt-2 text-xs text-white/90">{name}</p>
@@ -87,10 +135,26 @@ export function StudentsLoveCtaBand() {
   return (
     <div className="flex w-full flex-col items-center px-4 pb-8 pt-2 md:pb-12 md:pt-4 lg:pb-14">
       <div className="w-full max-w-4xl md:mr-0 md:w-full">
+        <div className="mb-3 flex flex-col items-center gap-1.5 md:mb-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <div className="flex items-center gap-0.5" aria-hidden>
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star
+                  key={i}
+                  className="h-4 w-4 fill-amber-400 text-amber-400 md:h-[1.125rem] md:w-[1.125rem]"
+                  strokeWidth={0}
+                />
+              ))}
+            </div>
+            <span className="text-sm font-medium tracking-tight text-neutral-500 md:text-base">
+              Loved by 50k+ Students
+            </span>
+          </div>
+        </div>
         <h3 className={`text-center ${HOME2_SECTION_HEADLINE_CLASS}`}>
-          <span className="md:block">2k+ colleges. One decision.</span>{" "}
+          <span className="md:block">50,000+ Students Found Their</span>{" "}
           <span className="md:mt-1 md:block" style={{ color: HOME2_PURPLE }}>
-            Make it confidently.
+            Dream School
           </span>
         </h3>
         <p className={`mx-auto mt-4 max-w-2xl text-center ${HOME2_SECTION_SUBTEXT_CLASS}`}>
@@ -117,6 +181,7 @@ export function StudentsLoveCtaBand() {
                 quote={t.quote}
                 name={t.name}
                 imageSrc={t.photoUrl}
+                matchBadge={matchBadgeForTestimonialId(t.id)}
                 eager={i < 5}
                 eagerHighFetch={i === 0}
               />
@@ -129,6 +194,7 @@ export function StudentsLoveCtaBand() {
                 quote={t.quote}
                 name={t.name}
                 imageSrc={t.photoUrl}
+                matchBadge={matchBadgeForTestimonialId(t.id)}
                 eager={i < 5}
                 eagerHighFetch={i === 0}
               />

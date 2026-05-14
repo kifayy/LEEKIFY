@@ -126,10 +126,11 @@ export function HeroFigmaDesign() {
                   className="rounded-none"
                   rowGapClassName="gap-2 py-3"
                   spacerClassName="inline-block w-8 shrink-0 sm:w-11"
-                  tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/20 sm:size-11"
+                  tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/25 sm:size-11"
                   trackPaddingClassName="px-0"
-                  rowWrapperClassName="w-full overflow-hidden opacity-[0.58] saturate-[0.92] brightness-105"
+                  rowWrapperClassName="w-full overflow-hidden"
                   imageSizes="(min-width:640px) 44px, 40px"
+                  hiddenFirstRowsBelowMd={2}
                 />
                 <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl">
                   <Image

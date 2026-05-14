@@ -15,6 +15,7 @@ import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
+import { BROWSE_COLLEGE_COLUMNS } from "@/lib/browse-college-select";
 
 const COLLEGES_PER_PAGE = 20;
 
@@ -97,7 +98,7 @@ export function Directory() {
         if (!hasEnvVars) throw new Error("Supabase URL or key missing");
         const supabase = createClient();
 
-        let query = supabase.from("colleges").select("*", { count: "exact" }).limit(BROWSE_FETCH_LIMIT);
+        let query = supabase.from("colleges").select(BROWSE_COLLEGE_COLUMNS, { count: "exact" }).limit(BROWSE_FETCH_LIMIT);
 
         if (debouncedSearchTerm.trim()) {
           const safe = debouncedSearchTerm.trim().replace(/\\/g, "\\\\").replace(/%/g, "\\%");

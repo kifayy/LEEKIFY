@@ -7,6 +7,7 @@ import { exploreCollegeMatchesVibe } from "@/lib/explore-vibe-match";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
+import { BROWSE_COLLEGE_COLUMNS } from "@/lib/browse-college-select";
 
 const BROWSE_FETCH_LIMIT = 5000;
 
@@ -50,7 +51,7 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
       try {
         if (!hasEnvVars) throw new Error("Supabase URL or key missing");
         const supabase = createClient();
-        let query = supabase.from("colleges").select("*").limit(BROWSE_FETCH_LIMIT);
+        let query = supabase.from("colleges").select(BROWSE_COLLEGE_COLUMNS).limit(BROWSE_FETCH_LIMIT);
 
         if (debouncedSearch.trim()) {
           const safe = debouncedSearch.trim().replace(/\\/g, "\\\\").replace(/%/g, "\\%");
