@@ -6,7 +6,9 @@ import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { BRAND_MEDIA } from "@/components/landing/constants";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { useHeroAudience } from "@/components/home/hero-audience-context";
+import { isCareerAudience } from "@/components/home/hero-audience-theme";
 
 /** Same facepile CDN as testimonials / StudentsFinding badge (first four in hero strip). */
 const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => ({
@@ -14,40 +16,53 @@ const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => 
   alt: "",
 }));
 
-/** Avatars + 5★ + “50k+ students matched” — single row (faces before stars), compact. */
+/** Avatars + 5★ + “50k+ matched” — single row (faces before stars), compact. */
 export function HeroStudentsMatchedWidget({ className }: { className?: string }) {
+  const { audience } = useHeroAudience();
+  const career = isCareerAudience(audience);
+
   return (
     <div
       className={cn(
-        "flex min-w-0 flex-nowrap items-center justify-center gap-2 pt-1 md:gap-2.5 lg:justify-start",
+        "flex min-w-0 flex-nowrap items-center justify-center gap-1.5 pt-0.5 md:gap-2 lg:justify-start",
         className
       )}
     >
-      <div className="flex shrink-0 justify-center -space-x-1.5 rtl:space-x-reverse lg:justify-start">
+      <div className="flex shrink-0 justify-center -space-x-1 rtl:space-x-reverse lg:justify-start">
         {STUDENT_AVATARS.map(({ src, alt }, i) => (
           <div
             key={src}
-            className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full ring-1 ring-white shadow-[0_1px_5px_rgba(76,29,149,0.18)] md:h-9 md:w-9"
+            className={cn(
+              "relative h-6 w-6 shrink-0 overflow-hidden rounded-full ring-1 md:h-7 md:w-7",
+              career
+                ? "ring-teal-100/90 shadow-[0_1px_3px_rgba(13,148,136,0.22)]"
+                : "ring-white shadow-[0_1px_3px_rgba(76,29,149,0.14)]"
+            )}
             style={{ zIndex: STUDENT_AVATARS.length - i }}
           >
-            <Image src={src} alt={alt} fill className="object-cover" sizes="36px" />
+            <Image src={src} alt={alt} fill className="object-cover" sizes="28px" />
           </div>
         ))}
       </div>
-      <div className="flex min-w-0 shrink items-center gap-1.5 whitespace-nowrap md:gap-2">
+      <div className="flex min-w-0 shrink items-center gap-1 whitespace-nowrap md:gap-1.5">
         <div
-          className="flex shrink-0 items-center gap-px text-[#EDC531] drop-shadow-[0_0_5px_rgba(237,197,49,0.55)]"
+          className="flex shrink-0 items-center gap-px text-[#EDC531] drop-shadow-[0_0_4px_rgba(237,197,49,0.45)]"
           aria-hidden
         >
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              className="h-2.5 w-2.5 shrink-0 fill-current md:h-3 md:w-3"
+              className="h-2 w-2 shrink-0 fill-current md:h-2.5 md:w-2.5"
             />
           ))}
         </div>
-        <span className="font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-tight tracking-[-0.02em] text-white/80 md:text-[0.6875rem] md:text-violet-950/90">
-          50k+ students matched
+        <span
+          className={cn(
+            "font-[family-name:var(--font-poppins)] text-[0.5625rem] font-medium leading-tight tracking-[-0.02em] text-white/80 md:text-[0.625rem]",
+            career ? "md:text-teal-950/90" : "md:text-violet-950/90"
+          )}
+        >
+          50k+ matched
         </span>
       </div>
     </div>
@@ -55,21 +70,41 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
 }
 
 export function HeroBelongCta() {
+  const { audience } = useHeroAudience();
+  const collegeAudience = audience === "college";
+  const career = isCareerAudience(audience);
+
+  const pillLine = collegeAudience ? "See Where You'll Thrive" : "See Where You Belong";
+  const quizLabel = collegeAudience ? "Career Match Quiz" : "College Match Quiz";
+  const quizHref = collegeAudience ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
+
   return (
     <div className="mx-auto flex w-full max-w-[38rem] flex-col gap-5 lg:mx-0 lg:max-w-none lg:gap-8">
       <div className="flex justify-center lg:justify-start">
-        <div className="flex w-full max-w-[min(100%,420px)] min-h-[52px] items-center gap-2 rounded-full border border-[#956EFE]/25 bg-white p-1.5 pl-4 shadow-[0_2px_12px_rgba(149,110,254,0.12)] md:min-h-[54px] md:gap-3 md:pl-5 lg:max-w-[440px]">
+        <div
+          className={cn(
+            "flex w-full max-w-[min(100%,420px)] min-h-[52px] items-center gap-2 rounded-full border bg-white p-1.5 pl-4 md:min-h-[54px] md:gap-3 md:pl-5 lg:max-w-[440px]",
+            career
+              ? "border-teal-600/25 shadow-[0_2px_12px_rgba(13,148,136,0.14)]"
+              : "border-[#956EFE]/25 shadow-[0_2px_12px_rgba(149,110,254,0.12)]"
+          )}
+        >
           <span className="min-w-0 flex-1 truncate py-2 text-left font-[family-name:var(--font-poppins)] text-[0.9375rem] font-medium tracking-[-0.02em] text-slate-500 md:text-base md:text-slate-600">
-            See Where You Belong
+            {pillLine}
           </span>
           <Link
-            href={COLLEGE_MATCH_QUIZ_URL}
+            href={quizHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[#7C3AED] bg-[#956EFE] px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]"
+            className={cn(
+              "inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]",
+              career
+                ? "border-teal-800 bg-teal-600 shadow-[0_4px_16px_rgba(13,148,136,0.35)] hover:opacity-[0.96]"
+                : "border-[#7C3AED] bg-[#956EFE]"
+            )}
           >
             <span aria-hidden>🎯</span>
-            College Match Quiz
+            {quizLabel}
           </Link>
         </div>
       </div>

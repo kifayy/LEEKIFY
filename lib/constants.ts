@@ -11,6 +11,9 @@ export const SCHOLARSHIP_SCANNER_SMS_URL = `sms:${SCHOLARSHIP_SCANNER_PHONE}?bod
 /** Pathpicker college match / archetype quiz (hosted on my.pathpicker.com). */
 export const COLLEGE_MATCH_QUIZ_URL = "https://my.pathpicker.com/archetype";
 
+/** Career-oriented quiz entry — swap URL here when a distinct college flow exists. */
+export const CAREER_MATCH_QUIZ_URL = COLLEGE_MATCH_QUIZ_URL;
+
 /**
  * Beehiiv hosted signup (iframe/embed). Used as fallback when server-side
  * `BEEHIIV_API_KEY` + `BEEHIIV_PUBLICATION_ID` are not set — see `/api/newsletter/subscribe`.

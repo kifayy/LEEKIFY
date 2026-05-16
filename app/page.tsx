@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
-import { DesktopHeroBanner } from "@/components/home/desktop-hero-banner";
 import { FeaturesSection } from "@/components/home/features-section";
-import { HeroFigmaDesign } from "@/components/home/hero-figma-design";
+import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
 import { HomeBottomStatCards } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
 import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
@@ -112,10 +111,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <DesktopHeroBanner />
-      <div className="md:hidden">
-        <HeroFigmaDesign />
-      </div>
+      <HomeHeroWithAudience />
       <AboutProfileSchoolsSection />
       <HomeScholarshipFeatureShowcase />
       <StudentsLoveSection />
