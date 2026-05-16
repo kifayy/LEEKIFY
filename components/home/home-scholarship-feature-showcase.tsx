@@ -17,33 +17,27 @@ const SKY_PANEL =
 function FeatureImageWhiteVignette({
   strength,
   omitLeftFade,
-  hideOnMobile,
 }: {
   strength: "strong" | "normal";
   omitLeftFade?: boolean;
-  hideOnMobile?: boolean;
 }) {
   const isStrong = strength === "strong";
   return (
     <div
-      className={
-        hideOnMobile
-          ? "pointer-events-none absolute inset-0 z-[2] max-md:hidden"
-          : "pointer-events-none absolute inset-0 z-[2]"
-      }
+      className="pointer-events-none absolute inset-0 z-[2]"
       aria-hidden
     >
       <div
         className={
           isStrong
-            ? "absolute inset-x-0 bottom-0 h-[56%] sm:h-[52%]"
+            ? "absolute inset-x-0 bottom-0 h-[64%] sm:h-[56%]"
             : "absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-white via-white/75 to-transparent sm:h-[40%]"
         }
         style={
           isStrong
             ? {
                 background:
-                  "linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 38%, rgba(255,255,255,0.18) 68%, transparent 100%)",
+                  "linear-gradient(to top, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.72) 30%, rgba(255,255,255,0.38) 55%, rgba(255,255,255,0.12) 76%, transparent 100%)",
               }
             : undefined
         }
@@ -68,14 +62,14 @@ function FeatureImageWhiteVignette({
       <div
         className={
           isStrong
-            ? "absolute inset-y-0 right-0 w-[min(34%,9.5rem)] sm:w-[min(30%,10rem)]"
+            ? "absolute inset-y-0 right-0 w-[min(42%,11rem)] sm:w-[min(36%,10.5rem)]"
             : "absolute inset-y-0 right-0 w-[min(28%,7rem)] bg-gradient-to-l from-white via-white/55 to-transparent sm:w-[min(24%,7.5rem)]"
         }
         style={
           isStrong
             ? {
                 background:
-                  "linear-gradient(to left, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.45) 45%, rgba(255,255,255,0.12) 75%, transparent 100%)",
+                  "linear-gradient(to left, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.58) 38%, rgba(255,255,255,0.24) 66%, transparent 100%)",
               }
             : undefined
         }
@@ -104,7 +98,7 @@ function BrowseFitVisual() {
           className="block h-auto w-full max-w-[min(100%,300px)] object-contain object-left max-md:py-1 md:max-w-[min(100%,430px)]"
         />
       </div>
-      <FeatureImageWhiteVignette strength="strong" omitLeftFade hideOnMobile />
+      <FeatureImageWhiteVignette strength="strong" omitLeftFade />
     </div>
   );
 }
