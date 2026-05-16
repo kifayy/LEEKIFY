@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
 import { FeaturesSection } from "@/components/home/features-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
-import { HomeBottomStatCards } from "@/components/home/home-bottom-stat-cards";
+import {
+  HomeCollegeMatchQuizCta,
+  HomeMatchBenefitsSection,
+} from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
 import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
 import {
+  HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
   HOME_FEATURE_DEEP_PROFILE_IMAGE_URL,
 } from "@/lib/home-feature-showcase-images";
 
@@ -106,7 +110,8 @@ export default async function Home() {
 
   return (
     <>
-      <link rel="preload" href={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL} as="image" fetchPriority="high" />
+      <link rel="preload" href={HOME_FEATURE_BROWSE_FIT_IMAGE_URL} as="image" fetchPriority="high" />
+      <link rel="preload" href={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL} as="image" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -116,8 +121,9 @@ export default async function Home() {
       <HomeScholarshipFeatureShowcase />
       <StudentsLoveSection />
       <FeaturesSection />
+      <HomeMatchBenefitsSection />
       <HomePageFaqs />
-      <HomeBottomStatCards />
+      <HomeCollegeMatchQuizCta />
     </>
   );
 }

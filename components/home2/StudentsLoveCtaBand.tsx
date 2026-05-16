@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
-import {
-  HOME2_PURPLE,
-  HOME2_SECTION_HEADLINE_CLASS,
-  HOME2_SECTION_SUBTEXT_CLASS,
-} from "@/components/home2/constants";
+import { getActiveStudentsLoveSectionTheme } from "@/components/home2/students-love-section-themes";
 import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
@@ -123,6 +119,7 @@ function PhotoQuoteTile({
 }
 
 export function StudentsLoveCtaBand() {
+  const sectionTheme = getActiveStudentsLoveSectionTheme();
   const { row1, row2 } = splitTestimonialsForMarqueeRows(HOME2_TESTIMONIALS);
   const row1Strip = triplicateRotated(row1, 0);
   const row2Strip = triplicateRotated(row2, 0);
@@ -146,17 +143,14 @@ export function StudentsLoveCtaBand() {
             ))}
           </div>
         </div>
-        <h3 className={`text-center ${HOME2_SECTION_HEADLINE_CLASS}`}>
-          <span className="md:block">50,000+ Students Found Their</span>{" "}
-          <span className="md:mt-1 md:block" style={{ color: HOME2_PURPLE }}>
-            Dream School
-          </span>
+        <h3 className={`text-center ${sectionTheme.headlineClass}`}>
+          <span className={sectionTheme.headlineLeadClass}>50k+ Found Their </span>
+          <span className={sectionTheme.accentPhraseClass}>Dream School</span>
         </h3>
-        <p className={`mx-auto mt-4 max-w-2xl text-center ${HOME2_SECTION_SUBTEXT_CLASS}`}>
-          We match your goals, values, and strengths against thousands of schools to find your best
-          matches.
+        <p className={`mx-auto mt-4 max-w-2xl text-center ${sectionTheme.subtextClass}`}>
+          Personality matters. See fit, admission odds, and campus happiness—not just where you can get in.
         </p>
-        <div className="relative mt-10 flex w-screen shrink-0 flex-col gap-3 overflow-hidden ml-[calc(50%-50vw)] md:mt-12 md:gap-4">
+        <div className="marquee-fade-edges relative mt-10 flex w-screen shrink-0 flex-col gap-3 overflow-hidden ml-[calc(50%-50vw)] md:mt-12 md:gap-4">
           <div className="home2-marquee-track flex w-max gap-0 pr-4">
             {loopRow1.map((t, i) => (
               <PhotoQuoteTile

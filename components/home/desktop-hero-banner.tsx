@@ -24,7 +24,7 @@ const HERO_BG_URL =
 /** Same asset as mobile `HeroFigmaDesign` hero image */
 const HERO_STUDENT_URL = "https://my.pathpicker.com/images/hero-student.png";
 
-const ROTATING_HIGH_SCHOOL = ["Dream School", "Chances", "Future Path"];
+const ROTATING_HIGH_SCHOOL = ["Dream School", "Chances", "Future Path", "Deep Stats"];
 const ROTATING_COLLEGE_STUDENTS = ["Dream Job", "AI Risk", "Future Salary"];
 const TYPE_MS = 80;
 const PAUSE_MS = 2000;

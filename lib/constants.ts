@@ -20,3 +20,7 @@ export const CAREER_MATCH_QUIZ_URL = COLLEGE_MATCH_QUIZ_URL;
  */
 export const BEEHIIV_EMBED_SUBSCRIBE_URL =
   "https://subscribe-forms.beehiiv.com/22508440-48d4-4c89-845f-6e9406a7b6d2";
+
+/** Awarded scholarship inbox embed — home page desktop band below FAQ. */
+export const BEEHIIV_SCHOLARSHIP_INBOX_EMBED_URL =
+  "https://subscribe-forms.beehiiv.com/5816d6e7-43de-41b2-bfa7-fb996a33745f";

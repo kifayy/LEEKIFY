@@ -7,7 +7,7 @@ const DISCOVERY_CARDS = [
   {
     title: "Commit With Zero Regrets",
     description:
-      "Most students feel doubt after choosing a school. We eliminate that. When you commit, you'll know, not hope if it's the right fit.",
+      "Most students second-guess their college pick. PathPicker helps you commit to a school that fits your personality and goals, so you know it is the right fit, not just a lucky guess.",
     lottieSrc: "/animations/meditating-brain.lottie",
     accentColor: "#EC4899",
     surfaceGradient: "linear-gradient(180deg, #fdf2f8 0%, #fffafb 28%, #ffffff 52%, #ffffff 100%)",
@@ -15,7 +15,7 @@ const DISCOVERY_CARDS = [
   {
     title: "Clarity in Minutes, Not Months",
     description:
-      "No endless campus visits or stressful nights researching. Answer a few questions and get your personalized college fit scores instantly.",
+      "Skip endless research tabs. Take a short college match quiz and get personalized fit scores, admission context, and happiness signals in minutes.",
     lottieSrc: "/animations/time.lottie",
     accentColor: "#10B981",
     surfaceGradient: "linear-gradient(180deg, #ecfdf5 0%, #f0fdf9 30%, #ffffff 55%, #ffffff 100%)",
@@ -23,7 +23,7 @@ const DISCOVERY_CARDS = [
   {
     title: "40,000 Students Can't Be Wrong",
     description:
-      "98% of our students committed to one of their top matches after seeing their results.",
+      "98% of students committed to one of their top college matches after seeing personality-aware fit results, not rankings alone.",
     lottieSrc: "/animations/champion.lottie",
     accentColor: "#F59E0B",
     surfaceGradient: "linear-gradient(180deg, #fffbeb 0%, #fffbf0 30%, #ffffff 55%, #ffffff 100%)",
@@ -37,7 +37,7 @@ export function FeaturesSection() {
     <section
       id="student-discovery-tools"
       className="w-full min-w-0 scroll-mt-28 overflow-x-hidden bg-white pt-4 pb-10 md:pt-8 md:pb-16"
-      aria-label="How PathPicker helps you choose"
+      aria-label="How PathPicker helps you find the right college fit"
     >
       <div className="container mx-auto max-w-6xl min-w-0 px-4 md:px-6">
         {SHOW_WHATS_PATHPICKER_WIDGET ? <WhatsPathPickerWidget /> : null}

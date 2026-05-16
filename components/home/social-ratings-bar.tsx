@@ -15,7 +15,7 @@ const STAR_FULL = "/images/social-proof/star-full.svg";
 const STAR_HALF = "/images/social-proof/star-half.svg";
 const GOOGLE_LOGO = "/images/social-proof/google-colored.svg";
 const APP_STORE_LOGO = "/images/social-proof/app-store-badge.svg";
-const TRUSTPILOT_GRAPHIC = "/images/social-proof/trustpilot.svg";
+const TRUSTPILOT_GRAPHIC = "/images/social-proof/trustpilot.png";
 
 function RatingStars({
   scoreLabel,
@@ -53,7 +53,7 @@ function RatingStars({
 
 function TrustpilotBlock({ priority }: { priority?: boolean }) {
   return (
-    <div className="flex min-h-[130px] shrink-0 justify-center pt-3">
+    <div className="flex min-h-[130px] shrink-0 justify-center pt-6">
       <a
         href="https://www.trustpilot.com/"
         target="_blank"
@@ -64,9 +64,9 @@ function TrustpilotBlock({ priority }: { priority?: boolean }) {
         <Image
           src={TRUSTPILOT_GRAPHIC}
           alt=""
-          width={140}
-          height={80}
-          className="h-auto w-[min(100vw-2rem,140px)] max-w-[140px]"
+          width={220}
+          height={160}
+          className="h-auto w-[min(100vw-2rem,200px)] max-w-[200px]"
           priority={priority}
         />
       </a>

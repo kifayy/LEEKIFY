@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
 import { cn } from "@/lib/utils";
 
 /** 0–1: how far the page has been scrolled through its scrollable range. */
@@ -43,18 +42,7 @@ export function MobileScholarshipQuizStickyFooter() {
       aria-hidden={!visible}
     >
       <div className={cn("pointer-events-auto py-2", !visible && "pointer-events-none")}>
-        <Link
-          href={COLLEGE_MATCH_QUIZ_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          tabIndex={visible ? undefined : -1}
-          className="inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#7C3AED] bg-[#956EFE] px-8 text-base font-semibold text-white shadow-[0_4px_20px_rgba(149,110,254,0.35)] transition hover:opacity-95 active:opacity-90"
-        >
-          <span className="text-lg leading-none" aria-hidden>
-            🎯
-          </span>
-          College Match Quiz
-        </Link>
+        <CollegeMatchQuizCtaLink tabIndex={visible ? undefined : -1} />
       </div>
     </div>
   );

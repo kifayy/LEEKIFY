@@ -51,10 +51,6 @@ export const HERO_COLLEGE_LOGO_ENTRIES = [
     src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Tulane_University_Logo.svg/250px-Tulane_University_Logo.svg.png",
     tileBgClass: "bg-[#006747]",
   },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/0/04/UVA_Cavaliers_logo.png",
-    tileBgClass: "bg-[#232D4D]",
-  },
 ] as const;
 
 export type HeroCollegeLogoEntry = (typeof HERO_COLLEGE_LOGO_ENTRIES)[number];

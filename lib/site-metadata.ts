@@ -2,4 +2,4 @@
 export const DEFAULT_SITE_TITLE = "PathPicker | College Match & Finder Quiz";
 
 export const DEFAULT_SITE_DESCRIPTION =
-  "We analyze your personality and academic indicators across 2,000+ schools to find your true college path.";
+  "Free college match quiz: compare 2,000+ schools on personality fit, admission odds, and happiness signals—not just rankings or grades alone.";

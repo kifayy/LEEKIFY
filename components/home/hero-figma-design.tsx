@@ -19,7 +19,7 @@ import {
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { CAREER_HERO_PORTRAIT_URL } from "@/lib/hero-career-content";
 
-const ROTATING_HIGH_SCHOOL = ["Dream School", "Chances", "Future Path"];
+const ROTATING_HIGH_SCHOOL = ["Dream School", "Chances", "Future Path", "Deep Stats"];
 const ROTATING_COLLEGE_STUDENTS = ["Dream Job", "AI Risk", "Future Salary"];
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;

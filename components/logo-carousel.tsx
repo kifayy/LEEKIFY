@@ -3,7 +3,6 @@ import Image from "next/image";
 const LOGO_CAROUSEL_IMAGES = [
   "https://storage.googleapis.com/images_592/51.png",
   "https://storage.googleapis.com/images_592/72.png",
-  "https://storage.googleapis.com/images_592/612.png",
   "https://storage.googleapis.com/images_592/721.png",
   "https://storage.googleapis.com/images_592/22.png",
 ];
