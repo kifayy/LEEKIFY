@@ -115,8 +115,8 @@ export default async function Home() {
       <AboutProfileSchoolsSection />
       <HomeScholarshipFeatureShowcase />
       <StudentsLoveSection />
-      <HomePageFaqs />
       <FeaturesSection />
+      <HomePageFaqs />
       <HomeBottomStatCards />
     </>
   );

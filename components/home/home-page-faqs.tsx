@@ -5,12 +5,12 @@ const FAQ_ITEMS: { question: string; answer: ReactNode }[] = [
   {
     question: "How does the analysis work?",
     answer:
-      "We use your quiz answers and student profile to match you across 106+ datapoints and 2,000+ schools, and find you the colleges where you fit best—not generic, one-size-fits-all rankings.",
+      "We use your quiz answers and student profile to match you across 106+ datapoints and 2,000+ schools, and find you the colleges where you fit best, not generic, one-size-fits-all rankings.",
   },
   {
     question: "What's the 30-day money-back guarantee?",
     answer:
-      "If you're not satisfied with your report, contact us within 30 days of purchase and we'll refund you—no hassle. We want you to try PathPicker risk-free.",
+      "If you're not satisfied with your report, contact us within 30 days of purchase and we'll refund you with no hassle. We want you to try PathPicker risk-free.",
   },
   {
     question: "Is my information secure?",

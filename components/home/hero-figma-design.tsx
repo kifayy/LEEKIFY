@@ -35,8 +35,7 @@ const MOBILE_HERO_BG_URL =
 export function HeroFigmaDesign() {
   const { audience } = useHeroAudience();
   const career = isCareerAudience(audience);
-  const rotatingWords =
-    audience === "college" ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
+  const rotatingWords = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
 
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(ROTATING_HIGH_SCHOOL[0].length);
@@ -47,11 +46,10 @@ export function HeroFigmaDesign() {
 
   useLayoutEffect(() => {
     setWordIndex(0);
-    const next =
-      audience === "college" ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
+    const next = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
     setCharIndex(next[0].length);
     setIsDeleting(false);
-  }, [audience]);
+  }, [career]);
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -76,9 +74,8 @@ export function HeroFigmaDesign() {
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, word, wordIndex, rotatingWords]);
 
-  const quizHref =
-    audience === "college" ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
-  const quizLabel = audience === "college" ? "Career Match Quiz" : "College Match Quiz";
+  const quizHref = career ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
+  const quizLabel = career ? "Career Match Quiz" : "College Match Quiz";
 
   return (
     <section

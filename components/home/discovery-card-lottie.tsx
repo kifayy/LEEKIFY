@@ -12,7 +12,7 @@ export function DiscoveryCardLottie({ src, className }: DiscoveryCardLottieProps
   return (
     <div
       className={cn(
-        "flex min-h-[200px] w-full items-center justify-center overflow-hidden rounded-2xl sm:min-h-[220px]",
+        "flex min-h-[150px] w-full items-center justify-center overflow-hidden rounded-2xl sm:min-h-[170px]",
         className
       )}
       aria-hidden
@@ -21,7 +21,7 @@ export function DiscoveryCardLottie({ src, className }: DiscoveryCardLottieProps
         src={src}
         loop
         autoplay
-        className="h-full max-h-[240px] w-full max-w-[420px]"
+        className="h-full max-h-[190px] w-full max-w-[320px]"
       />
     </div>
   );

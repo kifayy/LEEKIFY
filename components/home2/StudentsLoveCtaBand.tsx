@@ -1,13 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Star } from "lucide-react";
-import { AWARDED_APP_NEW_TAB } from "@/components/landing/constants";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import {
   HOME2_PURPLE,
-  HOME2_PURPLE_DEEP,
   HOME2_SECTION_HEADLINE_CLASS,
   HOME2_SECTION_SUBTEXT_CLASS,
 } from "@/components/home2/constants";
@@ -160,18 +156,6 @@ export function StudentsLoveCtaBand() {
           We match your goals, values, and strengths against thousands of schools to find your best
           matches.
         </p>
-        <div className="mt-6 flex justify-center md:mt-8">
-          <Link
-            href={COLLEGE_MATCH_QUIZ_URL}
-            {...AWARDED_APP_NEW_TAB}
-            className="inline-flex items-center justify-center rounded-full px-6 py-3 text-center text-lg font-bold text-white shadow-md transition hover:opacity-95 hover:shadow-lg md:px-8 md:py-3.5 md:text-xl"
-            style={{
-              background: `linear-gradient(180deg, ${HOME2_PURPLE} 0%, ${HOME2_PURPLE_DEEP} 100%)`,
-            }}
-          >
-            College Match Quiz
-          </Link>
-        </div>
         <div className="relative mt-10 flex w-screen shrink-0 flex-col gap-3 overflow-hidden ml-[calc(50%-50vw)] md:mt-12 md:gap-4">
           <div className="home2-marquee-track flex w-max gap-0 pr-4">
             {loopRow1.map((t, i) => (

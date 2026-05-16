@@ -19,7 +19,7 @@ const REVIEWS = [
   },
   {
     name: "Claudia Hader",
-    quote: "Narrowed my list fast—actually excited to tour these schools.",
+    quote: "Narrowed my list fast, actually excited to tour these schools.",
     avatar:
       "https://storage.googleapis.com/images_592/Gemini_Generated_Image_po0e4bpo0e4bpo0e.png",
   },

@@ -33,8 +33,7 @@ const BACKSPACE_MS = 50;
 export function DesktopHeroBanner() {
   const { audience } = useHeroAudience();
   const career = isCareerAudience(audience);
-  const rotatingWords =
-    audience === "college" ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
+  const rotatingWords = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
 
   const [wordIndex, setWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState(rotatingWords[0]);
@@ -42,11 +41,10 @@ export function DesktopHeroBanner() {
 
   useLayoutEffect(() => {
     setWordIndex(0);
-    const nextWords =
-      audience === "college" ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
+    const nextWords = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
     setDisplayText(nextWords[0]);
     setIsDeleting(false);
-  }, [audience]);
+  }, [career]);
 
   useEffect(() => {
     const word = rotatingWords[wordIndex];

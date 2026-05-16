@@ -16,7 +16,7 @@ const FEATURES = [
     image: "https://storage.googleapis.com/images_592/flying-money_3141991%20(2).png",
     title: "School matches",
     description:
-      "See colleges that fit your profile and goals—we rank options so you can compare faster.",
+      "See colleges that fit your profile and goals; we rank options so you can compare faster.",
   },
   {
     image: "https://storage.googleapis.com/images_592/money_2308887.png",

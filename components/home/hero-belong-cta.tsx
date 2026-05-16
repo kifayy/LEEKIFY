@@ -71,12 +71,11 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
 
 export function HeroBelongCta() {
   const { audience } = useHeroAudience();
-  const collegeAudience = audience === "college";
   const career = isCareerAudience(audience);
 
-  const pillLine = collegeAudience ? "See Where You'll Thrive" : "See Where You Belong";
-  const quizLabel = collegeAudience ? "Career Match Quiz" : "College Match Quiz";
-  const quizHref = collegeAudience ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
+  const pillLine = career ? "See Where You'll Thrive" : "See Where You Belong";
+  const quizLabel = career ? "Career Match Quiz" : "College Match Quiz";
+  const quizHref = career ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
 
   return (
     <div className="mx-auto flex w-full max-w-[38rem] flex-col gap-5 lg:mx-0 lg:max-w-none lg:gap-8">

@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import { isCareerAudience } from "@/components/home/hero-audience-theme";
+import { HOME_HERO_UNIVERSITY_STUDENT_ENABLED } from "@/lib/home-hero-university-student-variant";
 
 /** HS vs current college students — drives hero copy + quiz CTA label/link. */
 export type HeroAudience = "highSchool" | "college";
@@ -27,6 +28,7 @@ export function HeroAudienceProvider({ children }: { children: ReactNode }) {
   const [audience, setAudienceState] = useState<HeroAudience>("highSchool");
 
   const setAudience = useCallback((next: HeroAudience) => {
+    if (!HOME_HERO_UNIVERSITY_STUDENT_ENABLED && next === "college") return;
     setAudienceState(next);
   }, []);
 
@@ -66,6 +68,8 @@ export function HeroAudienceToggle({ className, size = "default" }: HeroAudience
   const career = isCareerAudience(audience);
 
   const compact = size === "compact";
+
+  if (!HOME_HERO_UNIVERSITY_STUDENT_ENABLED) return null;
 
   return (
     <div className={cn("flex w-full max-w-[min(100%,26rem)] flex-col sm:max-w-none", className)}>
