@@ -118,7 +118,7 @@ export function HeroQuizCards() {
                   <span
                     className="flex w-full items-center justify-center gap-2 rounded-full py-4 text-base font-normal text-white transition-opacity group-hover:opacity-95"
                     style={{
-                      background: "#956EFE",
+                      background: "#956DFE",
                     }}
                   >
                     {CARD.cta}

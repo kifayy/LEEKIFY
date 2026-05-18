@@ -70,7 +70,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white transition-transform duration-300 ease-out md:h-32 lg:h-36 lg:border-b lg:border-[#E5E5E7] lg:bg-[#FAFAFB] lg:shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+        className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white transition-transform duration-300 ease-out md:h-32 lg:relative lg:top-auto lg:z-10 lg:h-36 lg:border-0 lg:bg-[#F4F2FF] lg:shadow-none"
         style={{
           transform: isMobile && scrolledPastThreshold ? "translateY(-100%)" : undefined,
         }}

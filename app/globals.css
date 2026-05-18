@@ -58,6 +58,16 @@
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+  img,
+  picture,
+  picture img,
+  video,
+  [data-protected-media] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+  }
   h1, h2, h3 {
     font-weight: 700;
     color: #181A1D;

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { BRAND_MEDIA } from "@/components/landing/constants";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { useHeroAudience } from "@/components/home/hero-audience-context";
-import { isCareerAudience } from "@/components/home/hero-audience-theme";
+import { HERO_PURPLE, HERO_PURPLE_RGB, isCareerAudience } from "@/components/home/hero-audience-theme";
 
 /** Same facepile CDN as testimonials / StudentsFinding badge (first four in hero strip). */
 const STUDENT_AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4).map((src) => ({
@@ -36,7 +36,7 @@ export function HeroStudentsMatchedWidget({ className }: { className?: string })
               "relative h-6 w-6 shrink-0 overflow-hidden rounded-full ring-1 md:h-7 md:w-7",
               career
                 ? "ring-teal-100/90 shadow-[0_1px_3px_rgba(13,148,136,0.22)]"
-                : "ring-white shadow-[0_1px_3px_rgba(76,29,149,0.14)]"
+                : "ring-white shadow-[0_1px_3px_rgba(149,109,254,0.14)]"
             )}
             style={{ zIndex: STUDENT_AVATARS.length - i }}
           >
@@ -85,7 +85,7 @@ export function HeroBelongCta() {
             "flex w-full max-w-[min(100%,420px)] min-h-[52px] items-center gap-2 rounded-full border bg-white p-1.5 pl-4 md:min-h-[54px] md:gap-3 md:pl-5 lg:max-w-[440px]",
             career
               ? "border-teal-600/25 shadow-[0_2px_12px_rgba(13,148,136,0.14)]"
-              : "border-[#956EFE]/25 shadow-[0_2px_12px_rgba(149,110,254,0.12)]"
+              : "border-[#956DFE]/25 shadow-[0_2px_12px_rgba(149,109,254,0.12)]"
           )}
         >
           <span className="min-w-0 flex-1 truncate py-2 text-left font-[family-name:var(--font-poppins)] text-[0.9375rem] font-medium tracking-[-0.02em] text-slate-500 md:text-base md:text-slate-600">
@@ -96,11 +96,15 @@ export function HeroBelongCta() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]",
-              career
-                ? "border-teal-800 bg-teal-600 shadow-[0_4px_16px_rgba(13,148,136,0.35)] hover:opacity-[0.96]"
-                : "border-[#7C3AED] bg-[#956EFE]"
+              "inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-4 py-2 text-[0.8125rem] font-semibold text-white transition hover:opacity-95 md:px-5 md:py-2.5 md:text-[0.9375rem]",
+              career && "border-teal-800 bg-teal-600 hover:opacity-[0.96]",
+              !career && "border-[#8568ED]"
             )}
+            style={
+              career
+                ? { boxShadow: "0 4px 16px rgba(13, 148, 136, 0.35)" }
+                : { backgroundColor: HERO_PURPLE, boxShadow: `0 4px 16px rgba(${HERO_PURPLE_RGB}, 0.35)` }
+            }
           >
             <span aria-hidden>🎯</span>
             {quizLabel}

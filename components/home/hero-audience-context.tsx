@@ -99,7 +99,7 @@ export function HeroAudienceToggle({ className, size = "default" }: HeroAudience
             audience === "college"
               ? career
                 ? "bg-gradient-to-br from-teal-600 via-teal-600 to-emerald-700 md:from-teal-600 md:to-teal-700"
-                : "bg-[#956EFE] md:bg-[#8658f5]"
+                : "bg-[#956DFE] md:bg-[#8568ED]"
               : "bg-white md:bg-white"
           )}
         />
@@ -117,7 +117,7 @@ export function HeroAudienceToggle({ className, size = "default" }: HeroAudience
                   "flex items-center justify-center rounded-[8px] font-[family-name:var(--font-poppins)] leading-[1.1] tracking-[-0.02em] transition-colors duration-200 md:rounded-[10px]",
                   compact ? "px-1 py-0.5 sm:px-1.5" : "px-1.5 py-0.5 sm:px-2",
                   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-                  career ? "focus-visible:outline-teal-200 md:focus-visible:outline-teal-600" : "focus-visible:outline-white/90 md:focus-visible:outline-[#7C3AED]",
+                  career ? "focus-visible:outline-teal-200 md:focus-visible:outline-teal-600" : "focus-visible:outline-white/90 md:focus-visible:outline-[#956DFE]",
                   compact
                     ? "text-[0.625rem] font-semibold sm:text-[0.6875rem] md:text-sm"
                     : "text-[0.625rem] font-semibold sm:text-[0.6875rem] md:text-xs lg:text-sm",

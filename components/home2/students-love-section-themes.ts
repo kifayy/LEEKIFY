@@ -36,16 +36,16 @@ export const STUDENTS_LOVE_SECTION_THEMES: Record<
     id: "lightPurple",
     label: "Light purple",
     description: "Soft lavender band — on-brand without heavy saturation; dark text throughout.",
-    bg: "#ebe6ff",
+    bg: "#F4F2FF",
     gradient:
-      "linear-gradient(180deg, #f7f4ff 0%, #ebe6ff 20%, #e2d9ff 46%, #e8e2ff 70%, #f3efff 100%)",
-    borderClass: "border-violet-200/55",
+      "linear-gradient(180deg, #faf9ff 0%, #F4F2FF 22%, #F4F2FF 48%, #f0edff 72%, #F4F2FF 100%)",
+    borderClass: "border-violet-200/40",
     radialGlow:
-      "radial-gradient(ellipse 88% 68% at 50% 38%, rgba(149, 110, 254, 0.16) 0%, transparent 65%)",
+      "radial-gradient(ellipse 88% 68% at 50% 38%, rgba(149, 109, 254, 0.12) 0%, transparent 65%)",
     blobs: [
-      "absolute -left-[10%] top-[8%] h-[min(400px,52vw)] w-[min(400px,52vw)] rounded-full bg-violet-300/40 blur-[80px]",
-      "absolute -right-[8%] top-[20%] h-[min(340px,46vw)] w-[min(340px,46vw)] rounded-full bg-purple-200/45 blur-[72px]",
-      "absolute left-[32%] bottom-[5%] h-[min(260px,36vw)] w-[min(300px,40vw)] rounded-full bg-indigo-200/30 blur-[68px]",
+      "absolute -left-[10%] top-[8%] h-[min(400px,52vw)] w-[min(400px,52vw)] rounded-full bg-violet-200/30 blur-[80px]",
+      "absolute -right-[8%] top-[20%] h-[min(340px,46vw)] w-[min(340px,46vw)] rounded-full bg-purple-100/35 blur-[72px]",
+      "absolute left-[32%] bottom-[5%] h-[min(260px,36vw)] w-[min(300px,40vw)] rounded-full bg-violet-100/25 blur-[68px]",
     ],
     headlineClass: HOME2_SECTION_HEADLINE_SCALE_CLASS,
     headlineLeadClass: "text-neutral-800",

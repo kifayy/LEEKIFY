@@ -110,7 +110,14 @@ export default async function Home() {
 
   return (
     <>
-      <link rel="preload" href={HOME_FEATURE_BROWSE_FIT_IMAGE_URL} as="image" fetchPriority="high" />
+      <link
+        rel="preload"
+        href="/images/group-100000s5829.webp"
+        as="image"
+        fetchPriority="high"
+        media="(min-width: 768px)"
+      />
+      <link rel="preload" href={HOME_FEATURE_BROWSE_FIT_IMAGE_URL} as="image" />
       <link rel="preload" href={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL} as="image" />
       <script
         type="application/ld+json"

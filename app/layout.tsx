@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
+import { SiteImageProtection } from "@/components/site-image-protection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
 import "./globals.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://framerusercontent.com" />
       </head>
       <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}>
+          <SiteImageProtection />
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
           <Script id="google-analytics" strategy="lazyOnload">
             {`
@@ -104,7 +106,7 @@ export default function RootLayout({
             <CountryLayout>
             <div className="relative flex min-w-0 flex-col overflow-x-hidden">
               <SiteHeader />
-              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-36">
+              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-0">
                 {children}
               </main>
               {/* Image strip connecting into the footer (now shown on all viewports) */}
@@ -115,6 +117,7 @@ export default function RootLayout({
                   width={1600}
                   height={400}
                   className="block h-auto w-full object-cover"
+                  draggable={false}
                   unoptimized
                 />
               </div>

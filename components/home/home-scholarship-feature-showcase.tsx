@@ -260,7 +260,7 @@ export function HomeScholarshipFeatureShowcase() {
     >
       <div className="mx-auto w-full max-w-[min(100%,1420px)] px-5 sm:px-8 lg:px-12 xl:px-14 2xl:px-16">
         {/* Row 1: image left */}
-        <div className="grid grid-cols-1 items-center gap-8 border-b border-slate-100 py-10 max-md:gap-8 max-md:px-0 md:grid-cols-12 md:items-stretch md:gap-12 md:py-14 md:px-0 lg:gap-14 xl:gap-16">
+        <div className="grid grid-cols-1 items-center gap-8 border-b border-slate-100 py-10 max-md:gap-8 max-md:px-0 md:grid-cols-12 md:items-stretch md:gap-12 md:px-0 md:pb-14 md:pt-0 lg:gap-14 xl:gap-16">
           <div className="w-full max-md:-ml-5 max-md:w-[calc(100%+1.25rem)] max-md:max-w-none md:col-span-6 md:ml-0 md:w-auto">
             <BrowseFitVisual />
           </div>

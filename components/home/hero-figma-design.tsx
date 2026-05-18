@@ -13,14 +13,17 @@ import {
 } from "@/components/home/hero-audience-context";
 import {
   CAREER_GRADIENT,
+  HERO_PURPLE,
+  HERO_PURPLE_RGB,
   HS_GRADIENT,
   isCareerAudience,
 } from "@/components/home/hero-audience-theme";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { CAREER_HERO_PORTRAIT_URL } from "@/lib/hero-career-content";
-
-const ROTATING_HIGH_SCHOOL = ["Dream School", "Chances", "Future Path", "Deep Stats"];
-const ROTATING_COLLEGE_STUDENTS = ["Dream Job", "AI Risk", "Future Salary"];
+import {
+  HERO_PATH_TYPEWRITER_SPACER,
+  HERO_PATH_TYPEWRITER_WORDS,
+} from "@/lib/hero-path-typewriter-words";
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;
 const DELETE_DELAY_MS = 55;
@@ -35,19 +38,17 @@ const MOBILE_HERO_BG_URL =
 export function HeroFigmaDesign() {
   const { audience } = useHeroAudience();
   const career = isCareerAudience(audience);
-  const rotatingWords = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
 
   const [wordIndex, setWordIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(ROTATING_HIGH_SCHOOL[0].length);
+  const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const word = rotatingWords[wordIndex];
+  const word = HERO_PATH_TYPEWRITER_WORDS[wordIndex];
   const displayedText = word.slice(0, charIndex);
 
   useLayoutEffect(() => {
     setWordIndex(0);
-    const next = career ? ROTATING_COLLEGE_STUDENTS : ROTATING_HIGH_SCHOOL;
-    setCharIndex(next[0].length);
+    setCharIndex(0);
     setIsDeleting(false);
   }, [career]);
 
@@ -65,14 +66,14 @@ export function HeroFigmaDesign() {
             setCharIndex((c) => c - 1);
           } else {
             setIsDeleting(false);
-            setWordIndex((i) => (i + 1) % rotatingWords.length);
+            setWordIndex((i) => (i + 1) % HERO_PATH_TYPEWRITER_WORDS.length);
           }
         }
       },
       isDeleting ? DELETE_DELAY_MS : charIndex === word.length ? HOLD_DELAY_MS : TYPE_DELAY_MS
     );
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, word, wordIndex, rotatingWords]);
+  }, [charIndex, isDeleting, word, wordIndex]);
 
   const quizHref = career ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
   const quizLabel = career ? "Career Match Quiz" : "College Match Quiz";
@@ -81,8 +82,9 @@ export function HeroFigmaDesign() {
     <section
       className={cn(
         "relative w-full shrink-0 overflow-x-hidden overflow-y-hidden pt-6 pb-0 md:bg-white md:py-8 md:pb-8 lg:py-10 lg:pb-10 min-w-0",
-        career ? "bg-teal-700 pb-8 md:pb-8" : "bg-[#956EFE]"
+        career ? "bg-teal-700 pb-8 md:pb-8" : "md:bg-white"
       )}
+      style={career ? undefined : { backgroundColor: HERO_PURPLE }}
     >
       {/* Mobile (< md): layered backdrop aligned with desktop hero */}
       <div className="pointer-events-none absolute inset-0 z-0 md:hidden" aria-hidden>
@@ -110,7 +112,7 @@ export function HeroFigmaDesign() {
       {/* Blurred blue glow — tablet/desktop only (mobile uses lavender wash above) */}
       <div
         className="pointer-events-none absolute left-1/2 top-8 z-[1] hidden h-[305px] w-[312px] -translate-x-1/2 rounded-full opacity-[0.18] blur-[197px] md:left-[45%] md:top-12 md:block md:translate-x-0"
-        style={{ backgroundColor: career ? "rgb(13, 148, 136)" : "rgb(61, 159, 251)" }}
+        style={{ backgroundColor: career ? "rgb(13, 148, 136)" : HERO_PURPLE }}
       />
 
       <div className="container relative z-[3] mx-auto max-w-6xl px-4 md:px-6 min-w-0">
@@ -126,20 +128,23 @@ export function HeroFigmaDesign() {
                 <h1
                   className={cn(
                     "w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]",
-                    career
-                      ? "text-white [text-shadow:0_2px_24px_rgba(6,78,59,0.45)] md:text-[#181A1D] md:[text-shadow:none]"
-                      : "text-white [text-shadow:0_2px_24px_rgba(76,29,149,0.42)] md:text-[#181A1D] md:[text-shadow:none]"
+                    "text-white md:text-[#181A1D] md:[text-shadow:none]"
                   )}
+                  style={
+                    career
+                      ? { textShadow: "0 2px 24px rgba(6, 78, 59, 0.45)" }
+                      : { textShadow: `0 2px 24px rgba(${HERO_PURPLE_RGB}, 0.42)` }
+                  }
                 >
                   <span className="block w-full text-center lg:text-left">Find your</span>
                   <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
                     <span className="invisible" aria-hidden>
-                      Future Salary
+                      {HERO_PATH_TYPEWRITER_SPACER}
                     </span>
                     <span
                       className={cn(
                         "absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap lg:left-0 lg:translate-x-0",
-                        career ? "text-teal-50 md:text-teal-600" : "text-[#F5F3FF] md:text-[#956EFE]"
+                        career ? "text-teal-50 md:text-teal-600" : "text-[#F5F3FF] md:text-[#956DFE]"
                       )}
                     >
                       {displayedText}
@@ -187,7 +192,7 @@ export function HeroFigmaDesign() {
                     className="rounded-none"
                     rowGapClassName="gap-2 py-3"
                     spacerClassName="inline-block w-8 shrink-0 sm:w-11"
-                    tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(76,29,149,0.35)] ring-1 ring-white/25 sm:size-11"
+                    tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-xl shadow-[0_2px_12px_rgba(149,109,254,0.35)] ring-1 ring-white/25 sm:size-11"
                     trackPaddingClassName="px-0"
                     rowWrapperClassName="w-full overflow-hidden"
                     imageSizes="(min-width:640px) 44px, 40px"
@@ -247,7 +252,7 @@ export function HeroFigmaDesign() {
                     unoptimized
                   />
                 </div>
-                <p className="text-xs font-bold leading-tight md:text-sm" style={{ color: "#956EFE" }}>
+                <p className="text-xs font-bold leading-tight md:text-sm" style={{ color: HERO_PURPLE }}>
                   82% Ivy League Match
                 </p>
               </div>
