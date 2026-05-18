@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CopyrightYear } from "@/components/copyright-year";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const LOGO_URL =
   "https://storage.googleapis.com/images_592/black%20white%20grow%20logo%20(3).png";
@@ -19,7 +20,7 @@ const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/archetype-quiz", label: "College Match Quiz" },
+      { href: COLLEGE_MATCH_QUIZ_URL, label: "College Match Quiz" },
       { href: "/browse-schools", label: "Browse Schools" },
       { href: "/#deep-profile-rankings", label: "Features" },
       { href: "/#commit-with-zero-regrets", label: "How it Works" },

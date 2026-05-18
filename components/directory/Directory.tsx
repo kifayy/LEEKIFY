@@ -130,7 +130,13 @@ export function Directory() {
         setHasMoreColleges(more);
       } catch (e) {
         if (ac.signal.aborted || gen !== fetchGenerationRef.current) return;
-        console.error(e);
+        const msg =
+          e && typeof e === "object" && "message" in e && typeof (e as { message: unknown }).message === "string"
+            ? (e as { message: string }).message
+            : e instanceof Error
+              ? e.message
+              : String(e);
+        console.error("Failed to load colleges:", msg);
         setError(
           e instanceof Error && e.message.includes("timed out")
             ? e.message

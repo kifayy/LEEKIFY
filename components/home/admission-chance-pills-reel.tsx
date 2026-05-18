@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { HERO_COLLEGE_LOGO_URLS, heroCollegeLogoTileBgClass } from "@/lib/hero-college-logos";
+import { collegeLogoAlt } from "@/lib/home-image-seo";
 
 const PCT_POOL_MIN = 32;
 const PCT_POOL_MAX = 80;
@@ -177,7 +178,7 @@ function ChancePill({
       >
         <Image
           src={src}
-          alt=""
+          alt={collegeLogoAlt(src)}
           fill
           className="object-cover"
           sizes="32px"

@@ -7,7 +7,9 @@ import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
 } from "@/components/home2/testimonials";
+import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { HERO_COLLEGE_LOGO_ENTRIES } from "@/lib/hero-college-logos";
+import { HOME_TESTIMONIAL_PHOTO_ALT, collegeLogoAlt } from "@/lib/home-image-seo";
 
 type MatchBadge = { src: string; tileBgClass: string };
 
@@ -75,7 +77,7 @@ function PhotoQuoteTile({
       {imageSrc ? (
         <Image
           src={imageSrc}
-          alt=""
+          alt={HOME_TESTIMONIAL_PHOTO_ALT(name)}
           fill
           unoptimized
           loading={eager ? "eager" : "lazy"}
@@ -99,7 +101,7 @@ function PhotoQuoteTile({
         >
           <Image
             src={matchBadge.src}
-            alt=""
+            alt={collegeLogoAlt(matchBadge.src)}
             fill
             unoptimized
             sizes="24px"
@@ -148,7 +150,7 @@ export function StudentsLoveCtaBand() {
           <span className={sectionTheme.accentPhraseClass}>Dream School</span>
         </h3>
         <p className={`mx-auto mt-4 max-w-2xl text-center ${sectionTheme.subtextClass}`}>
-          Personality matters. See fit, admission odds, and campus happiness—not just where you can get in.
+          Personality matters. See fit, admission odds, and campus happiness, not just where you can get in.
         </p>
         <div className="marquee-fade-edges relative mt-10 flex w-screen shrink-0 flex-col gap-3 overflow-hidden ml-[calc(50%-50vw)] md:mt-12 md:gap-4">
           <div className="home2-marquee-track flex w-max gap-0 pr-4">
@@ -178,6 +180,8 @@ export function StudentsLoveCtaBand() {
             ))}
           </div>
         </div>
+
+        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-10 md:mt-12" />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { HOME_PARTNER_LOGO_ALT } from "@/lib/home-image-seo";
 
 const ARCHETYPE_IMAGE =
   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=778&h=552&fit=crop";
@@ -25,7 +26,7 @@ function LogoSlot({ src }: { src: string }) {
     >
       <Image
         src={src}
-        alt=""
+        alt={HOME_PARTNER_LOGO_ALT}
         width={isGreeker ? 230 : 200}
         height={isGreeker ? 138 : 120}
         className={
@@ -73,7 +74,7 @@ export function HeroQuizCards() {
                 <div className="relative aspect-[389/276] w-full overflow-hidden rounded-t-[39px] bg-[#F7F7F7] md:aspect-[480/320] lg:aspect-[520/346]">
                   <Image
                     src={CARD.image}
-                    alt=""
+                    alt="Students taking the PathPicker college match quiz"
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 389px"

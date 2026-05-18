@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
 const PLACEHOLDER_LOGOS = [
@@ -41,7 +42,7 @@ const CARD_CLASS =
 export function ArchetypeQuizWidget() {
   return (
     <Link
-      href="http://my.pathpicker.com/archetype"
+      href={COLLEGE_MATCH_QUIZ_URL}
       target="_blank"
       rel="noopener noreferrer"
       className={CARD_CLASS}

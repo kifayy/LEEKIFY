@@ -37,7 +37,7 @@ export const HOME2_TESTIMONIALS: Home2Testimonial[] = [
   },
   {
     id: "h2-3",
-    quote: "Cut my list way down—every school on it actually feels like me.",
+    quote: "Cut my list way down. Every school on it actually feels like me.",
     name: "Brian Campbell",
     avatarIndex: 2,
     photoUrl: testimonialAvatarUrl(2),
@@ -65,7 +65,7 @@ export const HOME2_TESTIMONIALS: Home2Testimonial[] = [
   },
   {
     id: "h2-7",
-    quote: "The fit scores matched how I learn and social life—not just rankings.",
+    quote: "The fit scores matched how I learn and social life, not just rankings.",
     name: "Olivia Park",
     avatarIndex: 6,
     photoUrl: testimonialAvatarUrl(6),

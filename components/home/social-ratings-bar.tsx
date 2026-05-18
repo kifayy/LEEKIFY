@@ -10,6 +10,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
+import { HOME_STAR_RATING_ALT, HOME_TRUSTPILOT_ALT } from "@/lib/home-image-seo";
 
 const STAR_FULL = "/images/social-proof/star-full.svg";
 const STAR_HALF = "/images/social-proof/star-half.svg";
@@ -38,9 +39,9 @@ function RatingStars({
       <div className="flex items-center gap-px">
         {cells.map((k, i) =>
           k === "full" ? (
-            <Image key={`${k}-${i}`} src={STAR_FULL} alt="" width={23} height={23} />
+            <Image key={`${k}-${i}`} src={STAR_FULL} alt={HOME_STAR_RATING_ALT} width={23} height={23} aria-hidden />
           ) : (
-            <Image key={`${k}-${i}`} src={STAR_HALF} alt="" width={23} height={23} />
+            <Image key={`${k}-${i}`} src={STAR_HALF} alt={HOME_STAR_RATING_ALT} width={23} height={23} aria-hidden />
           )
         )}
       </div>
@@ -63,7 +64,7 @@ function TrustpilotBlock({ priority }: { priority?: boolean }) {
       >
         <Image
           src={TRUSTPILOT_GRAPHIC}
-          alt=""
+          alt={HOME_TRUSTPILOT_ALT}
           width={220}
           height={160}
           className="h-auto w-[min(100vw-2rem,200px)] max-w-[200px]"

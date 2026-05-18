@@ -255,7 +255,7 @@ export function HomeScholarshipFeatureShowcase() {
   return (
     <section
       id="scholarship-features"
-      className="w-full overflow-x-hidden scroll-mt-28 bg-white"
+      className="w-full overflow-x-hidden scroll-mt-28 bg-white md:hidden"
       aria-label="College match, admission odds, and fit features"
     >
       <div className="mx-auto w-full max-w-[min(100%,1420px)] px-5 sm:px-8 lg:px-12 xl:px-14 2xl:px-16">
@@ -284,8 +284,7 @@ export function HomeScholarshipFeatureShowcase() {
 
         {/* Row 2: image right */}
         <div
-          id="deep-profile-rankings"
-          className="scroll-mt-28 grid grid-cols-1 items-center gap-8 border-b border-slate-100 py-10 max-md:gap-8 max-md:px-0 md:grid-cols-12 md:items-stretch md:gap-12 md:py-14 md:px-0 lg:gap-14 xl:gap-16"
+          className="grid grid-cols-1 items-center gap-8 border-b border-slate-100 py-10 max-md:gap-8 max-md:px-0 md:grid-cols-12 md:items-stretch md:gap-12 md:py-14 md:px-0 lg:gap-14 xl:gap-16"
         >
           <article
             className="w-full max-md:order-2 max-md:px-5 max-md:text-center md:order-1 md:col-span-6 md:px-0 md:text-left"

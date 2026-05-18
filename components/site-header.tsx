@@ -5,11 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
 const navLinks = [
-  { href: "/archetype-quiz", label: "College Match Quiz" },
+  { href: COLLEGE_MATCH_QUIZ_URL, label: "College Match Quiz", external: true },
   { href: "/browse-schools", label: "Browse Schools" },
   { href: "/#deep-profile-rankings", label: "Features" },
   { href: "/#commit-with-zero-regrets", label: "How it Works" },
@@ -17,7 +18,7 @@ const navLinks = [
 ];
 
 /** Mobile drawer: omit quiz link + bottom CTA — same entry exists on the floating footer after scroll. */
-const mobileDrawerNavLinks = navLinks.filter((link) => link.href !== "/archetype-quiz");
+const mobileDrawerNavLinks = navLinks.filter((link) => !("external" in link && link.external));
 
 const SCROLL_HIDE_THRESHOLD = 0.1;
 
@@ -107,6 +108,8 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
+                target={"external" in link && link.external ? "_blank" : undefined}
+                rel={"external" in link && link.external ? "noopener noreferrer" : undefined}
                 className="relative shrink-0 whitespace-nowrap text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE] lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-[#956EFE] lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full"
               >
                 {link.label}

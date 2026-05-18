@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { HERO_COLLEGE_LOGO_URLS, heroCollegeLogoTileBgClass } from "@/lib/hero-college-logos";
+import { collegeLogoAlt } from "@/lib/home-image-seo";
 
 /** Same CDN set as desktop hero (storage.googleapis.com/images_592) */
 export const HERO_COLLEGE_LOGOS = HERO_COLLEGE_LOGO_URLS;
@@ -133,7 +134,7 @@ export function HeroCollegeLogoReels({
                   >
                     <Image
                       src={cell.src}
-                      alt=""
+                      alt={collegeLogoAlt(cell.src)}
                       fill
                       className="object-cover"
                       sizes={imageSizes}

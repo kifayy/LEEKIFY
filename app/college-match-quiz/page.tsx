@@ -39,7 +39,12 @@ export default function CollegeMatchQuizPage() {
             Browse schools
           </Link>{" "}
           without the quiz, or try the{" "}
-          <Link href="/archetype-quiz" className="font-medium text-[#956EFE] hover:underline">
+          <Link
+            href={COLLEGE_MATCH_QUIZ_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[#956EFE] hover:underline"
+          >
             College Match Quiz
           </Link>
           .

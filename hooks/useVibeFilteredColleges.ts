@@ -80,7 +80,13 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
         setColleges(ordered);
       } catch (e) {
         if (abandoned || ac.signal.aborted) return;
-        console.error(e);
+        const msg =
+          e && typeof e === "object" && "message" in e && typeof (e as { message: unknown }).message === "string"
+            ? (e as { message: string }).message
+            : e instanceof Error
+              ? e.message
+              : String(e);
+        console.error("Failed to load colleges:", msg);
         setError(e instanceof Error && e.message.includes("timed out") ? e.message : "Failed to load colleges. Please try again.");
         setColleges([]);
       } finally {

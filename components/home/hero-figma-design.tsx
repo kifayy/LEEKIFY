@@ -21,6 +21,12 @@ import {
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { CAREER_HERO_PORTRAIT_URL } from "@/lib/hero-career-content";
 import {
+  HOME_DESKTOP_HERO_STUDENT_ALT,
+  HOME_HERO_MATCH_BADGE_ALT,
+  HOME_MOBILE_HERO_BACKDROP_ALT,
+  HOME_MOBILE_HERO_STUDENT_ALT,
+} from "@/lib/home-image-seo";
+import {
   HERO_PATH_TYPEWRITER_SPACER,
   HERO_PATH_TYPEWRITER_WORDS,
 } from "@/lib/hero-path-typewriter-words";
@@ -90,7 +96,7 @@ export function HeroFigmaDesign() {
       <div className="pointer-events-none absolute inset-0 z-0 md:hidden" aria-hidden>
         <Image
           src={MOBILE_HERO_BG_URL}
-          alt=""
+          alt={HOME_MOBILE_HERO_BACKDROP_ALT}
           fill
           fetchPriority="high"
           className="object-cover object-right-top opacity-[0.22]"
@@ -202,7 +208,7 @@ export function HeroFigmaDesign() {
                 <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl">
                   <Image
                     src={career ? CAREER_HERO_PORTRAIT_URL : HERO_IMAGE}
-                    alt={career ? "University student" : "Traveler"}
+                    alt={career ? "University student exploring career match on PathPicker" : HOME_MOBILE_HERO_STUDENT_ALT}
                     fill
                     priority
                     fetchPriority="high"
@@ -229,7 +235,7 @@ export function HeroFigmaDesign() {
             <div className="absolute inset-0 z-10 hidden overflow-hidden rounded-2xl md:block">
               <Image
                 src={HERO_IMAGE_DESKTOP}
-                alt="Traveler"
+                alt={HOME_DESKTOP_HERO_STUDENT_ALT}
                 fill
                 priority
                 fetchPriority="high"
@@ -246,7 +252,7 @@ export function HeroFigmaDesign() {
                 <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
                   <Image
                     src="https://storage.googleapis.com/images_592/images.png"
-                    alt=""
+                    alt={HOME_HERO_MATCH_BADGE_ALT}
                     fill
                     className="object-contain"
                     unoptimized

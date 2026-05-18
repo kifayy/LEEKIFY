@@ -18,6 +18,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
+import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { HomeDesktopScholarshipInboxCta } from "@/components/home/home-desktop-scholarship-inbox-cta";
 import { cn } from "@/lib/utils";
 
@@ -32,37 +33,39 @@ const MATCH_BENEFITS: BenefitItem[] = [
   {
     title: "Know yourself better",
     description:
-      "Get clear on what drives you—your goals, values, and strengths—before you pick a school.",
+      "Get clear on what drives you—your goals, values, and strengths—before you choose your next step.",
     Icon: Compass,
     iconBg: "#956EFE",
   },
   {
     title: "Less noise, more clarity",
-    description: "Spot what actually matters for your list and tune out the rest.",
+    description: "Focus on what actually matters for your future and tune out the rest.",
     Icon: Focus,
     iconBg: "#7C3AED",
   },
   {
     title: "Check your fit, fast",
-    description: "See which campuses line up with you so the right choice feels obvious.",
+    description:
+      "See which paths, careers, and options line up with you so the right direction feels obvious.",
     Icon: Gauge,
     iconBg: "#0EA5E9",
   },
   {
     title: "Narrow your options",
-    description: "Compare schools and see exactly why each one fits—or why it does not.",
+    description: "Compare your top fits and see exactly why each one works—or why it does not.",
     Icon: GitCompare,
     iconBg: "#10B981",
   },
   {
     title: "Decision-making tools",
-    description: "Side-by-side insights and comparisons that make your final call easier.",
+    description: "Side-by-side insights and comparisons that make your next big decision easier.",
     Icon: Columns2,
     iconBg: "#F59E0B",
   },
   {
     title: "Built for you",
-    description: "Guidance shaped around your profile, your priorities, and your college goals.",
+    description:
+      "Guidance shaped around your archetype, your priorities, and the future you are building.",
     Icon: UserCheck,
     iconBg: "#EC4899",
   },
@@ -107,12 +110,12 @@ export function HomeMatchBenefitsSection() {
   return (
     <section
       className="w-full border-t border-slate-200/80 bg-white py-10 md:py-12 lg:py-14"
-      aria-label="Why use PathPicker for college matching"
+      aria-label="Why use PathPicker"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="sm:hidden">
           <Carousel
-            aria-label="College match benefits"
+            aria-label="PathPicker benefits"
             opts={{ loop: false, align: "start", duration: 20 }}
             setApi={setCarouselApi}
             className="w-full"
@@ -151,6 +154,8 @@ export function HomeMatchBenefitsSection() {
             </li>
           ))}
         </ul>
+
+        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-12 lg:mt-14" />
       </div>
     </section>
   );

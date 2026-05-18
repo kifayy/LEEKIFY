@@ -6,6 +6,8 @@ import { BeehiivEmbedIframe } from "@/components/beehiiv-embed-iframe";
 import { BRAND_MEDIA } from "@/components/landing/constants";
 import { BEEHIIV_SCHOLARSHIP_INBOX_EMBED_URL } from "@/lib/constants";
 
+const NEWSLETTER_AVATAR_ALT = "PathPicker newsletter subscriber";
+
 const AVATARS = BRAND_MEDIA.testimonialAvatars.slice(0, 4);
 
 export function HomeDesktopScholarshipInboxCta() {
@@ -13,10 +15,11 @@ export function HomeDesktopScholarshipInboxCta() {
     <div className="flex min-w-0 flex-col items-stretch justify-center gap-4 px-4 pb-1 pt-4 sm:gap-5 sm:p-6 md:p-8 lg:flex-row lg:items-start lg:gap-6 lg:p-8 xl:gap-8 xl:p-10 2xl:p-12">
       <div className="min-w-0 text-center lg:mb-0 lg:max-w-sm lg:shrink-0 lg:pt-0.5 lg:text-left xl:max-w-md">
         <h3 className="font-[family-name:var(--font-poppins)] text-lg font-bold leading-snug tracking-tight text-[#181A1D] sm:text-xl lg:text-2xl">
-          Get high-impact scholarship picks in your inbox
+          The student world has changed forever.
         </h3>
         <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-600 sm:text-base lg:mx-0 lg:mt-2 lg:text-lg">
-          Scholarships straight to your inbox, so you can win more, with less work.
+          Get advice from top industry leaders, student news updates, and career insights in a world
+          changed by AI.
         </p>
       </div>
 
@@ -29,7 +32,7 @@ export function HomeDesktopScholarshipInboxCta() {
                   <Image
                     key={src}
                     src={src}
-                    alt=""
+                    alt={NEWSLETTER_AVATAR_ALT}
                     width={28}
                     height={28}
                     className={`h-6 w-6 rounded-full border-2 border-[#EDE9FE] object-cover sm:h-7 sm:w-7 ${

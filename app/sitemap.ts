@@ -15,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const mainProductPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/archetype-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/college-match-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/browse-schools`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
   ];
