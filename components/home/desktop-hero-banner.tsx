@@ -6,7 +6,7 @@ import { DesktopHeroPathTypewriter } from "@/components/home/desktop-hero-path-t
 import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { HOME_DESKTOP_HERO_ALT } from "@/lib/home-image-seo";
 
-const DESKTOP_HERO_IMAGE_URL = "/images/group-100000s5829.webp";
+import { DESKTOP_HERO_ART_URL } from "@/lib/home-lcp-images";
 
 export function DesktopHeroBanner() {
   return (
@@ -16,7 +16,7 @@ export function DesktopHeroBanner() {
     >
       <div className="relative w-full overflow-hidden bg-[#F4F2FF]">
         <Image
-          src={DESKTOP_HERO_IMAGE_URL}
+          src={DESKTOP_HERO_ART_URL}
           alt={HOME_DESKTOP_HERO_ALT}
           width={1920}
           height={900}

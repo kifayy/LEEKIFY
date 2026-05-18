@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
-
 import { DiscoveryCardLottie } from "@/components/home/discovery-card-lottie";
+import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import {
   DESKTOP_SECTION_HEADING_CLASS,
   DESKTOP_SECTION_ITEM_TITLE_CLASS,
@@ -109,13 +108,14 @@ function ArchetypeVisual() {
   return (
     <div className="relative mx-auto flex w-full max-w-[min(100%,22rem)] items-center justify-center sm:max-w-[24rem] lg:mx-0 lg:ml-auto lg:max-w-[28rem] xl:max-w-[30rem]">
       <div className="relative z-10 w-full drop-shadow-[0_28px_60px_rgba(24,6,46,0.14)]">
-        <Image
+        <HomeOptimizedImage
           src={DESKTOP_TRACKER_ARCHETYPE_IMAGE_URL}
           alt="PathPicker student archetype profile with personality traits and fit insights"
           width={640}
           height={800}
+          loading="lazy"
+          sizes="(min-width: 1024px) 30rem, (min-width: 768px) 24rem, 22rem"
           className="h-auto w-full object-contain"
-          unoptimized
         />
       </div>
     </div>

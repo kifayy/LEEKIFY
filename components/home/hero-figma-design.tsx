@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
 import { HeroCareerStatReels } from "@/components/home/hero-career-stat-reels";
 import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
@@ -21,7 +21,6 @@ import {
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { CAREER_HERO_PORTRAIT_URL } from "@/lib/hero-career-content";
 import {
-  HOME_DESKTOP_HERO_STUDENT_ALT,
   HOME_HERO_MATCH_BADGE_ALT,
   HOME_MOBILE_HERO_BACKDROP_ALT,
   HOME_MOBILE_HERO_STUDENT_ALT,
@@ -30,12 +29,13 @@ import {
   HERO_PATH_TYPEWRITER_SPACER,
   HERO_PATH_TYPEWRITER_WORDS,
 } from "@/lib/hero-path-typewriter-words";
+import { MOBILE_HERO_PORTRAIT_URL } from "@/lib/home-lcp-images";
+
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;
 const DELETE_DELAY_MS = 55;
 
-const HERO_IMAGE = "https://my.pathpicker.com/images/hero-student.png";
-const HERO_IMAGE_DESKTOP = "https://storage.googleapis.com/images_592/bsa.png";
+const HERO_IMAGE = MOBILE_HERO_PORTRAIT_URL;
 
 /** Same Framer wash as `DesktopHeroBanner` — mobile hero backdrop */
 const MOBILE_HERO_BG_URL =
@@ -94,11 +94,12 @@ export function HeroFigmaDesign() {
     >
       {/* Mobile (< md): layered backdrop aligned with desktop hero */}
       <div className="pointer-events-none absolute inset-0 z-0 md:hidden" aria-hidden>
-        <Image
+        <HomeOptimizedImage
           src={MOBILE_HERO_BG_URL}
           alt={HOME_MOBILE_HERO_BACKDROP_ALT}
           fill
-          fetchPriority="high"
+          fetchPriority="low"
+          loading="lazy"
           className="object-cover object-right-top opacity-[0.22]"
           sizes="100vw"
         />
@@ -206,18 +207,18 @@ export function HeroFigmaDesign() {
                   />
                 )}
                 <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl">
-                  <Image
+                  <HomeOptimizedImage
                     src={career ? CAREER_HERO_PORTRAIT_URL : HERO_IMAGE}
                     alt={career ? "University student exploring career match on PathPicker" : HOME_MOBILE_HERO_STUDENT_ALT}
                     fill
-                    priority
-                    fetchPriority="high"
+                    priority={!career}
+                    fetchPriority={career ? "auto" : "high"}
                     className={cn(
                       career
                         ? "translate-y-3 object-cover object-[center_10%] scale-[1.116] sm:translate-y-4 sm:scale-[1.153]"
                         : "translate-y-3 object-cover object-[center_11%] sm:translate-y-4"
                     )}
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 100vw, 0px"
                   />
                 </div>
                 <div
@@ -231,31 +232,17 @@ export function HeroFigmaDesign() {
                   )}
                 />
               </div>
-            {/* Hero image - desktop (md and up) */}
-            <div className="absolute inset-0 z-10 hidden overflow-hidden rounded-2xl md:block">
-              <Image
-                src={HERO_IMAGE_DESKTOP}
-                alt={HOME_DESKTOP_HERO_STUDENT_ALT}
-                fill
-                priority
-                fetchPriority="high"
-                className="object-contain"
-                style={{ objectPosition: "center 20%" }}
-                sizes="(min-width: 1024px) 690px, (min-width: 768px) 660px, 630px"
-                unoptimized
-              />
-            </div>
-
             {/* 82% Ivy League Match - over image, top-right (tablet/desktop only) */}
             <div className="animate-float absolute right-1 top-[18%] z-20 hidden min-w-[100px] rounded-lg bg-white p-2 shadow-[0_9px_59px_rgba(174,165,114,0.08)] md:flex md:min-w-[120px] md:right-2 md:p-2.5 lg:right-3" style={{ animationDelay: "0s" }}>
               <div className="flex items-center gap-2">
                 <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
-                  <Image
+                  <HomeOptimizedImage
                     src="https://storage.googleapis.com/images_592/images.png"
                     alt={HOME_HERO_MATCH_BADGE_ALT}
                     fill
+                    loading="lazy"
+                    sizes="20px"
                     className="object-contain"
-                    unoptimized
                   />
                 </div>
                 <p className="text-xs font-bold leading-tight md:text-sm" style={{ color: HERO_PURPLE }}>

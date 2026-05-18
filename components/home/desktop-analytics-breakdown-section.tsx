@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { CalendarCheck, LayoutDashboard, Timer } from "lucide-react";
+
+import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 
 import {
   DESKTOP_SECTION_HEADING_CLASS,
@@ -65,14 +66,14 @@ function PhoneMockupVisual() {
       <SquiggleDecor />
 
       <div className="relative z-10 w-full drop-shadow-[0_28px_60px_rgba(24,6,46,0.12)]">
-        <Image
+        <HomeOptimizedImage
           src={DESKTOP_ANALYTICS_PHONE_IMAGE_URL}
           alt="PathPicker mobile app showing college discover list and fit analytics"
           width={720}
           height={820}
+          loading="lazy"
+          sizes="(min-width: 1024px) 28rem, (min-width: 768px) 24rem, 22rem"
           className="h-auto w-full max-w-[min(100%,22rem)] object-contain sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[28rem]"
-          unoptimized
-          priority
         />
       </div>
     </div>

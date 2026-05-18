@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
+import { HomeFeatureShowcaseImage } from "@/components/home/home-feature-showcase-image";
 import {
   HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
   HOME_FEATURE_DEEP_PROFILE_IMAGE_URL,
@@ -87,15 +88,11 @@ function BrowseFitVisual() {
         style={{ background: LAVENDER_PANEL }}
       />
       <div className="relative z-[1] w-full min-h-[200px] px-0 pb-0 pt-1 sm:min-h-[220px] sm:pt-2">
-        <img
+        <HomeFeatureShowcaseImage
           src={HOME_FEATURE_BROWSE_FIT_IMAGE_URL}
           alt="PathPicker college match app showing personalized university fit scores and admission odds"
-          width={800}
-          height={600}
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          className="block h-auto w-full max-w-[min(100%,300px)] object-contain object-left max-md:py-1 md:max-w-[min(100%,430px)]"
+          priority
+          className="block max-w-[min(100%,300px)] object-left max-md:py-1 md:max-w-[min(100%,430px)]"
         />
       </div>
       <FeatureImageWhiteVignette strength="strong" omitLeftFade />
@@ -112,15 +109,10 @@ function DeepProfileFeatureVisual() {
         style={{ background: LAVENDER_PANEL }}
       />
       <div className="relative z-[1] flex min-h-[150px] w-full items-center justify-center px-0 py-3 max-md:min-h-[140px] md:min-h-[240px] md:px-6 md:py-8">
-        <img
+        <HomeFeatureShowcaseImage
           src={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL}
           alt="PathPicker college fit report with admission chances and student happiness indicators"
-          width={800}
-          height={600}
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          className="mx-auto h-auto w-full max-w-[min(100%,260px)] object-contain md:max-w-[min(100%,440px)] lg:max-w-[min(100%,480px)]"
+          className="mx-auto max-w-[min(100%,260px)] md:max-w-[min(100%,440px)] lg:max-w-[min(100%,480px)]"
         />
       </div>
       <FeatureImageWhiteVignette strength="normal" />

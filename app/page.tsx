@@ -10,9 +10,10 @@ import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarsh
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import {
-  HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
-  HOME_FEATURE_DEEP_PROFILE_IMAGE_URL,
-} from "@/lib/home-feature-showcase-images";
+  DESKTOP_HERO_ART_URL,
+  MOBILE_FEATURE_LCP_URL,
+  MOBILE_HERO_PORTRAIT_URL,
+} from "@/lib/home-lcp-images";
 import {
   buildHomePageJsonLdGraph,
   HOME_OG_IMAGE_URL,
@@ -76,21 +77,24 @@ export default async function Home() {
     <>
       <link
         rel="preload"
-        href="/images/group-100000s5829.webp"
+        href={DESKTOP_HERO_ART_URL}
         as="image"
+        type="image/webp"
         fetchPriority="high"
         media="(min-width: 768px)"
       />
       <link
         rel="preload"
-        href={HOME_FEATURE_BROWSE_FIT_IMAGE_URL}
+        href={MOBILE_HERO_PORTRAIT_URL}
         as="image"
+        fetchPriority="high"
         media="(max-width: 767px)"
       />
       <link
         rel="preload"
-        href={HOME_FEATURE_DEEP_PROFILE_IMAGE_URL}
+        href={MOBILE_FEATURE_LCP_URL}
         as="image"
+        fetchPriority="high"
         media="(max-width: 767px)"
       />
       <script

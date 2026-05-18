@@ -180,6 +180,7 @@ function ChancePill({
           src={src}
           alt={collegeLogoAlt(src)}
           fill
+          loading="lazy"
           className="object-cover"
           sizes="32px"
           unoptimized

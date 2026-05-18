@@ -136,6 +136,7 @@ export function HeroCollegeLogoReels({
                       src={cell.src}
                       alt={collegeLogoAlt(cell.src)}
                       fill
+                      loading="lazy"
                       className="object-cover"
                       sizes={imageSizes}
                       unoptimized
