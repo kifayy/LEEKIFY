@@ -29,7 +29,7 @@ import {
   HERO_PATH_TYPEWRITER_SPACER,
   HERO_PATH_TYPEWRITER_WORDS,
 } from "@/lib/hero-path-typewriter-words";
-import { MOBILE_HERO_PORTRAIT_URL } from "@/lib/home-lcp-images";
+import { HOME_HERO_IMAGE_QUALITY, MOBILE_HERO_PORTRAIT_URL } from "@/lib/home-lcp-images";
 
 const TYPE_DELAY_MS = 90;
 const HOLD_DELAY_MS = 1800;
@@ -211,6 +211,7 @@ export function HeroFigmaDesign() {
                     src={career ? CAREER_HERO_PORTRAIT_URL : HERO_IMAGE}
                     alt={career ? "University student exploring career match on PathPicker" : HOME_MOBILE_HERO_STUDENT_ALT}
                     fill
+                    quality={HOME_HERO_IMAGE_QUALITY}
                     priority={!career}
                     fetchPriority={career ? "auto" : "high"}
                     className={cn(
@@ -218,7 +219,7 @@ export function HeroFigmaDesign() {
                         ? "translate-y-3 object-cover object-[center_10%] scale-[1.116] sm:translate-y-4 sm:scale-[1.153]"
                         : "translate-y-3 object-cover object-[center_11%] sm:translate-y-4"
                     )}
-                    sizes="(max-width: 768px) 100vw, 0px"
+                    sizes="(max-width: 768px) min(100vw, 570px), 0px"
                   />
                 </div>
                 <div

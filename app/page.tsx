@@ -87,6 +87,7 @@ export default async function Home() {
         rel="preload"
         href={MOBILE_HERO_PORTRAIT_URL}
         as="image"
+        type="image/webp"
         fetchPriority="high"
         media="(max-width: 767px)"
       />
