@@ -6,7 +6,7 @@ import {
 export const MOBILE_HERO_PORTRAIT_URL = "https://my.pathpicker.com/images/hero-student.png";
 
 /** Desktop hero art — primary LCP from `md` up. */
-export const DESKTOP_HERO_ART_URL = "/images/group-100000s5829.webp";
+export const DESKTOP_HERO_ART_URL = "/images/desktop-hero.webp";
 
 /** First above-the-fold feature mock on mobile home (scholarship showcase row 1). */
 export const MOBILE_FEATURE_LCP_URL = HOME_FEATURE_BROWSE_FIT_IMAGE_URL;

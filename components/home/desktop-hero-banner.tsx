@@ -36,8 +36,9 @@ export function DesktopHeroBanner() {
             </h1>
 
             <p className="mt-3 max-w-[28rem] font-[family-name:var(--font-poppins)] text-sm font-normal leading-[1.45] tracking-[-0.01em] text-[#181A1D] md:mt-4 md:max-w-[32rem] md:text-[0.9375rem] lg:mt-5 lg:max-w-[37.1875rem] lg:text-[clamp(1rem,1.25vw,1.25rem)] lg:leading-[1.5]">
-              Students are preparing for a world that no longer exists. We match
-              your profile to schools and careers for the AI future.
+              Most students are preparing for a world that no longer exists. Find
+              your best path by matching your profile to future schools and
+              careers where you&apos;ll thrive.
             </p>
 
             <StudentArchetypeTestCta size="hero" />
