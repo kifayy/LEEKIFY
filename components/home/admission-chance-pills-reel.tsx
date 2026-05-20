@@ -53,35 +53,275 @@ function logoUrlToPercent(): Map<(typeof HERO_COLLEGE_LOGO_URLS)[number], number
   return new Map(HERO_COLLEGE_LOGO_URLS.map((url, i) => [url, chosen[i]!]));
 }
 
-function rotateOrder<T>(arr: readonly T[], shift: number): T[] {
-  const n = arr.length;
-  if (n === 0) return [];
-  const s = ((shift % n) + n) % n;
-  return [...arr.slice(s), ...arr.slice(0, s)];
+type ChancePillData = {
+  src: (typeof HERO_COLLEGE_LOGO_URLS)[number];
+  percent: number;
+  suffix: string;
+};
+
+/** Below this → amber/orange styling and cautionary BAD_STAT_SUFFIXES. */
+const PILLS_BAD_STATS_BELOW_PERCENT = 57;
+
+/**
+ * Pill body copy max length so rows stay readable in the marquee (characters).
+ */
+const PILLS_SUFFIX_MAX_CHARS = 73;
+
+/** Green/teal pills: personality, happiness, relationships — broad, human. */
+const GOOD_STAT_SUFFIXES = [
+  "more likely to make friendships that actually last",
+  "increased chance of a healthy, low-stress balance",
+  "more likely to feel completely at home by year two",
+  "increased chance of finding love by end of year one",
+] as const;
+
+/** Amber/orange pills: personality misfit vibes — still broad, not scene-specific. */
+const BAD_STAT_SUFFIXES = [
+  "higher risk of reporting social isolation despite a busy campus",
+  "more likely to consider transferring during heavy exam periods",
+  "higher probability of experiencing cultural friction or imposter syndrome",
+  "increased risk of severe academic burnout in the first semester",
+  "more likely to actively browse other schools within the first year",
+] as const;
+
+(() => {
+  const max = PILLS_SUFFIX_MAX_CHARS;
+  for (const line of [...GOOD_STAT_SUFFIXES, ...BAD_STAT_SUFFIXES]) {
+    if (line.length > max) {
+      throw new Error(
+        `admission-chance-pills-reel: suffix longer than ${max} chars (${line.length}): ${JSON.stringify(line)}`
+      );
+    }
+  }
+})();
+
+/** One stat line per logo within good/bad pools — no duplicate copy on distinct cards. */
+function logoUrlToSuffix(
+  pctByUrl: ReadonlyMap<(typeof HERO_COLLEGE_LOGO_URLS)[number], number>
+): Map<(typeof HERO_COLLEGE_LOGO_URLS)[number], string> {
+  const goodUrls: (typeof HERO_COLLEGE_LOGO_URLS)[number][] = [];
+  const badUrls: (typeof HERO_COLLEGE_LOGO_URLS)[number][] = [];
+
+  for (const url of HERO_COLLEGE_LOGO_URLS) {
+    const pct = pctByUrl.get(url);
+    if (pct === undefined) throw new Error(`admission-chance-pills-reel: missing percent for ${url}`);
+    if (pct >= PILLS_BAD_STATS_BELOW_PERCENT) goodUrls.push(url);
+    else badUrls.push(url);
+  }
+
+  const map = new Map<(typeof HERO_COLLEGE_LOGO_URLS)[number], string>();
+
+  function assignTier(
+    urls: (typeof HERO_COLLEGE_LOGO_URLS)[number][],
+    pool: readonly string[],
+    seed: string
+  ) {
+    const shuffledUrls = seededShuffle(`${seed}:urls`, urls);
+    const shuffledSuffixes = seededShuffle(`${seed}:suffixes`, pool);
+    const used = new Set<string>();
+
+    shuffledUrls.forEach((url, i) => {
+      const unused = shuffledSuffixes.find((s) => !used.has(s));
+      const suffix = unused ?? shuffledSuffixes[i % shuffledSuffixes.length]!;
+      used.add(suffix);
+      map.set(url, suffix);
+    });
+  }
+
+  assignTier(goodUrls, GOOD_STAT_SUFFIXES, "admission-pills-suffix-good-v4");
+  assignTier(badUrls, BAD_STAT_SUFFIXES, "admission-pills-suffix-bad-v4");
+
+  return map;
+}
+
+type LogoUrl = (typeof HERO_COLLEGE_LOGO_URLS)[number];
+type PillPolarity = "good" | "bad";
+
+const PILLS_MAX_SAME_POLARITY_RUN = 2;
+
+function pillPolarity(percent: number): PillPolarity {
+  return percent >= PILLS_BAD_STATS_BELOW_PERCENT ? "good" : "bad";
+}
+
+/** No 3+ good or bad pills adjacent (including across the seamless loop join). */
+function orderLogosWithMaxPolarityRun(
+  urls: readonly LogoUrl[],
+  pctByUrl: ReadonlyMap<LogoUrl, number>,
+  seed: string
+): LogoUrl[] {
+  if (urls.length <= 1) return [...urls];
+
+  const items = urls.map((url) => ({
+    url,
+    polarity: pillPolarity(pctByUrl.get(url)!),
+  }));
+
+  const good = items.filter((i) => i.polarity === "good");
+  const bad = items.filter((i) => i.polarity === "bad");
+
+  function violatesRun(seq: PillPolarity[]): boolean {
+    let run = 1;
+    for (let i = 1; i < seq.length; i++) {
+      if (seq[i] === seq[i - 1]) {
+        run++;
+        if (run > PILLS_MAX_SAME_POLARITY_RUN) return true;
+      } else {
+        run = 1;
+      }
+    }
+    const n = seq.length;
+    if (n >= 3 && seq[n - 2] === seq[n - 1] && seq[n - 1] === seq[0]) return true;
+    if (n >= 3 && seq[n - 1] === seq[0] && seq[0] === seq[1]) return true;
+    return false;
+  }
+
+  function backtrack(remaining: typeof items, seq: LogoUrl[], polSeq: PillPolarity[]): LogoUrl[] | null {
+    if (remaining.length === 0) {
+      return violatesRun(polSeq) ? null : seq;
+    }
+
+    const candidates = seededShuffle(`${seed}:bt:${seq.length}`, remaining);
+    for (const pick of candidates) {
+      const nextPol = [...polSeq, pick.polarity];
+      if (violatesRun(nextPol)) continue;
+      const rest = remaining.filter((r) => r.url !== pick.url);
+      const out = backtrack(rest, [...seq, pick.url], nextPol);
+      if (out) return out;
+    }
+    return null;
+  }
+
+  const greedy = interleaveLogosMaxRun(good, bad);
+  if (greedy && !violatesRun(greedy.map((url) => pillPolarity(pctByUrl.get(url)!)))) {
+    return greedy;
+  }
+
+  const solved = backtrack(items, [], [], seed);
+  if (solved) return solved;
+
+  return breakPolarityRunsBySwaps([...urls], pctByUrl);
+}
+
+/** Last resort: swap pills to break 3+ runs without changing which logos appear. */
+function breakPolarityRunsBySwaps(
+  arr: LogoUrl[],
+  pctByUrl: ReadonlyMap<LogoUrl, number>
+): LogoUrl[] {
+  const polSeq = () => arr.map((url) => pillPolarity(pctByUrl.get(url)!));
+
+  function violatesLinear(seq: PillPolarity[]): boolean {
+    let run = 1;
+    for (let i = 1; i < seq.length; i++) {
+      if (seq[i] === seq[i - 1]) {
+        run++;
+        if (run > PILLS_MAX_SAME_POLARITY_RUN) return true;
+      } else {
+        run = 1;
+      }
+    }
+    return false;
+  }
+
+  function violatesWrap(seq: PillPolarity[]): boolean {
+    const n = seq.length;
+    if (n >= 3 && seq[n - 2] === seq[n - 1] && seq[n - 1] === seq[0]) return true;
+    if (n >= 3 && seq[n - 1] === seq[0] && seq[0] === seq[1]) return true;
+    return false;
+  }
+
+  for (let guard = 0; guard < arr.length * 8; guard++) {
+    const seq = polSeq();
+    if (!violatesLinear(seq) && !violatesWrap(seq)) return arr;
+
+    const n = seq.length;
+    for (let i = 0; i < n; i++) {
+      const triple =
+        (i + 2 < n && seq[i] === seq[i + 1] && seq[i + 1] === seq[i + 2]) ||
+        (i === n - 2 && n >= 3 && seq[n - 2] === seq[n - 1] && seq[n - 1] === seq[0]) ||
+        (i === n - 1 && n >= 3 && seq[n - 1] === seq[0] && seq[0] === seq[1]);
+
+      if (!triple) continue;
+
+      const need = seq[i] === "good" ? "bad" : "good";
+      const j = arr.findIndex((url) => pillPolarity(pctByUrl.get(url)!) === need);
+      if (j < 0) continue;
+
+      const swapAt = i + 1 < n ? i + 1 : 0;
+      [arr[swapAt], arr[j]] = [arr[j]!, arr[swapAt]!];
+      break;
+    }
+  }
+
+  return arr;
+}
+
+function interleaveLogosMaxRun(
+  good: { url: LogoUrl; polarity: PillPolarity }[],
+  bad: { url: LogoUrl; polarity: PillPolarity }[]
+): LogoUrl[] | null {
+  const goodQ = good.map((i) => i.url);
+  const badQ = bad.map((i) => i.url);
+  const result: LogoUrl[] = [];
+  let last: PillPolarity | null = null;
+  let run = 0;
+
+  while (goodQ.length > 0 || badQ.length > 0) {
+    const canGood = goodQ.length > 0 && !(last === "good" && run >= PILLS_MAX_SAME_POLARITY_RUN);
+    const canBad = badQ.length > 0 && !(last === "bad" && run >= PILLS_MAX_SAME_POLARITY_RUN);
+
+    let pick: PillPolarity;
+    if (canGood && canBad) {
+      if (last === "good") pick = "bad";
+      else if (last === "bad") pick = "good";
+      else pick = goodQ.length >= badQ.length ? "good" : "bad";
+    } else if (canGood) pick = "good";
+    else if (canBad) pick = "bad";
+    else return null;
+
+    const url = (pick === "good" ? goodQ : badQ).shift()!;
+    result.push(url);
+    run = last === pick ? run + 1 : 1;
+    last = pick;
+  }
+
+  return result;
 }
 
 /**
- * Doubled for seamless infinity scroll: second half repeats the same (logo, percent) pairs as the first.
+ * Doubled for seamless infinity scroll: second half repeats the same (logo, percent, suffix) as the first.
  */
 function buildChanceTrack(
   order: readonly (typeof HERO_COLLEGE_LOGO_URLS)[number][],
-  pctByUrl: ReadonlyMap<(typeof HERO_COLLEGE_LOGO_URLS)[number], number>
-): { src: (typeof HERO_COLLEGE_LOGO_URLS)[number]; percent: number }[] {
+  pctByUrl: ReadonlyMap<(typeof HERO_COLLEGE_LOGO_URLS)[number], number>,
+  suffixByUrl: ReadonlyMap<(typeof HERO_COLLEGE_LOGO_URLS)[number], string>
+): ChancePillData[] {
   const once = order.map((src) => {
     const percent = pctByUrl.get(src);
+    const suffix = suffixByUrl.get(src);
     if (percent === undefined) throw new Error(`admission-chance-pills-reel: missing percent for ${src}`);
-    return { src, percent };
+    if (suffix === undefined) throw new Error(`admission-chance-pills-reel: missing suffix for ${src}`);
+    return { src, percent, suffix };
   });
   return [...once, ...once];
 }
 
 const PCT_BY_LOGO_URL = logoUrlToPercent();
+const SUFFIX_BY_LOGO_URL = logoUrlToSuffix(PCT_BY_LOGO_URL);
 
-const ROW1 = buildChanceTrack(HERO_COLLEGE_LOGO_URLS, PCT_BY_LOGO_URL);
-const ROW2 = buildChanceTrack(rotateOrder(HERO_COLLEGE_LOGO_URLS, 5), PCT_BY_LOGO_URL);
+/** Each school appears in one marquee row only (6 per row), interleaved good/bad. */
+const ROW1_LOGO_ORDER = orderLogosWithMaxPolarityRun(
+  HERO_COLLEGE_LOGO_URLS.slice(0, 6),
+  PCT_BY_LOGO_URL,
+  "admission-pills-row1-order-v1"
+);
+const ROW2_LOGO_ORDER = orderLogosWithMaxPolarityRun(
+  HERO_COLLEGE_LOGO_URLS.slice(6),
+  PCT_BY_LOGO_URL,
+  "admission-pills-row2-order-v1"
+);
 
-/** Below this → amber/orange styling and cautionary BAD_STAT_SUFFIXES. */
-const PILLS_BAD_STATS_BELOW_PERCENT = 57;
+const ROW1 = buildChanceTrack(ROW1_LOGO_ORDER, PCT_BY_LOGO_URL, SUFFIX_BY_LOGO_URL);
+const ROW2 = buildChanceTrack(ROW2_LOGO_ORDER, PCT_BY_LOGO_URL, SUFFIX_BY_LOGO_URL);
 
 /** Visual tier from hash percent (≈32–80): ≥57 green/teal positive fit; beneath = caution + bad-stats copy. */
 function matchStrengthClasses(percent: number) {
@@ -110,57 +350,7 @@ function matchStrengthClasses(percent: number) {
   };
 }
 
-/**
- * Pill body copy max length so rows stay readable in the marquee (characters).
- */
-const PILLS_SUFFIX_MAX_CHARS = 64;
-
-/** Green/teal pills: personality, happiness, relationships — broad, human. */
-const GOOD_STAT_SUFFIXES = [
-  "more likely to be happy here by year two",
-  "increased chance of falling in love here by year three",
-  "more likely to feel like yourself again by sophomore year",
-  "more likely to find friends you still care about by graduation",
-  "increased chance of calm weeks here throughout junior year",
-  "more likely to become who you actually want to become here",
-] as const;
-
-/** Amber/orange pills: personality misfit vibes — still broad, not scene-specific. */
-const BAD_STAT_SUFFIXES = [
-  "more likely to feel restless or boxed in here by year two",
-  "increased chance of feeling lonely here even when you're busy",
-  "more likely to second-guess this fit when pressure spikes",
-  "more likely to feel you're performing a version that's not you",
-  "increased chance of burnout after one semester",
-  "more likely to quietly imagine being happier somewhere else",
-] as const;
-
-(() => {
-  const max = PILLS_SUFFIX_MAX_CHARS;
-  for (const line of [...GOOD_STAT_SUFFIXES, ...BAD_STAT_SUFFIXES]) {
-    if (line.length > max) {
-      throw new Error(
-        `admission-chance-pills-reel: suffix longer than ${max} chars (${line.length}): ${JSON.stringify(line)}`
-      );
-    }
-  }
-})();
-
-function canonicalLogoIndex(src: string): number {
-  const i = HERO_COLLEGE_LOGO_URLS.indexOf(src as (typeof HERO_COLLEGE_LOGO_URLS)[number]);
-  return i >= 0 ? i : 0;
-}
-
-function ChancePill({
-  src,
-  percent,
-}: {
-  src: string;
-  percent: number;
-}) {
-  const isBadFitCopy = percent < PILLS_BAD_STATS_BELOW_PERCENT;
-  const suffixPool = isBadFitCopy ? BAD_STAT_SUFFIXES : GOOD_STAT_SUFFIXES;
-  const suffix = suffixPool[canonicalLogoIndex(src) % suffixPool.length]!;
+function ChancePill({ src, percent, suffix }: ChancePillData) {
   const tier = matchStrengthClasses(percent);
   return (
     <div
@@ -205,7 +395,7 @@ export function AdmissionChancePillsReel({ className }: { className?: string }) 
           )}
         >
           {ROW1.map((item, i) => (
-            <ChancePill key={`r1-${i}`} src={item.src} percent={item.percent} />
+            <ChancePill key={`r1-${i}`} {...item} />
           ))}
         </div>
       </div>
@@ -218,7 +408,7 @@ export function AdmissionChancePillsReel({ className }: { className?: string }) 
           style={{ animationDelay: "-4s" }}
         >
           {ROW2.map((item, i) => (
-            <ChancePill key={`r2-${i}`} src={item.src} percent={item.percent} />
+            <ChancePill key={`r2-${i}`} {...item} />
           ))}
         </div>
       </div>

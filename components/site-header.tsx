@@ -5,12 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
 
 const navLinks = [
-  { href: COLLEGE_MATCH_QUIZ_URL, label: "College Match Quiz", external: true },
+  { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL, external: true },
   { href: "/browse-schools", label: "Browse Schools" },
   { href: "/#deep-profile-rankings", label: "Features" },
   { href: "/#commit-with-zero-regrets", label: "How it Works" },

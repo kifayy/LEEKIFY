@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ type CollegeMatchQuizCtaLinkProps = {
 /** Site-wide primary CTA → college match quiz (external). */
 export function CollegeMatchQuizCtaLink({
   className,
-  children = "College Match Quiz",
+  children = PATH_COLLEGE_MATCH_QUIZ_LABEL,
   tabIndex,
 }: CollegeMatchQuizCtaLinkProps) {
   return (

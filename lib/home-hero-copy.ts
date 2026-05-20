@@ -8,20 +8,12 @@ export const HOME_HERO_SUBTITLE =
 
 /** Mobile hero — centered layout. */
 
-export const MOBILE_HERO_HEADLINE = "Stop Guessing";
-
-
+export const MOBILE_HERO_HEADLINE = "One Choice";
 
 export const MOBILE_HERO_BULLETS = [
-
-  "calculate your fit.",
-
-  "find your school.",
-
-  "pick your path.",
-
-  "use real data.",
-
+  "map your path",
+  "get it right",
+  "find your fit",
 ] as const;
 
 

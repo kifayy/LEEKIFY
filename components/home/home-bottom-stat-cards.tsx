@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import {
   Columns2,
   Compass,
@@ -13,6 +14,13 @@ import {
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
 import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import { HomeDesktopScholarshipInboxCta } from "@/components/home/home-desktop-scholarship-inbox-cta";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 type BenefitItem = {
   title: string;
@@ -27,26 +35,26 @@ const MATCH_BENEFITS: BenefitItem[] = [
     description:
       "Get clear on what drives you: your goals, values, and strengths, before you choose your next step.",
     Icon: Compass,
-    iconBg: "#956EFE",
+    iconBg: "#0EA5E9",
   },
   {
     title: "Less noise, more clarity",
     description: "Focus on what actually matters for your future and tune out the rest.",
     Icon: Focus,
-    iconBg: "#7C3AED",
+    iconBg: "#10B981",
   },
   {
     title: "Check your fit, fast",
     description:
       "See which paths, careers, and options line up with you so the right direction feels obvious.",
     Icon: Gauge,
-    iconBg: "#0EA5E9",
+    iconBg: "#2563EB",
   },
   {
     title: "Narrow your options",
     description: "Compare your top fits and see exactly why each one works, or why it does not.",
     Icon: GitCompare,
-    iconBg: "#10B981",
+    iconBg: "#14B8A6",
   },
   {
     title: "Decision-making tools",
@@ -62,8 +70,6 @@ const MATCH_BENEFITS: BenefitItem[] = [
     iconBg: "#EC4899",
   },
 ];
-
-const MATCH_BENEFITS_MARQUEE_TRACK = [...MATCH_BENEFITS, ...MATCH_BENEFITS];
 
 function MatchBenefitRow({ title, description, Icon, iconBg }: BenefitItem) {
   return (
@@ -84,36 +90,84 @@ function MatchBenefitRow({ title, description, Icon, iconBg }: BenefitItem) {
   );
 }
 
-function MatchBenefitMarqueeTile({ benefit }: { benefit: BenefitItem }) {
+function MatchBenefitCard({ benefit }: { benefit: BenefitItem }) {
   return (
-    <div
-      className="w-[16.5rem] shrink-0 rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(35,57,91,0.06)] sm:w-[18rem] sm:px-5 sm:py-5 md:w-[19rem]"
-    >
+    <div className="h-full w-full rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(35,57,91,0.06)] sm:px-5 sm:py-5">
       <MatchBenefitRow {...benefit} />
     </div>
   );
 }
 
-/** Six benefit cards — infinite horizontal reel above FAQ on the home page. */
+function MatchBenefitsCarousel() {
+  const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
+  const [active, setActive] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    const onSelect = () => setActive(carouselApi.selectedScrollSnap());
+    onSelect();
+    carouselApi.on("select", onSelect);
+    carouselApi.on("reInit", onSelect);
+    return () => {
+      carouselApi.off("select", onSelect);
+      carouselApi.off("reInit", onSelect);
+    };
+  }, [carouselApi]);
+
+  return (
+    <div className="w-full">
+      <Carousel
+        aria-label="PathPicker benefits"
+        setApi={setCarouselApi}
+        opts={{ loop: false, align: "start", duration: 0 }}
+        className={cn(
+          "w-full [--benefit-gap:1rem]",
+          "[--slide-w:min(18rem,calc(100%-2.5rem))]",
+          "md:[--slide-w:calc((100%-var(--benefit-gap))/2)]",
+          "lg:[--slide-w:calc((100%-2*var(--benefit-gap))/3)]",
+        )}
+      >
+        <CarouselContent className="-ml-0 gap-[var(--benefit-gap)]">
+          {MATCH_BENEFITS.map((benefit) => (
+            <CarouselItem
+              key={benefit.title}
+              className="flex min-w-0 flex-[0_0_var(--slide-w)] pl-0"
+            >
+              <MatchBenefitCard benefit={benefit} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+      <nav className="flex justify-center gap-1.5 pt-5" aria-label="Benefit slides">
+        {MATCH_BENEFITS.map((benefit, i) => (
+          <button
+            key={benefit.title}
+            type="button"
+            aria-label={benefit.title}
+            aria-current={active === i ? "true" : undefined}
+            className={cn(
+              "h-1.5 rounded-full transition-[width,background-color] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-300",
+              active === i
+                ? "w-6 bg-violet-400"
+                : "w-1.5 bg-neutral-200 hover:bg-neutral-300",
+            )}
+            onClick={() => carouselApi?.scrollTo(i)}
+          />
+        ))}
+      </nav>
+    </div>
+  );
+}
+
+/** Six benefit cards — swipeable carousel above FAQ on the home page. */
 export function HomeMatchBenefitsSection() {
   return (
     <section
       className="w-full bg-white pb-10 pt-10 md:pb-14 md:pt-14 lg:pb-16 lg:pt-16"
       aria-label="Why use PathPicker"
     >
-      <div
-        className="mx-auto max-w-6xl px-4 md:px-6"
-      >
-        <div
-          className="marquee-fade-edges relative overflow-hidden rounded-2xl"
-          aria-label="PathPicker benefits"
-        >
-        <div className="flex w-max shrink-0 items-stretch gap-4 pr-4 motion-reduce:animate-none motion-safe:animate-[marquee-x_55s_linear_infinite] sm:gap-5">
-          {MATCH_BENEFITS_MARQUEE_TRACK.map((benefit, i) => (
-            <MatchBenefitMarqueeTile key={`${benefit.title}-${i}`} benefit={benefit} />
-          ))}
-          </div>
-        </div>
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <MatchBenefitsCarousel />
       </div>
     </section>
   );
@@ -126,14 +180,13 @@ export function HomeCollegeMatchQuizCta() {
       <div className="mx-auto max-w-6xl md:hidden">
         <div
           className="flex flex-col items-center gap-3 px-4 text-center sm:gap-4"
-          aria-label="College match quiz"
+          aria-label="Find My Path"
         >
           <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[#181A1D]">
             Ready to see your college matches?
           </p>
           <p className="text-sm leading-relaxed text-[#3F3F46]">
-            Take the free college match quiz for admission odds, personality fit, and happiness signals in
-            minutes.
+            Find your path in minutes with admission odds, personality fit, and happiness signals.
           </p>
           <CollegeMatchQuizCtaLink className="mt-1">{STUDENT_ARCHETYPE_QUIZ_LABEL}</CollegeMatchQuizCtaLink>
         </div>

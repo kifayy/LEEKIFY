@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
@@ -59,7 +60,7 @@ export function ArchetypeQuizWidget() {
               </div>
             </div>
           </div>
-          <h2 className="text-xl font-bold text-[#0C1120]">College Match Quiz</h2>
+          <h2 className="text-xl font-bold text-[#0C1120]">{PATH_COLLEGE_MATCH_QUIZ_LABEL}</h2>
           <p
             className="mt-2 line-clamp-2 text-sm font-sans leading-relaxed"
             style={{ color: "rgba(12, 17, 32, 0.6)" }}

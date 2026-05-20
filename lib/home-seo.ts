@@ -1,3 +1,4 @@
+import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { HOME_FAQ_ITEMS } from "@/lib/home-faq-content";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
@@ -105,7 +106,7 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
           position: 1,
           item: {
             "@type": "WebPage",
-            name: "College Match Quiz",
+            name: PATH_COLLEGE_MATCH_QUIZ_LABEL,
             url: COLLEGE_MATCH_QUIZ_URL,
           },
         },

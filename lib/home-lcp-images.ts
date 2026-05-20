@@ -1,7 +1,3 @@
-import {
-  HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
-} from "@/lib/home-feature-showcase-images";
-
 /** Next/Image quality when the optimizer runs (remote heroes). */
 export const HOME_HERO_IMAGE_QUALITY = 90;
 
@@ -40,5 +36,3 @@ export const DESKTOP_HERO_ART_URL = "/images/desktop-hero.webp";
 export const DESKTOP_HERO_ART_WIDTH = 3840;
 export const DESKTOP_HERO_ART_HEIGHT = 2514;
 
-/** First above-the-fold feature mock on mobile home (scholarship showcase row 1). */
-export const MOBILE_FEATURE_LCP_URL = HOME_FEATURE_BROWSE_FIT_IMAGE_URL;

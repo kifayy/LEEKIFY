@@ -7,12 +7,10 @@ import {
   HomeMatchBenefitsSection,
 } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
-import { HomeScholarshipFeatureShowcase } from "@/components/home/home-scholarship-feature-showcase";
 import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import {
   DESKTOP_HERO_ART_URL,
-  MOBILE_FEATURE_LCP_URL,
   MOBILE_HERO_FIGMA_ART_URL,
 } from "@/lib/home-lcp-images";
 import {
@@ -92,13 +90,6 @@ export default async function Home() {
         fetchPriority="high"
         media="(max-width: 767px)"
       />
-      <link
-        rel="preload"
-        href={MOBILE_FEATURE_LCP_URL}
-        as="image"
-        fetchPriority="high"
-        media="(max-width: 767px)"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -107,8 +98,7 @@ export default async function Home() {
       <span id="commit-with-zero-regrets" className="block scroll-mt-28 md:hidden" aria-hidden />
       <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
       <AboutProfileSchoolsSection />
-      <HomeScholarshipFeatureShowcase />
-      <StudentsLoveSection />
+      <StudentsLoveSection className="hidden md:block" />
       <DesktopAnalyticsBreakdownSection />
       <HomeMatchBenefitsSection />
       <HomePageFaqs />

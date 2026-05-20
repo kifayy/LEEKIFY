@@ -23,8 +23,8 @@ const PATH_CAREER_BULLET_ACCENT = "#D93D8F";
 const PATH_OPTIONS = [
   {
     id: "highSchool" as const,
-    titleAccent: "College",
-    titleRest: " Match Quiz",
+    titleAccent: "Find",
+    titleRest: " My Path",
     titleAccentColor: PATH_COLLEGE_ACCENT,
     description:
       "Figure out which schools actually fit you, not just where your GPA can get you in.",
