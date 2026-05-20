@@ -1,6 +1,7 @@
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import { MobileDataEngineFeatureCards } from "@/components/home/mobile-data-engine-feature-cards";
 import { MobileDataEngineMetrics } from "@/components/home/mobile-data-engine-metrics";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 import {
   MOBILE_DATA_ENGINE_DASHBOARD_IMAGE_ALT,
   MOBILE_DATA_ENGINE_DASHBOARD_IMAGE_URL,
@@ -25,7 +26,12 @@ export function MobileDataEngineSection() {
               loading="lazy"
             />
           </div>
-          <MobileDataEngineMetrics />
+          <div className="flex flex-col items-center">
+            <MobileDataEngineMetrics />
+            <div className="mt-10 flex w-full justify-center">
+              <PathQuizCtaButton variant="college" size="desktop" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
