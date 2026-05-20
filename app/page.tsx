@@ -13,7 +13,7 @@ import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import {
   DESKTOP_HERO_ART_URL,
   MOBILE_FEATURE_LCP_URL,
-  MOBILE_HERO_PORTRAIT_URL,
+  MOBILE_HERO_FIGMA_ART_URL,
 } from "@/lib/home-lcp-images";
 import {
   buildHomePageJsonLdGraph,
@@ -86,9 +86,9 @@ export default async function Home() {
       />
       <link
         rel="preload"
-        href={MOBILE_HERO_PORTRAIT_URL}
+        href={MOBILE_HERO_FIGMA_ART_URL}
         as="image"
-        type="image/webp"
+        type="image/png"
         fetchPriority="high"
         media="(max-width: 767px)"
       />

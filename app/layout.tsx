@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Image from "next/image";
 import { Suspense } from "react";
-import { Poppins, Dancing_Script, Volkhov, Luckiest_Guy, Covered_By_Your_Grace } from "next/font/google";
+import {
+  Poppins,
+  Inter,
+  Dancing_Script,
+  Volkhov,
+  Luckiest_Guy,
+  Covered_By_Your_Grace,
+} from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -40,6 +47,14 @@ export async function generateMetadata(): Promise<Metadata> {
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-poppins",
+  display: "swap",
+  subsets: ["latin"],
+});
+
+/** Mobile hero headlines — matches clean landing reference (SF/Inter style). */
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
   subsets: ["latin"],
 });
@@ -84,7 +99,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://my.pathpicker.com" />
         <link rel="preconnect" href="https://framerusercontent.com" />
       </head>
-      <body className={`${poppins.className} ${poppins.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}>
+      <body
+        className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}
+      >
           <SiteImageProtection />
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
           <Script id="google-analytics" strategy="lazyOnload">

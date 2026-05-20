@@ -11,7 +11,15 @@ export const HOME_HERO_IMAGE_QUALITY = 90;
  */
 export const HOME_HERO_USE_PREOPTIMIZED_ASSETS = true;
 
-/** Mobile hero portrait — primary LCP below `md` (2× export of design asset). */
+/** Mobile hero composite — original GCS asset (no matte processing). */
+export const MOBILE_HERO_FIGMA_ART_URL =
+  "https://storage.googleapis.com/images_592/Group%20100000asdasd5831.png";
+
+/** Intrinsic size of mobile hero PNG — keep in sync if the asset is re-exported. */
+export const MOBILE_HERO_FIGMA_ART_WIDTH = 1268;
+export const MOBILE_HERO_FIGMA_ART_HEIGHT = 1232;
+
+/** @deprecated Legacy portrait overlay; mobile hero uses `MOBILE_HERO_FIGMA_ART_URL`. */
 export const MOBILE_HERO_PORTRAIT_URL = "/images/hero-student.webp";
 
 /** Intrinsic size of `hero-student.webp` — keep in sync if the file is re-exported. */

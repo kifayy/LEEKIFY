@@ -9,6 +9,9 @@ export const HOME_MOBILE_HERO_BACKDROP_ALT =
 export const HOME_MOBILE_HERO_STUDENT_ALT =
   "Student using PathPicker to explore college match and archetype results";
 
+export const HOME_MOBILE_HERO_FIGMA_ALT =
+  "Student with laptop and university logos exploring college match on PathPicker";
+
 export const HOME_DESKTOP_HERO_STUDENT_ALT =
   "PathPicker college match dashboard preview with student archetype insights";
 

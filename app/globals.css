@@ -175,6 +175,29 @@
   }
 }
 
+/* Mobile hero rotating headline — exits up, enters from below */
+@keyframes mobile-hero-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.65rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobile-hero-line-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.65rem);
+  }
+}
+
 /* Awarded “Take on iOS”: quick nudge every 3s (idle ~88% of cycle) */
 @keyframes ios-cta-bounce {
   0%,
@@ -205,6 +228,18 @@
   }
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+  .animate-mobile-hero-line-in {
+    animation: mobile-hero-line-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-mobile-hero-line-out {
+    animation: mobile-hero-line-out 420ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-mobile-hero-line-in,
+    .animate-mobile-hero-line-out {
+      animation: none;
+    }
   }
   .animate-ios-cta-bounce {
     animation: ios-cta-bounce 3s ease-in-out infinite;

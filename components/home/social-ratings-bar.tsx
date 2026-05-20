@@ -20,9 +20,11 @@ const TRUSTPILOT_GRAPHIC = "/images/social-proof/trustpilot.png";
 
 function RatingStars({
   scoreLabel,
+  compact = false,
 }: {
   /** e.g. 4.7, renders full + half stars */
   scoreLabel: number;
+  compact?: boolean;
 }) {
   const full = Math.floor(scoreLabel);
   const remainder = scoreLabel - full;
@@ -34,18 +36,46 @@ function RatingStars({
     else if (i === full && showHalf) cells.push("half");
   }
 
+  const starClass = compact
+    ? "h-[15px] w-[15px] sm:h-[18px] sm:w-[18px]"
+    : "h-[18px] w-[18px] sm:h-[23px] sm:w-[23px]";
+  const scoreClass = compact
+    ? "text-[0.6875rem] sm:text-xs"
+    : "text-xs sm:text-sm";
+
   return (
-    <div className="flex items-center gap-1.5">
+    <div className={cn("flex items-center", compact ? "gap-0.5 sm:gap-1" : "gap-1 sm:gap-1.5")}>
       <div className="flex items-center gap-px">
         {cells.map((k, i) =>
           k === "full" ? (
-            <Image key={`${k}-${i}`} src={STAR_FULL} alt={HOME_STAR_RATING_ALT} width={23} height={23} aria-hidden />
+            <Image
+              key={`${k}-${i}`}
+              src={STAR_FULL}
+              alt={HOME_STAR_RATING_ALT}
+              width={23}
+              height={23}
+              className={starClass}
+              aria-hidden
+            />
           ) : (
-            <Image key={`${k}-${i}`} src={STAR_HALF} alt={HOME_STAR_RATING_ALT} width={23} height={23} aria-hidden />
+            <Image
+              key={`${k}-${i}`}
+              src={STAR_HALF}
+              alt={HOME_STAR_RATING_ALT}
+              width={23}
+              height={23}
+              className={starClass}
+              aria-hidden
+            />
           )
         )}
       </div>
-      <span className="whitespace-nowrap text-sm font-semibold tabular-nums text-neutral-700">
+      <span
+        className={cn(
+          "whitespace-nowrap font-semibold tabular-nums text-neutral-700",
+          scoreClass,
+        )}
+      >
         {scoreLabel.toFixed(1)} / 5
       </span>
     </div>
@@ -54,7 +84,7 @@ function RatingStars({
 
 function TrustpilotBlock({ priority }: { priority?: boolean }) {
   return (
-    <div className="flex min-h-[130px] shrink-0 justify-center pt-6">
+    <div className="flex min-h-[96px] shrink-0 justify-center pt-3 sm:min-h-[130px] sm:pt-6">
       <a
         href="https://www.trustpilot.com/"
         target="_blank"
@@ -67,7 +97,7 @@ function TrustpilotBlock({ priority }: { priority?: boolean }) {
           alt={HOME_TRUSTPILOT_ALT}
           width={220}
           height={160}
-          className="h-auto w-[min(100vw-2rem,200px)] max-w-[200px]"
+          className="h-auto w-[min(100vw-2rem,148px)] max-w-[148px] sm:w-[min(100vw-2rem,200px)] sm:max-w-[200px]"
           priority={priority}
         />
       </a>
@@ -77,13 +107,13 @@ function TrustpilotBlock({ priority }: { priority?: boolean }) {
 
 function GoogleRatingsColumn() {
   return (
-    <div className="flex min-h-[130px] flex-col items-center justify-center gap-2">
+    <div className="flex min-h-[96px] flex-col items-center justify-center gap-1.5 sm:min-h-[130px] sm:gap-2">
       <Image
         src={GOOGLE_LOGO}
         alt="Google"
         width={80}
         height={32}
-        className="h-8 w-20 object-contain"
+        className="h-6 w-16 object-contain sm:h-8 sm:w-20"
       />
       <RatingStars scoreLabel={4.7} />
     </div>
@@ -92,15 +122,15 @@ function GoogleRatingsColumn() {
 
 function AppStoreRatingsColumn() {
   return (
-    <div className="flex min-h-[130px] flex-col items-center justify-center gap-2">
+    <div className="flex min-h-[88px] flex-col items-center justify-center gap-2.5 px-1 sm:min-h-[118px] sm:gap-2 sm:px-0">
       <Image
         src={APP_STORE_LOGO}
         alt="App Store"
         width={145}
         height={35}
-        className="h-9 max-w-[145px] object-contain"
+        className="h-6 w-auto max-w-[96px] object-contain sm:h-7 sm:max-w-[118px]"
       />
-      <RatingStars scoreLabel={4.6} />
+      <RatingStars scoreLabel={4.6} compact />
     </div>
   );
 }
@@ -133,9 +163,9 @@ export function SocialRatingsBar() {
           aria-label="Store and review ratings"
           opts={{ loop: false, align: "start", duration: 20 }}
           setApi={setCarouselApi}
-          className="w-full [--ratings-carousel-gap:0.75rem] [--slide-w:calc((100%-var(--ratings-carousel-gap))/2)]"
+          className="w-full [--ratings-carousel-gap:1.125rem] [--slide-w:calc((100%-var(--ratings-carousel-gap))/2)]"
         >
-          <CarouselContent className="-ml-0 gap-[var(--ratings-carousel-gap)] px-3">
+          <CarouselContent className="-ml-0 gap-[var(--ratings-carousel-gap)] px-4">
             <CarouselItem className="flex min-w-0 flex-[0_0_var(--slide-w)] flex-col items-center justify-center pl-0">
               <TrustpilotBlock priority />
             </CarouselItem>
@@ -147,7 +177,7 @@ export function SocialRatingsBar() {
             </CarouselItem>
           </CarouselContent>
         </Carousel>
-        <nav className="flex justify-center gap-1.5 pt-5" aria-label="Rating slides">
+        <nav className="flex justify-center gap-1.5 pt-4" aria-label="Rating slides">
           {[0, 1, 2].map((i) => (
             <button
               key={i}
