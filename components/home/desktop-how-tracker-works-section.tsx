@@ -3,6 +3,7 @@
 import { DiscoveryCardLottie } from "@/components/home/discovery-card-lottie";
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import {
+  DESKTOP_SECTION_HEADING_ACCENT_CLASS,
   DESKTOP_SECTION_HEADING_CLASS,
   DESKTOP_SECTION_ITEM_TITLE_CLASS,
   DESKTOP_SECTION_SUBTEXT_CLASS,
@@ -11,48 +12,56 @@ import {
 import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { DISCOVERY_CARDS } from "@/lib/discovery-cards-content";
 import { DESKTOP_TRACKER_ARCHETYPE_IMAGE_URL } from "@/lib/home-feature-showcase-images";
+import { cn } from "@/lib/utils";
 
 const TRACKER_STEPS = DISCOVERY_CARDS.map((card) => ({
+  step: card.step,
   title: card.shortTitle,
   description: card.shortDescription,
+  stats: card.stats,
   lottieSrc: card.lottieSrc,
   accentColor: card.accentColor,
   surfaceGradient: card.surfaceGradient,
 }));
 
-function StepConnector({ index }: { index: number }) {
-  if (index >= TRACKER_STEPS.length - 1) return null;
-  const paths = [
-    "M52 0 C72 8, 78 28, 58 44",
-    "M52 0 C32 10, 28 30, 48 44",
-  ];
+function TimelineRail({ stepCount }: { stepCount: number }) {
+  if (stepCount < 2) return null;
   return (
-    <svg
-      className="pointer-events-none absolute left-[3.25rem] top-full z-0 h-11 w-24 -translate-y-1 text-sky-300/80"
-      viewBox="0 0 96 48"
-      fill="none"
+    <div
+      className="pointer-events-none absolute left-[1.375rem] top-8 bottom-8 z-0 w-0.5 sm:left-[1.5rem]"
       aria-hidden
     >
-      <path
-        d={paths[index]}
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        markerEnd="url(#tracker-arrow)"
-      />
-      <defs>
-        <marker
-          id="tracker-arrow"
-          markerWidth="6"
-          markerHeight="6"
-          refX="5"
-          refY="3"
-          orient="auto"
-        >
-          <path d="M0 0 L6 3 L0 6 Z" fill="currentColor" />
-        </marker>
-      </defs>
-    </svg>
+      <div className="h-full w-full rounded-full bg-gradient-to-b from-amber-300 via-pink-300 to-emerald-300" />
+    </div>
+  );
+}
+
+function StepNumberBadge({ step, accentColor }: { step: number; accentColor: string }) {
+  return (
+    <div
+      className="absolute left-0 top-0 z-20 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white font-[family-name:var(--font-poppins)] text-sm font-extrabold text-white shadow-[0_4px_14px_rgba(15,23,42,0.18)] sm:h-9 sm:w-9"
+      style={{ backgroundColor: accentColor }}
+      aria-hidden
+    >
+      {step}
+    </div>
+  );
+}
+
+function StepStats({ stats, accentColor }: { stats: readonly string[]; accentColor: string }) {
+  return (
+    <ul className="mt-3 flex flex-wrap gap-2" aria-label="Highlights">
+      {stats.map((stat) => (
+        <li key={stat}>
+          <span
+            className="inline-flex rounded-full border border-white/80 bg-white/90 px-2.5 py-1 font-[family-name:var(--font-poppins)] text-xs font-medium text-[#18062E] shadow-[0_2px_8px_rgba(15,23,42,0.06)]"
+            style={{ boxShadow: `0 2px 10px ${accentColor}22` }}
+          >
+            {stat}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -122,12 +131,11 @@ function ArchetypeVisual() {
   );
 }
 
-
 export function DesktopHowTrackerWorksSection() {
   return (
     <section
       id="commit-with-zero-regrets"
-      className="relative hidden w-full scroll-mt-28 overflow-hidden bg-[#F4F2FF] md:block"
+      className="relative hidden w-full scroll-mt-28 overflow-hidden bg-white md:block"
       aria-labelledby="desktop-how-tracker-heading"
     >
       <DecorativeMagnifier />
@@ -136,44 +144,58 @@ export function DesktopHowTrackerWorksSection() {
       <div className="relative mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-8 lg:py-24 xl:gap-20">
         <div className="lg:pr-4">
           <h2 id="desktop-how-tracker-heading" className={`max-w-lg ${DESKTOP_SECTION_HEADING_CLASS}`}>
-            Your{" "}
-            <span className="relative inline-block pb-1">
-              Student Archetype
+            Your path, built on{" "}
+            <span
+              className={`relative inline-block pb-1 ${DESKTOP_SECTION_HEADING_ACCENT_CLASS}`}
+            >
+              student data.
               <DesktopHeadingSwoosh />
             </span>
           </h2>
           <p className={`mt-5 max-w-lg ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            For high school and college students, we map your student archetype to your future careers and
-            schools in a world shaped by AI.
+            PathPicker is powered by what 50,000+ students wish they&apos;d known earlier.
           </p>
 
-          <ol className="relative mt-10 space-y-10 sm:mt-12">
-            {TRACKER_STEPS.map(({ title, description, lottieSrc, accentColor, surfaceGradient }, index) => (
-              <li key={title} className="relative flex gap-4 sm:gap-5">
-                <StepConnector index={index} />
-                <div
-                  className="relative z-[1] h-[4.5rem] w-[4.5rem] shrink-0 sm:h-20 sm:w-20"
-                  style={{ background: surfaceGradient }}
-                >
-                  <div
-                    className="pointer-events-none absolute inset-0 z-0 translate-x-1.5 translate-y-1.5 rounded-2xl opacity-90"
-                    style={{ backgroundColor: accentColor }}
-                    aria-hidden
-                  />
-                  <div className="relative z-[1] h-full w-full overflow-hidden rounded-2xl bg-white shadow-[0_8px_20px_rgba(15,23,42,0.12)]">
-                    <DiscoveryCardLottie src={lottieSrc} compact />
-                  </div>
-                </div>
-                <div className="min-w-0 pt-0.5 sm:pt-1">
-                  <h3 className={DESKTOP_SECTION_ITEM_TITLE_CLASS}>
-                    {title}
-                  </h3>
-                  <p className="mt-1.5 font-[family-name:var(--font-poppins)] text-sm leading-relaxed text-neutral-500">
-                    {description}
-                  </p>
-                </div>
-              </li>
-            ))}
+          <ol className="relative mt-10 sm:mt-12">
+            <TimelineRail stepCount={TRACKER_STEPS.length} />
+            {TRACKER_STEPS.map(
+              ({ step, title, description, stats, lottieSrc, accentColor, surfaceGradient }, index) => {
+                const isLast = index === TRACKER_STEPS.length - 1;
+                return (
+                  <li
+                    key={title}
+                    className={cn(
+                      "relative flex gap-4 sm:gap-5",
+                      !isLast && "pb-10 sm:pb-12",
+                    )}
+                  >
+                    <div className="relative shrink-0 overflow-visible pt-1 pl-1">
+                      <div
+                        className="relative z-[1] h-[4.5rem] w-[4.5rem] overflow-visible sm:h-20 sm:w-20"
+                        style={{ background: surfaceGradient }}
+                      >
+                        <StepNumberBadge step={step} accentColor={accentColor} />
+                        <div
+                          className="pointer-events-none absolute inset-0 z-0 translate-x-1.5 translate-y-1.5 rounded-2xl opacity-90"
+                          style={{ backgroundColor: accentColor }}
+                          aria-hidden
+                        />
+                        <div className="relative z-[1] h-full w-full overflow-hidden rounded-2xl bg-white shadow-[0_8px_20px_rgba(15,23,42,0.12)]">
+                          <DiscoveryCardLottie src={lottieSrc} compact />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="min-w-0 pt-0.5 sm:pt-1">
+                      <h3 className={DESKTOP_SECTION_ITEM_TITLE_CLASS}>{title}</h3>
+                      <p className="mt-1.5 font-[family-name:var(--font-poppins)] text-sm leading-relaxed text-neutral-500">
+                        {description}
+                      </p>
+                      <StepStats stats={stats} accentColor={accentColor} />
+                    </div>
+                  </li>
+                );
+              },
+            )}
           </ol>
         </div>
 

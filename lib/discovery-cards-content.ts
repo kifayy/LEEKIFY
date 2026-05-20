@@ -1,39 +1,45 @@
-/** Shared copy + Lottie sources for mobile discovery cards and desktop tracker steps. */
+/** Shared copy + Lottie sources for desktop path-finder timeline steps. */
 export const DISCOVERY_CARDS = [
   {
-    title: "Find Your Best Path",
-    shortTitle: "Find Your Best Path",
+    step: 1,
+    title: "The data",
+    shortTitle: "The data",
     description:
-      "We calculate your highest odds of happiness in future careers—and show you which careers are most resilient (or most at risk) in an AI-driven world.",
+      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That powers your match, not rankings alone.",
     shortDescription:
-      "We calculate your highest odds of happiness in future careers—and show you which careers are most resilient (or most at risk) in an AI-driven world.",
+      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That powers your match, not rankings alone.",
+    stats: ["50k+ students surveyed", "US & international", "High school & college"],
+    lottieSrc: "/animations/champion.lottie",
+    accentColor: "#F59E0B",
+    surfaceGradient:
+      "linear-gradient(180deg, #fffbeb 0%, #fffbf0 30%, #ffffff 55%, #ffffff 100%)",
+  },
+  {
+    step: 2,
+    title: "The match",
+    shortTitle: "The match",
+    description:
+      "Answer a few questions. We map how you learn and work across 106+ data points, then match you to outcomes at 2,000+ schools and hundreds of careers.",
+    shortDescription:
+      "Answer a few questions. We map how you learn and work across 106+ data points, then match you to outcomes at 2,000+ schools and hundreds of careers.",
+    stats: ["106+ data points", "2,000+ schools mapped"],
     lottieSrc: "/animations/meditating-brain.lottie",
     accentColor: "#EC4899",
     surfaceGradient:
       "linear-gradient(180deg, #fdf2f8 0%, #fffafb 28%, #ffffff 52%, #ffffff 100%)",
   },
   {
-    title: "Clarity in Minutes",
-    shortTitle: "Clarity in Minutes",
+    step: 3,
+    title: "The result",
+    shortTitle: "The result",
     description:
-      "Our archetype test delivers 106+ data points, broken down simply, so you can pinpoint your ideal path for life after student years.",
+      "Based on your archetype, see where you'll thrive with fit and happiness scores, admission odds, salary outlook, and AI-era career fit built for your profile.",
     shortDescription:
-      "Our archetype test delivers 106+ data points, broken down simply, so you can pinpoint your ideal path for life after student years.",
+      "Based on your archetype, see where you'll thrive with fit and happiness scores, admission odds, salary outlook, and AI-era career fit built for your profile.",
+    stats: ["School shortlist", "Career fit scores", "5-year outlook"],
     lottieSrc: "/animations/time.lottie",
     accentColor: "#10B981",
     surfaceGradient:
       "linear-gradient(180deg, #ecfdf5 0%, #f0fdf9 30%, #ffffff 55%, #ffffff 100%)",
-  },
-  {
-    title: "50k+ Served",
-    shortTitle: "50k+ Served",
-    description:
-      '98% of students said their results were accurate and "extremely helpful."',
-    shortDescription:
-      '98% of students said their results were accurate and "extremely helpful."',
-    lottieSrc: "/animations/champion.lottie",
-    accentColor: "#F59E0B",
-    surfaceGradient:
-      "linear-gradient(180deg, #fffbeb 0%, #fffbf0 30%, #ffffff 55%, #ffffff 100%)",
   },
 ] as const;

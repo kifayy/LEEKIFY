@@ -1,37 +1,33 @@
-import { CalendarCheck, LayoutDashboard, Timer } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 
 import {
+  DESKTOP_SECTION_HEADING_ACCENT_CLASS,
   DESKTOP_SECTION_HEADING_CLASS,
   DESKTOP_SECTION_ITEM_TITLE_CLASS,
   DESKTOP_SECTION_SUBTEXT_CLASS,
   DesktopHeadingSwoosh,
 } from "@/components/home/desktop-section-typography";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { DESKTOP_ANALYTICS_PHONE_IMAGE_URL } from "@/lib/home-feature-showcase-images";
+
+const ANALYTICS_CHECK_COLOR = "#956DFE";
 
 const BREAKDOWN_ITEMS = [
   {
     title: "Automatic fit tracking",
     description:
       "Your quiz answers map to fit scores automatically, with no spreadsheets or guesswork required.",
-    iconBg: "#FF8C66",
-    Icon: Timer,
   },
   {
     title: "Customizable dashboard",
     description:
       "Filter by vibe, admission odds, and campus size so your short list reflects what matters to you.",
-    iconBg: "#76D1D9",
-    Icon: LayoutDashboard,
   },
   {
     title: "Compare schools retroactively",
     description:
       "Revisit saved matches anytime and see how your profile stacks up as your goals change.",
-    iconBg: "#F5C542",
-    Icon: CalendarCheck,
   },
 ] as const;
 
@@ -86,13 +82,15 @@ export function DesktopAnalyticsBreakdownSection() {
       className="relative hidden w-full bg-white md:block"
       aria-labelledby="desktop-analytics-breakdown-heading"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-10 pt-16 md:px-6 md:pb-12 md:pt-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:pb-14 lg:pt-24">
         <PhoneMockupVisual />
 
         <div className="flex flex-col justify-center lg:pl-4">
           <h2 id="desktop-analytics-breakdown-heading" className={DESKTOP_SECTION_HEADING_CLASS}>
             Never Regret Picking The{" "}
-            <span className="relative inline-block">
+            <span
+              className={`relative inline-block ${DESKTOP_SECTION_HEADING_ACCENT_CLASS}`}
+            >
               Wrong School
               <DesktopHeadingSwoosh className="min-w-[8.5rem]" />
             </span>
@@ -103,14 +101,14 @@ export function DesktopAnalyticsBreakdownSection() {
           </p>
 
           <ul className="mt-10 space-y-8">
-            {BREAKDOWN_ITEMS.map(({ title, description, iconBg, Icon }) => (
-              <li key={title} className="flex gap-4">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-sm"
-                  style={{ backgroundColor: iconBg }}
-                >
-                  <Icon className="h-6 w-6 text-white" strokeWidth={2} aria-hidden />
-                </div>
+            {BREAKDOWN_ITEMS.map(({ title, description }) => (
+              <li key={title} className="flex items-start gap-3">
+                <Check
+                  className="mt-1 h-5 w-5 shrink-0"
+                  style={{ color: ANALYTICS_CHECK_COLOR }}
+                  strokeWidth={2.5}
+                  aria-hidden
+                />
                 <div>
                   <h3 className={DESKTOP_SECTION_ITEM_TITLE_CLASS}>
                     {title}
@@ -122,8 +120,6 @@ export function DesktopAnalyticsBreakdownSection() {
               </li>
             ))}
           </ul>
-
-          <StudentArchetypeTestCta desktopOnly align="left" wrapperClassName="mt-10 lg:mt-12" />
         </div>
       </div>
     </section>

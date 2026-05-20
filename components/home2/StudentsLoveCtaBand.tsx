@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { StudentsLoveHeadlineTypewriter } from "@/components/home2/students-love-headline-typewriter";
 import { getActiveStudentsLoveSectionTheme } from "@/components/home2/students-love-section-themes";
 import {
   HOME2_TESTIMONIALS,
   type Home2Testimonial,
 } from "@/components/home2/testimonials";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
 import { HERO_COLLEGE_LOGO_ENTRIES } from "@/lib/hero-college-logos";
 import { HOME_TESTIMONIAL_PHOTO_ALT, collegeLogoAlt } from "@/lib/home-image-seo";
 
@@ -109,7 +109,7 @@ function PhotoQuoteTile({
           />
         </span>
         <span className="pr-0.5 text-[10px] font-bold leading-none tracking-tight text-neutral-900 md:text-[11px]">
-          #1 Match
+          Committed
         </span>
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
@@ -146,8 +146,11 @@ export function StudentsLoveCtaBand() {
           </div>
         </div>
         <h3 className={`text-center ${sectionTheme.headlineClass}`}>
-          <span className={sectionTheme.headlineLeadClass}>50k+ Found Their </span>
-          <span className={sectionTheme.accentPhraseClass}>Dream School</span>
+          <span className={`block ${sectionTheme.headlineLeadClass}`}>50k+ Found Their</span>
+          <span className="mt-0.5 flex flex-wrap items-baseline justify-center">
+            <span className={sectionTheme.headlineLeadClass}>Dream&nbsp;</span>
+            <StudentsLoveHeadlineTypewriter className={sectionTheme.accentPhraseClass} />
+          </span>
         </h3>
         <p className={`mx-auto mt-4 max-w-2xl text-center ${sectionTheme.subtextClass}`}>
           Personality matters. See fit, admission odds, and campus happiness, not just where you can get in.
@@ -180,8 +183,6 @@ export function StudentsLoveCtaBand() {
             ))}
           </div>
         </div>
-
-        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-10 md:mt-12" />
       </div>
     </div>
   );

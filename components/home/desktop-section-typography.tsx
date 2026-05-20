@@ -3,7 +3,10 @@ import { cn } from "@/lib/utils";
 
 /** Shared desktop marketing section h2 — color, size, font, weight. */
 export const DESKTOP_SECTION_HEADING_CLASS =
-  "font-[family-name:var(--font-poppins)] text-[clamp(1.75rem,2.8vw,2.625rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-[#18062E]";
+  "font-[family-name:var(--font-poppins)] text-[clamp(1.75rem,2.8vw,2.625rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-[#181A1D]";
+
+/** Highlighted phrase in section h2 — matches hero typewriter accent. */
+export const DESKTOP_SECTION_HEADING_ACCENT_CLASS = "text-[#956DFE]";
 
 /** Shared body copy under desktop section headings. */
 export const DESKTOP_SECTION_SUBTEXT_CLASS =

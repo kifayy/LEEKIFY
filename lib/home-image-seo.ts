@@ -21,7 +21,7 @@ export const HOME_TRUSTPILOT_ALT = "Trustpilot reviews for PathPicker";
 export const HOME_STAR_RATING_ALT = "Star rating";
 
 export const HOME_TESTIMONIAL_PHOTO_ALT = (studentName: string) =>
-  `PathPicker student testimonial photo — ${studentName}`;
+  `PathPicker student testimonial photo, ${studentName}`;
 
 export const HOME_TESTIMONIAL_MATCH_BADGE_ALT = "Top college match badge";
 

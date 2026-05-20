@@ -1,6 +1,7 @@
-/** Hero portrait for university / career audience (transparent PNG). */
-export const CAREER_HERO_PORTRAIT_URL =
-  "https://storage.googleapis.com/images_592/Gemini_Generated_Image_qt27fcqt27fcqt27-Photoroom.png";
+import { MOBILE_HERO_CAREER_PORTRAIT_URL } from "@/lib/home-lcp-images";
+
+/** Hero portrait for university / career audience (local pre-exported WebP). */
+export const CAREER_HERO_PORTRAIT_URL = MOBILE_HERO_CAREER_PORTRAIT_URL;
 
 export type HeroCareerStatTone = "neutral" | "negative" | "positive" | "caution";
 
@@ -11,6 +12,10 @@ export type HeroCareerStatLine = {
   label: string;
   /** Drives accent + type color: e.g. AI risk → red. */
   tone?: HeroCareerStatTone;
+  /** Optional career icon (replaces mini chart in stat chips). */
+  iconSrc?: string;
+  /** Label under icon, e.g. "Doctor". */
+  careerName?: string;
 };
 
 /**
@@ -26,4 +31,62 @@ export const HERO_CAREER_STATS: readonly HeroCareerStatLine[] = [
   { value: "+38%", label: "Remote Growth", tone: "positive" },
   { value: "55%", label: "Explore Fields" },
   { value: "11 wks", label: "Avg Job Hunt", tone: "caution" },
+] as const;
+
+/** Desktop path widget — stats with career icons instead of charts. */
+export const PATH_WIDGET_CAREER_STATS: readonly HeroCareerStatLine[] = [
+  {
+    value: "84%",
+    label: "chance of replacement by AI",
+    tone: "negative",
+    iconSrc: "/images/path-widget-careers/engineer.png",
+    careerName: "Engineer",
+  },
+  {
+    value: "$280k",
+    label: "median salary in your field",
+    tone: "positive",
+    iconSrc: "/images/path-widget-careers/doctor.png",
+    careerName: "Doctor",
+  },
+  {
+    value: "68%",
+    label: "want higher pay in their next role",
+    iconSrc: "/images/path-widget-careers/lawyer.png",
+    careerName: "Lawyer",
+  },
+  {
+    value: "4×",
+    label: "growth in AI-adjacent roles",
+    tone: "positive",
+    iconSrc: "/images/path-widget-careers/engineer.png",
+    careerName: "Engineer",
+  },
+  {
+    value: "3 yrs",
+    label: "until your skills need a refresh",
+    tone: "caution",
+    iconSrc: "/images/path-widget-careers/teacher.png",
+    careerName: "Teacher",
+  },
+  {
+    value: "+38%",
+    label: "more remote roles year over year",
+    tone: "positive",
+    iconSrc: "/images/path-widget-careers/therapist.png",
+    careerName: "Therapist",
+  },
+  {
+    value: "55%",
+    label: "exploring a different field",
+    iconSrc: "/images/path-widget-careers/therapist.png",
+    careerName: "Therapist",
+  },
+  {
+    value: "11 wks",
+    label: "average job search length",
+    tone: "caution",
+    iconSrc: "/images/path-widget-careers/lawyer.png",
+    careerName: "Lawyer",
+  },
 ] as const;

@@ -242,6 +242,22 @@
       transparent 100%
     );
   }
+  .marquee-fade-edges-compact {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 18%,
+      black 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 18%,
+      black 82%,
+      transparent 100%
+    );
+  }
   .marquee-fade-edges-y {
     -webkit-mask-image: linear-gradient(
       to bottom,

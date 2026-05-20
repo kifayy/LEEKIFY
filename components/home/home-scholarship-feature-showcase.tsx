@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
+import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import { HomeFeatureShowcaseImage } from "@/components/home/home-feature-showcase-image";
 import {
   HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
@@ -270,7 +271,7 @@ export function HomeScholarshipFeatureShowcase() {
             </FeatureBody>
             <FeatureDivider />
             <CheckList compactItems={BROWSE_FIT_BULLETS_COMPACT} />
-            <PrimaryCta>College Match Quiz</PrimaryCta>
+            <PrimaryCta>{STUDENT_ARCHETYPE_QUIZ_LABEL}</PrimaryCta>
           </article>
         </div>
 
@@ -293,7 +294,7 @@ export function HomeScholarshipFeatureShowcase() {
             </FeatureBody>
             <FeatureDivider />
             <CheckList compactItems={DEEP_PROFILE_BULLETS_COMPACT} />
-            <PrimaryCta>College Match Quiz</PrimaryCta>
+            <PrimaryCta>{STUDENT_ARCHETYPE_QUIZ_LABEL}</PrimaryCta>
           </article>
           <div className="w-full max-md:mx-auto max-md:order-1 max-md:max-w-[min(100%,300px)] md:order-2 md:col-span-6 md:mx-0 md:w-full">
             <DeepProfileFeatureVisual />
@@ -317,7 +318,7 @@ export function HomeScholarshipFeatureShowcase() {
               Loneliness, burnout, belonging, and momentum are hard to guess from a brochure. PathPicker turns those
               feelings into readable stats so you can compare schools on day-to-day life, not prestige alone.
             </FeatureBody>
-            <PrimaryCta>College Match Quiz</PrimaryCta>
+            <PrimaryCta>{STUDENT_ARCHETYPE_QUIZ_LABEL}</PrimaryCta>
           </article>
         </div>
       </div>

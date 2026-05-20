@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import { HERO_CAREER_STATS, type HeroCareerStatLine } from "@/lib/hero-career-content";
 
@@ -462,8 +464,11 @@ function MiniChart({
 const STAT_BASE_SEED = 0x51c4f02a >>> 0;
 const ROW_SEED_MIX = 0x85ebca6b >>> 0;
 
-function seededOrder(seed: number): HeroCareerStatLine[] {
-  const a = [...STATS];
+function seededOrder(
+  seed: number,
+  stats: readonly HeroCareerStatLine[] = STATS,
+): HeroCareerStatLine[] {
+  const a = [...stats];
   let state = seed >>> 0;
   if (state === 0) state = 0x6eed3849;
   for (let i = a.length - 1; i > 0; i--) {
@@ -474,8 +479,11 @@ function seededOrder(seed: number): HeroCareerStatLine[] {
   return a;
 }
 
-function statOrderForRow(rowIndex: number): HeroCareerStatLine[] {
-  return seededOrder((STAT_BASE_SEED + Math.imul(rowIndex, ROW_SEED_MIX)) >>> 0);
+function statOrderForRow(
+  rowIndex: number,
+  stats: readonly HeroCareerStatLine[] = STATS,
+): HeroCareerStatLine[] {
+  return seededOrder((STAT_BASE_SEED + Math.imul(rowIndex, ROW_SEED_MIX)) >>> 0, stats);
 }
 
 const STAT_REEL_ROWS = [
@@ -491,8 +499,6 @@ const STAT_REEL_ROWS = [
   },
   { animationClass: "motion-safe:animate-[marquee-x_38s_linear_infinite]", delaySec: -31.75 },
 ] as const;
-
-const ROW_STAT_ORDERS = STAT_REEL_ROWS.map((_, rowIndex) => statOrderForRow(rowIndex));
 
 type TrackCell =
   | { kind: "stat"; stat: HeroCareerStatLine; accentIndex: number }
@@ -526,9 +532,18 @@ export type HeroCareerStatReelsProps = {
   rowGapClassName?: string;
   spacerClassName?: string;
   chipClassName?: string;
+  labelClassName?: string;
+  iconShellClassName?: string;
+  careerNameClassName?: string;
   trackPaddingClassName?: string;
   rowWrapperClassName?: string;
   hiddenFirstRowsBelowMd?: number;
+  /** Override default hero stats (e.g. path widget copy). */
+  stats?: readonly HeroCareerStatLine[];
+  /** Cap how many marquee rows render. */
+  maxRows?: number;
+  /** Tighter chips with small career icons (path widget). */
+  variant?: "default" | "path-widget";
 };
 
 export function HeroCareerStatReels({
@@ -537,21 +552,29 @@ export function HeroCareerStatReels({
   rowGapClassName = "gap-3 py-5 md:gap-3.5",
   spacerClassName = "inline-block w-[3.75rem] shrink-0 md:w-[5.25rem] lg:w-32 xl:w-40",
   chipClassName,
+  labelClassName,
+  iconShellClassName,
+  careerNameClassName,
   trackPaddingClassName = "px-6 lg:px-8",
   rowWrapperClassName = "marquee-fade-edges mx-auto w-full overflow-hidden",
   hiddenFirstRowsBelowMd,
+  stats = STATS,
+  maxRows,
+  variant = "default",
 }: HeroCareerStatReelsProps) {
+  const rows = maxRows != null ? STAT_REEL_ROWS.slice(0, maxRows) : STAT_REEL_ROWS;
+
   return (
     <div
       className={cn(
         "pointer-events-none absolute inset-0 z-[5] flex flex-col justify-center",
         rowGapClassName,
-        className
+        className,
       )}
       aria-hidden
     >
-      {STAT_REEL_ROWS.map(({ animationClass, delaySec }, rowIndex) => {
-        const track = buildTrack(ROW_STAT_ORDERS[rowIndex]!, rowIndex);
+      {rows.map(({ animationClass, delaySec }, rowIndex) => {
+        const track = buildTrack(statOrderForRow(rowIndex, stats), rowIndex);
         return (
           <div
             key={`${idPrefix}-stat-row-${rowIndex}`}
@@ -586,6 +609,10 @@ export function HeroCareerStatReels({
                     stat={cell.stat}
                     accentIndex={cell.accentIndex}
                     chipClassName={chipClassName}
+                    labelClassName={labelClassName}
+                    iconShellClassName={iconShellClassName}
+                    careerNameClassName={careerNameClassName}
+                    variant={variant}
                   />
                 )
               )}
@@ -604,6 +631,10 @@ function StatChip({
   stat,
   accentIndex,
   chipClassName,
+  labelClassName,
+  iconShellClassName,
+  careerNameClassName,
+  variant: chipVariant = "default",
 }: {
   idPrefix: string;
   rowIndex: number;
@@ -611,34 +642,98 @@ function StatChip({
   stat: HeroCareerStatLine;
   accentIndex: number;
   chipClassName?: string;
+  labelClassName?: string;
+  iconShellClassName?: string;
+  careerNameClassName?: string;
+  variant?: "default" | "path-widget";
 }) {
   const preset = resolveAccentPreset(stat, accentIndex);
   const seed =
     (rowIndex * 0x9e37_79b9 + cellIndex * 0x517cc1b7 + stat.label.length * 31) >>> 0;
-  const variant = pickVariant(rowIndex, cellIndex, seed);
+  const chartVariant = pickVariant(rowIndex, cellIndex, seed);
   const toneKey = stat.tone ?? "neutral";
   const gradId = `${idPrefix}-spark-${rowIndex}-${cellIndex}-${accentIndex}-${toneKey}`;
+  const showIcon = Boolean(stat.iconSrc);
+  const isPathWidget = chipVariant === "path-widget";
 
   return (
     <span
       className={cn(
-        chipBase,
-        chipToneClass(stat.tone),
-        "border-l-[3px]",
+        isPathWidget
+          ? "relative flex min-h-0 min-w-[12.25rem] max-w-[17rem] shrink-0 items-center gap-2.5 rounded-xl border border-violet-100/90 bg-white py-2 pl-2.5 pr-3 shadow-[0_2px_10px_rgba(149,109,254,0.12)] sm:min-w-[13rem] sm:max-w-[17.5rem]"
+          : chipBase,
+        !isPathWidget && chipToneClass(stat.tone),
+        isPathWidget ? "border-l-2" : "border-l-[3px]",
         preset.chip,
-        chipClassName
+        chipClassName,
       )}
     >
-      <span className={cn(chartShell, chartShellToneClass(stat.tone))}>
-        <MiniChart variant={variant} seed={seed} preset={preset} gradientId={gradId} />
-      </span>
-      <span className="flex min-w-0 flex-1 flex-col justify-center text-left leading-snug">
-        <span className={cn(valueClass, valueToneClass(stat.tone))}>{stat.value}</span>
+      {showIcon ? (
         <span
           className={cn(
-            labelClass,
-            labelToneClass(stat.tone),
-            "mt-px max-w-[11rem] sm:max-w-[11.75rem] lg:max-w-[12.5rem]"
+            "flex w-[2.375rem] shrink-0 flex-col items-center justify-center gap-0.5",
+            isPathWidget && "w-[2.125rem]",
+          )}
+        >
+          <span
+            className={cn(
+              isPathWidget
+                ? "relative h-7 w-7 shrink-0 overflow-hidden rounded-lg bg-white ring-1 ring-violet-100/90"
+                : chartShell,
+              !isPathWidget && "relative overflow-hidden bg-white p-0.5 ring-violet-100",
+              iconShellClassName,
+            )}
+          >
+            <Image
+              src={stat.iconSrc!}
+              alt={stat.careerName ?? ""}
+              fill
+              loading="lazy"
+              className="object-contain p-0.5"
+              sizes={isPathWidget ? "28px" : "48px"}
+            />
+          </span>
+          {stat.careerName ? (
+            <span
+              className={cn(
+                "w-full text-center font-[family-name:var(--font-poppins)] text-[0.5rem] font-semibold leading-none text-neutral-500",
+                !isPathWidget && "max-w-[3.25rem] truncate text-neutral-600",
+                careerNameClassName,
+              )}
+            >
+              {stat.careerName}
+            </span>
+          ) : null}
+        </span>
+      ) : (
+        <span className={cn(chartShell, chartShellToneClass(stat.tone))}>
+          <MiniChart
+            variant={chartVariant}
+            seed={seed}
+            preset={preset}
+            gradientId={gradId}
+          />
+        </span>
+      )}
+      <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 text-left leading-snug">
+        <span
+          className={cn(
+            valueClass,
+            valueToneClass(stat.tone),
+            isPathWidget && "text-[0.75rem] sm:text-[0.8125rem]",
+          )}
+        >
+          {stat.value}
+        </span>
+        <span
+          className={cn(
+            isPathWidget
+              ? "font-[family-name:var(--font-poppins)] text-[0.625rem] font-medium leading-snug text-neutral-600"
+              : labelClass,
+            !isPathWidget && labelToneClass(stat.tone),
+            !isPathWidget && "mt-px max-w-[11rem] sm:max-w-[11.75rem] lg:max-w-[12.5rem]",
+            isPathWidget && "line-clamp-2",
+            labelClassName,
           )}
         >
           {stat.label}

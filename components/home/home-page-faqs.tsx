@@ -53,7 +53,7 @@ export function HomePageFaqs() {
             PathPicker FAQ
           </h2>
           <p className={`mx-auto mt-5 max-w-xl ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            Clear answers on your archetype, career fit, and planning your next step—beyond grades and rankings
+            Clear answers on your archetype, career fit, and planning your next step, beyond grades and rankings
             alone.
           </p>
         </header>

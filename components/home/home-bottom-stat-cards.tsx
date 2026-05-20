@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   Columns2,
   Compass,
@@ -11,16 +10,9 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
+import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import { HomeDesktopScholarshipInboxCta } from "@/components/home/home-desktop-scholarship-inbox-cta";
-import { cn } from "@/lib/utils";
 
 type BenefitItem = {
   title: string;
@@ -33,7 +25,7 @@ const MATCH_BENEFITS: BenefitItem[] = [
   {
     title: "Know yourself better",
     description:
-      "Get clear on what drives you—your goals, values, and strengths—before you choose your next step.",
+      "Get clear on what drives you: your goals, values, and strengths, before you choose your next step.",
     Icon: Compass,
     iconBg: "#956EFE",
   },
@@ -52,7 +44,7 @@ const MATCH_BENEFITS: BenefitItem[] = [
   },
   {
     title: "Narrow your options",
-    description: "Compare your top fits and see exactly why each one works—or why it does not.",
+    description: "Compare your top fits and see exactly why each one works, or why it does not.",
     Icon: GitCompare,
     iconBg: "#10B981",
   },
@@ -70,6 +62,8 @@ const MATCH_BENEFITS: BenefitItem[] = [
     iconBg: "#EC4899",
   },
 ];
+
+const MATCH_BENEFITS_MARQUEE_TRACK = [...MATCH_BENEFITS, ...MATCH_BENEFITS];
 
 function MatchBenefitRow({ title, description, Icon, iconBg }: BenefitItem) {
   return (
@@ -90,72 +84,36 @@ function MatchBenefitRow({ title, description, Icon, iconBg }: BenefitItem) {
   );
 }
 
-/** Six benefit rows — placed above FAQ on the home page. */
+function MatchBenefitMarqueeTile({ benefit }: { benefit: BenefitItem }) {
+  return (
+    <div
+      className="w-[16.5rem] shrink-0 rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(35,57,91,0.06)] sm:w-[18rem] sm:px-5 sm:py-5 md:w-[19rem]"
+    >
+      <MatchBenefitRow {...benefit} />
+    </div>
+  );
+}
+
+/** Six benefit cards — infinite horizontal reel above FAQ on the home page. */
 export function HomeMatchBenefitsSection() {
-  const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
-  const [active, setActive] = React.useState(0);
-
-  React.useEffect(() => {
-    if (!carouselApi) return;
-    const onSelect = () => setActive(carouselApi.selectedScrollSnap());
-    onSelect();
-    carouselApi.on("select", onSelect);
-    carouselApi.on("reInit", onSelect);
-    return () => {
-      carouselApi.off("select", onSelect);
-      carouselApi.off("reInit", onSelect);
-    };
-  }, [carouselApi]);
-
   return (
     <section
-      className="w-full border-t border-slate-200/80 bg-white py-10 md:py-12 lg:py-14"
+      className="w-full bg-white pb-10 pt-10 md:pb-14 md:pt-14 lg:pb-16 lg:pt-16"
       aria-label="Why use PathPicker"
     >
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="sm:hidden">
-          <Carousel
-            aria-label="PathPicker benefits"
-            opts={{ loop: false, align: "start", duration: 20 }}
-            setApi={setCarouselApi}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-4">
-              {MATCH_BENEFITS.map((benefit) => (
-                <CarouselItem key={benefit.title} className="basis-full pl-4">
-                  <MatchBenefitRow {...benefit} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <nav className="flex justify-center gap-1.5 pt-6" aria-label="Benefit slides">
-            {MATCH_BENEFITS.map((benefit, i) => (
-              <button
-                key={benefit.title}
-                type="button"
-                aria-label={benefit.title}
-                aria-current={active === i ? "true" : undefined}
-                className={cn(
-                  "h-1.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-300",
-                  active === i
-                    ? "w-6 bg-violet-400"
-                    : "w-1.5 bg-neutral-200 hover:bg-neutral-300",
-                )}
-                onClick={() => carouselApi?.scrollTo(i)}
-              />
-            ))}
-          </nav>
-        </div>
-
-        <ul className="hidden grid-cols-1 gap-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-          {MATCH_BENEFITS.map((benefit) => (
-            <li key={benefit.title}>
-              <MatchBenefitRow {...benefit} />
-            </li>
+      <div
+        className="mx-auto max-w-6xl px-4 md:px-6"
+      >
+        <div
+          className="marquee-fade-edges relative overflow-hidden rounded-2xl"
+          aria-label="PathPicker benefits"
+        >
+        <div className="flex w-max shrink-0 items-stretch gap-4 pr-4 motion-reduce:animate-none motion-safe:animate-[marquee-x_55s_linear_infinite] sm:gap-5">
+          {MATCH_BENEFITS_MARQUEE_TRACK.map((benefit, i) => (
+            <MatchBenefitMarqueeTile key={`${benefit.title}-${i}`} benefit={benefit} />
           ))}
-        </ul>
-
-        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-12 lg:mt-14" />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -177,7 +135,7 @@ export function HomeCollegeMatchQuizCta() {
             Take the free college match quiz for admission odds, personality fit, and happiness signals in
             minutes.
           </p>
-          <CollegeMatchQuizCtaLink className="mt-1" />
+          <CollegeMatchQuizCtaLink className="mt-1">{STUDENT_ARCHETYPE_QUIZ_LABEL}</CollegeMatchQuizCtaLink>
         </div>
       </div>
 

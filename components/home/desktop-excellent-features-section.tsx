@@ -1,55 +1,149 @@
-import { Bell, CalendarCheck, FileBarChart } from "lucide-react";
+"use client";
 
-import { DecorativeRocketLottie } from "@/components/home/decorative-rocket-lottie";
-import {
-  DESKTOP_SECTION_HEADING_CLASS,
-  DESKTOP_SECTION_SUBTEXT_CLASS,
-  DesktopHeadingSwoosh,
-} from "@/components/home/desktop-section-typography";
-import { HERO_PURPLE } from "@/components/home/hero-audience-theme";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
+import { Check } from "lucide-react";
 
-const FEATURE_CARDS = [
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
+
+const PATH_COLLEGE_MATCH_LOTTIE = "/animations/job-hunting-college.lottie";
+const PATH_CAREER_MATCH_LOTTIE = "/animations/job-hunting.lottie";
+
+const PATH_VISUAL_WRAPPER_CLASS =
+  "relative mx-auto w-full max-w-[42rem] overflow-hidden";
+const PATH_LOTTIE_CLASS =
+  "block w-full max-w-[40rem] [&_canvas]:mx-auto [&_canvas]:block [&_canvas]:!h-auto [&_canvas]:!w-full [&_canvas]:max-h-[36rem] sm:[&_canvas]:max-h-[38rem] lg:[&_canvas]:max-h-[42rem]";
+
+/** College column — mint/teal from job-hunting-college blob. */
+const PATH_COLLEGE_ACCENT = "#5ED4C4";
+/** Career column — rose pink (readable on white + white label on CTA). */
+const PATH_CAREER_TITLE_ACCENT = "#D93D8F";
+const PATH_CAREER_BULLET_ACCENT = "#D93D8F";
+
+const PATH_OPTIONS = [
   {
-    title: "College & Career Match Quiz",
+    id: "highSchool" as const,
+    titleAccent: "College",
+    titleRest: " Match Quiz",
+    titleAccentColor: PATH_COLLEGE_ACCENT,
     description:
-      "Take a short quiz to map your student archetype to schools and career paths that fit how you learn, live, and want to work in the AI-driven future.",
-    bg: "#76D1D9",
-    iconBg: "rgba(255,255,255,0.35)",
-    Icon: CalendarCheck,
+      "Figure out which schools actually fit you, not just where your GPA can get you in.",
+    bullets: [
+      "2k+ schools matched based on your personality",
+      "Admission odds for your profile",
+      "Career paths tied to each school",
+      "AI-era outlook for every path",
+    ],
+    ctaVariant: "college" as const,
+    accentColor: PATH_COLLEGE_ACCENT,
+    lottieSrc: PATH_COLLEGE_MATCH_LOTTIE,
   },
   {
-    title: "Smart School & Career Shortlist",
+    id: "college" as const,
+    titleAccent: "Career",
+    titleRest: " Match Quiz",
+    titleAccentColor: PATH_CAREER_TITLE_ACCENT,
     description:
-      "Get reach, target, and safety picks ranked by real fit, not just GPA and rankings alone. Includes career outlook and salary potential for each path.",
-    bg: HERO_PURPLE,
-    iconBg: "rgba(255,255,255,0.28)",
-    Icon: Bell,
-  },
-  {
-    title: "Deep Fit & Future Reports",
-    description:
-      "See admission odds, campus vibe, student happiness signals, and future career fit in one clear report, so you know where you'll thrive now and in 5 years.",
-    bg: "#FF8C66",
-    iconBg: "rgba(255,255,255,0.32)",
-    Icon: FileBarChart,
+      "Find the career paths that align with who you are, before you graduate into the wrong one.",
+    bullets: [
+      "Career matches ranked by fit",
+      "Salary potential and growth outlook",
+      "AI resilience score for each path",
+      "Major alignment check",
+    ],
+    ctaVariant: "career" as const,
+    accentColor: PATH_CAREER_BULLET_ACCENT,
+    lottieSrc: PATH_CAREER_MATCH_LOTTIE,
   },
 ] as const;
 
-function DecorativeStar() {
+function PathLottieVisual({ src }: { src: string }) {
   return (
-    <svg
-      className="pointer-events-none absolute left-[4%] top-6 h-16 w-16 text-violet-300/50 md:left-[6%] md:top-8 md:h-20 md:w-20 lg:left-[8%]"
-      viewBox="0 0 80 80"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M40 4L46 34H76L52 52L60 80L40 62L20 80L28 52L4 34H34L40 4Z"
-        stroke="currentColor"
-        strokeWidth="1.25"
+    <div className={PATH_VISUAL_WRAPPER_CLASS} aria-hidden>
+      <DotLottieReact src={src} loop autoplay className={PATH_LOTTIE_CLASS} />
+    </div>
+  );
+}
+
+function PathCollegeLogoVisual() {
+  return (
+    <div className={PATH_VISUAL_WRAPPER_CLASS} aria-hidden>
+      <DotLottieReact
+        src={PATH_COLLEGE_MATCH_LOTTIE}
+        loop
+        autoplay
+        className={PATH_LOTTIE_CLASS}
       />
-    </svg>
+      <div className="pointer-events-none absolute left-1/2 top-[36%] z-10 w-full max-w-[20rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden px-1">
+        <HeroCollegeLogoReels
+          idPrefix="path-column-hs"
+          maxRows={2}
+          maxLogosPerRow={5}
+          className="relative flex w-full flex-col justify-center"
+          rowGapClassName="gap-2.5 py-0"
+          spacerClassName="inline-block w-4 shrink-0 sm:w-5"
+          tileClassName="relative block size-10 shrink-0 overflow-hidden rounded-lg shadow-[0_2px_10px_rgba(61,184,168,0.35)] ring-1 ring-white/25 sm:size-11"
+          trackPaddingClassName="px-0"
+          rowWrapperClassName="marquee-fade-edges-compact mx-auto w-full overflow-hidden"
+          imageSizes="44px"
+        />
+      </div>
+    </div>
+  );
+}
+
+function PathOptionColumn({
+  option,
+}: {
+  option: (typeof PATH_OPTIONS)[number];
+}) {
+  const title = (
+    <>
+      <span style={{ color: option.titleAccentColor }}>{option.titleAccent}</span>
+      {option.titleRest}
+    </>
+  );
+
+  return (
+    <article className="flex flex-col items-center text-center">
+      <div className="w-full">
+        {option.id === "highSchool" ? (
+          <PathCollegeLogoVisual />
+        ) : (
+          <PathLottieVisual src={option.lottieSrc} />
+        )}
+      </div>
+
+      <div className="relative z-20 mt-6 flex w-full flex-col items-center md:mt-8">
+        <h3 className="font-[family-name:var(--font-poppins)] text-2xl font-bold leading-snug text-[#18062E] md:text-[1.5rem] lg:text-[1.75rem]">
+          {title}
+        </h3>
+
+        <p className="mt-4 max-w-md mx-auto font-[family-name:var(--font-poppins)] text-sm leading-relaxed text-neutral-600 md:text-base">
+          {option.description}
+        </p>
+
+        <ul className="mt-7 w-full max-w-sm space-y-3 text-left sm:max-w-md">
+          {option.bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start gap-2.5">
+            <Check
+              className="mt-0.5 h-5 w-5 shrink-0"
+              style={{ color: option.accentColor }}
+              strokeWidth={2.5}
+              aria-hidden
+            />
+            <span className="font-[family-name:var(--font-poppins)] text-sm leading-relaxed text-neutral-600">
+              {bullet}
+            </span>
+          </li>
+        ))}
+        </ul>
+
+        <div className="mt-10">
+          <PathQuizCtaButton variant={option.ctaVariant} size="column" />
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -58,53 +152,14 @@ export function DesktopExcellentFeaturesSection() {
     <section
       id="deep-profile-rankings"
       className="relative z-[2] hidden w-full scroll-mt-28 bg-white md:block"
-      aria-labelledby="desktop-excellent-features-heading"
+      aria-label="College and career match quizzes"
     >
-      <DecorativeStar />
-
-      <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-4 md:px-6 md:pb-20 md:pt-8 lg:px-8 lg:pb-24">
-        <div className="relative mx-auto max-w-3xl text-center pr-0 md:pr-16 lg:pr-20">
-          <DecorativeRocketLottie />
-          <h2
-            id="desktop-excellent-features-heading"
-            className={`relative ${DESKTOP_SECTION_HEADING_CLASS}`}
-          >
-            Pick The{" "}
-            <span className="relative inline-block pb-1">
-              Right Student Path
-              <DesktopHeadingSwoosh />
-            </span>
-          </h2>
-          <p className={`mx-auto mt-5 max-w-[34rem] ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            Most students are preparing for a world that no longer exists. We help you pick the right path
-            for a future run by AI.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-5 lg:mt-14 lg:gap-6">
-          {FEATURE_CARDS.map(({ title, description, bg, iconBg, Icon }) => (
-            <article
-              key={title}
-              className="flex min-h-[15.5rem] flex-col rounded-[1.75rem] p-6 shadow-[0_18px_40px_rgba(35,57,91,0.14)] transition-transform duration-200 hover:-translate-y-0.5 md:min-h-[16.5rem] md:p-7 lg:rounded-[2rem]"
-              style={{ backgroundColor: bg }}
-            >
-              <div
-                className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl"
-                style={{ backgroundColor: iconBg }}
-              >
-                <Icon className="h-7 w-7 text-white" strokeWidth={2} aria-hidden />
-              </div>
-              <h3 className="font-[family-name:var(--font-poppins)] text-lg font-bold leading-snug text-white">
-                {title}
-              </h3>
-              <p className="mt-3 font-[family-name:var(--font-poppins)] text-sm leading-relaxed text-white/90 md:text-[0.9375rem]">
-                {description}
-              </p>
-            </article>
+      <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2 lg:gap-12 xl:gap-20">
+          {PATH_OPTIONS.map((option) => (
+            <PathOptionColumn key={option.id} option={option} />
           ))}
         </div>
-
-        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-12 lg:mt-14" />
       </div>
     </section>
   );

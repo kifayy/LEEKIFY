@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { HeroPathTypewriter } from "@/components/home/hero-path-typewriter";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import { HeroCollegeLogoReels } from "@/components/home/hero-college-logo-reels";
 import { HeroCareerStatReels } from "@/components/home/hero-career-stat-reels";
 import { HeroStudentsMatchedWidget } from "@/components/home/hero-belong-cta";
+import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import {
   HeroAudienceToggle,
   useHeroAudience,
@@ -19,21 +20,17 @@ import {
   isCareerAudience,
 } from "@/components/home/hero-audience-theme";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
-import { CAREER_HERO_PORTRAIT_URL } from "@/lib/hero-career-content";
 import {
   HOME_HERO_MATCH_BADGE_ALT,
   HOME_MOBILE_HERO_BACKDROP_ALT,
   HOME_MOBILE_HERO_STUDENT_ALT,
 } from "@/lib/home-image-seo";
+import { HOME_HERO_SUBTITLE } from "@/lib/home-hero-copy";
 import {
-  HERO_PATH_TYPEWRITER_SPACER,
-  HERO_PATH_TYPEWRITER_WORDS,
-} from "@/lib/hero-path-typewriter-words";
-import { HOME_HERO_IMAGE_QUALITY, MOBILE_HERO_PORTRAIT_URL } from "@/lib/home-lcp-images";
-
-const TYPE_DELAY_MS = 90;
-const HOLD_DELAY_MS = 1800;
-const DELETE_DELAY_MS = 55;
+  HOME_HERO_USE_PREOPTIMIZED_ASSETS,
+  MOBILE_HERO_CAREER_PORTRAIT_URL,
+  MOBILE_HERO_PORTRAIT_URL,
+} from "@/lib/home-lcp-images";
 
 const HERO_IMAGE = MOBILE_HERO_PORTRAIT_URL;
 
@@ -45,44 +42,8 @@ export function HeroFigmaDesign() {
   const { audience } = useHeroAudience();
   const career = isCareerAudience(audience);
 
-  const [wordIndex, setWordIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const word = HERO_PATH_TYPEWRITER_WORDS[wordIndex];
-  const displayedText = word.slice(0, charIndex);
-
-  useLayoutEffect(() => {
-    setWordIndex(0);
-    setCharIndex(0);
-    setIsDeleting(false);
-  }, [career]);
-
-  useEffect(() => {
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (charIndex < word.length) {
-            setCharIndex((c) => c + 1);
-          } else {
-            setIsDeleting(true);
-          }
-        } else {
-          if (charIndex > 0) {
-            setCharIndex((c) => c - 1);
-          } else {
-            setIsDeleting(false);
-            setWordIndex((i) => (i + 1) % HERO_PATH_TYPEWRITER_WORDS.length);
-          }
-        }
-      },
-      isDeleting ? DELETE_DELAY_MS : charIndex === word.length ? HOLD_DELAY_MS : TYPE_DELAY_MS
-    );
-    return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, word, wordIndex]);
-
   const quizHref = career ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
-  const quizLabel = career ? "Career Match Quiz" : "College Match Quiz";
+  const quizLabel = career ? "Career Match Quiz" : STUDENT_ARCHETYPE_QUIZ_LABEL;
 
   return (
     <section
@@ -131,7 +92,7 @@ export function HeroFigmaDesign() {
               <HeroAudienceToggle size="compact" className="w-full" />
               <div className="flex w-full flex-col gap-2.5 md:gap-5">
               {/* Fixed height/width so title doesn’t bounce as typewriter runs */}
-              <div className="min-h-[4.5rem] w-full sm:min-h-[5.25rem] md:min-h-[6rem] lg:min-h-[6.25rem]">
+              <div className="w-full">
                 <h1
                   className={cn(
                     "w-full text-[2.5rem] font-bold leading-[1.2] tracking-tight sm:text-[3rem] md:text-[3.5rem] lg:text-[3.75rem]",
@@ -143,22 +104,25 @@ export function HeroFigmaDesign() {
                       : { textShadow: `0 2px 24px rgba(${HERO_PURPLE_RGB}, 0.42)` }
                   }
                 >
-                  <span className="block w-full text-center lg:text-left">Find your</span>
-                  <span className="relative block w-full text-center lg:text-left" style={{ minHeight: "1.2em" }}>
-                    <span className="invisible" aria-hidden>
-                      {HERO_PATH_TYPEWRITER_SPACER}
-                    </span>
-                    <span
-                      className={cn(
-                        "absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap lg:left-0 lg:translate-x-0",
-                        career ? "text-teal-50 md:text-teal-600" : "text-[#F5F3FF] md:text-[#956DFE]"
-                      )}
-                    >
-                      {displayedText}
-                    </span>
+                  <span className="flex flex-col items-center gap-0.5">
+                    <span>Find your</span>
+                    <HeroPathTypewriter career={career} />
                   </span>
                 </h1>
               </div>
+              <p
+                className={cn(
+                  "relative z-10 mx-auto max-w-[min(100%,22rem)] shrink-0 px-1 text-center font-[family-name:var(--font-poppins)] text-[0.8125rem] font-normal leading-[1.45] tracking-[-0.01em] sm:max-w-[24rem]",
+                  career ? "text-teal-50/95" : "text-white"
+                )}
+                style={
+                  career
+                    ? { textShadow: "0 1px 10px rgba(4, 47, 46, 0.55)" }
+                    : { textShadow: `0 1px 12px rgba(${HERO_PURPLE_RGB}, 0.5)` }
+                }
+              >
+                {HOME_HERO_SUBTITLE}
+              </p>
               <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-start">
                 <Link
                   href={quizHref}
@@ -208,16 +172,15 @@ export function HeroFigmaDesign() {
                 )}
                 <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl">
                   <HomeOptimizedImage
-                    src={career ? CAREER_HERO_PORTRAIT_URL : HERO_IMAGE}
+                    src={career ? MOBILE_HERO_CAREER_PORTRAIT_URL : HERO_IMAGE}
                     alt={career ? "University student exploring career match on PathPicker" : HOME_MOBILE_HERO_STUDENT_ALT}
                     fill
-                    quality={HOME_HERO_IMAGE_QUALITY}
+                    unoptimized={HOME_HERO_USE_PREOPTIMIZED_ASSETS}
                     priority={!career}
                     fetchPriority={career ? "auto" : "high"}
                     className={cn(
-                      career
-                        ? "translate-y-3 object-cover object-[center_10%] scale-[1.116] sm:translate-y-4 sm:scale-[1.153]"
-                        : "translate-y-3 object-cover object-[center_11%] sm:translate-y-4"
+                      "translate-y-3 object-cover sm:translate-y-4",
+                      career ? "object-[center_10%]" : "object-[center_11%]"
                     )}
                     sizes="(max-width: 768px) min(100vw, 570px), 0px"
                   />

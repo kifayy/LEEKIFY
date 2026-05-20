@@ -2,15 +2,28 @@ import {
   HOME_FEATURE_BROWSE_FIT_IMAGE_URL,
 } from "@/lib/home-feature-showcase-images";
 
-/** Next/Image quality for above-the-fold hero art (default 75 is too soft on retina). */
+/** Next/Image quality when the optimizer runs (remote heroes). */
 export const HOME_HERO_IMAGE_QUALITY = 90;
+
+/**
+ * Local hero WebPs in `/public/images` are pre-exported at high quality — serve as-is
+ * (`unoptimized`) so Next does not re-encode them at default quality.
+ */
+export const HOME_HERO_USE_PREOPTIMIZED_ASSETS = true;
 
 /** Mobile hero portrait — primary LCP below `md` (2× export of design asset). */
 export const MOBILE_HERO_PORTRAIT_URL = "/images/hero-student.webp";
 
 /** Intrinsic size of `hero-student.webp` — keep in sync if the file is re-exported. */
-export const MOBILE_HERO_PORTRAIT_WIDTH = 1280;
-export const MOBILE_HERO_PORTRAIT_HEIGHT = 1872;
+export const MOBILE_HERO_PORTRAIT_WIDTH = 1920;
+export const MOBILE_HERO_PORTRAIT_HEIGHT = 2808;
+
+/** Career/university mobile hero portrait (pre-exported WebP). */
+export const MOBILE_HERO_CAREER_PORTRAIT_URL = "/images/hero-career.webp";
+
+/** Intrinsic size of `hero-career.webp` — keep in sync if the file is re-exported. */
+export const MOBILE_HERO_CAREER_PORTRAIT_WIDTH = 1641;
+export const MOBILE_HERO_CAREER_PORTRAIT_HEIGHT = 2400;
 
 /** Desktop hero art — primary LCP from `md` up. */
 export const DESKTOP_HERO_ART_URL = "/images/desktop-hero.webp";

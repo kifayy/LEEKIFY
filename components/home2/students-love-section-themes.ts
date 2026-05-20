@@ -24,7 +24,7 @@ export type StudentsLoveSectionTheme = {
   headlineClass: string;
   headlineLeadClass: string;
   subtextClass: string;
-  /** “Dream School” phrase styling */
+  /** Typewriter phrase (Career / Path / School) styling */
   accentPhraseClass: string;
 };
 
@@ -46,7 +46,7 @@ export const STUDENTS_LOVE_SECTION_THEMES: Record<
     subtextClass:
       "text-[0.9rem] text-neutral-600 md:text-[clamp(0.9375rem,0.45vw+0.68rem,1.2rem)]",
     accentPhraseClass:
-      "inline-block rounded-lg bg-[#956EFE] px-2.5 py-0.5 text-white shadow-[0_2px_10px_rgba(149,110,254,0.35)]",
+      "rounded-lg bg-[#956EFE] px-2 py-0.5 text-white shadow-[0_2px_10px_rgba(149,110,254,0.35)]",
   },
   softSky: {
     id: "softSky",

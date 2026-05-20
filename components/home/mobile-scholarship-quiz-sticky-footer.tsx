@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
+import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import { cn } from "@/lib/utils";
 
 /** 0–1: how far the page has been scrolled through its scrollable range. */
@@ -38,11 +39,13 @@ export function MobileScholarshipQuizStickyFooter() {
       } transition-[transform,opacity] duration-200 ease-out`}
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       role="complementary"
-      aria-label="College Match Quiz"
+      aria-label={STUDENT_ARCHETYPE_QUIZ_LABEL}
       aria-hidden={!visible}
     >
       <div className={cn("pointer-events-auto py-2", !visible && "pointer-events-none")}>
-        <CollegeMatchQuizCtaLink tabIndex={visible ? undefined : -1} />
+        <CollegeMatchQuizCtaLink tabIndex={visible ? undefined : -1}>
+          {STUDENT_ARCHETYPE_QUIZ_LABEL}
+        </CollegeMatchQuizCtaLink>
       </div>
     </div>
   );

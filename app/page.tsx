@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
+import { DesktopAnalyticsBreakdownSection } from "@/components/home/desktop-analytics-breakdown-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
 import {
   HomeCollegeMatchQuizCta,
@@ -103,11 +104,12 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       <HomeHeroWithAudience />
-      <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
       <span id="commit-with-zero-regrets" className="block scroll-mt-28 md:hidden" aria-hidden />
+      <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
       <AboutProfileSchoolsSection />
       <HomeScholarshipFeatureShowcase />
       <StudentsLoveSection />
+      <DesktopAnalyticsBreakdownSection />
       <HomeMatchBenefitsSection />
       <HomePageFaqs />
       <HomeCollegeMatchQuizCta />

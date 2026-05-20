@@ -78,6 +78,10 @@ export type HeroCollegeLogoReelsProps = {
   imageSizes?: string;
   /** Hide the first N rows when viewport is below `md` (e.g. 2 for a denser mobile hero). */
   hiddenFirstRowsBelowMd?: number;
+  /** Cap how many marquee rows render (e.g. compact widgets). */
+  maxRows?: number;
+  /** Limit logos per row for shorter tracks (e.g. path-picker blob). */
+  maxLogosPerRow?: number;
 };
 
 export function HeroCollegeLogoReels({
@@ -90,7 +94,11 @@ export function HeroCollegeLogoReels({
   rowWrapperClassName = "marquee-fade-edges mx-auto w-full overflow-hidden",
   imageSizes = "44px",
   hiddenFirstRowsBelowMd,
+  maxRows,
+  maxLogosPerRow,
 }: HeroCollegeLogoReelsProps) {
+  const rows = maxRows != null ? HERO_LOGO_REEL_ROWS.slice(0, maxRows) : HERO_LOGO_REEL_ROWS;
+
   return (
     <div
       className={cn(
@@ -100,8 +108,11 @@ export function HeroCollegeLogoReels({
       )}
       aria-hidden
     >
-      {HERO_LOGO_REEL_ROWS.map(({ animationClass, delaySec }, rowIndex) => {
-        const track = buildHeroLogoTrack(ROW_LOGO_ORDERS[rowIndex]!);
+      {rows.map(({ animationClass, delaySec }, rowIndex) => {
+        const rowOrder = ROW_LOGO_ORDERS[rowIndex]!;
+        const order =
+          maxLogosPerRow != null ? rowOrder.slice(0, maxLogosPerRow) : rowOrder;
+        const track = buildHeroLogoTrack(order);
         return (
           <div
             key={`${idPrefix}-row-${rowIndex}`}
