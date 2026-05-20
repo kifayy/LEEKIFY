@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { DesktopExcellentFeaturesSection } from "@/components/home/desktop-excellent-features-section";
 import { DesktopHeroPathTypewriter } from "@/components/home/desktop-hero-path-typewriter";
 import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 import { HOME_DESKTOP_HERO_ALT } from "@/lib/home-image-seo";
@@ -49,8 +48,6 @@ export function DesktopHeroBanner() {
           </div>
         </div>
       </div>
-
-      <DesktopExcellentFeaturesSection />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import { MobileDataEngineMetrics } from "@/components/home/mobile-data-engine-metrics";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 import {
   MOBILE_DATA_ENGINE_DASHBOARD_IMAGE_ALT,
   MOBILE_DATA_ENGINE_DASHBOARD_IMAGE_URL,
@@ -79,6 +80,9 @@ export function DesktopDataEngineSection() {
               className="mt-8 lg:mt-10"
               gridClassName="grid grid-cols-2 gap-x-8 gap-y-10 text-left lg:gap-x-12 lg:gap-y-12"
             />
+            <div className="mt-10 flex justify-center lg:mt-12 lg:justify-start">
+              <PathQuizCtaButton variant="college" size="desktop" />
+            </div>
           </div>
         </div>
       </div>

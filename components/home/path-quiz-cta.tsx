@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HERO_PURPLE, HERO_PURPLE_RGB } from "@/components/home/hero-audience-theme";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -14,9 +15,9 @@ const PATH_QUIZ_CTA_CONFIG = {
   college: {
     label: PATH_COLLEGE_MATCH_QUIZ_LABEL,
     href: COLLEGE_MATCH_QUIZ_URL,
-    ctaBg: "#3DB8A8",
-    ctaShadow: "0 10px 32px rgba(61, 184, 168, 0.42)",
-    ctaFocusClass: "focus-visible:outline-[#3DB8A8]",
+    ctaBg: HERO_PURPLE,
+    ctaShadow: `0 10px 32px rgba(${HERO_PURPLE_RGB}, 0.38)`,
+    ctaFocusClass: "focus-visible:outline-[#943DC8]",
   },
   career: {
     label: PATH_CAREER_MATCH_QUIZ_LABEL,
@@ -36,7 +37,10 @@ const PATH_QUIZ_CTA_SIZE_CLASS = {
   column: "h-14 min-w-[12.5rem] px-9 text-base",
   section:
     "h-12 min-w-[11rem] px-8 text-[0.9375rem] md:h-[3.25rem] md:min-w-[12.5rem] md:px-8 md:text-base",
-  hero: "mt-5 h-12 min-w-[11rem] px-8 text-[0.9375rem] md:mt-5 md:h-[3.25rem] md:min-w-[12.5rem] lg:mt-8",
+  hero:
+    "mt-5 h-12 min-w-[11rem] px-8 text-[0.9375rem] md:mt-5 md:h-[3.25rem] md:min-w-[12.5rem] lg:mt-8 lg:h-14 lg:min-w-[14rem] lg:px-10 lg:text-lg xl:h-[3.75rem] xl:min-w-[15rem] xl:px-11 xl:text-[1.125rem]",
+  desktop:
+    "h-14 min-w-[14rem] px-10 text-lg lg:h-[3.75rem] lg:min-w-[15rem] lg:px-11 lg:text-[1.125rem]",
 } as const;
 
 type PathQuizCtaSize = keyof typeof PATH_QUIZ_CTA_SIZE_CLASS;
