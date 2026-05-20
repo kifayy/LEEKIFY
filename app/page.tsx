@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
-import { DesktopAnalyticsBreakdownSection } from "@/components/home/desktop-analytics-breakdown-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
 import {
   HomeCollegeMatchQuizCta,
@@ -99,7 +98,6 @@ export default async function Home() {
       <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
       <AboutProfileSchoolsSection />
       <StudentsLoveSection className="hidden md:block" />
-      <DesktopAnalyticsBreakdownSection />
       <HomeMatchBenefitsSection />
       <HomePageFaqs />
       <HomeCollegeMatchQuizCta />

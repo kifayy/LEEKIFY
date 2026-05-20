@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { DesktopExcellentFeaturesSection } from "@/components/home/desktop-excellent-features-section";
-import { DesktopHowTrackerWorksSection } from "@/components/home/desktop-how-tracker-works-section";
-import { DesktopHeroPathTypewriter } from "@/components/home/desktop-hero-path-typewriter";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
-import { HOME_DESKTOP_HERO_ALT } from "@/lib/home-image-seo";
 
-import { HOME_HERO_SUBTITLE } from "@/lib/home-hero-copy";
+import { DesktopExcellentFeaturesSection } from "@/components/home/desktop-excellent-features-section";
+import { DesktopHeroPathTypewriter } from "@/components/home/desktop-hero-path-typewriter";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
+import { HOME_DESKTOP_HERO_ALT } from "@/lib/home-image-seo";
+import { DESKTOP_HERO_SUBTITLE } from "@/lib/home-hero-copy";
 import {
   DESKTOP_HERO_ART_HEIGHT,
   DESKTOP_HERO_ART_URL,
@@ -43,16 +42,15 @@ export function DesktopHeroBanner() {
             </h1>
 
             <p className="mt-3 max-w-[28rem] font-[family-name:var(--font-poppins)] text-sm font-normal leading-[1.45] tracking-[-0.01em] text-[#181A1D] md:mt-4 md:max-w-[32rem] md:text-[0.9375rem] lg:mt-5 lg:max-w-[37.1875rem] lg:text-[clamp(1rem,1.25vw,1.25rem)] lg:leading-[1.5]">
-              {HOME_HERO_SUBTITLE}
+              {DESKTOP_HERO_SUBTITLE}
             </p>
 
-            <StudentArchetypeTestCta size="hero" />
+            <PathQuizCtaButton variant="college" size="hero" />
           </div>
         </div>
       </div>
 
       <DesktopExcellentFeaturesSection />
-      <DesktopHowTrackerWorksSection />
     </section>
   );
 }

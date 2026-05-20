@@ -8,6 +8,7 @@ import {
 } from "@/lib/mobile-data-engine-content";
 import { useCountUp } from "@/components/home/use-count-up";
 import { useInViewOnce } from "@/components/home/use-in-view-once";
+import { cn } from "@/lib/utils";
 
 const METRIC_ACCENT = "#956DFE";
 
@@ -38,19 +39,39 @@ function MetricCell({ metric, animate }: { metric: MobileDataEngineMetric; anima
   );
 }
 
-export function MobileDataEngineMetrics() {
+type MobileDataEngineMetricsProps = {
+  /** When false, only the stat grid is rendered (desktop column layout supplies its own header). */
+  showHeader?: boolean;
+  className?: string;
+  gridClassName?: string;
+};
+
+export function MobileDataEngineMetrics({
+  showHeader = true,
+  className,
+  gridClassName,
+}: MobileDataEngineMetricsProps = {}) {
   const { ref, inView } = useInViewOnce<HTMLDivElement>();
 
   return (
-    <div ref={ref} className="pt-2 text-center">
-      <h2 className="font-[family-name:var(--font-inter)] text-[1.5rem] font-semibold leading-[1.2] tracking-[-0.03em] text-[#1A1A18]">
-        {MOBILE_DATA_ENGINE_METRICS_TITLE}
-      </h2>
-      <p className="mx-auto mt-2.5 max-w-[21rem] font-[family-name:var(--font-inter)] text-[0.9375rem] font-normal leading-[1.55] text-[#6B6B6B]">
-        {MOBILE_DATA_ENGINE_METRICS_SUBTITLE}
-      </p>
+    <div ref={ref} className={cn(showHeader && "pt-2 text-center", className)}>
+      {showHeader ? (
+        <>
+          <h2 className="font-[family-name:var(--font-inter)] text-[1.5rem] font-semibold leading-[1.2] tracking-[-0.03em] text-[#1A1A18]">
+            {MOBILE_DATA_ENGINE_METRICS_TITLE}
+          </h2>
+          <p className="mx-auto mt-2.5 max-w-[21rem] font-[family-name:var(--font-inter)] text-[0.9375rem] font-normal leading-[1.55] text-[#6B6B6B]">
+            {MOBILE_DATA_ENGINE_METRICS_SUBTITLE}
+          </p>
+        </>
+      ) : null}
 
-      <div className="mt-9 grid grid-cols-2 gap-x-5 gap-y-9 text-left">
+      <div
+        className={
+          gridClassName ??
+          (showHeader ? "mt-9 grid grid-cols-2 gap-x-5 gap-y-9 text-left" : "grid grid-cols-2 gap-x-5 gap-y-9 text-left")
+        }
+      >
         {MOBILE_DATA_ENGINE_METRICS.map((metric) => (
           <MetricCell key={metric.label} metric={metric} animate={inView} />
         ))}

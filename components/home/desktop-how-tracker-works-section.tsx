@@ -9,7 +9,7 @@ import {
   DESKTOP_SECTION_SUBTEXT_CLASS,
   DesktopHeadingSwoosh,
 } from "@/components/home/desktop-section-typography";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 import { DISCOVERY_CARDS } from "@/lib/discovery-cards-content";
 import { DESKTOP_TRACKER_ARCHETYPE_IMAGE_URL } from "@/lib/home-feature-showcase-images";
 import { cn } from "@/lib/utils";
@@ -204,7 +204,9 @@ export function DesktopHowTrackerWorksSection() {
         </div>
       </div>
 
-      <StudentArchetypeTestCta desktopOnly wrapperClassName="mx-auto max-w-6xl px-4 pb-16 pt-2 md:px-6 md:pb-20 md:pt-4 lg:px-8 lg:pb-24" />
+      <div className="mx-auto flex max-w-6xl justify-center px-4 pb-16 pt-2 md:px-6 md:pb-20 md:pt-4 lg:px-8 lg:pb-24">
+        <PathQuizCtaButton variant="college" size="section" className="min-w-[12.5rem]" />
+      </div>
     </section>
   );
 }

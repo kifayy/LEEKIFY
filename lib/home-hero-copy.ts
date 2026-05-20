@@ -1,28 +1,28 @@
-/** Shared hero subtitle (desktop). */
+/** Shared home hero copy — mobile and desktop. */
 
-export const HOME_HERO_SUBTITLE =
+export const HOME_HERO_HEADLINE = "One Choice";
 
-  "Use real student data to find the school, career path, and future that fits you best.";
-
-
-
-/** Mobile hero — centered layout. */
-
-export const MOBILE_HERO_HEADLINE = "One Choice";
-
-export const MOBILE_HERO_BULLETS = [
+export const HOME_HERO_BULLETS = [
   "use real data",
   "find your fit",
   "don't risk it",
   "compare yourself",
 ] as const;
 
+export const HOME_HERO_SUBTEXT =
+  "College is the biggest choice of your life, don't make it your biggest regret.";
 
+export const HOME_HERO_CTA_LABEL = "Find My Path";
 
-export const MOBILE_HERO_SUBTEXT =
-  "College is the biggest choice of your student career, don't make it your biggest regret.";
+/** Desktop hero subtitle (unchanged from original desktop layout). */
+export const DESKTOP_HERO_SUBTITLE =
+  "Use real student data to find the school and future that fits you best.";
 
+/** @deprecated Use DESKTOP_HERO_SUBTITLE on desktop, HOME_HERO_SUBTEXT on mobile */
+export const HOME_HERO_SUBTITLE = DESKTOP_HERO_SUBTITLE;
 
-
-export const MOBILE_HERO_CTA_LABEL = "Find My Path";
-
+/** @deprecated Use HOME_HERO_* — kept for existing mobile imports */
+export const MOBILE_HERO_HEADLINE = HOME_HERO_HEADLINE;
+export const MOBILE_HERO_BULLETS = HOME_HERO_BULLETS;
+export const MOBILE_HERO_SUBTEXT = HOME_HERO_SUBTEXT;
+export const MOBILE_HERO_CTA_LABEL = HOME_HERO_CTA_LABEL;

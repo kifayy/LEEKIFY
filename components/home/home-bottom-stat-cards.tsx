@@ -11,8 +11,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
-import { STUDENT_ARCHETYPE_QUIZ_LABEL } from "@/components/home/student-archetype-test-cta";
 import { HomeDesktopScholarshipInboxCta } from "@/components/home/home-desktop-scholarship-inbox-cta";
 import {
   Carousel,
@@ -173,26 +171,11 @@ export function HomeMatchBenefitsSection() {
   );
 }
 
-/** Post-FAQ band — quiz CTA on mobile; scholarship inbox signup on desktop. */
+/** Post-FAQ band — scholarship inbox signup on desktop only. */
 export function HomeCollegeMatchQuizCta() {
   return (
-    <section className="w-full border-t border-slate-200/80 bg-white py-10 md:py-0 lg:py-0">
-      <div className="mx-auto max-w-6xl md:hidden">
-        <div
-          className="flex flex-col items-center gap-3 px-4 text-center sm:gap-4"
-          aria-label="Find My Path"
-        >
-          <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[#181A1D]">
-            Ready to see your college matches?
-          </p>
-          <p className="text-sm leading-relaxed text-[#3F3F46]">
-            Find your path in minutes with admission odds, personality fit, and happiness signals.
-          </p>
-          <CollegeMatchQuizCtaLink className="mt-1">{STUDENT_ARCHETYPE_QUIZ_LABEL}</CollegeMatchQuizCtaLink>
-        </div>
-      </div>
-
-      <div className="mx-auto hidden max-w-6xl md:block" aria-label="Scholarship picks newsletter">
+    <section className="hidden w-full border-t border-slate-200/80 bg-white md:block">
+      <div className="mx-auto max-w-6xl" aria-label="Scholarship picks newsletter">
         <HomeDesktopScholarshipInboxCta />
       </div>
     </section>

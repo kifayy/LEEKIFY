@@ -6,7 +6,8 @@ import {
   DESKTOP_SECTION_HEADING_CLASS,
   DESKTOP_SECTION_SUBTEXT_CLASS,
 } from "@/components/home/desktop-section-typography";
-import { StudentArchetypeTestCta } from "@/components/home/student-archetype-test-cta";
+import { CollegeMatchQuizCtaLink } from "@/components/home/college-match-quiz-cta-link";
+import { HOME_HERO_CTA_LABEL } from "@/lib/home-hero-copy";
 import { HOME_FAQ_ITEMS } from "@/lib/home-faq-content";
 
 const FAQ_ANSWERS: Record<(typeof HOME_FAQ_ITEMS)[number]["question"], ReactNode> = {
@@ -53,8 +54,7 @@ export function HomePageFaqs() {
             PathPicker FAQ
           </h2>
           <p className={`mx-auto mt-5 max-w-xl ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            Clear answers on your archetype, career fit, and planning your next step, beyond grades and rankings
-            alone.
+            Clear answers on college fit, admission odds, and happiness signals — beyond grades and rankings alone.
           </p>
         </header>
 
@@ -94,7 +94,9 @@ export function HomePageFaqs() {
           ))}
         </div>
 
-        <StudentArchetypeTestCta desktopOnly wrapperClassName="mt-10 md:mt-12" />
+        <div className="mt-10 flex justify-center md:mt-12">
+          <CollegeMatchQuizCtaLink>{HOME_HERO_CTA_LABEL}</CollegeMatchQuizCtaLink>
+        </div>
       </div>
     </section>
   );

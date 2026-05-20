@@ -11,12 +11,18 @@ const EXIT_MS = 420;
 type MobileHeroRotatingLineProps = {
   lines: readonly string[];
   className?: string;
+  /** Override rotating phrase typography (e.g. desktop hero scale). */
+  lineClassName?: string;
 };
 
 /**
  * Second headline line — fades out upward, next phrase rises in from below.
  */
-export function MobileHeroRotatingLine({ lines, className }: MobileHeroRotatingLineProps) {
+export function MobileHeroRotatingLine({
+  lines,
+  className,
+  lineClassName,
+}: MobileHeroRotatingLineProps) {
   const [index, setIndex] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
 
@@ -62,6 +68,7 @@ export function MobileHeroRotatingLine({ lines, className }: MobileHeroRotatingL
         onAnimationEnd={handleAnimationEnd}
         className={cn(
           MOBILE_HERO_ROTATING_LINE_CLASS,
+          lineClassName,
           isExiting
             ? "animate-mobile-hero-line-out motion-reduce:opacity-0"
             : "animate-mobile-hero-line-in motion-reduce:opacity-100",
