@@ -11,16 +11,16 @@ export const HOME_HERO_SUBTITLE =
 export const MOBILE_HERO_HEADLINE = "One Choice";
 
 export const MOBILE_HERO_BULLETS = [
-  "map your path",
-  "get it right",
+  "use real data",
   "find your fit",
+  "don't risk it",
+  "compare yourself",
 ] as const;
 
 
 
 export const MOBILE_HERO_SUBTEXT =
-
-  "The biggest choice of your student career, don't make it your biggest regret.";
+  "College is the biggest choice of your student career, don't make it your biggest regret.";
 
 
 
