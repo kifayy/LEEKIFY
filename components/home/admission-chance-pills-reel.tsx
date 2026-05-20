@@ -196,7 +196,7 @@ function orderLogosWithMaxPolarityRun(
     return greedy;
   }
 
-  const solved = backtrack(items, [], [], seed);
+  const solved = backtrack(items, [], []);
   if (solved) return solved;
 
   return breakPolarityRunsBySwaps([...urls], pctByUrl);
