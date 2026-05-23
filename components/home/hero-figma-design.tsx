@@ -30,11 +30,13 @@ export function HeroFigmaDesign() {
     >
       <div className="mx-auto flex w-full max-w-[420px] flex-col items-center px-4 text-center">
         <div className="flex w-full flex-col items-center">
-          <h1 className={MOBILE_HERO_HEADLINE_CLASS}>{MOBILE_HERO_HEADLINE}</h1>
-          <MobileHeroRotatingLine lines={MOBILE_HERO_BULLETS} className="mt-0.5" />
+          <h1 className="flex w-full flex-col items-center text-balance">
+            <span className={MOBILE_HERO_HEADLINE_CLASS}>{MOBILE_HERO_HEADLINE}</span>
+            <MobileHeroRotatingLine lines={MOBILE_HERO_BULLETS} className="-mt-0.5" />
+          </h1>
         </div>
 
-        <p className={`${MOBILE_HERO_SUBTEXT_CLASS} mt-5 max-w-[21rem] px-1`}>
+        <p className={`${MOBILE_HERO_SUBTEXT_CLASS} mt-7 max-w-[22rem] px-1 sm:max-w-[24rem]`}>
           {MOBILE_HERO_SUBTEXT}
         </p>
 

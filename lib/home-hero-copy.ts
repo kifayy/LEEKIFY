@@ -1,18 +1,18 @@
 /** Shared home hero copy — mobile and desktop. */
 
-export const HOME_HERO_HEADLINE = "One Choice";
+export const HOME_HERO_HEADLINE = "Find Your";
 
 export const HOME_HERO_BULLETS = [
-  "use real data",
-  "find your fit",
-  "don't risk it",
-  "compare yourself",
+  "Dream School",
+  "Future Job",
+  "Archetype",
+  "Next Path",
 ] as const;
 
 export const HOME_HERO_SUBTEXT =
-  "College is the biggest choice of your life, don't make it your biggest regret.";
+  "The student archetype quiz, backed by data from 2,000+ campuses.";
 
-export const HOME_HERO_CTA_LABEL = "Find My Path";
+export const HOME_HERO_CTA_LABEL = "Student Archetype Quiz";
 
 /** Desktop hero subtitle (unchanged from original desktop layout). */
 export const DESKTOP_HERO_SUBTITLE =
