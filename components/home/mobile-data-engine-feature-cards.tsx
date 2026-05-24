@@ -1,8 +1,10 @@
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
 import {
+  DataEngineFeaturesHeading,
+} from "@/components/home/data-engine-section-headings";
+import {
   MOBILE_DATA_ENGINE_FEATURES,
   MOBILE_DATA_ENGINE_FEATURES_SUBTITLE,
-  MOBILE_DATA_ENGINE_FEATURES_TITLE,
 } from "@/lib/mobile-data-engine-content";
 
 export function MobileDataEngineFeatureCards() {
@@ -13,9 +15,7 @@ export function MobileDataEngineFeatureCards() {
       </div>
 
       <header className="text-center">
-        <h2 className="font-[family-name:var(--font-inter)] text-[1.5rem] font-semibold leading-[1.2] tracking-[-0.03em] text-[#1A1A18]">
-          {MOBILE_DATA_ENGINE_FEATURES_TITLE}
-        </h2>
+        <DataEngineFeaturesHeading />
         <p className="mx-auto mt-2.5 max-w-[19rem] font-[family-name:var(--font-inter)] text-[0.9375rem] font-normal leading-[1.55] text-[#6B6B6B]">
           {MOBILE_DATA_ENGINE_FEATURES_SUBTITLE}
         </p>

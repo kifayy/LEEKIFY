@@ -1,7 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import { BarChart3, Orbit, WandSparkles } from "lucide-react";
 
-export const MOBILE_DATA_ENGINE_FEATURES_TITLE = "You only go to college once";
+export const MOBILE_DATA_ENGINE_FEATURES_TITLE_PREFIX = "One University, ";
+export const MOBILE_DATA_ENGINE_FEATURES_TITLE_ACCENT = "One Choice";
+
+/** @deprecated Use prefix + accent for styled heading */
+export const MOBILE_DATA_ENGINE_FEATURES_TITLE = `${MOBILE_DATA_ENGINE_FEATURES_TITLE_PREFIX}${MOBILE_DATA_ENGINE_FEATURES_TITLE_ACCENT}`;
 
 export const MOBILE_DATA_ENGINE_FEATURES_SUBTITLE =
   "We make sure you pick the school that actually matches you.";
@@ -53,7 +57,11 @@ export type MobileDataEngineMetric = {
   label: string;
 };
 
-export const MOBILE_DATA_ENGINE_METRICS_TITLE = "The Data Behind the Engine";
+export const MOBILE_DATA_ENGINE_METRICS_TITLE_PREFIX = "The Student ";
+export const MOBILE_DATA_ENGINE_METRICS_TITLE_ACCENT = "Data Engine";
+
+/** @deprecated Use prefix + accent for styled heading */
+export const MOBILE_DATA_ENGINE_METRICS_TITLE = `${MOBILE_DATA_ENGINE_METRICS_TITLE_PREFIX}${MOBILE_DATA_ENGINE_METRICS_TITLE_ACCENT}`;
 
 export const MOBILE_DATA_ENGINE_METRICS_SUBTITLE =
   "The smartest college matching tool on the market, powered entirely by verified student outcomes.";

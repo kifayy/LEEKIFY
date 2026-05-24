@@ -1,4 +1,8 @@
 import { AdmissionChancePillsReel } from "@/components/home/admission-chance-pills-reel";
+import {
+  DataEngineFeaturesHeading,
+  DataEngineMetricsHeading,
+} from "@/components/home/data-engine-section-headings";
 import { HomeOptimizedImage } from "@/components/home/home-optimized-image";
 import { MobileDataEngineMetrics } from "@/components/home/mobile-data-engine-metrics";
 import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
@@ -7,9 +11,7 @@ import {
   MOBILE_DATA_ENGINE_DASHBOARD_IMAGE_URL,
   MOBILE_DATA_ENGINE_FEATURES,
   MOBILE_DATA_ENGINE_FEATURES_SUBTITLE,
-  MOBILE_DATA_ENGINE_FEATURES_TITLE,
   MOBILE_DATA_ENGINE_METRICS_SUBTITLE,
-  MOBILE_DATA_ENGINE_METRICS_TITLE,
 } from "@/lib/mobile-data-engine-content";
 
 /** Desktop layout for the data-engine block — mobile uses `MobileDataEngineSection`. */
@@ -20,9 +22,7 @@ export function DesktopDataEngineSection() {
         <AdmissionChancePillsReel />
 
         <header className="mx-auto mt-14 max-w-2xl text-center lg:mt-16">
-          <h2 className="font-[family-name:var(--font-inter)] text-[clamp(1.75rem,2.5vw,2.5rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[#1A1A18]">
-            {MOBILE_DATA_ENGINE_FEATURES_TITLE}
-          </h2>
+          <DataEngineFeaturesHeading />
           <p className="mx-auto mt-3 max-w-xl font-[family-name:var(--font-inter)] text-[1.0625rem] leading-[1.55] text-[#6B6B6B]">
             {MOBILE_DATA_ENGINE_FEATURES_SUBTITLE}
           </p>
@@ -69,9 +69,7 @@ export function DesktopDataEngineSection() {
           </div>
 
           <div className="text-center lg:text-left">
-            <h2 className="font-[family-name:var(--font-inter)] text-[clamp(1.5rem,2vw,2rem)] font-semibold leading-[1.2] tracking-[-0.03em] text-[#1A1A18]">
-              {MOBILE_DATA_ENGINE_METRICS_TITLE}
-            </h2>
+            <DataEngineMetricsHeading />
             <p className="mx-auto mt-3 max-w-md font-[family-name:var(--font-inter)] text-[1rem] leading-[1.55] text-[#6B6B6B] lg:mx-0">
               {MOBILE_DATA_ENGINE_METRICS_SUBTITLE}
             </p>

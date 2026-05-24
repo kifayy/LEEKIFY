@@ -1,9 +1,9 @@
 "use client";
 
+import { DataEngineMetricsHeading } from "@/components/home/data-engine-section-headings";
 import {
   MOBILE_DATA_ENGINE_METRICS,
   MOBILE_DATA_ENGINE_METRICS_SUBTITLE,
-  MOBILE_DATA_ENGINE_METRICS_TITLE,
   type MobileDataEngineMetric,
 } from "@/lib/mobile-data-engine-content";
 import { useCountUp } from "@/components/home/use-count-up";
@@ -57,9 +57,7 @@ export function MobileDataEngineMetrics({
     <div ref={ref} className={cn(showHeader && "pt-2 text-center", className)}>
       {showHeader ? (
         <>
-          <h2 className="font-[family-name:var(--font-inter)] text-[1.5rem] font-semibold leading-[1.2] tracking-[-0.03em] text-[#1A1A18]">
-            {MOBILE_DATA_ENGINE_METRICS_TITLE}
-          </h2>
+          <DataEngineMetricsHeading />
           <p className="mx-auto mt-2.5 max-w-[21rem] font-[family-name:var(--font-inter)] text-[0.9375rem] font-normal leading-[1.55] text-[#6B6B6B]">
             {MOBILE_DATA_ENGINE_METRICS_SUBTITLE}
           </p>
