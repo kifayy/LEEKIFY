@@ -4,9 +4,9 @@ import Image from "next/image";
 import { CopyrightYear } from "@/components/copyright-year";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { PATHPICKER_FOOTER_LOGO_URL } from "@/lib/brand-logos";
 
-const LOGO_URL =
-  "https://storage.googleapis.com/images_592/black%20white%20grow%20logo%20(3).png";
+const LOGO_URL = PATHPICKER_FOOTER_LOGO_URL;
 
 const FOOTER_COLUMNS = [
   {

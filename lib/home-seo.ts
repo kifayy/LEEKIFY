@@ -1,4 +1,5 @@
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
+import { PATHPICKER_LOGO_URL } from "@/lib/brand-logos";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { HOME_FAQ_ITEMS } from "@/lib/home-faq-content";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
@@ -47,7 +48,7 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: "https://storage.googleapis.com/images_592/s2as.png",
+        url: PATHPICKER_LOGO_URL,
       },
     },
     {

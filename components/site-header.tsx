@@ -7,8 +7,9 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { PATHPICKER_LOGO_URL } from "@/lib/brand-logos";
 
-const LOGO_URL = "https://storage.googleapis.com/images_592/s2as.png";
+const LOGO_URL = PATHPICKER_LOGO_URL;
 
 const navLinks = [
   { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL, external: true },
