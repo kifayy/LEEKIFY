@@ -4,6 +4,7 @@
  * Keep protocol/pathname aligned when adding hosts.
  */
 export const REMOTE_IMAGE_PATTERNS = [
+  { protocol: "https" as const, hostname: "images.pexels.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "images.unsplash.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "upload.wikimedia.org", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "storage.googleapis.com", pathname: "/**" as const },
