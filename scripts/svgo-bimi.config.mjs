@@ -14,9 +14,6 @@ export default {
             noSpaceAfterFlags: true,
           },
           mergePaths: { force: true, noSpaceAfterFlags: true },
-          removeViewBox: false,
-          removeTitle: false,
-          removeDesc: false,
         },
       },
     },
@@ -28,5 +25,8 @@ export default {
         noSpaceAfterFlags: true,
       },
     },
+    "removeTitle",
+    "removeDesc",
+    "removeMetadata",
   ],
 };

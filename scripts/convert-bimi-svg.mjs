@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 
 const input =
-  process.argv[2] ?? path.join(root, "public/assets/pathh.svg");
+  process.argv[2] ?? path.join(root, "public/assets/pathpickerlogo.svg");
 const output =
   process.argv[3] ?? path.join(root, "public/assets/pathpickernew.svg");
 
