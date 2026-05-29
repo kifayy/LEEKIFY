@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export type InfoArticleSection = {
   emoji: string;
   title: string;
-  paragraphs: string[];
+  paragraphs: readonly string[];
   image?: { src: string; alt: string };
   visual?: ReactNode;
 };
