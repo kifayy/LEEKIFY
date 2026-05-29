@@ -63,7 +63,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
-              Find your dream school, without the stress.
+              Find where you actually belong at.
             </p>
           </div>
 
