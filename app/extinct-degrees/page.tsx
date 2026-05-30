@@ -1,112 +1,201 @@
 import { InfoArticleFooterCta } from "@/components/info-article/info-article-footer-cta";
 import { InfoArticlePage } from "@/components/info-article/info-article-page";
+import type { InfoArticleSection } from "@/components/info-article/info-article-page";
 
 export const metadata = {
-  title: "5 Careers a Harvard Professor Says Will Be Extinct by 2027 | PathPicker",
+  title: "10 Degrees Facing the Highest Automation Risk by 2028 | PathPicker",
   description:
-    "Five entry-level career paths where hiring and AI adoption are changing fast. Ranked by risk, with what students should know before they commit.",
+    "Ten college degrees ranked by automation risk score, from data entry to travel management. What students should know before they commit to a major.",
 };
 
 const HERO_IMAGE =
-  "https://storage.googleapis.com/images_592/Black%20Modern%20Music%20News%20Headline%20Instagram%20Post%20(4).png";
+  "https://storage.googleapis.com/images_592/Black%20Modern%20Music%20News%20Headline%20Instagram%20Post%20(6).png";
 
 const PEXELS = {
-  receptionist:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoF8nBvhjCnUOCCzi2DM3JqNIo0TCd41r1PA&s",
-  socialMedia:
-    "https://images.pexels.com/photos/4977464/pexels-photo-4977464.jpeg?auto=compress&cs=tinysrgb&w=1260",
-  paralegal: "https://images.pexels.com/photos/5668777/pexels-photo-5668777.jpeg?auto=compress&cs=tinysrgb&w=1260",
-  developer: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260",
-  operations: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  dataEntry:
+    "https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  accounting:
+    "https://images.pexels.com/photos/6779714/pexels-photo-6779714.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  paralegal:
+    "https://images.pexels.com/photos/5668777/pexels-photo-5668777.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  customerService:
+    "https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  marketing:
+    "https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  journalism:
+    "https://images.pexels.com/photos/30612694/pexels-photo-30612694.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  banking:
+    "https://images.pexels.com/photos/18804128/pexels-photo-18804128.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  liberalArts:
+    "https://images.pexels.com/photos/8133129/pexels-photo-8133129.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  supplyChain:
+    "https://images.pexels.com/photos/4483608/pexels-photo-4483608.jpeg?auto=compress&cs=tinysrgb&w=1260",
+  travelTourism:
+    "https://images.pexels.com/photos/3885601/pexels-photo-3885601.jpeg?auto=compress&cs=tinysrgb&w=1260",
 } as const;
 
-/** Ordered #5 → #1; last item is highest extinction risk. */
-const CAREER_SECTIONS = [
+/** Lowest risk first; highest risk (Data Entry) last. */
+const DEGREE_SECTIONS: InfoArticleSection[] = [
   {
-    emoji: "⚖️",
-    title: "Paralegal",
+    emoji: "✈️",
+    title: "Travel & Tourism Management",
+    automationRiskScore: 74,
     image: {
-      src: PEXELS.paralegal,
-      alt: "Law books and legal documents on a desk",
+      src: PEXELS.travelTourism,
+      alt: "Traveler with luggage in an airport terminal",
     },
     paragraphs: [
-      "Contract review, case research, document drafting, discovery prep. AI does all four in the time it used to take a paralegal three days. Law firms are not hiring fewer paralegals because of budget cuts. They are hiring fewer because one AI tool is doing the work of eleven people and billing the client the same amount.",
-      "Entry-level paralegal job postings dropped 34% in 2024 alone. The ones that exist are hybrid roles that require knowing how to operate and audit the AI, not replace it. Pre-law students who were planning to paralegal their way through applications are finding there is nowhere to land.",
-      "The legal industry is not shrinking. It is just doing the same work with a fraction of the humans it used to need.",
+      "Booking engines, dynamic pricing, and AI trip planners replaced much of what travel agents and front-desk coordinators used to do manually.",
+      "Post-pandemic recovery helped tourism hiring, but self-serve apps capture routine itineraries. Agencies survive on luxury, corporate, and complex multi-stop planning.",
+      "Tourism and hospitality degrees still work for experience design, destination marketing, and operations leadership. Transactional booking roles face the steadiest automation creep.",
     ],
   },
   {
-    emoji: "🛎️",
-    title: "Receptionist",
+    emoji: "📦",
+    title: "Supply Chain Management",
+    automationRiskScore: 76,
     image: {
-      src: PEXELS.receptionist,
-      alt: "Receptionist greeting a visitor at a front desk",
+      src: PEXELS.supplyChain,
+      alt: "Warehouse and logistics operations for supply chain",
     },
     paragraphs: [
-      "Call routing, appointment booking, visitor check-in, and FAQ answers used to be a full-time front desk job. AI phone agents, chat widgets, and self-service kiosks now handle most of it without a person at the counter.",
-      "Offices that still have a reception role often fold it into office management or admin support. Standalone receptionist postings are down across healthcare, hospitality, and corporate campuses as companies standardize on automated intake.",
-      "If you were counting on reception as an easy entry point into an industry, the door still exists, but it is narrower and usually expects multiple skills on day one.",
+      "Forecasting, inventory routing, and vendor communications are increasingly algorithm-driven. Warehouses adopt robotics and WMS automation every quarter.",
+      "Entry-level planner roles that once meant spreadsheet updates now expect ERP fluency and model oversight. The work continues; the human count per shipment drops.",
+      "Supply chain degrees align with logistics tech, procurement strategy, and sustainability reporting. Pure coordinator tracks are the vulnerable layer.",
+    ],
+  },
+  {
+    emoji: "📚",
+    title: "Liberal Arts",
+    automationRiskScore: 78,
+    image: {
+      src: PEXELS.liberalArts,
+      alt: "University library books representing liberal arts education",
+    },
+    paragraphs: [
+      "Not because robots replace philosophers, but because liberal arts grads often land in admin, writing, and coordination roles that are themselves automating.",
+      "The degree builds critical thinking, but employers increasingly want a paired skill: data, design, policy, or sales. A generalist resume without tooling fluency is harder to place than five years ago.",
+      "Liberal arts remains valuable as a foundation. Stack a minor in tech, analytics, or a licensed profession to avoid drifting into the highest-risk job families.",
+    ],
+  },
+  {
+    emoji: "🏦",
+    title: "Banking Operations",
+    automationRiskScore: 80,
+    image: {
+      src: PEXELS.banking,
+      alt: "Currency exchange at a bank teller window",
+    },
+    paragraphs: [
+      "Teller-adjacent work, loan processing paperwork, and back-office settlements are heavily scripted and increasingly machine-run.",
+      "Major banks have deployed AI for KYC checks, fraud flags, and customer onboarding. Branch operations hiring has declined for a decade; AI accelerates the trend.",
+      "Finance and banking degrees still open doors in relationship management, risk, and fintech product roles. Operations-heavy tracks face the most automation pressure.",
+    ],
+  },
+  {
+    emoji: "📰",
+    title: "Journalism",
+    automationRiskScore: 82,
+    image: {
+      src: PEXELS.journalism,
+      alt: "Journalist writing notes in a notebook outdoors",
+    },
+    paragraphs: [
+      "Wire services and local outlets already publish AI-assisted summaries, earnings briefs, and sports recaps. Reader traffic still exists; headcount does not.",
+      "Newsroom employment in the U.S. remains well below pre-2008 peaks. Graduates compete with tools that never miss a deadline and cost pennies per article.",
+      "Investigative reporting, accountability journalism, and multimedia storytelling still need humans. Beat reporting on routine events is where automation lands first.",
     ],
   },
   {
     emoji: "📱",
-    title: "Social Media Managers",
+    title: "Marketing",
+    automationRiskScore: 85,
     image: {
-      src: PEXELS.socialMedia,
-      alt: "Social media manager using a smartphone and laptop in an office",
+      src: PEXELS.marketing,
+      alt: "Digital marketing and social media strategy on laptop",
     },
     paragraphs: [
-      "Brands still need a feed, but AI now drafts captions, schedules posts, resizes creatives, and suggests hashtags faster than a junior hire learning the tools.",
-      "Agencies and in-house teams report cutting entry-level social roles while keeping strategists and client leads. What remains is judgment: brand voice, crisis calls, and knowing what not to publish.",
-      "If your plan was to grow from posting content into strategy, the first rung is already automated. You need analytics, paid social, or creative direction to get hired now.",
+      "AI drafts copy, builds audiences, runs A/B tests, and generates creative variants faster than a coordinator learning the stack.",
+      "Agency surveys show heavy cuts to entry-level marketing hires while strategist and analytics roles hold steady. The job left is brand judgment, not posting frequency.",
+      "Marketing degrees pay off when you add data literacy, performance media, or creative direction. Generic social and content coordinator paths are the most automated.",
+    ],
+  },
+  {
+    emoji: "📞",
+    title: "Customer Service",
+    automationRiskScore: 87,
+    image: {
+      src: PEXELS.customerService,
+      alt: "Customer service representative with headset",
+    },
+    paragraphs: [
+      "Chatbots, voice agents, and help-center AI resolve tier-one tickets without a human. Companies report 40 to 60% deflection rates on common support queries after deploying AI layers.",
+      "Call center and retail support hiring has flattened while spend shifts to conversation design and escalation specialists. The degree still trains communication skills, but the entry queue role is shrinking.",
+      "Students should target customer success, technical support engineering, or CX strategy where relationships and complex troubleshooting still require people.",
+    ],
+  },
+  {
+    emoji: "⚖️",
+    title: "Paralegal Studies",
+    automationRiskScore: 89,
+    image: {
+      src: PEXELS.paralegal,
+      alt: "Law books and legal documents for paralegal studies",
+    },
+    paragraphs: [
+      "Contract review, discovery, and case research tools now process thousands of pages in minutes. Law firms bill the same hours while using fewer paralegals per matter.",
+      "Entry-level paralegal postings fell sharply in 2024 as AI-assisted legal tech went mainstream. Remaining roles expect you to supervise models, not manually highlight PDFs.",
+      "Pre-law students used paralegal work as a pipeline. That rung is narrowing. Plan on law school, compliance tech, or legal operations instead of traditional paralegal placement alone.",
+    ],
+  },
+  {
+    emoji: "🧮",
+    title: "Accounting",
+    automationRiskScore: 92,
+    image: {
+      src: PEXELS.accounting,
+      alt: "Accounting ledger, calculator, and financial paperwork",
+    },
+    paragraphs: [
+      "Bookkeeping, reconciliations, and standard tax prep are increasingly automated through platforms like QuickBooks AI, Xero, and enterprise ERP modules.",
+      "The Big Four and mid-size firms are hiring fewer first-year accountants for rote ledger work while expanding advisory and compliance roles. CPA demand remains, but the volume of human hours per return is shrinking fast.",
+      "Accounting degrees still matter when paired with forensic analysis, audit judgment, or client-facing advisory. Pure data-in, report-out accounting is the part under pressure.",
     ],
   },
   {
     emoji: "🗂️",
-    title: "Data Entry and Operations Coordinator",
+    title: "Data Entry / Administration",
+    automationRiskScore: 95,
     image: {
-      src: PEXELS.operations,
-      alt: "Office worker at a desk with keyboard and paperwork",
+      src: PEXELS.dataEntry,
+      alt: "Computer code on a screen representing data entry work",
     },
     paragraphs: [
-      "This one was already half gone before AI got good. Automation has been chipping away at data entry roles since 2018. What AI did was finish the job.",
-      "83% of mid-size companies have already fully automated their data entry operations. The remaining 17% are in the process. The operations coordinator roles that still exist are project management adjacent, require vendor relationships, and involve human judgment calls that software can't make yet.",
-      "The students who took business degrees planning to start in operations and work their way into management are finding the starting point has been deleted.",
+      "This is the degree path most exposed to straight replacement. Scheduling, form intake, record updates, and inbox routing are already handled by software agents and workflow bots.",
+      "McKinsey and World Economic Forum estimates put routine administrative work among the first white-collar tasks machines absorb at scale. Graduates expecting clerical admin as a default first job are competing with tools that never need onboarding.",
+      "If you are in this track, pivot toward operations analytics, business systems, or roles that audit automation rather than perform repetitive entry.",
     ],
   },
-  {
-    emoji: "🎮",
-    title: "Videogame Developer",
-    image: {
-      src: PEXELS.developer,
-      alt: "Junior game developer working at a computer in a studio",
-    },
-    paragraphs: [
-      "This one is the cruelest because everyone said learn to code and break into games. Parents said it. Guidance counselors said it. Every career quiz spat out developer as a safe bet. Industry trackers logged more than 14,800 game layoffs worldwide in 2024, above the 10,500 cut in 2023 and the 8,500 in 2022.",
-      "AI is not the only reason, but it is speeding up the squeeze. Unity's 2024 gaming report found 62% of developers already using AI in production. GDC's State of the Industry survey put 49% of respondents at studios using generative AI. Copilot, Cursor, and engine plugins now ship scripting, placeholder assets, and debugging faster than a junior hire eight months out of school.",
-      "What is left is systems thinking, networking, live ops, and knowing why you are building a feature, not just implementing it. Entry-level game programming postings are down while senior and specialist roles absorb the work. If you want in, you need a portfolio and a niche from day one, because the junior rung is narrowing fast.",
-    ],
-  },
-] as const;
+];
 
 export default function ExtinctDegreesPage() {
   return (
     <InfoArticlePage
       eyebrow="PathPicker Student News"
-      title="The 5 Careers a Harvard Professor Says Will Be Extinct by 2027"
-      subtitle="Hiring data and automation reports keep pointing to the same pattern: the entry-level version of a job is what disappears first, not the whole field."
+      title="The 10 Degrees Facing the Highest Automation Risk by 2028"
+      subtitle="Listed from lower to higher automation risk. Keep scrolling—the last degree has the highest exposure."
       lead={[
-        "We reviewed job posting trends, what career centers are reporting, and where companies are already using AI for repeatable work. Five paths show up again and again.",
-        "That does not mean these industries are over. It means the first rung on the ladder is getting removed or rewritten before you can step on it.",
+        "We mapped degree paths to the roles graduates actually land, then scored how much of that work is already automating. These ten degrees cluster at the top.",
+        "A high score does not mean the major is worthless. It means your first jobs out of school are likely in categories where AI and workflow tools are cutting entry-level hiring.",
       ]}
       heroImage={{
         src: HERO_IMAGE,
-        alt: "Harvard professor announcing careers that may be extinct by 2027, PathPicker student news graphic",
+        alt: "Harvard professor announcing degrees facing automation risk by 2028, PathPicker student news graphic",
         placement: "cover",
         aspect: "portrait",
       }}
       sectionNumbering="countdown"
-      sections={[...CAREER_SECTIONS]}
+      sections={DEGREE_SECTIONS}
       footerCta={
         <InfoArticleFooterCta
           eyebrow="Thanks for 10k+ subs!"

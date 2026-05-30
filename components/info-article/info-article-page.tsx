@@ -10,6 +10,8 @@ export type InfoArticleSection = {
   paragraphs: readonly string[];
   image?: { src: string; alt: string };
   visual?: ReactNode;
+  /** 0–100; shown in the section header when set. */
+  automationRiskScore?: number;
 };
 
 type HeroImageConfig = {
@@ -33,9 +35,9 @@ type InfoArticlePageProps = {
   sections: InfoArticleSection[];
   heroImage?: HeroImageConfig;
   leadVisual?: ReactNode;
-  /** `countdown`: first section is #N, last is #1 (most important). Default: 1, 2, 3… */
+  /** `countdown`: last section in the array is treated as highest risk. Default: first section is highest. */
   sectionNumbering?: SectionNumbering;
-  /** Shown above the section list when using countdown ranking. */
+  /** Shown above the section list. */
   sectionsIntro?: string;
   /** Optional block below career sections (e.g. newsletter CTA). */
   footerCta?: ReactNode;
@@ -49,24 +51,52 @@ function sectionRank(
   return numbering === "countdown" ? total - index : index + 1;
 }
 
-function riskLabel(rank: number): string | null {
-  if (rank !== 1) return null;
-  return "Highest extinction risk";
+function AutomationRiskOverlay({
+  score,
+  isTopRisk = false,
+}: {
+  score: number;
+  isTopRisk?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "absolute bottom-3 right-3 z-10 overflow-hidden rounded-xl shadow-[0_4px_18px_rgba(0,0,0,0.22)]",
+        isTopRisk && "ring-2 ring-[#DC2626]/70 ring-offset-2 ring-offset-transparent",
+      )}
+      aria-label={`${score} percent automation risk`}
+    >
+      <div className="flex items-stretch">
+        <div
+          className={cn(
+            "flex items-center justify-center px-3 py-2",
+            isTopRisk ? "bg-[#B91C1C]" : "bg-[#DC2626]",
+          )}
+        >
+          <span className="font-[family-name:var(--font-inter)] text-[1.125rem] font-extrabold leading-none tabular-nums text-white">
+            {score}%
+          </span>
+        </div>
+        <div className="flex items-center bg-[#111111] px-2.5 py-2">
+          <span className="font-[family-name:var(--font-inter)] text-[0.5625rem] font-semibold uppercase leading-[1.15] tracking-[0.07em] text-white">
+            Automation
+            <br />
+            risk
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function ArticleSectionCard({
   section,
-  rank,
-  total,
-  numbering,
+  isTopRisk = false,
 }: {
   section: InfoArticleSection;
-  rank: number;
-  total: number;
-  numbering: SectionNumbering;
+  isTopRisk?: boolean;
 }) {
-  const isTopRisk = numbering === "countdown" && rank === 1;
-  const label = riskLabel(rank);
+  const score = section.automationRiskScore;
 
   return (
     <section
@@ -79,48 +109,42 @@ function ArticleSectionCard({
     >
       <div
         className={cn(
-          "flex gap-4 px-4 py-4 md:px-5 md:py-5",
+          "px-4 py-3.5 md:px-5 md:py-4",
           isTopRisk ? "bg-[#FAF8FF]" : "bg-[#FAFAFA]",
         )}
       >
-        <div
-          className={cn(
-            "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl font-[family-name:var(--font-inter)] text-[1.125rem] font-bold tabular-nums",
-            isTopRisk
-              ? "bg-[#956DFE] text-white shadow-[0_4px_14px_rgba(149,109,254,0.35)]"
-              : "bg-white text-[#956DFE] ring-1 ring-[#956DFE]/20",
-          )}
-          aria-hidden
-        >
-          #{rank}
-        </div>
-        <div className="min-w-0 flex-1 pt-0.5">
-          {label ? (
-            <p className="mb-1 font-[family-name:var(--font-inter)] text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-[#956DFE]">
-              {label}
-            </p>
-          ) : numbering === "countdown" ? (
-            <p className="mb-1 font-[family-name:var(--font-inter)] text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-[#9CA3AF]">
-              Risk rank {rank} of {total}
-            </p>
-          ) : null}
-          <h2 className="font-[family-name:var(--font-inter)] text-[1.125rem] font-bold leading-snug tracking-[-0.02em] text-[#111111] md:text-xl">
-            <span className="mr-2" aria-hidden>
-              {section.emoji}
-            </span>
-            {section.title}
-          </h2>
-        </div>
+        {isTopRisk ? (
+          <p className="mb-1 font-[family-name:var(--font-inter)] text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[#956DFE]">
+            Highest automation risk
+          </p>
+        ) : null}
+        <h2 className="font-[family-name:var(--font-inter)] text-[1.0625rem] font-bold leading-snug tracking-[-0.02em] text-[#111111] md:text-lg">
+          <span className="mr-1.5" aria-hidden>
+            {section.emoji}
+          </span>
+          {section.title}
+        </h2>
       </div>
 
-      {section.visual ??
-        (section.image ? (
+      {section.visual ? (
+        <div className="relative">
+          {section.visual}
+          {score != null ? (
+            <AutomationRiskOverlay score={score} isTopRisk={isTopRisk} />
+          ) : null}
+        </div>
+      ) : section.image ? (
+        <div className="relative">
           <ArticleImage
             src={section.image.src}
             alt={section.image.alt}
             className="rounded-none"
           />
-        ) : null)}
+          {score != null ? (
+            <AutomationRiskOverlay score={score} isTopRisk={isTopRisk} />
+          ) : null}
+        </div>
+      ) : null}
 
       <div className="space-y-3.5 border-t border-[#F0F0F2] px-4 py-4 md:px-5 md:py-5">
         {section.paragraphs.map((paragraph) => (
@@ -291,9 +315,9 @@ export function InfoArticlePage({
               <ArticleSectionCard
                 key={section.title}
                 section={section}
-                rank={sectionRank(index, sectionCount, sectionNumbering)}
-                total={sectionCount}
-                numbering={sectionNumbering}
+                isTopRisk={
+                  sectionRank(index, sectionCount, sectionNumbering) === 1
+                }
               />
             ))}
             {footerCta ? <div className="pt-2">{footerCta}</div> : null}
