@@ -1,0 +1,413 @@
+{
+  "bucket": "pathpicker",
+  "auditedAt": "2026-05-30T16:58:16.364Z",
+  "objectCount": 2574,
+  "totalMb": 947.5708436965942,
+  "oversizedCount": 723,
+  "orphanCount": 2094,
+  "orphanMb": 333.4349145889282,
+  "topOversized": [
+    {
+      "path": "gs://pathpicker/college_logos/f082821d-9df5-46fc-b003-80175885e5f4.png",
+      "kb": 4902.1689453125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/11b9b2c4-9f93-4791-8b02-80847ccd889a.png",
+      "kb": 3288.2421875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/e1d26e29-793c-463c-8136-bccef46cb095.png",
+      "kb": 3217.33984375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/3a22f421-0e68-43e8-bbb7-3da9ba92f39e.png",
+      "kb": 3204.4072265625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/Untitled",
+      "kb": 2920.6103515625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/61690cda-f223-4206-8b11-901a0f03ba41.png",
+      "kb": 2822.0615234375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/anime-school-building-illustration.jpg",
+      "kb": 2675.763671875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/4d8f608f-2bae-48c0-b79b-da69f2d79e20.png",
+      "kb": 2669.2890625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/c758cdc9-c3d3-4d17-bce6-00115f6cb720.png",
+      "kb": 2316.6103515625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/d2dfe2da-d710-46dd-8158-cf4d02d0a69b.png",
+      "kb": 2307.7158203125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/f127ead3-a34a-4584-8e6b-90c84d166f00.png",
+      "kb": 2269.1865234375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/56b9ad53-d03f-460e-8349-3e675100498f.png",
+      "kb": 2259.048828125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 2232.552734375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/3606682b-72b7-4cd8-b444-77d2eae84562.png",
+      "kb": 2226.3642578125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/0573ca8e-fe91-424d-99cc-0fd54587ece1.png",
+      "kb": 2197.3759765625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/ebedd418-e16f-4e0d-8897-32dad15320ec.png",
+      "kb": 2175.7900390625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/6fe98ae7-9a29-476e-9d76-f4db1c5122d5.png",
+      "kb": 2170.9033203125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 2113.3564453125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/4b9e5b12-a9cb-4612-a758-d8a8558192ee.png",
+      "kb": 2107.1591796875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/d2da5ae5-a79c-4f27-aa73-a12067a97f4c.png",
+      "kb": 2102.001953125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 2091.3056640625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/a3fc7c45-bac5-49eb-b2a7-312374b21d7f.png",
+      "kb": 2074.0849609375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/c90585ad-de52-4ff8-af25-896aa5be09de.png",
+      "kb": 2058.1416015625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/77af235a-d1db-4c86-978b-4a4d57f868b2.png",
+      "kb": 2050.9599609375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/e0ff8da7-1206-4b9e-85f8-d8535c713a05.png",
+      "kb": 2047.5634765625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/2be1d8c9-6dad-4485-ba5e-d8d8b431fd46.png",
+      "kb": 2045.6845703125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/446f959d-ae05-4b03-bb23-a42961adeb5c.png",
+      "kb": 2045.064453125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/9e499fda-6479-437c-863c-4de4c9a3e5f3.png",
+      "kb": 2044.08203125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/11b9b2c4-9f93-4791-8b02-80847ccd889a.png",
+      "kb": 2043.6494140625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/Untitled",
+      "kb": 2021.8095703125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/b82f2977-0768-4399-80d9-ef0326c79f21.png",
+      "kb": 2019.3154296875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/a9007c22-7c58-4f0b-a670-47759b1e679f.png",
+      "kb": 2017.677734375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/bceaa276-42d4-4f3f-8b51-93acca6ff1e0.png",
+      "kb": 2008.8154296875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 1995.9296875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 1962.046875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/421d4b35-2ad0-4611-a745-e14ed2cb53c4.png",
+      "kb": 1953.556640625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/11d688a1-33f6-412f-bdf4-ff17a64cb821.png",
+      "kb": 1948.13671875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/631bd590-c3ae-4c4d-b0b2-f13fcebe4ecd.png",
+      "kb": 1947.6484375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/c1164407-cebc-47f4-8fe4-d74f4f232419.png",
+      "kb": 1927.203125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/d8bf97af-2ae6-4843-a214-0107ed54205f.png",
+      "kb": 1926.8203125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/0a80b272-0d16-4d9a-bb37-88964f23520b.png",
+      "kb": 1924.5263671875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/f32c32a1-73e2-4351-b9e5-dde8d173e2ba.png",
+      "kb": 1921.4873046875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/513e9317-7056-4e0e-9795-8ceb28b2618e.png",
+      "kb": 1893.4775390625
+    },
+    {
+      "path": "gs://pathpicker/generated_images/5ef1220d-8b33-413d-bfae-59d4bcb1c1ab.png",
+      "kb": 1890.4638671875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/a21e73eb-b946-475c-9405-ac4a3614fc05.png",
+      "kb": 1888.2578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/79d0f181-29c9-4b27-9d14-b1bb90fc5083.png",
+      "kb": 1875.07421875
+    },
+    {
+      "path": "gs://pathpicker/generated_images/66478620-4811-48b4-8967-5eef14ddfd35.png",
+      "kb": 1867.490234375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/cbbb897e-819c-4a92-89e2-c9437e8c0404.png",
+      "kb": 1858.876953125
+    },
+    {
+      "path": "gs://pathpicker/generated_images/52212",
+      "kb": 1856.1943359375
+    },
+    {
+      "path": "gs://pathpicker/generated_images/887c7cd7-ece5-4b08-8646-c32d2d03fed0.png",
+      "kb": 1855.197265625
+    }
+  ],
+  "sampleOrphans": [
+    {
+      "path": "gs://pathpicker/college_logos/001173ff-4aa5-415e-800c-dc3ad668e459.png",
+      "kb": 16.619140625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/001dd10c-ffc1-44ac-9092-388bc2dc5229.png",
+      "kb": 42.1142578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/00294fc0-2ca7-4ab2-a076-6706b3df2910.png",
+      "kb": 28.62109375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/004556fe-49de-449b-8d10-95a3d8f9dc44.png",
+      "kb": 26.939453125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/004850ce-c909-48d8-8b32-d75278b8c119.png",
+      "kb": 62.8408203125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0049b858-7258-48f5-abeb-4afe4a242877.png",
+      "kb": 42.818359375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/005377fe-1b9a-44b9-b486-063da5958275.png",
+      "kb": 350.884765625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/00d5e981-8068-47cc-bf6c-459d3dc4608a.png",
+      "kb": 31.259765625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/00db1480-07ff-42ab-92bb-0e2c11b2a6a2.png",
+      "kb": 343.4189453125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/00dbcfb2-76e7-4959-adb6-297b50e4d8aa.png",
+      "kb": 22.5986328125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/00e55036-4051-4667-9298-1eec768a93ae.png",
+      "kb": 81.599609375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/012e65a8-3f30-4f11-89e2-f0f7dd7dc2cf.png",
+      "kb": 201.1826171875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0133990c-e83e-4a90-9f38-16c54afa9878.png",
+      "kb": 5.6552734375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/01518cd2-e717-4849-9186-68040e350edb.png",
+      "kb": 83.9501953125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0172841f-c244-419b-b356-23ee677d0e07.png",
+      "kb": 31.3935546875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/019e62d1-4917-43b3-bfa7-02d8c342cd04.png",
+      "kb": 1281.0087890625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/01ad7fe2-b410-4449-8e76-5a80fb779889.png",
+      "kb": 42.8310546875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/02096a9a-bffc-4e23-a448-d3c98c820bb3.png",
+      "kb": 37.6259765625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/022740b1-3834-43bd-88f1-61ada246c5ef.png",
+      "kb": 55.06640625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/025d26a8-7fd0-40b6-8dfd-d1ce4817dff0.png",
+      "kb": 273.43359375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/02cd0b3a-dc24-4c05-b7c6-9d4341185800.png",
+      "kb": 46.095703125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/02e78fa0-fb08-4551-8b60-c3fd636cfc5e.png",
+      "kb": 85.8642578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/03005277-3ead-4db9-8224-b4830d2f70a4.png",
+      "kb": 11.6826171875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/03283da3-5cf8-45f1-b1f9-d7aaa3fa8173.png",
+      "kb": 59.1796875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/034f3f8f-31f1-4ebc-bb1b-34a3ffb5bc02.png",
+      "kb": 27.5517578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/035c0afd-b85b-4838-b37e-3d522d96dccc.png",
+      "kb": 155.220703125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/03665e5b-a69e-492d-9e17-e9b927732dbc.png",
+      "kb": 42.8037109375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/037f0434-a52f-42d1-a23f-45ee90f73905.png",
+      "kb": 50.2392578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/03fb9a90-b440-490c-8ed9-609212ed7ba5.png",
+      "kb": 135.1318359375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/03fffdf2-aeb9-4841-86b6-4619f415ffe9.png",
+      "kb": 112.1953125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0452c6ac-57d3-4c82-93c0-3773fd883e14.webp",
+      "kb": 9.599609375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/045a5a40-2f77-4c7b-96c6-e78c38676ddc.png",
+      "kb": 30.9052734375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/045f57da-e277-463e-92a6-80972bf86ac8.png",
+      "kb": 61.015625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0464fdc9-1196-4c36-b354-74ccc43ce98a.png",
+      "kb": 1673.771484375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/047a7d53-f366-45d3-a78a-84053b7a7f93.png",
+      "kb": 22.83203125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/048d4807-bd54-4bf7-9717-75fefe37f879.png",
+      "kb": 18.8642578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0499fe53-ab47-41be-a3bc-544ce43b1414.png",
+      "kb": 51.0751953125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/04a48bbc-a385-434b-ab84-f1adfd01c547.png",
+      "kb": 33.7060546875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/04ddf45f-7222-43cd-8283-4f621e3a006b.png",
+      "kb": 6.6484375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/04ec02e5-2039-47b0-9681-e464c6f94433.png",
+      "kb": 83.841796875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0536ee61-3179-4105-9178-81708c7122ac.png",
+      "kb": 254.890625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0565921e-7541-49ee-967a-949bc22e1385.png",
+      "kb": 167.142578125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/057f9bcf-9c1c-414e-bbbb-dfd8fb9bfc5a.png",
+      "kb": 37.4453125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/058a0244-56a9-4268-b9b8-c728b26241d6.png",
+      "kb": 267.546875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/05b0eaee-d58b-44c0-a978-72d5a9e0a06d.png",
+      "kb": 17.79296875
+    },
+    {
+      "path": "gs://pathpicker/college_logos/05db0f19-d97b-4dd1-bf48-562578aeab0e.png",
+      "kb": 23.31640625
+    },
+    {
+      "path": "gs://pathpicker/college_logos/05ddf72e-95a3-44bd-b0f7-68a15a812233.png",
+      "kb": 13.396484375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/05f0601f-8b87-4f52-ab99-8c1f0d79eb4f.png",
+      "kb": 80.1552734375
+    },
+    {
+      "path": "gs://pathpicker/college_logos/0613c2cb-6e56-442b-8934-df51e767708a.png",
+      "kb": 140.5673828125
+    },
+    {
+      "path": "gs://pathpicker/college_logos/062db537-fcb8-46f4-b5ad-ddd16128916f.png",
+      "kb": 122.3466796875
+    }
+  ]
+}

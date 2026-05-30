@@ -46,8 +46,7 @@ export function StudentFoodSection({
             const el = e.currentTarget;
             if (!el.dataset.fallback) {
               el.dataset.fallback = "1";
-              el.src =
-                "https://storage.googleapis.com/pathpicker/generated_images/Untitled%20design%20-%202025-10-27T195814.166.png";
+              el.src = "/images/school-detail/food-header.png";
             }
           }}
         />

@@ -1,0 +1,413 @@
+{
+  "bucket": "images_592",
+  "auditedAt": "2026-05-30T16:58:27.843Z",
+  "objectCount": 585,
+  "totalMb": 614.0901861190796,
+  "oversizedCount": 270,
+  "orphanCount": 584,
+  "orphanMb": 611.910041809082,
+  "topOversized": [
+    {
+      "path": "gs://images_592/Group",
+      "kb": 18829.2177734375
+    },
+    {
+      "path": "gs://images_592/friends.png",
+      "kb": 9378.3388671875
+    },
+    {
+      "path": "gs://images_592/club.png",
+      "kb": 9199.5048828125
+    },
+    {
+      "path": "gs://images_592/class.png",
+      "kb": 9131.03515625
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_vestu0vestu0vest.png",
+      "kb": 9125.7998046875
+    },
+    {
+      "path": "gs://images_592/rizz.png",
+      "kb": 9060.0087890625
+    },
+    {
+      "path": "gs://images_592/campuses.png",
+      "kb": 8970.5634765625
+    },
+    {
+      "path": "gs://images_592/dorm.png",
+      "kb": 8865.5478515625
+    },
+    {
+      "path": "gs://images_592/studyvparty.png",
+      "kb": 8717.85546875
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_j8uy27j8uy27j8uy.png",
+      "kb": 8338.689453125
+    },
+    {
+      "path": "gs://images_592/dirtysink.png",
+      "kb": 8211.5048828125
+    },
+    {
+      "path": "gs://images_592/AWARDED",
+      "kb": 7841.650390625
+    },
+    {
+      "path": "gs://images_592/future.png",
+      "kb": 7395.5703125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_qt27fcqt27fcqt27.png",
+      "kb": 7201.5732421875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 7062.1962890625
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_po0e4bpo0e4bpo0e.png",
+      "kb": 7056.869140625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6967.1962890625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6962.9501953125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_4pojec4pojec4poj.png",
+      "kb": 6919.2666015625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6873.4853515625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6817.12890625
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 6121.4912109375
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 5916.4912109375
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_6ohmor6ohmor6ohm",
+      "kb": 5866.6767578125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_6bglh26bglh26bgl.png",
+      "kb": 5706.42578125
+    },
+    {
+      "path": "gs://images_592/Groasdasdasdup",
+      "kb": 5608.0263671875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 5375.5205078125
+    },
+    {
+      "path": "gs://images_592/deskland.png",
+      "kb": 5369.9443359375
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 5342.615234375
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 5312.4912109375
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 5173.1513671875
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_xp4bruxp4bruxp4b.png",
+      "kb": 5117.9140625
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 5114.501953125
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 4911.8984375
+    },
+    {
+      "path": "gs://images_592/Group",
+      "kb": 4901.705078125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_guk04mguk04mguk0.png",
+      "kb": 4883.9814453125
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4851.7421875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4639.220703125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_lrqmhulrqmhulrqm.png",
+      "kb": 4630.046875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4599.3876953125
+    },
+    {
+      "path": "gs://images_592/Gemini_Generated_Image_qt27fcqt27fcqt27-Photoroom.png",
+      "kb": 4500.640625
+    },
+    {
+      "path": "gs://images_592/Grasdasdasdoup",
+      "kb": 4479.865234375
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4461.615234375
+    },
+    {
+      "path": "gs://images_592/illustrated-watercolor-city.jpg",
+      "kb": 4444.841796875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4272.5302734375
+    },
+    {
+      "path": "gs://images_592/02_Hoasdasdme",
+      "kb": 4202.9267578125
+    },
+    {
+      "path": "gs://images_592/sectiofffn.png",
+      "kb": 4011.916015625
+    },
+    {
+      "path": "gs://images_592/sefction.png",
+      "kb": 3954.6796875
+    },
+    {
+      "path": "gs://images_592/sectio2n.png",
+      "kb": 3895.1298828125
+    },
+    {
+      "path": "gs://images_592/Grdsadoup",
+      "kb": 3502.77734375
+    }
+  ],
+  "sampleOrphans": [
+    {
+      "path": "gs://images_592/01.",
+      "kb": 1482.26953125
+    },
+    {
+      "path": "gs://images_592/02_Hoasdasdme",
+      "kb": 4202.9267578125
+    },
+    {
+      "path": "gs://images_592/05.",
+      "kb": 2134.3046875
+    },
+    {
+      "path": "gs://images_592/1.png",
+      "kb": 111.62109375
+    },
+    {
+      "path": "gs://images_592/10.png",
+      "kb": 256.115234375
+    },
+    {
+      "path": "gs://images_592/11.15.asdasd2011a",
+      "kb": 650.8330078125
+    },
+    {
+      "path": "gs://images_592/11.png",
+      "kb": 225.431640625
+    },
+    {
+      "path": "gs://images_592/12.png",
+      "kb": 250.8271484375
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4639.220703125
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6962.9501953125
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6817.12890625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4851.7421875
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4461.615234375
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 7062.1962890625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6873.4853515625
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 5375.5205078125
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4599.3876953125
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 4272.5302734375
+    },
+    {
+      "path": "gs://images_592/13.",
+      "kb": 6967.1962890625
+    },
+    {
+      "path": "gs://images_592/13.png",
+      "kb": 54.37109375
+    },
+    {
+      "path": "gs://images_592/14.png",
+      "kb": 10.658203125
+    },
+    {
+      "path": "gs://images_592/15.png",
+      "kb": 14.072265625
+    },
+    {
+      "path": "gs://images_592/1st.png",
+      "kb": 1465.6435546875
+    },
+    {
+      "path": "gs://images_592/2.png",
+      "kb": 92.521484375
+    },
+    {
+      "path": "gs://images_592/22.png",
+      "kb": 12.2666015625
+    },
+    {
+      "path": "gs://images_592/23adasd.png",
+      "kb": 43.1904296875
+    },
+    {
+      "path": "gs://images_592/24afasf.png",
+      "kb": 2470.0654296875
+    },
+    {
+      "path": "gs://images_592/251.png",
+      "kb": 165.7958984375
+    },
+    {
+      "path": "gs://images_592/3.png",
+      "kb": 17.482421875
+    },
+    {
+      "path": "gs://images_592/38.png",
+      "kb": 1467.083984375
+    },
+    {
+      "path": "gs://images_592/39.png",
+      "kb": 1453.248046875
+    },
+    {
+      "path": "gs://images_592/4.8",
+      "kb": 11.69140625
+    },
+    {
+      "path": "gs://images_592/4.8",
+      "kb": 19.15625
+    },
+    {
+      "path": "gs://images_592/4.8",
+      "kb": 18.8369140625
+    },
+    {
+      "path": "gs://images_592/4.8",
+      "kb": 37.5458984375
+    },
+    {
+      "path": "gs://images_592/4.png",
+      "kb": 20.701171875
+    },
+    {
+      "path": "gs://images_592/40.png",
+      "kb": 1448.1376953125
+    },
+    {
+      "path": "gs://images_592/41.png",
+      "kb": 1374.4345703125
+    },
+    {
+      "path": "gs://images_592/42.png",
+      "kb": 174.1435546875
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 167.2470703125
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 179.767578125
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 160.912109375
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 162.71484375
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 164.65625
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 221.806640625
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 157.71484375
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 229.8984375
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 173.107421875
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 165.9658203125
+    },
+    {
+      "path": "gs://images_592/421",
+      "kb": 151.97265625
+    }
+  ]
+}

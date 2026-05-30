@@ -30,3 +30,16 @@ export function shouldUseNextImageOptimizer(src: string): boolean {
     return false;
   }
 }
+
+const GCS_HOSTS = new Set(["storage.googleapis.com", "storage.cloud.google.com"]);
+
+/** Serve from GCS CDN directly (skip `/_next/image`) — cheaper when objects are pre-sized. */
+export function shouldServeImageDirectFromCdn(src: string): boolean {
+  try {
+    const u = new URL(src);
+    if (u.protocol !== "https:") return false;
+    return GCS_HOSTS.has(u.hostname.toLowerCase());
+  } catch {
+    return false;
+  }
+}

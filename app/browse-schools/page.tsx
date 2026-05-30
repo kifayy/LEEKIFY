@@ -1,7 +1,6 @@
-"use client";
-
 import { Suspense } from "react";
 import { Directory } from "@/components/directory/Directory";
+import { getBrowseCollegesInitial } from "@/lib/browse-colleges-server";
 
 function BrowseFallback() {
   return (
@@ -12,10 +11,12 @@ function BrowseFallback() {
   );
 }
 
-export default function BrowseSchoolsPage() {
+export default async function BrowseSchoolsPage() {
+  const initialColleges = await getBrowseCollegesInitial();
+
   return (
     <Suspense fallback={<BrowseFallback />}>
-      <Directory />
+      <Directory initialColleges={initialColleges} />
     </Suspense>
   );
 }

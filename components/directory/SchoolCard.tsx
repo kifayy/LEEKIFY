@@ -11,7 +11,7 @@ import { useSchoolMatchScore } from "@/hooks/useSchoolMatchScore";
 import { MatchBreakdownModal } from "./MatchBreakdownModal";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
-import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
+import { shouldUseNextImageOptimizer, shouldServeImageDirectFromCdn } from "@/lib/remote-image-patterns";
 
 /** `sizes` for directory grid: 1 / 2 / 3 columns (~full-bleed card image). */
 const SCHOOL_CARD_HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
@@ -156,14 +156,16 @@ export function SchoolCard({
 
   const showHero = heroIndex < heroUrls.length;
   const heroSrc = showHero ? heroUrls[heroIndex] : "";
-  const optimizeHero = Boolean(heroSrc && shouldUseNextImageOptimizer(heroSrc));
+  const useNextImage = Boolean(heroSrc && shouldUseNextImageOptimizer(heroSrc));
+  /** Pre-sized college heroes: serve from GCS CDN directly (no `/_next/image` fan-out). */
+  const serveHeroFromCdn = Boolean(heroSrc && shouldServeImageDirectFromCdn(heroSrc));
 
   return (
     <>
       <div className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white rounded-2xl overflow-hidden relative h-full border border-gray-100 shadow-sm">
         <div className={`relative ${imageHeight} overflow-hidden`}>
           {showHero ? (
-            optimizeHero ? (
+            useNextImage ? (
               <Image
                 key={heroSrc}
                 src={heroSrc}
@@ -172,7 +174,8 @@ export function SchoolCard({
                 className="object-cover"
                 style={schoolHeroImageStyle(school.id)}
                 sizes={SCHOOL_CARD_HERO_SIZES}
-                quality={72}
+                quality={serveHeroFromCdn ? undefined : 72}
+                unoptimized={serveHeroFromCdn}
                 priority={imageLoadPriority}
                 loading={imageLoadPriority ? "eager" : "lazy"}
                 fetchPriority={imageLoadPriority ? "high" : "auto"}

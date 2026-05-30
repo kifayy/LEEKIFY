@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { SchoolHeader } from "./SchoolHeader";
@@ -16,6 +17,7 @@ import { SchoolAdmissionMatchTeaser } from "./school-admission-match-teaser";
 import type { CollegeDetail } from "@/types/college-detail";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
+import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
 
 type SectionChip = { id: string; label: string; emoji: string };
 
@@ -36,6 +38,8 @@ export function SchoolDetailsLayout({
 
   const friday = collegeData.friday_timeline?.length ? collegeData.friday_timeline : null;
   const bannerLogo = sanitizeCollegeBanner(collegeData.banner);
+  const heroSrc = collegeData.new_image_link || collegeData.featured_image_url || "";
+  const useOptimizedHero = Boolean(heroSrc && shouldUseNextImageOptimizer(heroSrc));
 
   const sectionChips = useMemo((): SectionChip[] => {
     const chips: SectionChip[] = [
@@ -101,16 +105,29 @@ export function SchoolDetailsLayout({
             )}
 
             <div>
-              {collegeData.new_image_link || collegeData.featured_image_url ? (
-                <div className="relative w-full rounded-3xl overflow-hidden bg-gray-100 border border-gray-200">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={collegeData.new_image_link || collegeData.featured_image_url || ""}
-                    alt={`${collegeData.name} campus banner`}
-                    className="w-full h-52 sm:h-64 md:h-72 lg:h-80 object-cover md:object-[center_25%]"
-                    style={schoolHeroImageStyle(collegeData.id)}
-                    loading="eager"
-                  />
+              {heroSrc ? (
+                <div className="relative w-full rounded-3xl overflow-hidden bg-gray-100 border border-gray-200 h-52 sm:h-64 md:h-72 lg:h-80">
+                  {useOptimizedHero ? (
+                    <Image
+                      src={heroSrc}
+                      alt={`${collegeData.name} campus banner`}
+                      fill
+                      className="object-cover md:object-[center_25%]"
+                      style={schoolHeroImageStyle(collegeData.id)}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                      quality={75}
+                      priority
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={heroSrc}
+                      alt={`${collegeData.name} campus banner`}
+                      className="w-full h-full object-cover md:object-[center_25%]"
+                      style={schoolHeroImageStyle(collegeData.id)}
+                      loading="eager"
+                    />
+                  )}
                   {bannerLogo && (
                     <div className="absolute bottom-8 left-3 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-white/90 backdrop-blur-sm shadow-md border border-white/80 flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}

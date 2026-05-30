@@ -15,12 +15,9 @@ import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
-import { BROWSE_COLLEGE_COLUMNS } from "@/lib/browse-college-select";
+import { BROWSE_COLLEGE_COLUMNS, BROWSE_FETCH_LIMIT } from "@/lib/browse-college-select";
 
 const COLLEGES_PER_PAGE = 20;
-
-/** PostgREST often defaults to 1k rows; keep headroom for 2k+ school datasets. */
-const BROWSE_FETCH_LIMIT = 5000;
 
 const COLLEGES_QUERY_TIMEOUT_MS = 45_000;
 
@@ -39,7 +36,7 @@ const vibeOptions = [
   { value: "foodie", label: "🍜 Foodie", emoji: "🍜" },
 ];
 
-export function Directory() {
+export function Directory({ initialColleges = [] }: { initialColleges?: College[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user } = useAuth();
@@ -63,6 +60,24 @@ export function Directory() {
   const filtersKeyRef = useRef("");
   const shuffleSeedRef = useRef(Math.random());
   const fetchGenerationRef = useRef(0);
+  const initialCollegesRef = useRef(initialColleges);
+  initialCollegesRef.current = initialColleges;
+
+  const applyBrowseSlice = (list: College[], seed: number, pageForSlice: number) => {
+    const allOrdered = orderCollegesForBrowse(list, seed);
+    const from = pageForSlice * COLLEGES_PER_PAGE;
+    const slice = allOrdered.slice(from, from + COLLEGES_PER_PAGE);
+    const more = from + COLLEGES_PER_PAGE < allOrdered.length;
+    if (pageForSlice === 0) {
+      setColleges(slice);
+    } else {
+      setColleges((prev) => [...prev, ...slice]);
+    }
+    setHasMoreColleges(more);
+  };
+
+  const canUseInitialColleges = (search: string, vibes: string[]) =>
+    initialCollegesRef.current.length > 0 && !search.trim() && vibes.length === 0;
 
   useEffect(() => {
     const ac = new AbortController();
@@ -84,6 +99,15 @@ export function Directory() {
         if (!ac.signal.aborted && gen === fetchGenerationRef.current) {
           setColleges([]);
           setHasMoreColleges(false);
+          setLoading(false);
+          setError(null);
+        }
+        return;
+      }
+
+      if (canUseInitialColleges(debouncedSearchTerm, selectedVibes)) {
+        if (!ac.signal.aborted && gen === fetchGenerationRef.current) {
+          applyBrowseSlice(initialCollegesRef.current, shuffleSeedRef.current, pageForSlice);
           setLoading(false);
           setError(null);
         }
