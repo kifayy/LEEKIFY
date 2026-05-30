@@ -1,23 +1,25 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
-import { ChevronDown } from "lucide-react";
+import { BarChart3, CalendarDays, ChevronDown, FileText, Sparkles, Target, Users, Wallet } from "lucide-react";
 import { useState } from "react";
 
 import type { SchoolSeoFaqItem } from "@/lib/school-seo-hub-faq";
 
+const FAQ_ICONS = [Target, Wallet, Sparkles, BarChart3, FileText, CalendarDays, Users] as const;
+
 export function SchoolSeoHubFaqAccordionItem({
   item,
-  Icon,
+  iconIndex,
   defaultOpen,
   className,
 }: {
   item: SchoolSeoFaqItem;
-  Icon: LucideIcon;
+  iconIndex: number;
   defaultOpen: boolean;
   className: string;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const Icon = FAQ_ICONS[iconIndex % FAQ_ICONS.length]!;
 
   return (
     <details

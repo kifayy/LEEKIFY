@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { BarChart3, CalendarDays, FileText, MessageCircleQuestion, Sparkles, Target, Users, Wallet } from "lucide-react";
+import { MessageCircleQuestion } from "lucide-react";
 
 import { SchoolSeoHubFaqAccordionItem } from "@/components/school/SchoolSeoHubFaqAccordionItem";
 import type { CollegeDetail } from "@/types/college-detail";
 import type { SchoolSeoFaqItem } from "@/lib/school-seo-hub-faq";
 import { buildSchoolSeoHubFaq } from "@/lib/school-seo-hub-faq";
-
-const FAQ_ICONS = [Target, Wallet, Sparkles, BarChart3, FileText, CalendarDays, Users] as const;
 
 /** Crawlable SEO hub: common questions mirroring student search intents (see docs/SCHOOL_PAGE_SEO_HUB_SPEC.md). */
 export function SchoolSeoHubSection({
@@ -55,12 +53,11 @@ export function SchoolSeoHubSection({
 
       <div className="space-y-2 p-3 sm:p-4">
         {faqItems.map((item, i) => {
-          const Icon = FAQ_ICONS[i % FAQ_ICONS.length];
           return (
             <SchoolSeoHubFaqAccordionItem
               key={i}
               item={item}
-              Icon={Icon}
+              iconIndex={i}
               defaultOpen={i === 0}
               className="group rounded-xl border border-gray-200/90 bg-white/90 shadow-sm transition-[box-shadow,border-color] open:border-violet-200/70 open:shadow-md open:shadow-violet-500/5 hover:border-violet-200/50"
             />
