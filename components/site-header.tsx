@@ -3,13 +3,19 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
-import { PATHPICKER_LOGO_URL } from "@/lib/brand-logos";
+import {
+  PATHPICKER_ASSETS_LOGO_URL,
+  PATHPICKER_PURPLE_LOGO_URL,
+} from "@/lib/brand-logos";
+import { cn } from "@/lib/utils";
 
-const LOGO_URL = PATHPICKER_LOGO_URL;
+const HEADER_LOGO_URL = PATHPICKER_ASSETS_LOGO_URL;
+const DRAWER_LOGO_URL = PATHPICKER_PURPLE_LOGO_URL;
 
 const navLinks = [
   { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL, external: true },
@@ -25,6 +31,8 @@ const mobileDrawerNavLinks = navLinks.filter((link) => !("external" in link && l
 const SCROLL_HIDE_THRESHOLD = 0.1;
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolledPastThreshold, setScrolledPastThreshold] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -73,7 +81,10 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 h-24 w-full min-h-0 min-w-0 shrink-0 overflow-hidden bg-white transition-transform duration-300 ease-out md:h-32 lg:relative lg:top-auto lg:z-10 lg:h-36 lg:border-0 lg:bg-[#F4F2FF] lg:shadow-none"
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 h-32 w-full min-h-0 min-w-0 shrink-0 overflow-hidden transition-transform duration-300 ease-out md:h-44 lg:relative lg:top-auto lg:z-10 lg:h-52 lg:border-0 lg:shadow-none",
+          isHome ? "max-md:bg-transparent md:bg-white lg:bg-[#4E2FFF]" : "bg-white lg:bg-[#4E2FFF]",
+        )}
         style={{
           transform: isMobile && scrolledPastThreshold ? "translateY(-100%)" : undefined,
         }}
@@ -82,19 +93,26 @@ export function SiteHeader() {
           <div className="flex min-w-0 shrink items-center gap-2 overflow-hidden">
             <Link href="/" className="flex min-h-0 min-w-0 shrink items-center active:opacity-80">
               <Image
-                src={LOGO_URL}
+                src={HEADER_LOGO_URL}
                 alt="Pathpicker"
-                width={600}
-                height={180}
-                className="h-28 w-auto max-w-[400px] object-contain object-left sm:h-32 sm:max-w-[440px] md:h-40 md:max-w-[520px] lg:h-48 lg:max-w-[560px]"
+                width={336}
+                height={126}
+                className="h-28 w-auto max-w-[min(90vw,440px)] object-contain object-left sm:h-32 md:h-40 md:max-w-[520px] lg:h-48 lg:max-w-[600px]"
                 unoptimized
+                priority
               />
             </Link>
 
             <Button
               variant="ghost"
               size="icon"
-              className="h-12 min-h-[48px] min-w-[48px] w-12 lg:hidden lg:h-10 lg:min-h-0 lg:min-w-0 lg:w-10"
+              className={cn(
+                "h-12 min-h-[48px] min-w-[48px] w-12 lg:hidden lg:h-10 lg:min-h-0 lg:min-w-0 lg:w-10",
+                isHome
+                  ? "text-white hover:bg-white/10 hover:text-white"
+                  : "text-[#181A1D] hover:bg-accent hover:text-accent-foreground",
+                "md:text-[#181A1D] md:hover:bg-accent md:hover:text-accent-foreground",
+              )}
               aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
             >
@@ -112,7 +130,7 @@ export function SiteHeader() {
                 href={link.href}
                 target={"external" in link && link.external ? "_blank" : undefined}
                 rel={"external" in link && link.external ? "noopener noreferrer" : undefined}
-                className="relative shrink-0 whitespace-nowrap text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:hover:text-[#956EFE] lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-[#956EFE] lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full"
+                className="relative shrink-0 whitespace-nowrap text-[15px] font-medium text-[#181A1D]/80 transition-colors duration-200 lg:py-1 lg:text-white/85 lg:hover:text-white lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-white lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full"
               >
                 {link.label}
               </Link>
@@ -124,7 +142,12 @@ export function SiteHeader() {
               href="https://my.pathpicker.com/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] min-w-0 items-center gap-1.5 rounded-[15px] border-2 border-[#E5E5E7] bg-transparent px-4 py-2 text-sm font-medium text-[#181A1D] transition-colors hover:border-[#956EFE] hover:text-[#956EFE] md:hidden"
+              className={cn(
+                "inline-flex min-h-[48px] min-w-0 items-center gap-1.5 rounded-[15px] border-2 bg-transparent px-4 py-2 text-sm font-medium transition-colors md:hidden",
+                isHome
+                  ? "border-white/50 text-white hover:border-white hover:bg-white/10"
+                  : "border-[#E5E5E7] text-[#181A1D] hover:border-[#956EFE] hover:text-[#956EFE]",
+              )}
               aria-label="Student Login"
             >
               <span aria-hidden>🎓</span>
@@ -134,7 +157,7 @@ export function SiteHeader() {
               href="https://my.pathpicker.com/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden min-h-[48px] items-center gap-2 rounded-[15px] border-2 border-[#E5E5E7] bg-transparent px-5 py-2.5 text-[15px] font-medium text-[#181A1D] transition-colors hover:border-[#956EFE] hover:text-[#956EFE] md:inline-flex"
+              className="hidden min-h-[48px] items-center gap-2 rounded-[15px] border-2 border-[#E5E5E7] bg-transparent px-5 py-2.5 text-[15px] font-medium text-[#181A1D] transition-colors hover:border-[#956EFE] hover:text-[#956EFE] md:inline-flex lg:border-white/40 lg:text-white lg:hover:border-white lg:hover:text-white"
               aria-label="Student Login"
             >
               <span aria-hidden>🎓</span>
@@ -164,11 +187,11 @@ export function SiteHeader() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Image
-                  src={LOGO_URL}
+                  src={DRAWER_LOGO_URL}
                   alt="Pathpicker"
-                  width={480}
-                  height={144}
-                  className="h-[10.5rem] w-auto shrink-0 object-contain"
+                  width={336}
+                  height={126}
+                  className="h-48 w-auto max-w-[480px] shrink-0 object-contain"
                   unoptimized
                 />
               </Link>

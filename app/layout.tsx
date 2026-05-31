@@ -123,7 +123,7 @@ export default function RootLayout({
             <CountryLayout>
             <div className="relative flex min-w-0 flex-col overflow-x-hidden">
               <SiteHeader />
-              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-24 md:pt-32 lg:pt-0">
+              <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-32 md:pt-44 lg:pt-0">
                 {children}
               </main>
               {/* Image strip connecting into the footer (now shown on all viewports) */}

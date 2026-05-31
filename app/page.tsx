@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { AboutProfileSchoolsSection } from "@/components/home/about-profile-schools-section";
+import { HomeCollegeVibePicker } from "@/components/home/home-college-vibe-picker";
+import { HomeHowItWorksSection } from "@/components/home/home-how-it-works-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
 import {
   HomeCollegeMatchQuizCta,
   HomeMatchBenefitsSection,
 } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
-import { StudentsLoveSection } from "@/components/home2/StudentsLoveSection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import {
   DESKTOP_HERO_ART_URL,
@@ -77,7 +77,7 @@ export default async function Home() {
         rel="preload"
         href={DESKTOP_HERO_ART_URL}
         as="image"
-        type="image/webp"
+        type="image/png"
         fetchPriority="high"
         media="(min-width: 768px)"
       />
@@ -93,11 +93,13 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <HomeHeroWithAudience />
+      <div className="-mt-32 md:mt-0">
+        <HomeHeroWithAudience />
+      </div>
+      <HomeCollegeVibePicker />
+      <HomeHowItWorksSection />
       <span id="commit-with-zero-regrets" className="block scroll-mt-28 md:hidden" aria-hidden />
       <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
-      <AboutProfileSchoolsSection />
-      <StudentsLoveSection className="hidden md:block" />
       <HomeMatchBenefitsSection />
       <HomePageFaqs />
       <HomeCollegeMatchQuizCta />

@@ -54,7 +54,7 @@ export function HomePageFaqs() {
             PathPicker FAQ
           </h2>
           <p className={`mx-auto mt-5 max-w-xl ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            Clear answers on college fit, admission odds, and happiness signals — beyond grades and rankings alone.
+            Clear answers on college fit, admission odds, and happiness signals, beyond grades and rankings alone.
           </p>
         </header>
 

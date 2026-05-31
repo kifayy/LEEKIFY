@@ -12,7 +12,7 @@ export const HOME_HERO_BULLETS = [
 export const HOME_HERO_SUBTEXT =
   "The student archetype quiz, backed by data from 2,000+ campuses.";
 
-export const HOME_HERO_CTA_LABEL = "Student Archetype Quiz";
+export const HOME_HERO_CTA_LABEL = "Find My Matches";
 
 /** Desktop hero subtitle (unchanged from original desktop layout). */
 export const DESKTOP_HERO_SUBTITLE =

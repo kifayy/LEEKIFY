@@ -1,10 +1,13 @@
 import Link from "next/link";
 
-import { HERO_PURPLE, HERO_PURPLE_RGB } from "@/components/home/hero-audience-theme";
+import {
+  PATHPICKER_BRAND_PURPLE,
+  PATHPICKER_BRAND_PURPLE_RGB,
+} from "@/components/home/hero-audience-theme";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Student Archetype Quiz";
+export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Matches";
 export const PATH_CAREER_MATCH_QUIZ_LABEL = "Career Match Quiz";
 
 /** @deprecated Use path quiz CTA labels; kept for existing imports. */
@@ -15,9 +18,13 @@ const PATH_QUIZ_CTA_CONFIG = {
   college: {
     label: PATH_COLLEGE_MATCH_QUIZ_LABEL,
     href: COLLEGE_MATCH_QUIZ_URL,
-    ctaBg: HERO_PURPLE,
-    ctaShadow: `0 10px 32px rgba(${HERO_PURPLE_RGB}, 0.38)`,
-    ctaFocusClass: "focus-visible:outline-[#943DC8]",
+    ctaBg: PATHPICKER_BRAND_PURPLE,
+    ctaShadow: `0 8px 28px rgba(${PATHPICKER_BRAND_PURPLE_RGB}, 0.32)`,
+    ctaFocusClass: "focus-visible:outline-[#6836D5]",
+    onDarkCtaBg: "#FFFFFF",
+    onDarkCtaShadow: "0 8px 24px rgba(0, 0, 0, 0.22)",
+    onDarkCtaFocusClass: "focus-visible:outline-white",
+    onDarkTextClass: "text-[#6836D5]",
   },
   career: {
     label: PATH_CAREER_MATCH_QUIZ_LABEL,
@@ -25,13 +32,17 @@ const PATH_QUIZ_CTA_CONFIG = {
     ctaBg: "#E8489A",
     ctaShadow: "0 10px 32px rgba(232, 72, 154, 0.38)",
     ctaFocusClass: "focus-visible:outline-[#E8489A]",
+    onDarkCtaBg: "#FFFFFF",
+    onDarkCtaShadow: "0 8px 24px rgba(0, 0, 0, 0.22)",
+    onDarkCtaFocusClass: "focus-visible:outline-white",
+    onDarkTextClass: "text-[#5F1C99]",
   },
 } as const;
 
 export type PathQuizCtaVariant = keyof typeof PATH_QUIZ_CTA_CONFIG;
 
 const PATH_QUIZ_CTA_BASE_CLASS =
-  "inline-flex items-center justify-center rounded-full font-[family-name:var(--font-poppins)] font-semibold text-white transition hover:opacity-95 active:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
+  "inline-flex items-center justify-center rounded-full font-[family-name:var(--font-poppins)] font-bold text-white transition hover:opacity-95 active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
 
 const PATH_QUIZ_CTA_SIZE_CLASS = {
   column: "h-14 min-w-[12.5rem] px-9 text-base",
@@ -48,34 +59,42 @@ type PathQuizCtaSize = keyof typeof PATH_QUIZ_CTA_SIZE_CLASS;
 type PathQuizCtaButtonProps = {
   variant: PathQuizCtaVariant;
   size?: PathQuizCtaSize;
+  appearance?: "default" | "onDark";
   className?: string;
+  tabIndex?: number;
+  children?: React.ReactNode;
 };
 
 export function PathQuizCtaButton({
   variant,
   size = "column",
+  appearance = "default",
   className,
+  tabIndex,
+  children,
 }: PathQuizCtaButtonProps) {
-  const { label, href, ctaBg, ctaShadow, ctaFocusClass } =
-    PATH_QUIZ_CTA_CONFIG[variant];
+  const config = PATH_QUIZ_CTA_CONFIG[variant];
+  const onDark = appearance === "onDark";
 
   return (
     <Link
-      href={href}
+      href={config.href}
       target="_blank"
       rel="noopener noreferrer"
+      tabIndex={tabIndex}
       className={cn(
         PATH_QUIZ_CTA_BASE_CLASS,
         PATH_QUIZ_CTA_SIZE_CLASS[size],
-        ctaFocusClass,
+        onDark ? config.onDarkCtaFocusClass : config.ctaFocusClass,
+        onDark && config.onDarkTextClass,
         className,
       )}
       style={{
-        backgroundColor: ctaBg,
-        boxShadow: ctaShadow,
+        backgroundColor: onDark ? config.onDarkCtaBg : config.ctaBg,
+        boxShadow: onDark ? config.onDarkCtaShadow : config.ctaShadow,
       }}
     >
-      {label}
+      {children ?? config.label}
     </Link>
   );
 }

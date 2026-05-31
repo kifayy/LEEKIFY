@@ -43,13 +43,13 @@
   html {
     -webkit-text-size-adjust: 100%;
     overflow-y: scroll;
-    scroll-padding-top: 6rem; /* Match fixed header: h-24 */
+    scroll-padding-top: 8rem; /* Match fixed header: h-32 */
   }
   @media (min-width: 768px) {
-    html { scroll-padding-top: 8rem; } /* md:h-32 */
+    html { scroll-padding-top: 11rem; } /* md:h-44 */
   }
   @media (min-width: 1024px) {
-    html { scroll-padding-top: 9rem; } /* lg:h-36 */
+    html { scroll-padding-top: 13rem; } /* lg:h-52 */
   }
   body {
     @apply bg-background text-foreground text-base font-normal;
@@ -76,20 +76,20 @@
   [id]:where(h1, h2, h3, h4, h5, h6),
   pre,
   [class*="prose"] pre {
-    scroll-margin-top: 6rem; /* h-24 mobile */
+    scroll-margin-top: 8rem; /* h-32 mobile */
   }
   @media (min-width: 768px) {
     [id]:where(h1, h2, h3, h4, h5, h6),
     pre,
     [class*="prose"] pre {
-      scroll-margin-top: 8rem; /* md:h-32 */
+      scroll-margin-top: 11rem; /* md:h-44 */
     }
   }
   @media (min-width: 1024px) {
     [id]:where(h1, h2, h3, h4, h5, h6),
     pre,
     [class*="prose"] pre {
-      scroll-margin-top: 9rem; /* lg:h-36 */
+      scroll-margin-top: 13rem; /* lg:h-52 */
     }
   }
   /* JSON/code blocks: no inner scroll – content flows with page */

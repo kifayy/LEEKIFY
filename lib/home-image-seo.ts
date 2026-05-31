@@ -1,7 +1,7 @@
 /** Descriptive `alt` text for home page images (SEO + accessibility; not visible copy). */
 
 export const HOME_DESKTOP_HERO_ALT =
-  "PathPicker hero illustration for students exploring college and career paths";
+  "Students across the United States matched to colleges including Berkeley, Arizona, LSU, and Harvard on PathPicker";
 
 export const HOME_MOBILE_HERO_BACKDROP_ALT =
   "Decorative background for PathPicker student archetype and college match hero";
@@ -9,8 +9,7 @@ export const HOME_MOBILE_HERO_BACKDROP_ALT =
 export const HOME_MOBILE_HERO_STUDENT_ALT =
   "Student using PathPicker to explore college match and archetype results";
 
-export const HOME_MOBILE_HERO_FIGMA_ALT =
-  "Student with laptop and university logos exploring college match on PathPicker";
+export const HOME_MOBILE_HERO_FIGMA_ALT = HOME_DESKTOP_HERO_ALT;
 
 export const HOME_DESKTOP_HERO_STUDENT_ALT =
   "PathPicker college match dashboard preview with student archetype insights";

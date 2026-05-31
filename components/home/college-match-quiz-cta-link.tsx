@@ -1,7 +1,7 @@
-import Link from "next/link";
-
-import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import {
+  PATH_COLLEGE_MATCH_QUIZ_LABEL,
+  PathQuizCtaButton,
+} from "@/components/home/path-quiz-cta";
 import { cn } from "@/lib/utils";
 
 type CollegeMatchQuizCtaLinkProps = {
@@ -17,20 +17,16 @@ export function CollegeMatchQuizCtaLink({
   tabIndex,
 }: CollegeMatchQuizCtaLinkProps) {
   return (
-    <Link
-      href={COLLEGE_MATCH_QUIZ_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <PathQuizCtaButton
+      variant="college"
+      size="section"
       tabIndex={tabIndex}
       className={cn(
-        "inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-full border-2 border-[#7C3AED] bg-[#956EFE] px-8 text-base font-semibold text-white shadow-[0_4px_20px_rgba(149,110,254,0.35)] transition hover:opacity-95 active:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600",
+        "h-14 min-w-[min(100%,16rem)] px-10 text-[1.0625rem] md:h-[3.75rem] md:min-w-[18rem] md:text-lg",
         className,
       )}
     >
-      <span className="text-lg leading-none" aria-hidden>
-        🎯
-      </span>
       {children}
-    </Link>
+    </PathQuizCtaButton>
   );
 }
