@@ -4,7 +4,6 @@ export const HOME_HERO_HEADLINE = "Find Your";
 
 export const HOME_HERO_BULLETS = [
   "Dream School",
-  "Future Job",
   "Archetype",
   "Next Path",
 ] as const;
@@ -12,7 +11,7 @@ export const HOME_HERO_BULLETS = [
 export const HOME_HERO_SUBTEXT =
   "The student archetype quiz, backed by data from 2,000+ campuses.";
 
-export const HOME_HERO_CTA_LABEL = "Find My Matches";
+export const HOME_HERO_CTA_LABEL = "Find My Archetype";
 
 /** Desktop hero subtitle (unchanged from original desktop layout). */
 export const DESKTOP_HERO_SUBTITLE =

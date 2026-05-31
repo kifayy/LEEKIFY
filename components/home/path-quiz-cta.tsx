@@ -7,7 +7,7 @@ import {
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Matches";
+export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Archetype";
 export const PATH_CAREER_MATCH_QUIZ_LABEL = "Career Match Quiz";
 
 /** @deprecated Use path quiz CTA labels; kept for existing imports. */
