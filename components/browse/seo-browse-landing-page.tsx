@@ -62,7 +62,32 @@ export function SeoBrowseLandingPage({ config, canonicalUrl, baseUrl, initialCol
         </div>
       </header>
 
-      <section className="container mx-auto max-w-7xl px-4 pb-6">
+      <section aria-label="Matching colleges" className="border-t border-gray-100">
+        <Suspense fallback={<BrowseFallback />}>
+          <Directory
+            initialColleges={initialColleges}
+            defaultVibes={[...config.vibes]}
+            urlSync={{ mode: "landing", basePath: landingPath }}
+          />
+        </Suspense>
+      </section>
+
+      <section className="container mx-auto max-w-3xl border-t border-gray-100 px-4 py-12 sm:py-16">
+        <h2 className="text-lg font-semibold text-[#0C1120]">Frequently asked questions</h2>
+        <dl className="mt-6 space-y-6">
+          {config.faq.map((item) => (
+            <div key={item.question}>
+              <dt className="font-medium text-[#0C1120]">{item.question}</dt>
+              <dd className="mt-2 text-gray-700 leading-relaxed">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section
+        aria-label="About this school vibe"
+        className="container mx-auto max-w-7xl border-t border-gray-100 bg-[#faf9fc] px-4 py-12 sm:py-16"
+      >
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
             <h2 className="text-xl font-semibold text-[#0C1120] sm:text-2xl">{config.whatIsTitle}</h2>
@@ -93,28 +118,6 @@ export function SeoBrowseLandingPage({ config, canonicalUrl, baseUrl, initialCol
             </p>
           </div>
         </div>
-      </section>
-
-      <section aria-label="Matching colleges" className="border-t border-gray-100">
-        <Suspense fallback={<BrowseFallback />}>
-          <Directory
-            initialColleges={initialColleges}
-            defaultVibes={[...config.vibes]}
-            urlSync={{ mode: "landing", basePath: landingPath }}
-          />
-        </Suspense>
-      </section>
-
-      <section className="container mx-auto max-w-3xl px-4 py-12 sm:py-16">
-        <h2 className="text-lg font-semibold text-[#0C1120]">Frequently asked questions</h2>
-        <dl className="mt-6 space-y-6">
-          {config.faq.map((item) => (
-            <div key={item.question}>
-              <dt className="font-medium text-[#0C1120]">{item.question}</dt>
-              <dd className="mt-2 text-gray-700 leading-relaxed">{item.answer}</dd>
-            </div>
-          ))}
-        </dl>
       </section>
     </div>
   );

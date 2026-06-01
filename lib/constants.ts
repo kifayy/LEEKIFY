@@ -1,3 +1,6 @@
+/** Footer + non-home header background (site chrome purple). */
+export const PATHPICKER_SITE_PURPLE = "#956EFE";
+
 /** Phone number for Scholarship Scanner SMS signup. */
 export const SCHOLARSHIP_SCANNER_PHONE = "+18559224190";
 
@@ -10,6 +13,9 @@ export const SCHOLARSHIP_SCANNER_SMS_URL = `sms:${SCHOLARSHIP_SCANNER_PHONE}?bod
 
 /** Pathpicker college match / archetype quiz (hosted on my.pathpicker.com). */
 export const COLLEGE_MATCH_QUIZ_URL = "https://my.pathpicker.com/archetype";
+
+/** Subscription management portal on my.pathpicker.com. */
+export const MANAGE_BILLING_URL = "https://my.pathpicker.com/manage-billing";
 
 /** Career-oriented quiz entry — swap URL here when a distinct college flow exists. */
 export const CAREER_MATCH_QUIZ_URL = COLLEGE_MATCH_QUIZ_URL;

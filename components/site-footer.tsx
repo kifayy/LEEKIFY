@@ -5,6 +5,8 @@ import { CopyrightYear } from "@/components/copyright-year";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { PATHPICKER_FOOTER_LOGO_URL } from "@/lib/brand-logos";
+import { PATHPICKER_SITE_PURPLE } from "@/lib/constants";
+import { SEO_BROWSE_LANDING_FOOTER_LINKS } from "@/lib/seo-browse-landings";
 
 const LOGO_URL = PATHPICKER_FOOTER_LOGO_URL;
 
@@ -13,7 +15,7 @@ const FOOTER_COLUMNS = [
     title: "Company",
     links: [
       { href: "/about", label: "About" },
-      { href: "/partners", label: "Partners" },
+      { href: "/pricing", label: "Pricing" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
     ],
@@ -22,7 +24,8 @@ const FOOTER_COLUMNS = [
     title: "Product",
     links: [
       { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL },
-      { href: "/browse-schools", label: "Browse Schools" },
+      { href: "/browse-schools", label: "School Comparison Tool" },
+      { href: COLLEGE_MATCH_QUIZ_URL, label: "Admissions Odds Tool" },
       { href: "/#deep-profile-rankings", label: "Features" },
       { href: "/#commit-with-zero-regrets", label: "How it Works" },
     ],
@@ -30,13 +33,17 @@ const FOOTER_COLUMNS = [
   {
     title: "Support",
     links: [
-      { href: "/contact", label: "Support" },
-      { href: "/partners", label: "For Partners" },
+      { href: "/contact", label: "Contact" },
+      { href: "/contact", label: "For Partners" },
     ],
+  },
+  {
+    title: "Explore Schools",
+    links: SEO_BROWSE_LANDING_FOOTER_LINKS,
   },
 ];
 
-const FOOTER_BG = "#956EFE";
+const FOOTER_BG = PATHPICKER_SITE_PURPLE;
 const FOOTER_DARK = "#FFFFFF";
 const FOOTER_MUTED = "rgba(255, 255, 255, 0.85)";
 const FOOTER_BORDER = "rgba(255, 255, 255, 0.18)";
@@ -76,7 +83,7 @@ export function SiteFooter() {
                 </h3>
                 <ul className="flex flex-col gap-3">
                   {column.links.map((link) => (
-                    <li key={link.href}>
+                    <li key={link.label}>
                       <Link
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
