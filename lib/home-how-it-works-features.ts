@@ -58,7 +58,7 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     description:
 
-      "See how you stack up against students at schools you're considering, grounded in two decades of verified outcomes, not just this year's marketing. Real wins and regrets from thousands of students shape your match.",
+      "See how you stack up against students at schools you're considering, backed by 20+ years of verified outcomes, from thousands of students. Never guess if you'll actually fit in.",
 
     imageSrc: "/assets/Group%20797.png",
 
@@ -82,13 +82,13 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
       "Across 19,000+ cities, we surface where you'll actually enjoy living, plus live admission odds, campus happiness scores, and career outlooks so your choice holds up after graduation.",
 
-    imageSrc: "/assets/Group%20798.png",
+    imageSrc: "/assets/asdasdroup%20799.png",
 
     imageAlt: "PathPicker predictive location, happiness, and admissions insights",
 
-    imageWidth: 2223,
+    imageWidth: 2152,
 
-    imageHeight: 1284,
+    imageHeight: 1189,
 
   },
 
