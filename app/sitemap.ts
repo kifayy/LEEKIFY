@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
+import { getAllSeoBrowseLandingSlugs } from "@/lib/seo-browse-landings";
 import { getAllCollegeSlugsForSitemap } from "@/lib/supabase/queries/colleges";
 
 /** Avoid static snapshot at build using VERCEL_URL (preview/prod *.vercel.app) inside pathpicker.com/sitemap.xml */
@@ -14,9 +15,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
   ];
 
+  const seoLandingPages: MetadataRoute.Sitemap = getAllSeoBrowseLandingSlugs().map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const mainProductPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/college-match-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/browse-schools`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    ...seoLandingPages,
   ];
 
   const otherStatic: MetadataRoute.Sitemap = [

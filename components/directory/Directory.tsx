@@ -21,6 +21,11 @@ const COLLEGES_PER_PAGE = 20;
 
 const COLLEGES_QUERY_TIMEOUT_MS = 45_000;
 
+export type DirectoryUrlSync =
+  | { mode: "browse" }
+  | { mode: "landing"; basePath: string }
+  | { mode: "none" };
+
 const vibeOptions = [
   { value: "nature-lover", label: "🌿 Nature", emoji: "🌿" },
   { value: "flirty", label: "💋 Flirty", emoji: "💋" },
@@ -36,14 +41,27 @@ const vibeOptions = [
   { value: "foodie", label: "🍜 Foodie", emoji: "🍜" },
 ];
 
-export function Directory({ initialColleges = [] }: { initialColleges?: College[] }) {
+type DirectoryProps = {
+  initialColleges?: College[];
+  /** Pre-selected vibes (SEO landing pages); URL `vibes` overrides when present. */
+  defaultVibes?: string[];
+  urlSync?: DirectoryUrlSync;
+};
+
+export function Directory({
+  initialColleges = [],
+  defaultVibes,
+  urlSync = { mode: "browse" },
+}: DirectoryProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user } = useAuth();
   const { hasCompletedCareerQuiz } = useCareerPersonalityStatus();
 
   const initialSearchTerm = searchParams.get("search") || "";
-  const initialVibes = searchParams.get("vibes")?.split(",").filter(Boolean) || [];
+  const vibesFromUrl = searchParams.get("vibes")?.split(",").filter(Boolean) || [];
+  const initialVibes =
+    vibesFromUrl.length > 0 ? vibesFromUrl : defaultVibes?.length ? [...defaultVibes] : [];
 
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
@@ -181,6 +199,9 @@ export function Directory({ initialColleges = [] }: { initialColleges?: College[
   }, [debouncedSearchTerm, selectedVibesKey, selectedVibes.length, currentPage]);
 
   useEffect(() => {
+    if (urlSync.mode === "none") return;
+
+    const basePath = urlSync.mode === "landing" ? urlSync.basePath : "/browse-schools";
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
     if (selectedVibes.length > 0) params.set("vibes", selectedVibes.join(","));
@@ -189,9 +210,9 @@ export function Directory({ initialColleges = [] }: { initialColleges?: College[
     const curVibes = (searchParams.get("vibes") ?? "").split(",").filter(Boolean).sort().join(",");
     const nextVibes = [...selectedVibes].sort().join(",");
     if (searchTerm !== curSearch || nextVibes !== curVibes) {
-      router.replace(nextQs ? `/browse-schools?${nextQs}` : "/browse-schools", { scroll: false });
+      router.replace(nextQs ? `${basePath}?${nextQs}` : basePath, { scroll: false });
     }
-  }, [searchTerm, selectedVibes, router, searchParams]);
+  }, [searchTerm, selectedVibes, router, searchParams, urlSync]);
 
   const isVibeDisabled = (vibe: { value: string; requiresQuiz?: boolean }) =>
     Boolean(vibe.requiresQuiz && (!user || !hasCompletedCareerQuiz));
