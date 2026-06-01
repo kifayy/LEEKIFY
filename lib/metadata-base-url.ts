@@ -7,6 +7,11 @@ function getBaseUrlFromEnv(): string {
   );
 }
 
+/** Sync site URL for page bodies that also call `"use cache"` data loaders (no request headers). */
+export function getSiteUrlForCachedPages(): string {
+  return (getCanonicalSiteUrlFromEnv() ?? getBaseUrlFromEnv()).replace(/\/$/, "");
+}
+
 /** Trailing slash stripped. Use for sitemap/robots so static builds never emit *.vercel.app when prod is custom domain. */
 export function getCanonicalSiteUrlFromEnv(): string | null {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();

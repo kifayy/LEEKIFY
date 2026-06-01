@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { SeoBrowseLandingPage } from "@/components/browse/seo-browse-landing-page";
 import { getBrowseCollegesInitial } from "@/lib/browse-colleges-server";
-import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import { getBaseUrlForMetadata, getSiteUrlForCachedPages } from "@/lib/metadata-base-url";
 import {
   getAllSeoBrowseLandingSlugs,
   getSeoBrowseLanding,
@@ -50,7 +50,7 @@ export default async function SeoBrowseLandingRoute({ params }: Props) {
   const config = getSeoBrowseLanding(landingSlug);
   if (!config) notFound();
 
-  const baseUrl = await getBaseUrlForMetadata();
+  const baseUrl = getSiteUrlForCachedPages();
   const canonicalUrl = `${baseUrl}/${config.slug}`;
   const initialColleges = await getBrowseCollegesInitial();
 

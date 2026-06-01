@@ -60,13 +60,13 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
       "See how you stack up against students at schools you're considering, backed by 20+ years of verified outcomes, from thousands of students. Never guess if you'll actually fit in.",
 
-    imageSrc: "/assets/Group%20797.png",
+    imageSrc: "/images/Group%20800.png",
 
     imageAlt: "PathPicker student ranking backed by historical campus data",
 
-    imageWidth: 3121,
+    imageWidth: 2574,
 
-    imageHeight: 2745,
+    imageHeight: 2949,
 
   },
 
