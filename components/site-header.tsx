@@ -23,7 +23,6 @@ const navLinks = [
   { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL, external: true },
   { href: "/browse-schools", label: "Browse Schools" },
   { href: "/#deep-profile-rankings", label: "Features" },
-  { href: "/#commit-with-zero-regrets", label: "How it Works" },
   { href: "/contact", label: "Support" },
 ];
 
