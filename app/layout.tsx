@@ -6,9 +6,6 @@ import {
   Poppins,
   Inter,
   Dancing_Script,
-  Volkhov,
-  Luckiest_Guy,
-  Covered_By_Your_Grace,
 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
@@ -65,27 +62,6 @@ const dancingScript = Dancing_Script({
   subsets: ["latin"],
 });
 
-const volkhov = Volkhov({
-  weight: "700",
-  variable: "--font-volkhov",
-  display: "swap",
-  subsets: ["latin"],
-});
-
-const luckiestGuy = Luckiest_Guy({
-  weight: "400",
-  variable: "--font-luckiest-guy",
-  display: "swap",
-  subsets: ["latin"],
-});
-
-const coveredByYourGrace = Covered_By_Your_Grace({
-  weight: "400",
-  variable: "--font-covered-by-your-grace",
-  display: "swap",
-  subsets: ["latin"],
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -97,10 +73,9 @@ export default function RootLayout({
         <meta name="impact-site-verification" content="506f7160-3dd6-4477-8a3e-bb29d178f99a" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
         <link rel="preconnect" href="https://my.pathpicker.com" />
-        <link rel="preconnect" href="https://framerusercontent.com" />
       </head>
       <body
-        className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} ${volkhov.variable} ${luckiestGuy.variable} ${coveredByYourGrace.variable} antialiased`}
+        className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
       >
           <SiteImageProtection />
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
@@ -135,7 +110,8 @@ export default function RootLayout({
                   height={400}
                   className="block h-auto w-full object-cover"
                   draggable={false}
-                  unoptimized
+                  sizes="100vw"
+                  quality={80}
                 />
               </div>
               <SiteFooter />

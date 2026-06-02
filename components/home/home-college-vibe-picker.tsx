@@ -25,7 +25,6 @@ function VibePickLink({ pick }: { pick: HomeCollegeVibePick }) {
           alt=""
           width={48}
           height={48}
-          unoptimized
           aria-hidden
           className="h-full w-full object-contain object-center"
         />

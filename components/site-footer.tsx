@@ -66,7 +66,6 @@ export function SiteFooter() {
                 width={336}
                 height={126}
                 className="h-[7.5rem] w-auto object-contain md:h-36"
-                unoptimized
               />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
@@ -111,7 +110,6 @@ export function SiteFooter() {
                 width={390}
                 height={72}
                 className="h-[4.5rem] w-auto object-contain"
-                unoptimized
               />
             </Link>
             <p className="text-sm" style={{ color: FOOTER_MUTED }}>

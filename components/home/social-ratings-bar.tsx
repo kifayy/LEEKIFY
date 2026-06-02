@@ -97,7 +97,7 @@ function TrustpilotBlock({
           alt={HOME_TRUSTPILOT_ALT}
           width={280}
           height={120}
-          unoptimized
+          sizes="200px"
           className="h-auto w-[min(100vw-2rem,168px)] max-w-[168px] sm:w-[200px] sm:max-w-[200px]"
           priority={priority}
         />

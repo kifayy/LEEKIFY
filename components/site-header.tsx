@@ -101,7 +101,6 @@ export function SiteHeader() {
                 width={336}
                 height={126}
                 className="h-28 w-auto max-w-[min(90vw,440px)] object-contain object-left sm:h-32 md:h-40 md:max-w-[520px] lg:h-48 lg:max-w-[600px]"
-                unoptimized
                 priority
               />
             </Link>
@@ -204,7 +203,6 @@ export function SiteHeader() {
                   width={336}
                   height={126}
                   className="h-48 w-auto max-w-[480px] shrink-0 object-contain"
-                  unoptimized
                 />
               </Link>
               <button

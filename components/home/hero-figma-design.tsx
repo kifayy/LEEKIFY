@@ -19,6 +19,7 @@ import {
 } from "@/lib/home-hero-copy";
 import { HOME_MOBILE_HERO_FIGMA_ALT } from "@/lib/home-image-seo";
 import {
+  HOME_HERO_IMAGE_QUALITY,
   HOME_HERO_USE_PREOPTIMIZED_ASSETS,
   MOBILE_HERO_FIGMA_ART_HEIGHT,
   MOBILE_HERO_FIGMA_ART_URL,
@@ -72,6 +73,7 @@ export function HeroFigmaDesign() {
             width={MOBILE_HERO_FIGMA_ART_WIDTH}
             height={MOBILE_HERO_FIGMA_ART_HEIGHT}
             unoptimized={HOME_HERO_USE_PREOPTIMIZED_ASSETS}
+            quality={HOME_HERO_IMAGE_QUALITY}
             priority
             fetchPriority="high"
             className="h-auto w-full object-contain object-center"

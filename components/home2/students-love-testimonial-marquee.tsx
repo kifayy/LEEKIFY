@@ -35,13 +35,6 @@ function matchBadgeForTestimonialId(id: string): MatchBadge {
   );
 }
 
-function triplicateRotated(items: Home2Testimonial[], rotateBy: number): Home2Testimonial[] {
-  if (items.length === 0) return [];
-  const k = ((rotateBy % items.length) + items.length) % items.length;
-  const r = [...items.slice(k), ...items.slice(0, k)];
-  return [...r, ...r, ...r];
-}
-
 function splitTestimonialsForMarqueeRows(all: Home2Testimonial[]): {
   row1: Home2Testimonial[];
   row2: Home2Testimonial[];
@@ -51,20 +44,23 @@ function splitTestimonialsForMarqueeRows(all: Home2Testimonial[]): {
   return { row1, row2 };
 }
 
+/** CSS marquee animates -50%; exactly two copies loop seamlessly. */
+function marqueeLoopRow(items: Home2Testimonial[]): Home2Testimonial[] {
+  return [...items, ...items];
+}
+
 function PhotoQuoteTile({
   quote,
   name,
   imageSrc,
   matchBadge,
   eager,
-  eagerHighFetch,
 }: {
   quote: string;
   name: string;
   imageSrc?: string;
   matchBadge: MatchBadge;
   eager?: boolean;
-  eagerHighFetch?: boolean;
 }) {
   return (
     <div className="relative m-2 h-[220px] w-[220px] shrink-0 overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 md:h-[250px] md:w-[250px] lg:h-[275px] lg:w-[275px]">
@@ -73,11 +69,11 @@ function PhotoQuoteTile({
           src={imageSrc}
           alt={HOME_TESTIMONIAL_PHOTO_ALT(name)}
           fill
-          unoptimized
           loading={eager ? "eager" : "lazy"}
-          fetchPriority={eager ? (eagerHighFetch ? "high" : "auto") : "low"}
+          fetchPriority={eager ? "high" : "low"}
           className="object-cover"
           sizes="(max-width: 768px) 228px, (max-width: 1024px) 258px, 284px"
+          quality={75}
         />
       ) : (
         <div
@@ -97,7 +93,6 @@ function PhotoQuoteTile({
             src={matchBadge.src}
             alt={collegeLogoAlt(matchBadge.src)}
             fill
-            unoptimized
             sizes="24px"
             className="rounded-full object-cover"
           />
@@ -120,10 +115,8 @@ export function StudentsLoveTestimonialMarquee({
   className?: string;
 }) {
   const { row1, row2 } = splitTestimonialsForMarqueeRows(HOME2_TESTIMONIALS);
-  const row1Strip = triplicateRotated(row1, 0);
-  const row2Strip = triplicateRotated(row2, 0);
-  const loopRow1 = [...row1Strip, ...row1Strip];
-  const loopRow2 = [...row2Strip, ...row2Strip];
+  const loopRow1 = marqueeLoopRow(row1);
+  const loopRow2 = marqueeLoopRow(row2);
 
   return (
     <div
@@ -138,8 +131,7 @@ export function StudentsLoveTestimonialMarquee({
             name={t.name}
             imageSrc={t.photoUrl}
             matchBadge={matchBadgeForTestimonialId(t.id)}
-            eager={i < 5}
-            eagerHighFetch={i === 0}
+            eager={i === 0}
           />
         ))}
       </div>
@@ -151,8 +143,7 @@ export function StudentsLoveTestimonialMarquee({
             name={t.name}
             imageSrc={t.photoUrl}
             matchBadge={matchBadgeForTestimonialId(t.id)}
-            eager={i < 5}
-            eagerHighFetch={i === 0}
+            eager={i === 0}
           />
         ))}
       </div>

@@ -10,6 +10,7 @@ import {
   DESKTOP_HERO_ART_HEIGHT,
   DESKTOP_HERO_ART_URL,
   DESKTOP_HERO_ART_WIDTH,
+  HOME_HERO_IMAGE_QUALITY,
   HOME_HERO_USE_PREOPTIMIZED_ASSETS,
 } from "@/lib/home-lcp-images";
 
@@ -52,6 +53,7 @@ export function DesktopHeroBanner() {
               width={DESKTOP_HERO_ART_WIDTH}
               height={DESKTOP_HERO_ART_HEIGHT}
               unoptimized={HOME_HERO_USE_PREOPTIMIZED_ASSETS}
+              quality={HOME_HERO_IMAGE_QUALITY}
               priority
               fetchPriority="high"
               sizes="(min-width: 768px) 50vw, 100vw"

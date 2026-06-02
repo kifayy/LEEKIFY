@@ -1,13 +1,21 @@
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 import { HomeCommunityCtaBand } from "@/components/home/home-community-cta-band";
-import { StudentsLoveTestimonialMarquee } from "@/components/home2/students-love-testimonial-marquee";
 import {
   DESKTOP_SECTION_SUBTEXT_CLASS,
 } from "@/components/home/desktop-section-typography";
 import { HOME_HOW_IT_WORKS_FEATURES } from "@/lib/home-how-it-works-features";
 import { HOME_REVIEWS_TRUST_TITLE } from "@/lib/home-reviews-trust-copy";
 import { cn } from "@/lib/utils";
+
+const StudentsLoveTestimonialMarquee = dynamic(
+  () =>
+    import("@/components/home2/students-love-testimonial-marquee").then((m) => ({
+      default: m.StudentsLoveTestimonialMarquee,
+    })),
+  { ssr: true },
+);
 
 function FeatureTextCard({
   eyebrow,
@@ -74,8 +82,8 @@ export function HomeHowItWorksSection() {
                     alt={feature.imageAlt}
                     width={feature.imageWidth}
                     height={feature.imageHeight}
-                    unoptimized
                     loading={index === 0 ? "eager" : "lazy"}
+                    quality={85}
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="h-auto w-full max-w-[min(100%,28rem)] object-contain md:max-w-[32rem] lg:max-w-none"
                   />

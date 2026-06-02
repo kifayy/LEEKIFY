@@ -1,11 +1,8 @@
 /** Next/Image quality when the optimizer runs (remote heroes). */
 export const HOME_HERO_IMAGE_QUALITY = 90;
 
-/**
- * Local hero WebPs in `/public/images` are pre-exported at high quality — serve as-is
- * (`unoptimized`) so Next does not re-encode them at default quality.
- */
-export const HOME_HERO_USE_PREOPTIMIZED_ASSETS = true;
+/** Let `next/image` serve AVIF/WebP at display width (do not bypass the optimizer). */
+export const HOME_HERO_USE_PREOPTIMIZED_ASSETS = false;
 
 /** Mobile + desktop hero illustration (`public/assets/Grouasdasdp 10.png`). */
 export const MOBILE_HERO_FIGMA_ART_URL = "/assets/Grouasdasdp%2010.png";

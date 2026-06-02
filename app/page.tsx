@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { HomeCollegeVibePicker } from "@/components/home/home-college-vibe-picker";
 import { HomeHowItWorksSection } from "@/components/home/home-how-it-works-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
-import {
-  HomeCollegeMatchQuizCta,
-  HomeMatchBenefitsSection,
-} from "@/components/home/home-bottom-stat-cards";
+import { HomeCollegeMatchQuizCta } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
-import {
-  DESKTOP_HERO_ART_URL,
-  MOBILE_HERO_FIGMA_ART_URL,
-} from "@/lib/home-lcp-images";
+
+const HomeMatchBenefitsSection = dynamic(
+  () =>
+    import("@/components/home/home-bottom-stat-cards").then((m) => ({
+      default: m.HomeMatchBenefitsSection,
+    })),
+  { ssr: true },
+);
 import {
   buildHomePageJsonLdGraph,
   HOME_OG_IMAGE_URL,
@@ -73,22 +75,6 @@ export default async function Home() {
 
   return (
     <>
-      <link
-        rel="preload"
-        href={DESKTOP_HERO_ART_URL}
-        as="image"
-        type="image/png"
-        fetchPriority="high"
-        media="(min-width: 768px)"
-      />
-      <link
-        rel="preload"
-        href={MOBILE_HERO_FIGMA_ART_URL}
-        as="image"
-        type="image/png"
-        fetchPriority="high"
-        media="(max-width: 767px)"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
