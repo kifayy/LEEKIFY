@@ -13,6 +13,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
+import { AttributionCapture } from "@/components/attribution-capture";
 import { SiteImageProtection } from "@/components/site-image-protection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
@@ -96,6 +97,9 @@ export default function RootLayout({
         className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
       >
           <SiteImageProtection />
+          <Suspense fallback={null}>
+            <AttributionCapture />
+          </Suspense>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
           <Script id="google-analytics" strategy="lazyOnload">
             {`

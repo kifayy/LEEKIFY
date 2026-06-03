@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const FLAG_IMAGE = "https://em-content.zobj.net/source/facebook/65/flag-for-united-states_1f1fa-1f1f8.png";
-const GO_LINK = "https://my.pathpicker.com/archetype";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 const SHOW_INTERVAL_MS = 7000;
 const VISIBLE_DURATION_MS = 3500;
 
@@ -41,6 +41,7 @@ function pickRandom<T>(arr: T[]): T {
 }
 
 export function MobileSocialProofPopup() {
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [notification, setNotification] = useState(() => ({
@@ -123,7 +124,7 @@ export function MobileSocialProofPopup() {
           </button>
         </div>
         <a
-          href={GO_LINK}
+          href={collegeMatchQuizUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="shrink-0 self-center rounded-xl bg-[#956EFE] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_2px_6px_rgba(149,110,254,0.35)] transition hover:opacity-95 active:scale-[0.98]"

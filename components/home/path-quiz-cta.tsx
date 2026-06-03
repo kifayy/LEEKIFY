@@ -6,7 +6,7 @@ import {
   PATHPICKER_BRAND_PURPLE,
   PATHPICKER_BRAND_PURPLE_RGB,
 } from "@/components/home/hero-audience-theme";
-import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +20,6 @@ export const STUDENT_ARCHETYPE_QUIZ_LABEL = PATH_COLLEGE_MATCH_QUIZ_LABEL;
 const PATH_QUIZ_CTA_CONFIG = {
   college: {
     label: PATH_COLLEGE_MATCH_QUIZ_LABEL,
-    href: COLLEGE_MATCH_QUIZ_URL,
     ctaBg: PATHPICKER_BRAND_PURPLE,
     ctaShadow: `0 8px 28px rgba(${PATHPICKER_BRAND_PURPLE_RGB}, 0.32)`,
     ctaFocusClass: "focus-visible:outline-[#6836D5]",
@@ -31,7 +30,6 @@ const PATH_QUIZ_CTA_CONFIG = {
   },
   career: {
     label: PATH_CAREER_MATCH_QUIZ_LABEL,
-    href: CAREER_MATCH_QUIZ_URL,
     ctaBg: "#E8489A",
     ctaShadow: "0 10px 32px rgba(232, 72, 154, 0.38)",
     ctaFocusClass: "focus-visible:outline-[#E8489A]",
@@ -77,11 +75,12 @@ export function PathQuizCtaButton({
   children,
 }: PathQuizCtaButtonProps) {
   const config = PATH_QUIZ_CTA_CONFIG[variant];
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const onDark = appearance === "onDark";
 
   return (
     <Link
-      href={config.href}
+      href={collegeMatchQuizUrl}
       target="_blank"
       rel="noopener noreferrer"
       tabIndex={tabIndex}

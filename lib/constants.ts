@@ -11,7 +11,7 @@ export const SCHOLARSHIP_SCANNER_SMS_BODY =
 /** SMS URI: opens default SMS app with number and body pre-filled (e.g. on phone). */
 export const SCHOLARSHIP_SCANNER_SMS_URL = `sms:${SCHOLARSHIP_SCANNER_PHONE}?body=${encodeURIComponent(SCHOLARSHIP_SCANNER_SMS_BODY)}`;
 
-/** Pathpicker college match / archetype quiz (hosted on my.pathpicker.com). */
+/** Pathpicker college match / archetype quiz (hosted on my.pathpicker.com). Use `useCollegeMatchQuizUrl()` or `CollegeMatchQuizLink` for navigation so session attribution is forwarded. */
 export const COLLEGE_MATCH_QUIZ_URL = "https://my.pathpicker.com/archetype";
 
 /** Subscription management portal on my.pathpicker.com. */

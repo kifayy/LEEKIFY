@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { COLLEGE_MATCH_QUIZ_URL, PATHPICKER_SITE_PURPLE } from "@/lib/constants";
 import {
   PATHPICKER_ASSETS_LOGO_URL,
@@ -33,6 +34,7 @@ const SCROLL_HIDE_THRESHOLD = 0.1;
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const isHome = pathname === "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolledPastThreshold, setScrolledPastThreshold] = useState(false);
@@ -126,8 +128,8 @@ export function SiteHeader() {
           >
             {navLinks.map((link) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={link.label}
+                href={"external" in link && link.external ? collegeMatchQuizUrl : link.href}
                 target={"external" in link && link.external ? "_blank" : undefined}
                 rel={"external" in link && link.external ? "noopener noreferrer" : undefined}
                 className={cn(

@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import {
   HOME_COLLEGE_VIBE_PICKS,
   HOME_COLLEGE_VIBE_PICKS_DESKTOP,
@@ -11,9 +13,11 @@ import {
 } from "@/lib/home-college-vibe-picks";
 
 function VibePickLink({ pick }: { pick: HomeCollegeVibePick }) {
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
+
   return (
     <Link
-      href={COLLEGE_MATCH_QUIZ_URL}
+      href={collegeMatchQuizUrl}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={pick.label}

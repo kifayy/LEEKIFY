@@ -1,8 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { Check, Star } from "lucide-react";
-
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const TRUSTPILOT_URL = "https://www.trustpilot.com/";
@@ -105,10 +104,7 @@ function PricingMapSocialProof() {
 
 function ContinueButton({ outlined = false }: { outlined?: boolean }) {
   return (
-    <Link
-      href={COLLEGE_MATCH_QUIZ_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <CollegeMatchQuizLink
       className={cn(
         "inline-flex w-full items-center justify-center rounded-lg px-5 py-3 text-[15px] font-semibold transition-colors",
         outlined
@@ -117,7 +113,7 @@ function ContinueButton({ outlined = false }: { outlined?: boolean }) {
       )}
     >
       Start Subscription
-    </Link>
+    </CollegeMatchQuizLink>
   );
 }
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 
 export async function generateMetadata() {
@@ -29,27 +29,19 @@ export default function CollegeMatchQuizPage() {
           Answer a few quick questions and discover colleges that line up with how you learn, socialize, and plan your
           future.
         </p>
-        <Link
-          href={COLLEGE_MATCH_QUIZ_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <CollegeMatchQuizLink
           className="mt-10 inline-flex h-14 min-w-[240px] items-center justify-center rounded-[15px] border-2 border-[#7C3AED] bg-[#956EFE] px-8 text-lg font-semibold text-white shadow-[0_4px_20px_rgba(149,110,254,0.35)] transition hover:opacity-95"
         >
           {PATH_COLLEGE_MATCH_QUIZ_LABEL}
-        </Link>
+        </CollegeMatchQuizLink>
         <p className="mt-8 text-sm text-[#6B7280]">
           <Link href="/browse-schools" className="font-medium text-[#956EFE] hover:underline">
             Browse schools
           </Link>{" "}
           without the quiz, or try{" "}
-          <Link
-            href={COLLEGE_MATCH_QUIZ_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-[#956EFE] hover:underline"
-          >
+          <CollegeMatchQuizLink className="font-medium text-[#956EFE] hover:underline">
             {PATH_COLLEGE_MATCH_QUIZ_LABEL}
-          </Link>
+          </CollegeMatchQuizLink>
           .
         </p>
       </div>

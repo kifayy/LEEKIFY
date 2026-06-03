@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { Directory } from "@/components/directory/Directory";
 import { SeoBrowseLandingJsonLd } from "@/components/browse/seo-browse-landing-json-ld";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
 import type { SeoBrowseLandingConfig } from "@/lib/seo-browse-landings";
 import type { College } from "@/types/college";
@@ -106,14 +106,9 @@ export function SeoBrowseLandingPage({ config, canonicalUrl, baseUrl, initialCol
             </ul>
             <p className="mt-6 text-gray-800">
               {config.quizCtaLine}{" "}
-              <Link
-                href={COLLEGE_MATCH_QUIZ_URL}
-                className="font-medium text-[#6836D5] underline-offset-2 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <CollegeMatchQuizLink className="font-medium text-[#6836D5] underline-offset-2 hover:underline">
                 Take the PathPicker quiz →
-              </Link>{" "}
+              </CollegeMatchQuizLink>{" "}
               ({PATH_COLLEGE_MATCH_QUIZ_LABEL})
             </p>
           </div>

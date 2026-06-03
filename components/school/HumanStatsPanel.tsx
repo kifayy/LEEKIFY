@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Info } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { cn } from "@/lib/utils";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 type StatDef = {
   normKey: string;
@@ -114,6 +114,7 @@ function StatRow({
   def: StatDef;
   value: number;
 }) {
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const [open, setOpen] = useState(false);
   const w = Math.min(100, Math.max(0, value));
 
@@ -198,7 +199,7 @@ function StatRow({
         </div>
         <div className="absolute inset-0 flex items-center justify-center px-1">
           <Link
-            href={COLLEGE_MATCH_QUIZ_URL}
+            href={collegeMatchQuizUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="max-w-[min(100%,280px)] rounded-full border border-gray-200/90 bg-white px-3 py-2 text-center text-[11px] font-semibold leading-tight text-gray-900 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition hover:bg-gray-50 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] active:scale-[0.98] sm:text-xs"

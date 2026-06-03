@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { HOME_PARTNER_LOGO_ALT } from "@/lib/home-image-seo";
 
 const ARCHETYPE_IMAGE =
@@ -42,7 +42,6 @@ function LogoSlot({ src }: { src: string }) {
 }
 
 const CARD = {
-  href: COLLEGE_MATCH_QUIZ_URL,
   title: PATH_COLLEGE_MATCH_QUIZ_LABEL,
   description:
     "Find your archetype. Join 40k+ peers and see what type of student you are. Discover your profile.",
@@ -51,7 +50,8 @@ const CARD = {
 };
 
 export function HeroQuizCards() {
-  const href = CARD.href;
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
+  const href = collegeMatchQuizUrl;
   const isExternal = href.startsWith("http");
 
   return (
@@ -71,7 +71,7 @@ export function HeroQuizCards() {
             style={{ backgroundColor: "#F0EEFF" }}
           >
             <div className="relative flex min-h-0 flex-1 flex-col">
-              {!CARD.href.includes("archetype") && (
+              {!href.includes("archetype") && (
                 <div className="relative aspect-[389/276] w-full overflow-hidden rounded-t-[39px] bg-[#F7F7F7] md:aspect-[480/320] lg:aspect-[520/346]">
                   <Image
                     src={CARD.image}

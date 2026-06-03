@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 
 const GREEKER_URL = "https://storage.googleapis.com/images_592/Greeker%20(3).png";
 const PLACEHOLDER_LOGOS = [
@@ -41,9 +41,11 @@ const CARD_CLASS =
 
 /** Reusable College Match Quiz card widget (same destination as archetype flow). */
 export function ArchetypeQuizWidget() {
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
+
   return (
     <Link
-      href={COLLEGE_MATCH_QUIZ_URL}
+      href={collegeMatchQuizUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={CARD_CLASS}

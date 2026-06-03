@@ -10,7 +10,7 @@ import {
 } from "@/components/home/mobile-hero-typography";
 import { HERO_SIMPLIFIED_GRADIENT } from "@/components/home/hero-audience-theme";
 import { HeroTrustpilotProof } from "@/components/home/hero-trustpilot-proof";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
 import {
   MOBILE_HERO_BULLETS,
@@ -31,6 +31,8 @@ import {
  * Mobile-only hero (`md:hidden` in `home-hero-with-audience.tsx`).
  */
 export function HeroFigmaDesign() {
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
+
   return (
     <section
       className="w-full shrink-0 overflow-x-hidden pb-8 pt-32 min-w-0 md:hidden"
@@ -57,7 +59,7 @@ export function HeroFigmaDesign() {
         </p>
 
         <Link
-          href={COLLEGE_MATCH_QUIZ_URL}
+          href={collegeMatchQuizUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackLandingCtaToQuiz()}

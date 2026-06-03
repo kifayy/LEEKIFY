@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { CopyrightYear } from "@/components/copyright-year";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { isCollegeMatchQuizUrl } from "@/lib/attribution";
 import { PATHPICKER_FOOTER_LOGO_URL } from "@/lib/brand-logos";
-import { PATHPICKER_SITE_PURPLE } from "@/lib/constants";
+import { COLLEGE_MATCH_QUIZ_URL, PATHPICKER_SITE_PURPLE } from "@/lib/constants";
 import { SEO_BROWSE_LANDING_FOOTER_LINKS } from "@/lib/seo-browse-landings";
 
 const LOGO_URL = PATHPICKER_FOOTER_LOGO_URL;
@@ -83,15 +84,24 @@ export function SiteFooter() {
                 <ul className="flex flex-col gap-3">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="text-sm transition-opacity hover:opacity-80"
-                        style={{ color: FOOTER_DARK }}
-                      >
-                        {link.label}
-                      </Link>
+                      {isCollegeMatchQuizUrl(link.href) ? (
+                        <CollegeMatchQuizLink
+                          className="text-sm transition-opacity hover:opacity-80"
+                          style={{ color: FOOTER_DARK }}
+                        >
+                          {link.label}
+                        </CollegeMatchQuizLink>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          target={link.href.startsWith("http") ? "_blank" : undefined}
+                          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="text-sm transition-opacity hover:opacity-80"
+                          style={{ color: FOOTER_DARK }}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

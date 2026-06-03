@@ -7,7 +7,7 @@ import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BRAND_MEDIA } from "@/components/landing/constants";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { useHeroAudience } from "@/components/home/hero-audience-context";
 import { HERO_PURPLE, HERO_PURPLE_RGB, isCareerAudience } from "@/components/home/hero-audience-theme";
 
@@ -76,7 +76,8 @@ export function HeroBelongCta() {
 
   const pillLine = career ? "See Where You'll Thrive" : "See Where You Belong";
   const quizLabel = career ? "Career Match Quiz" : PATH_COLLEGE_MATCH_QUIZ_LABEL;
-  const quizHref = career ? CAREER_MATCH_QUIZ_URL : COLLEGE_MATCH_QUIZ_URL;
+  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
+  const quizHref = collegeMatchQuizUrl;
 
   return (
     <div className="mx-auto flex w-full max-w-[38rem] flex-col gap-5 lg:mx-0 lg:max-w-none lg:gap-8">
