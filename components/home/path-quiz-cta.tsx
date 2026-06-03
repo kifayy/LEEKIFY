@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import {
@@ -5,6 +7,7 @@ import {
   PATHPICKER_BRAND_PURPLE_RGB,
 } from "@/components/home/hero-audience-theme";
 import { CAREER_MATCH_QUIZ_URL, COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
 import { cn } from "@/lib/utils";
 
 export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Archetype";
@@ -82,6 +85,7 @@ export function PathQuizCtaButton({
       target="_blank"
       rel="noopener noreferrer"
       tabIndex={tabIndex}
+      onClick={() => trackLandingCtaToQuiz()}
       className={cn(
         PATH_QUIZ_CTA_BASE_CLASS,
         PATH_QUIZ_CTA_SIZE_CLASS[size],

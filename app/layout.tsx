@@ -16,9 +16,21 @@ import { CountryLayout } from "@/components/country-layout";
 import { SiteImageProtection } from "@/components/site-image-protection";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
+import { SNAPCHAT_PIXEL_ID } from "@/lib/snapchat-pixel";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
+
+const SNAPCHAT_PIXEL_INIT = `
+(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+r.src=n;var u=t.getElementsByTagName(s)[0];
+u.parentNode.insertBefore(r,u);})(window,document,
+'https://sc-static.net/scevent.min.js');
+snaptr('init', '${SNAPCHAT_PIXEL_ID}', {});
+snaptr('track', 'PAGE_VIEW');
+`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
@@ -73,6 +85,12 @@ export default function RootLayout({
         <meta name="impact-site-verification" content="506f7160-3dd6-4477-8a3e-bb29d178f99a" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
         <link rel="preconnect" href="https://my.pathpicker.com" />
+        <link rel="preconnect" href="https://sc-static.net" />
+        <Script
+          id="snapchat-pixel"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: SNAPCHAT_PIXEL_INIT }}
+        />
       </head>
       <body
         className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}

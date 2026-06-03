@@ -11,6 +11,7 @@ import {
 import { HERO_SIMPLIFIED_GRADIENT } from "@/components/home/hero-audience-theme";
 import { HeroTrustpilotProof } from "@/components/home/hero-trustpilot-proof";
 import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
 import {
   MOBILE_HERO_BULLETS,
   MOBILE_HERO_CTA_LABEL,
@@ -59,6 +60,7 @@ export function HeroFigmaDesign() {
           href={COLLEGE_MATCH_QUIZ_URL}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackLandingCtaToQuiz()}
           className="mt-6 inline-flex h-[3.25rem] w-full max-w-[18rem] items-center justify-center rounded-full bg-white px-8 font-[family-name:var(--font-inter)] text-[1.0625rem] font-semibold text-[#4E2FFF] shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition hover:opacity-95 active:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           {MOBILE_HERO_CTA_LABEL}
