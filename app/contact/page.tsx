@@ -7,7 +7,7 @@ import { ContactFaqs } from "@/components/contact/contact-faqs";
 import { MANAGE_BILLING_URL } from "@/lib/constants";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 
-const SUPPORT_EMAIL = "hi@pathpicker.com";
+const SUPPORT_EMAIL = "support@pathpicker.com";
 const PARTNERSHIPS_EMAIL = "ellie@pathpicker.com";
 
 export async function generateMetadata(): Promise<Metadata> {

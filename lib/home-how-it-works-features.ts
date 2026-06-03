@@ -32,7 +32,7 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     eyebrow: "DEEP DATA MAPPING",
 
-    title: "Personality Matters",
+    title: "College Matching Was Broken, We Fixed It",
 
     description:
 

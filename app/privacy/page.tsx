@@ -91,8 +91,8 @@ export default function PrivacyPage() {
           </ul>
           <p className="mt-3 text-muted-foreground">
             To exercise these rights, submit a verifiable consumer request to{" "}
-            <a href="mailto:hi@awarded.app" className="text-[#956EFE] underline hover:no-underline">
-              hi@awarded.app
+            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
+              support@pathpicker.com
             </a>
             . We will not discriminate against any User for exercising their statutory privacy rights.
           </p>
@@ -119,8 +119,8 @@ export default function PrivacyPage() {
           </p>
           <p className="mt-2 text-muted-foreground">
             Email:{" "}
-            <a href="mailto:hi@awarded.app" className="text-[#956EFE] underline hover:no-underline">
-              hi@awarded.app
+            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
+              support@pathpicker.com
             </a>
           </p>
         </section>

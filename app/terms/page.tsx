@@ -56,8 +56,8 @@ export default function TermsPage() {
           </p>
           <p className="mt-3 text-muted-foreground">
             <strong>SMS/Text Messaging:</strong> If you opt-in to SMS services, you agree to receive automated promotional and informational text messages. Consent is not a condition of purchase or use of the Services. Message frequency varies. Standard message and data rates may apply. You may revoke your consent at any time by replying &quot;STOP&quot; to any mobile message. For assistance, reply &quot;HELP&quot; or contact{" "}
-            <a href="mailto:hi@awarded.app" className="text-[#956EFE] underline hover:no-underline">
-              hi@awarded.app
+            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
+              support@pathpicker.com
             </a>
             .
           </p>
