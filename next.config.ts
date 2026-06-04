@@ -36,8 +36,6 @@ const nextConfig: NextConfig = {
       { source: "/scholarship-scanner", destination: "/", permanent: true },
       { source: "/scholarship-quiz", destination: "/", permanent: true },
       { source: "/money-quiz", destination: "/", permanent: true },
-      { source: "/apply/:path*", destination: "/", permanent: true },
-      { source: "/awarded-app", destination: "/", permanent: true },
     ];
   },
   logging: {
