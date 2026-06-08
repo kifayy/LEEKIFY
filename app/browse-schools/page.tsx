@@ -44,11 +44,11 @@ export default async function BrowseSchoolsPage() {
 
   return (
     <>
-      <div className="container mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 md:text-center lg:px-8">
         <h1 className="text-2xl font-semibold tracking-tight text-[#0C1120] sm:text-3xl">
           Browse Schools
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-gray-600 sm:text-base">
+        <p className="mt-2 max-w-2xl text-sm text-gray-600 sm:text-base md:mx-auto">
           Explore 2,000+ colleges from our directory — filter by vibe, compare acceptance rates and
           costs, then open any school for admission odds and fit details.
         </p>
