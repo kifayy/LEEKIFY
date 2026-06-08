@@ -1,7 +1,11 @@
 import { ImageResponse } from "next/og";
 
+import { getClientIpFromHeaders, hashClientIp } from "@/lib/client-ip";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
+
 const WIDTH = 1280;
 const HEIGHT = 582;
+const MAX_TITLE_LENGTH = 200;
 
 /** Four background images; we pick one per article (by slug hash) and overlay emoji + article title. */
 const BACKGROUND_IMAGES = [
@@ -22,9 +26,16 @@ function getSlugIndex(slug: string): number {
 }
 
 export async function GET(request: Request) {
+  const ipHash = hashClientIp(getClientIpFromHeaders(request.headers));
+  const limit = await checkRateLimit(`article-hero:ip:${ipHash}`, 30, 15 * 60 * 1000);
+  if (!limit.allowed) {
+    return rateLimitResponse(limit.retryAfterSec ?? 60);
+  }
+
   const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug") ?? "";
-  const title = searchParams.get("title")?.trim() || "";
+  const slug = (searchParams.get("slug") ?? "").slice(0, 120);
+  const titleRaw = searchParams.get("title")?.trim() || "";
+  const title = titleRaw.slice(0, MAX_TITLE_LENGTH);
   const displayText = title || "Article";
   const idx = getSlugIndex(slug);
   const backgroundUrl = BACKGROUND_IMAGES[idx];

@@ -6,6 +6,7 @@ import type { College } from "@/types/college";
 import { exploreCollegeMatchesVibe } from "@/lib/explore-vibe-match";
 import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
+import { collegeSearchOrFilter } from "@/lib/postgrest-ilike";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
 import { BROWSE_COLLEGE_COLUMNS } from "@/lib/browse-college-select";
 
@@ -54,8 +55,7 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
         let query = supabase.from("colleges").select(BROWSE_COLLEGE_COLUMNS).limit(BROWSE_FETCH_LIMIT);
 
         if (debouncedSearch.trim()) {
-          const safe = debouncedSearch.trim().replace(/\\/g, "\\\\").replace(/%/g, "\\%");
-          query = query.or(`name.ilike.%${safe}%,location.ilike.%${safe}%,description.ilike.%${safe}%`);
+          query = query.or(collegeSearchOrFilter(debouncedSearch));
         }
 
         const { data, error: qErr } = await withTimeout(query, COLLEGES_QUERY_TIMEOUT_MS, "Loading colleges timed out");

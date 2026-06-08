@@ -1,4 +1,8 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+
+import { getClientIpFromHeaders, hashClientIp } from "@/lib/client-ip";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 const BEEHIIV_API = "https://api.beehiiv.com/v2";
 
@@ -7,6 +11,13 @@ function isValidEmail(email: string): boolean {
 }
 
 export async function POST(request: Request) {
+  const headerStore = await headers();
+  const ipHash = hashClientIp(getClientIpFromHeaders(headerStore));
+  const limit = await checkRateLimit(`newsletter:ip:${ipHash}`, 5, 15 * 60 * 1000);
+  if (!limit.allowed) {
+    return rateLimitResponse(limit.retryAfterSec ?? 60);
+  }
+
   let body: unknown;
   try {
     body = await request.json();
@@ -19,7 +30,7 @@ export async function POST(request: Request) {
   }
 
   const record = body as Record<string, unknown>;
-  const email = typeof record.email === "string" ? record.email.trim() : "";
+  const email = typeof record.email === "string" ? record.email.trim().toLowerCase() : "";
   const honeypot =
     typeof record.website === "string"
       ? record.website.trim()
@@ -31,8 +42,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (!email || !isValidEmail(email)) {
+  if (!email || !isValidEmail(email) || email.length > 254) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+
+  const emailLimit = await checkRateLimit(`newsletter:email:${email}`, 3, 60 * 60 * 1000);
+  if (!emailLimit.allowed) {
+    return rateLimitResponse(emailLimit.retryAfterSec ?? 60);
   }
 
   const apiKey = process.env.BEEHIIV_API_KEY;

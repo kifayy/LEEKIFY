@@ -122,9 +122,17 @@ export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) 
   const [state, formAction] = useActionState(submitAction, null);
 
   return (
-    <form action={formAction} id="scholarship-application-form" className="space-y-0">
+    <form action={formAction} id="scholarship-application-form" className="relative space-y-0">
       <input type="hidden" name="scholarshipId" value={scholarshipId} />
       <input type="hidden" name="slug" value={slug} />
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
 
       {state?.error && (
         <div className="mb-4 rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">

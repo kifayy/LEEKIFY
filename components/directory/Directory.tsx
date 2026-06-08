@@ -14,6 +14,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { orderCollegesForBrowse, sliceBrowseCollegesForGrid } from "@/lib/order-colleges-for-browse";
+import { collegeSearchOrFilter } from "@/lib/postgrest-ilike";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
 import { BROWSE_COLLEGE_COLUMNS, BROWSE_FETCH_LIMIT } from "@/lib/browse-college-select";
 
@@ -148,8 +149,7 @@ export function Directory({
         let query = supabase.from("colleges").select(BROWSE_COLLEGE_COLUMNS, { count: "exact" }).limit(BROWSE_FETCH_LIMIT);
 
         if (debouncedSearchTerm.trim()) {
-          const safe = debouncedSearchTerm.trim().replace(/\\/g, "\\\\").replace(/%/g, "\\%");
-          query = query.or(`name.ilike.%${safe}%,location.ilike.%${safe}%,description.ilike.%${safe}%`);
+          query = query.or(collegeSearchOrFilter(debouncedSearchTerm));
         }
 
         const { data, error: qErr } = await withTimeout(

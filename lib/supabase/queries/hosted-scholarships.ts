@@ -1,4 +1,5 @@
 import { createClient, createAdminClient } from "@/lib/supabase/server";
+import { createPublicSupabaseClient } from "@/lib/supabase/public-client";
 
 /** Form field definition - stored in hosted_scholarships.form_schema */
 export type FormFieldDef = {
@@ -98,26 +99,62 @@ export async function getHostedScholarshipBySlug(
   return normalizeFormSchema(data) as HostedScholarship;
 }
 
-/**
- * Fetch scholarship by slug for metadata only. Uses admin client (no cookies())
- * so it can run in generateMetadata without triggering "uncached data outside Suspense".
- */
 export async function getHostedScholarshipBySlugForMeta(
   slug: string
 ): Promise<HostedScholarship | null> {
-  try {
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("hosted_scholarships")
-      .select("*")
-      .eq("slug", slug)
-      .eq("is_active", true)
-      .single();
-    if (error || !data) return null;
-    return normalizeFormSchema(data) as HostedScholarship;
-  } catch {
-    return null;
+  const supabase = createPublicSupabaseClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("hosted_scholarships")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_active", true)
+    .single();
+  if (error || !data) return null;
+  return normalizeFormSchema(data) as HostedScholarship;
+}
+
+/** Recent duplicate guard for abuse prevention (service role). */
+export async function hasRecentSubmissionForScholarship(options: {
+  hostedScholarshipId: string;
+  ipHash: string;
+  emailField?: { key: string; email: string } | null;
+  withinMs?: number;
+}): Promise<boolean> {
+  const withinMs = options.withinMs ?? 24 * 60 * 60 * 1000;
+  const since = new Date(Date.now() - withinMs).toISOString();
+  const supabase = createAdminClient();
+
+  const { count: ipCount, error: ipError } = await supabase
+    .from("hosted_scholarship_submissions")
+    .select("id", { count: "exact", head: true })
+    .eq("hosted_scholarship_id", options.hostedScholarshipId)
+    .eq("ip_hash", options.ipHash)
+    .gte("created_at", since);
+
+  if (ipError) {
+    console.error("[hasRecentSubmissionForScholarship] ip", ipError.message);
+  } else if ((ipCount ?? 0) > 0) {
+    return true;
   }
+
+  const emailField = options.emailField;
+  if (!emailField) return false;
+
+  const { count: emailCount, error: emailError } = await supabase
+    .from("hosted_scholarship_submissions")
+    .select("id", { count: "exact", head: true })
+    .eq("hosted_scholarship_id", options.hostedScholarshipId)
+    .gte("created_at", since)
+    .filter(`answers->>${emailField.key}`, "eq", emailField.email);
+
+  if (emailError) {
+    console.error("[hasRecentSubmissionForScholarship] email", emailError.message);
+    return false;
+  }
+
+  return (emailCount ?? 0) > 0;
 }
 
 /** Get all submissions for a scholarship - for export. Uses admin client (bypasses RLS). */
