@@ -20,10 +20,13 @@ fbq('init', '${META_PIXEL_ID}');
 fbq('track', 'PageView');
 `;
 
-/** Fires before navigation to my.pathpicker.com/archetype (Lead on landing only). */
+/**
+ * Micro-conversion before quiz handoff. Optimize ads for CompleteRegistration
+ * on my.pathpicker.com (email submit) — not this event.
+ */
 export function trackMetaLandingCtaToQuiz(): void {
   if (typeof window === "undefined") return;
-  window.fbq?.("track", "Lead", {
+  window.fbq?.("track", "ViewContent", {
     content_name: "landing_cta_to_quiz",
     content_category: "archetype_quiz",
   });
