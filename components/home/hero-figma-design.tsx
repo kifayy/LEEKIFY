@@ -11,7 +11,7 @@ import {
 import { HERO_SIMPLIFIED_GRADIENT } from "@/components/home/hero-audience-theme";
 import { HeroTrustpilotProof } from "@/components/home/hero-trustpilot-proof";
 import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
-import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
+import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 import {
   MOBILE_HERO_BULLETS,
   MOBILE_HERO_CTA_LABEL,

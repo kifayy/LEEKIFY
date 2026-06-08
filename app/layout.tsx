@@ -90,11 +90,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://my.pathpicker.com" />
         <link rel="preconnect" href="https://sc-static.net" />
         <link rel="preconnect" href="https://connect.facebook.net" />
-        <Script
-          id="meta-pixel"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT }}
-        />
+        {/* Native inline script so Meta Pixel Helper detects fbq on first paint (Next.js Script queues via __next_s). */}
+        <script dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT.trim() }} />
         <Script
           id="snapchat-pixel"
           strategy="beforeInteractive"

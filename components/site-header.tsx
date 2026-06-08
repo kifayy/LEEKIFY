@@ -8,6 +8,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
+import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 import { COLLEGE_MATCH_QUIZ_URL, PATHPICKER_SITE_PURPLE } from "@/lib/constants";
 import {
   PATHPICKER_ASSETS_LOGO_URL,
@@ -132,6 +133,7 @@ export function SiteHeader() {
                 href={"external" in link && link.external ? collegeMatchQuizUrl : link.href}
                 target={"external" in link && link.external ? "_blank" : undefined}
                 rel={"external" in link && link.external ? "noopener noreferrer" : undefined}
+                onClick={"external" in link && link.external ? () => trackLandingCtaToQuiz() : undefined}
                 className={cn(
                   "relative shrink-0 whitespace-nowrap text-[15px] font-medium transition-colors duration-200 lg:py-1 lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:block lg:after:h-0.5 lg:after:w-0 lg:after:content-[''] lg:after:rounded-full lg:after:bg-white lg:after:transition-[width] lg:after:duration-200 lg:hover:after:w-full",
                   isHome

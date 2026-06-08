@@ -1,6 +1,12 @@
 /** Meta (Facebook) Pixel — pathpicker.com landing. */
 export const META_PIXEL_ID = "1189171536318015";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 export const META_PIXEL_INIT = `
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -13,3 +19,12 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '${META_PIXEL_ID}');
 fbq('track', 'PageView');
 `;
+
+/** Fires before navigation to my.pathpicker.com/archetype (Lead on landing only). */
+export function trackMetaLandingCtaToQuiz(): void {
+  if (typeof window === "undefined") return;
+  window.fbq?.("track", "Lead", {
+    content_name: "landing_cta_to_quiz",
+    content_category: "archetype_quiz",
+  });
+}

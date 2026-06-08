@@ -11,6 +11,7 @@ export const ATTRIBUTION_PARAM_KEYS = [
   "utm_content",
   "ScCid",
   "sc_cid",
+  "fbclid",
 ] as const;
 
 export type AttributionParamKey = (typeof ATTRIBUTION_PARAM_KEYS)[number];

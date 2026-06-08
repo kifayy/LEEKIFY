@@ -7,7 +7,7 @@ import {
   PATHPICKER_BRAND_PURPLE_RGB,
 } from "@/components/home/hero-audience-theme";
 import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
-import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
+import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 import { cn } from "@/lib/utils";
 
 export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Archetype";

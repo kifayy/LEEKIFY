@@ -8,7 +8,7 @@ declare global {
 }
 
 /** Fires before navigation to my.pathpicker.com quiz (CUSTOM_EVENT_2 on landing only). */
-export function trackLandingCtaToQuiz(): void {
+export function trackSnapchatLandingCtaToQuiz(): void {
   if (typeof window === "undefined") return;
   window.snaptr?.("track", "CUSTOM_EVENT_2", {
     description: "landing_cta_to_quiz",

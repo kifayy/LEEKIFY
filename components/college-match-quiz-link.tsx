@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 
 import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
-import { trackLandingCtaToQuiz } from "@/lib/snapchat-pixel";
+import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 
 type CollegeMatchQuizLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   trackCta?: boolean;
