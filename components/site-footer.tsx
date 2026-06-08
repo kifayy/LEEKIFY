@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { CopyrightYear } from "@/components/copyright-year";
+import { FooterNavLink } from "@/components/footer-nav-link";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { isCollegeMatchQuizUrl } from "@/lib/attribution";
 import { PATHPICKER_FOOTER_LOGO_URL } from "@/lib/brand-logos";
@@ -11,14 +12,21 @@ import { SEO_BROWSE_LANDING_FOOTER_LINKS } from "@/lib/seo-browse-landings";
 
 const LOGO_URL = PATHPICKER_FOOTER_LOGO_URL;
 
-const FOOTER_COLUMNS = [
+type FooterLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
+
+const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Company",
     links: [
-      { href: "/about", label: "About" },
       { href: "/pricing", label: "Pricing" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
+      { href: "/terms#refund-policy", label: "Refund Policy" },
+      { href: "/contact", label: "For Partners" },
     ],
   },
   {
@@ -35,19 +43,61 @@ const FOOTER_COLUMNS = [
     title: "Support",
     links: [
       { href: "/contact", label: "Contact" },
-      { href: "/contact", label: "For Partners" },
+      {
+        href: "https://my.pathpicker.com/manage-billing",
+        label: "Manage Subscription",
+        external: true,
+      },
     ],
   },
-  {
-    title: "Explore Schools",
-    links: SEO_BROWSE_LANDING_FOOTER_LINKS,
-  },
 ];
+
+const EXPLORE_SCHOOLS_COLUMN_1 = SEO_BROWSE_LANDING_FOOTER_LINKS.slice(0, 6);
+const EXPLORE_SCHOOLS_COLUMN_2 = SEO_BROWSE_LANDING_FOOTER_LINKS.slice(6);
 
 const FOOTER_BG = PATHPICKER_SITE_PURPLE;
 const FOOTER_DARK = "#FFFFFF";
 const FOOTER_MUTED = "rgba(255, 255, 255, 0.85)";
-const FOOTER_BORDER = "rgba(255, 255, 255, 0.18)";
+
+const linkClassName = "text-sm transition-opacity hover:opacity-80";
+
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  if (isCollegeMatchQuizUrl(link.href)) {
+    return (
+      <CollegeMatchQuizLink className={linkClassName} style={{ color: FOOTER_DARK }}>
+        {link.label}
+      </CollegeMatchQuizLink>
+    );
+  }
+
+  return (
+    <FooterNavLink
+      href={link.href}
+      external={link.external}
+      className={linkClassName}
+      style={{ color: FOOTER_DARK }}
+    >
+      {link.label}
+    </FooterNavLink>
+  );
+}
+
+function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+  return (
+    <div className="flex min-w-[140px] flex-col gap-4">
+      <h3 className="text-sm font-bold" style={{ color: FOOTER_DARK }}>
+        {title}
+      </h3>
+      <ul className="flex flex-col gap-2.5">
+        {links.map((link) => (
+          <li key={`${link.href}-${link.label}`}>
+            <FooterLinkItem link={link} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function SiteFooter() {
   return (
@@ -56,10 +106,8 @@ export function SiteFooter() {
       style={{ backgroundColor: FOOTER_BG, color: FOOTER_DARK }}
     >
       <div className="mx-auto flex max-w-[1290px] flex-col px-4 py-16 md:px-[75px] md:gap-24">
-        {/* Top row: logo + tagline, then link columns */}
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
-          {/* Left: Logo + tagline (replaces eco-label block) */}
-          <div className="flex max-w-[295px] flex-col gap-6">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+          <div className="flex max-w-[295px] shrink-0 flex-col gap-6">
             <Link href="/" className="flex w-fit items-center active:opacity-80">
               <Image
                 src={LOGO_URL}
@@ -70,47 +118,51 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
-              Find where you actually belong at.
+              University matching was broken, we fixed it.
             </p>
           </div>
 
-          {/* Link columns */}
-          <div className="flex flex-wrap gap-x-12 gap-y-10 lg:gap-x-16">
+          <div className="grid w-full max-w-[880px] grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10">
             {FOOTER_COLUMNS.map((column) => (
-              <div key={column.title} className="flex min-w-[120px] flex-col gap-6">
-                <h3 className="text-sm font-bold" style={{ color: FOOTER_DARK }}>
-                  {column.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {column.links.map((link) => (
-                    <li key={link.label}>
-                      {isCollegeMatchQuizUrl(link.href) ? (
-                        <CollegeMatchQuizLink
-                          className="text-sm transition-opacity hover:opacity-80"
-                          style={{ color: FOOTER_DARK }}
-                        >
-                          {link.label}
-                        </CollegeMatchQuizLink>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          target={link.href.startsWith("http") ? "_blank" : undefined}
-                          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          className="text-sm transition-opacity hover:opacity-80"
-                          style={{ color: FOOTER_DARK }}
-                        >
-                          {link.label}
-                        </Link>
-                      )}
+              <FooterColumn key={column.title} title={column.title} links={column.links} />
+            ))}
+
+            <div className="col-span-2 flex min-w-0 flex-col gap-4 sm:col-span-3 lg:col-span-1">
+              <h3 className="text-sm font-bold" style={{ color: FOOTER_DARK }}>
+                Explore Schools
+              </h3>
+              <div className="grid grid-cols-1 gap-x-8 gap-y-2.5 min-[420px]:grid-cols-2">
+                <ul className="flex flex-col gap-2.5">
+                  {EXPLORE_SCHOOLS_COLUMN_1.map((link) => (
+                    <li key={link.href}>
+                      <FooterNavLink
+                        href={link.href}
+                        className={linkClassName}
+                        style={{ color: FOOTER_DARK }}
+                      >
+                        {link.label}
+                      </FooterNavLink>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="flex flex-col gap-2.5">
+                  {EXPLORE_SCHOOLS_COLUMN_2.map((link) => (
+                    <li key={link.href}>
+                      <FooterNavLink
+                        href={link.href}
+                        className={linkClassName}
+                        style={{ color: FOOTER_DARK }}
+                      >
+                        {link.label}
+                      </FooterNavLink>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar: logo, copyright, buttons */}
         <div className="flex flex-col gap-6 pt-8 md:flex-row md:items-center md:justify-between md:gap-8">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
             <Link href="/" className="flex w-fit items-center active:opacity-80">

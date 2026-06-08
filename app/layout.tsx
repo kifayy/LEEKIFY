@@ -15,6 +15,7 @@ import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scho
 import { CountryLayout } from "@/components/country-layout";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { SiteImageProtection } from "@/components/site-image-protection";
+import { ScrollToTopOnNavigate } from "@/components/scroll-to-top-on-navigate";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
 import { SNAPCHAT_PIXEL_ID } from "@/lib/snapchat-pixel";
@@ -118,6 +119,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <CountryLayout>
+            <ScrollToTopOnNavigate />
             <div className="relative flex min-w-0 flex-col overflow-x-hidden">
               <SiteHeader />
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-32 md:pt-44 lg:pt-0">

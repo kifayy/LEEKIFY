@@ -88,7 +88,7 @@ export default function ContactPage() {
           aria-labelledby="account-help-heading"
         >
           <h2 id="account-help-heading" className="text-xl font-bold tracking-tight text-[#181A1D] md:text-2xl">
-            Having Account Trouble?
+            Manage Your Billing In One Click
           </h2>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-[#6B7280] md:text-base">
             Update your plan, change payment method, or manage your subscription in one place.
