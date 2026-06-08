@@ -18,6 +18,7 @@ import { SiteImageProtection } from "@/components/site-image-protection";
 import { ScrollToTopOnNavigate } from "@/components/scroll-to-top-on-navigate";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
+import { META_PIXEL_ID, META_PIXEL_INIT } from "@/lib/meta-pixel";
 import { SNAPCHAT_PIXEL_ID } from "@/lib/snapchat-pixel";
 import "./globals.css";
 
@@ -88,6 +89,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://storage.googleapis.com" />
         <link rel="preconnect" href="https://my.pathpicker.com" />
         <link rel="preconnect" href="https://sc-static.net" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <Script
+          id="meta-pixel"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT }}
+        />
         <Script
           id="snapchat-pixel"
           strategy="beforeInteractive"
@@ -97,6 +104,15 @@ export default function RootLayout({
       <body
         className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
       >
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+              alt=""
+            />
+          </noscript>
           <SiteImageProtection />
           <Suspense fallback={null}>
             <AttributionCapture />
