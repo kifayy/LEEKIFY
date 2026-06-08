@@ -13,7 +13,7 @@ import { Lock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
-import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
+import { orderCollegesForBrowse, sliceBrowseCollegesForGrid } from "@/lib/order-colleges-for-browse";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
 import { BROWSE_COLLEGE_COLUMNS, BROWSE_FETCH_LIMIT } from "@/lib/browse-college-select";
 
@@ -63,20 +63,25 @@ export function Directory({
   const initialVibes =
     vibesFromUrl.length > 0 ? vibesFromUrl : defaultVibes?.length ? [...defaultVibes] : [];
 
+  const seededBrowse =
+    initialVibes.length === 0 && !initialSearchTerm.trim()
+      ? sliceBrowseCollegesForGrid(initialColleges, COLLEGES_PER_PAGE)
+      : { colleges: [] as College[], hasMore: true };
+
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const [colleges, setColleges] = useState<College[]>([]);
+  const [colleges, setColleges] = useState<College[]>(seededBrowse.colleges);
   const [selectedVibes, setSelectedVibes] = useState<string[]>(initialVibes);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [hasMoreColleges, setHasMoreColleges] = useState(true);
+  const [hasMoreColleges, setHasMoreColleges] = useState(seededBrowse.hasMore);
 
   const vibeFilterResult = useVibeFilteredColleges(selectedVibes, debouncedSearchTerm);
 
   const selectedVibesKey = useMemo(() => [...selectedVibes].sort().join(","), [selectedVibes]);
   const filtersKeyRef = useRef("");
-  const shuffleSeedRef = useRef(Math.random());
+  const shuffleSeedRef = useRef(0);
   const fetchGenerationRef = useRef(0);
   const initialCollegesRef = useRef(initialColleges);
   initialCollegesRef.current = initialColleges;

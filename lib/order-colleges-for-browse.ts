@@ -71,3 +71,16 @@ export function orderCollegesForBrowse(list: College[], seed: number): College[]
   const rest = list.filter((college) => !isFullyFilledOutCollege(college));
   return [...orderPartition(filled, 0), ...orderPartition(rest, 10)];
 }
+
+/** First browse grid page — deterministic seed so SSR HTML matches hydration. */
+export function sliceBrowseCollegesForGrid(
+  list: College[],
+  pageSize: number,
+  page = 0,
+  seed = 0,
+): { colleges: College[]; hasMore: boolean } {
+  const ordered = orderCollegesForBrowse(list, seed);
+  const from = page * pageSize;
+  const colleges = ordered.slice(from, from + pageSize);
+  return { colleges, hasMore: from + pageSize < ordered.length };
+}
