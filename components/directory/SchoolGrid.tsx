@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { SchoolCard } from "./SchoolCard";
 import { NoSchoolsFound } from "./NoSchoolsFound";
 import { useSchoolMatchScore } from "@/hooks/useSchoolMatchScore";
@@ -64,7 +63,6 @@ export function SchoolGrid({
   onLoadMore,
   onResetFilters,
 }: SchoolGridProps) {
-  const router = useRouter();
   const { user } = useAuth();
   const isSignedIn = !!user;
   const { savedColleges, toggleSavedCollege } = useSavedColleges();
@@ -104,18 +102,6 @@ export function SchoolGrid({
   };
 
   const handleResetFilters = () => onResetFilters?.();
-
-  const handleSchoolNavigation = (school: CollegeWithMatch) => {
-    let slug = school.slug?.trim();
-    if (!slug) {
-      slug = school.name
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "");
-    }
-    router.push(`/schools/${encodeURIComponent(slug)}`);
-  };
 
   if (isLoading && collegesWithMatches.length === 0) {
     return (
@@ -202,7 +188,6 @@ export function SchoolGrid({
               personality_line: school.personality_line ?? undefined,
               emoji_desc: school.emoji_desc ?? undefined,
             }}
-            onClick={() => handleSchoolNavigation(school)}
             savedSchools={savedColleges}
             onSaveSchool={handleSaveSchool}
             vibeEmojis={VIBE_EMOJIS}

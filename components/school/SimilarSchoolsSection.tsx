@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { createClient } from "@/lib/supabase/client";
 import { SchoolCard } from "@/components/directory/SchoolCard";
-import { useRouter } from "next/navigation";
 import type { CollegeDetail } from "@/types/college-detail";
 
 type Row = {
@@ -90,7 +89,6 @@ function normalizeEmojiDesc(emojiDesc: string | null): string[] {
 }
 
 export function SimilarSchoolsSection({ currentCollege }: { currentCollege: CollegeDetail }) {
-  const router = useRouter();
   const [emblaRef] = useEmblaCarousel({ align: "start", loop: false, skipSnaps: false });
   const [schools, setSchools] = useState<Row[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -185,13 +183,6 @@ export function SimilarSchoolsSection({ currentCollege }: { currentCollege: Coll
     };
   }, [currentCollege.id, vibeKey, currentCollege.vibe_tags]);
 
-  const onCardClick = useCallback(
-    (slug: string) => {
-      router.push(`/schools/${encodeURIComponent(slug)}`);
-    },
-    [router],
-  );
-
   return (
     <section id="similar" className="scroll-mt-24 pt-4">
       <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
@@ -228,7 +219,6 @@ export function SimilarSchoolsSection({ currentCollege }: { currentCollege: Coll
                   }}
                   mode="directory"
                   hideHeartButton
-                  onClick={() => onCardClick(slug)}
                 />
               </div>
             );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginToSaveSchoolDialog } from "@/components/schools/login-to-save-dialog";
@@ -12,6 +13,7 @@ import { MatchBreakdownModal } from "./MatchBreakdownModal";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
 import { shouldUseNextImageOptimizer, shouldServeImageDirectFromCdn } from "@/lib/remote-image-patterns";
+import { getSchoolPageHref } from "@/lib/school-page-href";
 
 /** `sizes` for directory grid: 1 / 2 / 3 columns (~full-bleed card image). */
 const SCHOOL_CARD_HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
@@ -39,7 +41,6 @@ interface SchoolCardProps {
     personality_line?: string;
     emoji_desc?: string;
   };
-  onClick?: () => void;
   showMatchScore?: boolean;
   matchScore?: number;
   savedSchools?: Set<string>;
@@ -60,7 +61,6 @@ interface SchoolCardProps {
 
 export function SchoolCard({
   school,
-  onClick,
   showMatchScore = false,
   matchScore: propMatchScore,
   savedSchools,
@@ -115,10 +115,7 @@ export function SchoolCard({
     if (onSaveSchool) void onSaveSchool(school.id, e);
   };
 
-  const handleExploreClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onClick?.();
-  };
+  const schoolHref = getSchoolPageHref(school.slug, school.name);
 
   const parseEmojiDesc = (emojiDesc?: string) => {
     if (!emojiDesc) return [];
@@ -164,65 +161,69 @@ export function SchoolCard({
     <>
       <div className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white rounded-2xl overflow-hidden relative h-full border border-gray-100 shadow-sm">
         <div className={`relative ${imageHeight} overflow-hidden`}>
-          {showHero ? (
-            useNextImage ? (
-              <Image
-                key={heroSrc}
-                src={heroSrc}
-                alt={`${school.name} campus`}
-                fill
-                className="object-cover"
-                style={schoolHeroImageStyle(school.id)}
-                sizes={SCHOOL_CARD_HERO_SIZES}
-                quality={serveHeroFromCdn ? undefined : 72}
-                unoptimized={serveHeroFromCdn}
-                priority={imageLoadPriority}
-                loading={imageLoadPriority ? "eager" : "lazy"}
-                fetchPriority={imageLoadPriority ? "high" : "auto"}
-                onError={() => setHeroIndex((i) => i + 1)}
-              />
+          <Link href={schoolHref} className="block h-full w-full" aria-label={`View ${school.name}`}>
+            {showHero ? (
+              useNextImage ? (
+                <Image
+                  key={heroSrc}
+                  src={heroSrc}
+                  alt={`${school.name} campus`}
+                  fill
+                  className="object-cover"
+                  style={schoolHeroImageStyle(school.id)}
+                  sizes={SCHOOL_CARD_HERO_SIZES}
+                  quality={serveHeroFromCdn ? undefined : 72}
+                  unoptimized={serveHeroFromCdn}
+                  priority={imageLoadPriority}
+                  loading={imageLoadPriority ? "eager" : "lazy"}
+                  fetchPriority={imageLoadPriority ? "high" : "auto"}
+                  onError={() => setHeroIndex((i) => i + 1)}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={heroSrc}
+                  src={heroSrc}
+                  alt={`${school.name} campus`}
+                  className="w-full h-full object-cover"
+                  style={schoolHeroImageStyle(school.id)}
+                  loading={imageLoadPriority ? "eager" : "lazy"}
+                  fetchPriority={imageLoadPriority ? "high" : "auto"}
+                  decoding="async"
+                  onError={() => setHeroIndex((i) => i + 1)}
+                />
+              )
             ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={heroSrc}
-                src={heroSrc}
-                alt={`${school.name} campus`}
-                className="w-full h-full object-cover"
-                style={schoolHeroImageStyle(school.id)}
-                loading={imageLoadPriority ? "eager" : "lazy"}
-                fetchPriority={imageLoadPriority ? "high" : "auto"}
-                decoding="async"
-                onError={() => setHeroIndex((i) => i + 1)}
-              />
-            )
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 flex items-center justify-center">
-              <div className="text-6xl sm:text-7xl opacity-30">{displayEmoji}</div>
-            </div>
-          )}
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+                <div className="text-6xl sm:text-7xl opacity-30">{displayEmoji}</div>
+              </div>
+            )}
+          </Link>
 
           {!hideHeartButton && (
             <button
               type="button"
               onClick={handleSaveClick}
-              className={`absolute top-3 right-3 w-9 h-9 rounded-full transition-all duration-300 flex items-center justify-center backdrop-blur-sm ${
+              className={`absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 ${
                 isSaved
                   ? "bg-red-500 text-white hover:bg-red-600 shadow-lg"
                   : "bg-white/90 text-gray-400 hover:bg-white hover:text-red-500 shadow-md"
               }`}
               title={isSaved ? "Remove from saved" : "Save school"}
             >
-              <Heart className={`w-5 h-5 ${isSaved ? "fill-current" : ""}`} />
+              <Heart className={`h-5 w-5 ${isSaved ? "fill-current" : ""}`} />
             </button>
           )}
 
           {!hideExploreButton && buttonPosition === "overlay" && (
             <Button
-              onClick={handleExploreClick}
-              className="absolute bottom-3 right-3 px-4 py-2 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] hover:from-[#9575ff] hover:to-[#5d4ec7] text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 z-20"
+              asChild
+              className="absolute bottom-3 right-3 z-20 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:from-[#9575ff] hover:to-[#5d4ec7] hover:shadow-xl"
             >
-              {buttonText}
-              <ArrowRight className="w-4 h-4" />
+              <Link href={schoolHref}>
+                {buttonText}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </Button>
           )}
         </div>
@@ -230,7 +231,9 @@ export function SchoolCard({
         <div className={`${compactPadding ? "p-1.5 sm:p-3" : "p-4 sm:p-6"} overflow-hidden`}>
           <div className={compactPadding ? "mb-1 sm:mb-2" : "mb-4"}>
             <h3 className="font-bold text-gray-900 text-left text-base sm:text-lg lg:text-xl mb-0.5 sm:mb-1 break-words leading-tight">
-              {school.name}
+              <Link href={schoolHref} className="hover:text-[#6C5DD3] transition-colors">
+                {school.name}
+              </Link>
             </h3>
             <div className="flex items-center gap-1 text-gray-500 text-left text-xs sm:text-sm">
               <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
@@ -260,11 +263,13 @@ export function SchoolCard({
 
           {!hideExploreButton && buttonPosition === "bottom" && (
             <Button
-              onClick={handleExploreClick}
+              asChild
               className="w-full mt-4 px-4 py-2 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] hover:from-[#9575ff] hover:to-[#5d4ec7] text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              {buttonText}
-              <ArrowRight className="w-4 h-4" />
+              <Link href={schoolHref}>
+                {buttonText}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </Button>
           )}
         </div>
