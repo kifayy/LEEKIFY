@@ -21,6 +21,9 @@ export type SeoBrowseLandingConfig = {
   quizCtaLine: string;
   faq: readonly SeoBrowseLandingFaq[];
   heroImage?: { src: string; alt: string };
+  bestFor: string;
+  notIdealFor: string;
+  discoverQuery: string;
 };
 
 const SEO_YEAR = new Date().getFullYear();
@@ -73,6 +76,9 @@ function buildLanding(seed: LandingSeed): SeoBrowseLandingConfig {
           "Take the free PathPicker archetype quiz to discover your vibes, then browse schools or mix filters to compare fit, happiness signals, and admission odds.",
       },
     ],
+    bestFor: `Students drawn to ${keyword.toLowerCase()} culture who want both ${v0.toLowerCase()} and ${v1.toLowerCase()} campus energy—not a generic rankings list.`,
+    notIdealFor: `Students who prefer the opposite of ${keyword.toLowerCase()} vibes (commuter-only, single-track, or ultra-corporate campuses with little ${v0.toLowerCase()} or ${v1.toLowerCase()} social life).`,
+    discoverQuery: `${v0.toLowerCase()} ${v1.toLowerCase()} ${keyword.toLowerCase()} colleges`,
   };
 }
 

@@ -73,3 +73,9 @@ export function exploreCollegeMatchesVibe(college: College, vibeId: string): boo
   if (vibeId === "party-animal" && isKnownPartySchoolName(college.name)) return true;
   return false;
 }
+
+/** All listed browse vibes must match (category landing highlights). */
+export function collegeMatchesBrowseVibes(college: College, vibes: string[]): boolean {
+  if (vibes.length === 0) return false;
+  return vibes.every((v) => exploreCollegeMatchesVibe(college, v));
+}

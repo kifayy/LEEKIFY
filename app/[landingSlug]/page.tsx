@@ -9,22 +9,27 @@ import {
   getSeoBrowseLanding,
   isSeoBrowseLandingSlug,
 } from "@/lib/seo-browse-landings";
+import { hasBrowseFilterParams, metadataForFilterParams } from "@/lib/seo-filter-params";
 
-type Props = { params: Promise<{ landingSlug: string }> };
+type Props = {
+  params: Promise<{ landingSlug: string }>;
+  searchParams: Promise<{ search?: string; vibes?: string }>;
+};
 
 export function generateStaticParams() {
   return getAllSeoBrowseLandingSlugs().map((landingSlug) => ({ landingSlug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { landingSlug } = await params;
+  const sp = await searchParams;
   if (!isSeoBrowseLandingSlug(landingSlug)) return {};
   const config = getSeoBrowseLanding(landingSlug)!;
   const baseUrl = await getBaseUrlForMetadata();
   const canonical = `${baseUrl}/${config.slug}`;
   const ogImage = config.heroImage?.src;
 
-  return {
+  const base: Metadata = {
     title: config.title,
     description: config.metaDescription,
     alternates: { canonical },
@@ -43,6 +48,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: ogImage ? [ogImage] : undefined,
     },
   };
+
+  return metadataForFilterParams(base, hasBrowseFilterParams(sp));
 }
 
 export default async function SeoBrowseLandingRoute({ params }: Props) {

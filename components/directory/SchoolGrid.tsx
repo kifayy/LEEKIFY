@@ -194,6 +194,7 @@ export function SchoolGrid({
             mode="directory"
             showMatchScore={isSignedIn && matchScores.has(school.id)}
             matchScore={matchScores.get(school.id)}
+            selectedVibes={selectedVibes}
           />
         ))}
       </div>

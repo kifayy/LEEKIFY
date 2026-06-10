@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { SchoolDetailsLayout } from "@/components/school/SchoolDetailsLayout";
 import { SchoolSeoHubSection } from "@/components/school/SchoolSeoHubSection";
+import { SchoolTrustBlock } from "@/components/school/school-trust-block";
 import { SchoolPageJsonLd } from "@/components/school/school-page-json-ld";
 import { fetchCollegeBySlugParam } from "@/lib/fetch-college-by-slug";
 import { buildSchoolSeoHubFaq } from "@/lib/school-seo-hub-faq";
@@ -78,7 +79,12 @@ export default async function SchoolPage({ params }: Props) {
         collegeData={college}
         showSidebarNav={false}
         canonicalUrl={canonicalUrl}
-        seoHubSlot={<SchoolSeoHubSection college={college} items={faqItems} />}
+        seoHubSlot={
+          <>
+            <SchoolTrustBlock college={college} canonicalUrl={canonicalUrl} />
+            <SchoolSeoHubSection college={college} items={faqItems} />
+          </>
+        }
       />
     </div>
   );

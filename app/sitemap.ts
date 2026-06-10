@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
+import { PROMOTED_COLLEGE_SEARCH_SLUGS } from "@/lib/college-search/promoted-slugs";
+import { getIndexedDiscoverSlugs } from "@/lib/discover/intent-pages-db";
 import { getAllSeoBrowseLandingSlugs } from "@/lib/seo-browse-landings";
 import { getAllCollegeSlugsForSitemap } from "@/lib/supabase/queries/colleges";
 
@@ -43,5 +45,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }));
 
-  return [...home, ...mainProductPages, ...otherStatic, ...schoolPages];
+  const discoverSlugs = await getIndexedDiscoverSlugs();
+  const discoverPages: MetadataRoute.Sitemap = discoverSlugs.map((slug) => ({
+    url: `${baseUrl}/discover/${encodeURIComponent(slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.75,
+  }));
+
+  const collegeSearchPages: MetadataRoute.Sitemap = PROMOTED_COLLEGE_SEARCH_SLUGS.map((slug) => ({
+    url: `${baseUrl}/college-search/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...home, ...mainProductPages, ...otherStatic, ...schoolPages, ...discoverPages, ...collegeSearchPages];
 }

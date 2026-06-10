@@ -15,6 +15,8 @@ import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { orderCollegesForBrowse, sliceBrowseCollegesForGrid } from "@/lib/order-colleges-for-browse";
 import { collegeSearchOrFilter } from "@/lib/postgrest-ilike";
+import { VIBE_OPTIONS } from "@/lib/directory/vibe-options";
+import { trackBrowseEvent } from "@/lib/browse-analytics";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
 import { BROWSE_COLLEGE_COLUMNS, BROWSE_FETCH_LIMIT } from "@/lib/browse-college-select";
 
@@ -27,31 +29,21 @@ export type DirectoryUrlSync =
   | { mode: "landing"; basePath: string }
   | { mode: "none" };
 
-const vibeOptions = [
-  { value: "nature-lover", label: "🌿 Nature", emoji: "🌿" },
-  { value: "flirty", label: "💋 Flirty", emoji: "💋" },
-  { value: "artsy-af", label: "🎨 Artsy", emoji: "🎨" },
-  { value: "academic-weapon", label: "🏛️ Academic", emoji: "🏛️" },
-  { value: "party-animal", label: "🎉 Social", emoji: "🎉" },
-  { value: "tech-savvy", label: "💻 Tech", emoji: "💻" },
-  { value: "sports-enthusiast", label: "🏈 Sports", emoji: "🏈" },
-  { value: "entrepreneurial", label: "🚀 Business", emoji: "🚀" },
-  { value: "creative-soul", label: "🎭 Creative", emoji: "🎭" },
-  { value: "wellness-focused", label: "🧘 Wellness", emoji: "🧘" },
-  { value: "diverse-community", label: "🌍 Diversity", emoji: "🌍" },
-  { value: "foodie", label: "🍜 Foodie", emoji: "🍜" },
-];
+const vibeOptions = [...VIBE_OPTIONS];
 
 type DirectoryProps = {
   initialColleges?: College[];
   /** Pre-selected vibes (SEO landing pages); URL `vibes` overrides when present. */
   defaultVibes?: string[];
+  /** Pre-filled search (discover pages); URL `search` overrides when present. */
+  defaultSearch?: string;
   urlSync?: DirectoryUrlSync;
 };
 
 export function Directory({
   initialColleges = [],
   defaultVibes,
+  defaultSearch,
   urlSync = { mode: "browse" },
 }: DirectoryProps) {
   const router = useRouter();
@@ -59,7 +51,7 @@ export function Directory({
   const { user } = useAuth();
   const { hasCompletedCareerQuiz } = useCareerPersonalityStatus();
 
-  const initialSearchTerm = searchParams.get("search") || "";
+  const initialSearchTerm = searchParams.get("search") || defaultSearch || "";
   const vibesFromUrl = searchParams.get("vibes")?.split(",").filter(Boolean) || [];
   const initialVibes =
     vibesFromUrl.length > 0 ? vibesFromUrl : defaultVibes?.length ? [...defaultVibes] : [];
@@ -218,6 +210,15 @@ export function Directory({
       router.replace(nextQs ? `${basePath}?${nextQs}` : basePath, { scroll: false });
     }
   }, [searchTerm, selectedVibes, router, searchParams, urlSync]);
+
+  useEffect(() => {
+    if (!debouncedSearchTerm.trim() && selectedVibes.length === 0) return;
+    trackBrowseEvent({
+      type: "browse_filter",
+      search: debouncedSearchTerm.trim() || undefined,
+      vibes: selectedVibes.length ? selectedVibes : undefined,
+    });
+  }, [debouncedSearchTerm, selectedVibesKey]);
 
   const isVibeDisabled = (vibe: { value: string; requiresQuiz?: boolean }) =>
     Boolean(vibe.requiresQuiz && (!user || !hasCompletedCareerQuiz));

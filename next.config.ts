@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/browse", destination: "/browse-schools", permanent: false },
+      { source: "/browse", destination: "/browse-schools", permanent: true },
       { source: "/money-scanner", destination: "/", permanent: true },
       { source: "/student-scanner", destination: "/", permanent: true },
       { source: "/directory", destination: "/browse-schools", permanent: true },

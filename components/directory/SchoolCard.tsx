@@ -13,7 +13,12 @@ import { MatchBreakdownModal } from "./MatchBreakdownModal";
 import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
 import { shouldUseNextImageOptimizer, shouldServeImageDirectFromCdn } from "@/lib/remote-image-patterns";
+import {
+  buildSchoolCardFitReason,
+  buildSchoolCardStatLine,
+} from "@/lib/school-card-fit-copy";
 import { getSchoolPageHref } from "@/lib/school-page-href";
+import { trackBrowseEvent } from "@/lib/browse-analytics";
 
 /** `sizes` for directory grid: 1 / 2 / 3 columns (~full-bleed card image). */
 const SCHOOL_CARD_HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
@@ -57,6 +62,8 @@ interface SchoolCardProps {
   hideImageOverlay?: boolean;
   /** First grid cells: eager + high fetch priority so hero photos resolve faster. */
   imageLoadPriority?: boolean;
+  /** Active browse vibes — used for plain-language match reasons. */
+  selectedVibes?: string[];
 }
 
 export function SchoolCard({
@@ -74,6 +81,7 @@ export function SchoolCard({
   buttonText = "Explore",
   buttonPosition = "overlay",
   imageLoadPriority = false,
+  selectedVibes = [],
 }: SchoolCardProps) {
   const { user } = useAuth();
   const isSignedIn = !!user;
@@ -116,6 +124,25 @@ export function SchoolCard({
   };
 
   const schoolHref = getSchoolPageHref(school.slug, school.name);
+  const statLine = buildSchoolCardStatLine({
+    acceptanceRate: school.acceptance_rate,
+    tuitionRange: school.tuition_range,
+  });
+  const fitReason =
+    buildSchoolCardFitReason({
+      selectedVibes,
+      vibeTags: school.vibe_tags,
+      location: school.location,
+      acceptanceRate: school.acceptance_rate,
+    }) ?? statLine;
+
+  const trackClick = () => {
+    trackBrowseEvent({
+      type: "school_card_click",
+      schoolSlug: school.slug,
+      context: mode,
+    });
+  };
 
   const parseEmojiDesc = (emojiDesc?: string) => {
     if (!emojiDesc) return [];
@@ -161,7 +188,7 @@ export function SchoolCard({
     <>
       <div className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white rounded-2xl overflow-hidden relative h-full border border-gray-100 shadow-sm">
         <div className={`relative ${imageHeight} overflow-hidden`}>
-          <Link href={schoolHref} className="block h-full w-full" aria-label={`View ${school.name}`}>
+          <Link href={schoolHref} className="block h-full w-full" aria-label={`View ${school.name}`} onClick={trackClick}>
             {showHero ? (
               useNextImage ? (
                 <Image
@@ -220,7 +247,7 @@ export function SchoolCard({
               asChild
               className="absolute bottom-3 right-3 z-20 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:from-[#9575ff] hover:to-[#5d4ec7] hover:shadow-xl"
             >
-              <Link href={schoolHref}>
+              <Link href={schoolHref} onClick={trackClick}>
                 {buttonText}
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -231,7 +258,7 @@ export function SchoolCard({
         <div className={`${compactPadding ? "p-1.5 sm:p-3" : "p-4 sm:p-6"} overflow-hidden`}>
           <div className={compactPadding ? "mb-1 sm:mb-2" : "mb-4"}>
             <h3 className="font-bold text-gray-900 text-left text-base sm:text-lg lg:text-xl mb-0.5 sm:mb-1 break-words leading-tight">
-              <Link href={schoolHref} className="hover:text-[#6C5DD3] transition-colors">
+              <Link href={schoolHref} className="hover:text-[#6C5DD3] transition-colors" onClick={trackClick}>
                 {school.name}
               </Link>
             </h3>
@@ -241,11 +268,21 @@ export function SchoolCard({
             </div>
           </div>
 
-          {school.personality_line && (
+          {fitReason ? (
+            <p className="text-gray-700 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2 font-medium break-words leading-relaxed">
+              {fitReason}
+            </p>
+          ) : null}
+
+          {school.personality_line && !fitReason ? (
             <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-4 line-clamp-2 sm:line-clamp-4 italic break-words overflow-wrap-anywhere leading-relaxed">
               {school.personality_line}
             </p>
-          )}
+          ) : null}
+
+          {statLine && fitReason !== statLine ? (
+            <p className="text-gray-500 text-xs mb-2 sm:mb-3">{statLine}</p>
+          ) : null}
 
           {!hideEmojiTags && emojiDescElements.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
@@ -266,7 +303,7 @@ export function SchoolCard({
               asChild
               className="w-full mt-4 px-4 py-2 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] hover:from-[#9575ff] hover:to-[#5d4ec7] text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <Link href={schoolHref}>
+              <Link href={schoolHref} onClick={trackClick}>
                 {buttonText}
                 <ArrowRight className="w-4 h-4" />
               </Link>
