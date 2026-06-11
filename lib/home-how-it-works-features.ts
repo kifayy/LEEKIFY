@@ -30,17 +30,17 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     id: "personality",
 
-    eyebrow: "DEEP DATA MAPPING",
+    eyebrow: "STUDENT INTELLIGENCE",
 
     title: "College Matching Was Broken, We Fixed It",
 
     description:
 
-      "Go beyond GPA and acceptance odds alone. We filter 2,000+ universities through 400+ variables, mapped to your personality, cognitive style, and how you actually learn and socialize.",
+      "Go beyond GPA and acceptance odds alone. We filter 2,000+ universities through 400+ intelligence signals, mapped to your personality, cognitive style, and how you actually learn and socialize.",
 
     imageSrc: "/assets/Group%20784.png",
 
-    imageAlt: "PathPicker deep data mapping for personality and college fit",
+    imageAlt: "PathPicker student intelligence mapping for personality and college fit",
 
     imageWidth: 2786,
 
@@ -52,17 +52,17 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     id: "ranking",
 
-    eyebrow: "20+ YEARS OF RESEARCH",
+    eyebrow: "PEER FIT INTELLIGENCE",
 
-    title: "Ranking You vs. Other Students",
+    title: "See Where Students Like You Thrive",
 
     description:
 
-      "See how you stack up against students at schools you're considering, backed by 20+ years of verified outcomes, from thousands of students. Never guess if you'll actually fit in.",
+      "Every campus has students who love it — and students who don't. PathPicker compares your archetype to real campus culture, so you know where you'll belong before you commit.",
 
     imageSrc: "/images/Group%20800.png",
 
-    imageAlt: "PathPicker student ranking backed by historical campus data",
+    imageAlt: "PathPicker peer fit intelligence comparing student archetype to campus culture",
 
     imageWidth: 2574,
 

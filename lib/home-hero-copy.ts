@@ -9,13 +9,13 @@ export const HOME_HERO_BULLETS = [
 ] as const;
 
 export const HOME_HERO_SUBTEXT =
-  "The student archetype quiz, backed by data from 2,000+ campuses.";
+  "The student archetype quiz, powered by student intelligence from 2,000+ campuses.";
 
 export const HOME_HERO_CTA_LABEL = "Find My Archetype";
 
 /** Desktop hero subtitle (unchanged from original desktop layout). */
 export const DESKTOP_HERO_SUBTITLE =
-  "Use real student data to find the school and future that fits you best.";
+  "The student intelligence platform finding your future path.";
 
 /** @deprecated Use DESKTOP_HERO_SUBTITLE on desktop, HOME_HERO_SUBTEXT on mobile */
 export const HOME_HERO_SUBTITLE = DESKTOP_HERO_SUBTITLE;

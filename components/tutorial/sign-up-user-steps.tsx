@@ -58,6 +58,7 @@ export function SignUpUserSteps() {
                 className="text-primary hover:text-foreground"
                 href="https://vercel.com/docs/accounts/create-a-team#find-your-team-id"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Vercel Team settings
               </Link>
@@ -67,6 +68,7 @@ export function SignUpUserSteps() {
           <Link
             href="https://supabase.com/docs/guides/auth/redirect-urls#vercel-preview-urls"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-primary/50 hover:text-primary flex items-center text-sm gap-1 mt-4"
           >
             Redirect URLs Docs <ArrowUpRight size={14} />

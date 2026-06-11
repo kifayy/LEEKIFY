@@ -27,6 +27,7 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
       { href: "/terms", label: "Terms" },
       { href: "/terms#refund-policy", label: "Refund Policy" },
       { href: "/contact", label: "For Partners" },
+      { href: "/llms", label: "AI Site Index" },
     ],
   },
   {
@@ -118,7 +119,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: FOOTER_MUTED }}>
-              University matching was broken, we fixed it.
+              Student intelligence for college matching — we fixed what was broken.
             </p>
           </div>
 

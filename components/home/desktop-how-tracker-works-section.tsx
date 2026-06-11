@@ -148,12 +148,13 @@ export function DesktopHowTrackerWorksSection() {
             <span
               className={`relative inline-block pb-1 ${DESKTOP_SECTION_HEADING_ACCENT_CLASS}`}
             >
-              student data.
+              student intelligence.
               <DesktopHeadingSwoosh />
             </span>
           </h2>
           <p className={`mt-5 max-w-lg ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            PathPicker is powered by what 50,000+ students wish they&apos;d known earlier.
+            PathPicker is a student intelligence platform powered by what 50,000+ students wish
+            they&apos;d known earlier.
           </p>
 
           <ol className="relative mt-10 sm:mt-12">

@@ -277,10 +277,10 @@ export function PricingPage() {
           </h2>
           <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-10">
             <div className="text-center md:text-left">
-              <p className="text-sm font-bold text-[#181A1D]">Real student signals</p>
+              <p className="text-sm font-bold text-[#181A1D]">Student intelligence signals</p>
               <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
-                Decades of campus data plus personality fit—so picks reflect how students actually live
-                at each school.
+                Decades of campus intelligence plus personality fit—so picks reflect how students
+                actually live at each school.
               </p>
             </div>
             <div className="text-center md:text-left">

@@ -2,12 +2,12 @@
 export const DISCOVERY_CARDS = [
   {
     step: 1,
-    title: "The data",
-    shortTitle: "The data",
+    title: "The intelligence",
+    shortTitle: "The intelligence",
     description:
-      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That powers your match, not rankings alone.",
+      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That student intelligence powers your match, not rankings alone.",
     shortDescription:
-      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That powers your match, not rankings alone.",
+      "Thousands of students shared what they'd do differently: regrets, wins, and gaps between where they landed and where they wanted to be. That student intelligence powers your match, not rankings alone.",
     stats: ["50k+ students surveyed", "US & international", "High school & college"],
     lottieSrc: "/animations/champion.lottie",
     accentColor: "#F59E0B",
@@ -19,10 +19,10 @@ export const DISCOVERY_CARDS = [
     title: "The match",
     shortTitle: "The match",
     description:
-      "Answer a few questions. We map how you learn and work across 106+ data points, then match you to outcomes at 2,000+ schools and hundreds of careers.",
+      "Answer a few questions. We map how you learn and work across 106+ intelligence signals, then match you to outcomes at 2,000+ schools and hundreds of careers.",
     shortDescription:
-      "Answer a few questions. We map how you learn and work across 106+ data points, then match you to outcomes at 2,000+ schools and hundreds of careers.",
-    stats: ["106+ data points", "2,000+ schools mapped"],
+      "Answer a few questions. We map how you learn and work across 106+ intelligence signals, then match you to outcomes at 2,000+ schools and hundreds of careers.",
+    stats: ["106+ intelligence signals", "2,000+ schools mapped"],
     lottieSrc: "/animations/meditating-brain.lottie",
     accentColor: "#EC4899",
     surfaceGradient:

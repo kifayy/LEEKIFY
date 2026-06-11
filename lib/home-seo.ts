@@ -8,6 +8,7 @@ export const HOME_OG_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.
 
 export const HOME_SEO_KEYWORDS = [
   "PathPicker",
+  "student intelligence platform",
   "college match quiz",
   "student archetype",
   "college finder",

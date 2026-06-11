@@ -30,6 +30,9 @@ export function DesktopHeroBanner() {
                 Find your&nbsp;
                 <DesktopHeroPathTypewriter className="!bg-white/15 !text-white !shadow-[0_2px_12px_rgba(0,0,0,0.18)]" />
               </span>
+              <span className="sr-only">
+                PathPicker college match quiz for students — find schools by archetype and personality fit
+              </span>
             </h1>
 
             <p className="mt-4 max-w-md font-[family-name:var(--font-poppins)] text-[0.9375rem] font-normal leading-[1.5] tracking-[-0.01em] text-white/90 lg:mt-5 lg:max-w-lg lg:text-lg">

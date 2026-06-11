@@ -49,6 +49,9 @@ export function HeroFigmaDesign() {
               lines={MOBILE_HERO_BULLETS}
               className="-mt-0.5 [&_span]:!text-white"
             />
+            <span className="sr-only">
+              PathPicker student college match — schools, archetype quiz, and admission odds
+            </span>
           </h1>
         </div>
 

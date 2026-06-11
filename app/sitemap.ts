@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.55 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/llms`, lastModified: now, changeFrequency: "monthly", priority: 0.35 },
   ];
 
   const collegeSlugs = await getAllCollegeSlugsForSitemap();

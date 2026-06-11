@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
+import { HOME_TESTIMONIAL_PHOTO_ALT } from "@/lib/home-image-seo";
+
 const REVIEWS = [
   {
     name: "Sharlet Gonzalez",
@@ -53,11 +55,11 @@ function ReviewCard({
       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg sm:h-16 sm:w-16">
         <Image
           src={review.avatar}
-          alt=""
+          alt={HOME_TESTIMONIAL_PHOTO_ALT(review.name)}
           width={64}
           height={64}
+          sizes="64px"
           className={`h-full w-full object-cover ${"avatarPosition" in review && review.avatarPosition === "top" ? "object-top" : "object-center"}`}
-          unoptimized
         />
       </div>
       <div className="min-w-0 flex-1 overflow-hidden sm:min-w-[180px]">
@@ -95,8 +97,8 @@ export function ReviewsCard() {
               alt="Trustpilot 4.8 stars"
               width={240}
               height={180}
+              sizes="(min-width: 768px) 7rem, 6rem"
               className="h-24 w-auto object-contain md:h-28"
-              unoptimized
             />
           </a>
         </div>

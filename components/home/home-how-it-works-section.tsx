@@ -105,6 +105,9 @@ export function HomeHowItWorksSection() {
               100k+ students
             </span>
             <span className="hidden md:inline">{HOME_REVIEWS_TRUST_TITLE}</span>
+            <span className="sr-only">
+              PathPicker college matching — schools and student archetype fit
+            </span>
           </h2>
         </div>
         <StudentsLoveTestimonialMarquee className="mt-4 md:mt-6" />

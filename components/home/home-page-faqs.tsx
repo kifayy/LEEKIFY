@@ -52,6 +52,7 @@ export function HomePageFaqs() {
         <header className="text-center">
           <h2 id="home-faq-heading" className={DESKTOP_SECTION_HEADING_CLASS}>
             PathPicker FAQ
+            <span className="sr-only"> — college match, schools, and student archetype</span>
           </h2>
           <p className={`mx-auto mt-5 max-w-xl ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
             Clear answers on college fit, admission odds, and happiness signals, beyond grades and rankings alone.

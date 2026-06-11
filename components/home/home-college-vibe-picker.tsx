@@ -49,6 +49,7 @@ export function HomeCollegeVibePicker() {
       <div className="mx-auto max-w-6xl">
         <h2 className="text-center font-[family-name:var(--font-poppins)] text-[1.375rem] font-bold leading-[1.2] tracking-[-0.03em] text-[#18062E] md:text-[1.75rem] lg:text-[2rem]">
           {HOME_COLLEGE_VIBE_SECTION_TITLE}
+          <span className="sr-only"> schools matched to your student archetype on PathPicker</span>
         </h2>
 
         {/* Mobile: vertical scroll list (Busuu-style) */}
