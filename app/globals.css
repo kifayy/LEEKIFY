@@ -218,6 +218,60 @@
   }
 }
 
+@keyframes vibe-egg-pop {
+  0% {
+    transform: scale(0.75);
+  }
+  45% {
+    transform: scale(1.28);
+  }
+  70% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes vibe-egg-hop {
+  0% {
+    transform: scale(1.15) translateY(0);
+  }
+  35% {
+    transform: scale(1.18) translateY(-12px);
+  }
+  55% {
+    transform: scale(1.15) translateY(-3px);
+  }
+  75% {
+    transform: scale(1.15) translateY(-7px);
+  }
+  100% {
+    transform: scale(1.15) translateY(0);
+  }
+}
+
+@keyframes vibe-egg-idle {
+  0%,
+  100% {
+    transform: scale(1.15) translateY(0);
+  }
+  50% {
+    transform: scale(1.15) translateY(-5px);
+  }
+}
+
+@keyframes browse-result-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -243,6 +297,28 @@
   }
   .animate-ios-cta-bounce {
     animation: ios-cta-bounce 3s ease-in-out infinite;
+  }
+  .animate-vibe-egg-pop {
+    animation: vibe-egg-pop 0.5s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+  }
+  .animate-vibe-egg-hop {
+    animation: vibe-egg-hop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .animate-vibe-egg-idle {
+    animation: vibe-egg-idle 1.6s ease-in-out infinite;
+  }
+  .animate-browse-result-in {
+    animation: browse-result-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-vibe-egg-pop,
+    .animate-vibe-egg-hop,
+    .animate-vibe-egg-idle,
+    .animate-browse-result-in {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .animate-ios-cta-bounce {

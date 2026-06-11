@@ -1,0 +1,421 @@
+"use client";
+
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { BrowseSearchPickerSheet } from "@/components/browse/browse-search-picker-sheet";
+import { BrowseHatchOverlay } from "@/components/browse/browse-hatch-overlay";
+import { VIBE_OPTIONS, type VibeOption } from "@/lib/directory/vibe-options";
+import {
+  pickToSearchTerm,
+  pickToVibes,
+  type BrowseSearchPick,
+} from "@/lib/browse-recent-searches";
+import { pickDistinctVibeMixEggs } from "@/lib/vibe-mix-egg-images";
+import { cn } from "@/lib/utils";
+
+type Tab = "baby" | "state" | "search";
+
+type ActiveField = "babyA" | "babyB" | "state" | "search";
+
+const BROWSE_HERO_IMAGE = "/images/Gsasdasdroup 2.png";
+
+type Props = {
+  searchTerm: string;
+  onSearchChange: (value: string) => void;
+  onVibesChange: (vibes: string[]) => void;
+  vibeOptions: readonly VibeOption[];
+  isVibeDisabled: (vibe: VibeOption) => boolean;
+  onSearchComplete?: () => void;
+};
+
+function displayValue(pick: BrowseSearchPick | null, placeholder: string) {
+  if (!pick) return placeholder;
+  if (pick.kind === "vibe" && pick.vibeValue) {
+    const vibe = VIBE_OPTIONS.find((v) => v.value === pick.vibeValue);
+    if (vibe) return vibe.label;
+  }
+  return pick.label;
+}
+
+export function BrowseMobileSearchCard({
+  searchTerm,
+  onSearchChange,
+  onVibesChange,
+  vibeOptions,
+  isVibeDisabled,
+  onSearchComplete,
+}: Props) {
+  const [tab, setTab] = useState<Tab>("baby");
+  const [babyA, setBabyA] = useState<BrowseSearchPick | null>(null);
+  const [babyB, setBabyB] = useState<BrowseSearchPick | null>(null);
+  const [statePick, setStatePick] = useState<BrowseSearchPick | null>(null);
+  const [searchPick, setSearchPick] = useState<BrowseSearchPick | null>(
+    searchTerm.trim() ? { kind: "text", label: searchTerm.trim(), query: searchTerm.trim() } : null,
+  );
+  const [eggs, setEggs] = useState<[string, string] | null>(null);
+  const [eggABump, setEggABump] = useState(0);
+  const [eggBBump, setEggBBump] = useState(0);
+
+  useEffect(() => {
+    const [first, second] = pickDistinctVibeMixEggs(2);
+    setEggs([first, second]);
+  }, []);
+
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [activeField, setActiveField] = useState<ActiveField>("babyA");
+  const [sheetQuery, setSheetQuery] = useState("");
+  const [hatching, setHatching] = useState(false);
+
+  const disabledVibeValues = useMemo(() => {
+    const set = new Set<string>();
+    for (const vibe of vibeOptions) {
+      if (isVibeDisabled(vibe)) set.add(vibe.value);
+    }
+    return set;
+  }, [isVibeDisabled, vibeOptions]);
+
+  const openSheet = (field: ActiveField) => {
+    setActiveField(field);
+    setSheetQuery("");
+    setSheetOpen(true);
+  };
+
+  const sheetTitle = useMemo(() => {
+    switch (activeField) {
+      case "babyA":
+        return "Imagine if…";
+      case "babyB":
+        return "Had a baby with…";
+      case "state":
+        return "Search by state";
+      default:
+        return "Search colleges";
+    }
+  }, [activeField]);
+
+  const handlePick = useCallback(
+    (pick: BrowseSearchPick) => {
+      switch (activeField) {
+        case "babyA":
+          setBabyA(pick);
+          setEggABump((n) => n + 1);
+          break;
+        case "babyB":
+          setBabyB(pick);
+          setEggBBump((n) => n + 1);
+          break;
+        case "state":
+          setStatePick(pick);
+          break;
+        case "search":
+          setSearchPick(pick);
+          break;
+      }
+    },
+    [activeField],
+  );
+
+  const applyFilters = useCallback(
+    (picks: BrowseSearchPick[]) => {
+      const vibes = picks.flatMap((pick) => pickToVibes(pick));
+      const uniqueVibes = [...new Set(vibes)].slice(0, 2);
+      const textParts = picks.map(pickToSearchTerm).filter(Boolean);
+
+      if (uniqueVibes.length === 2 && textParts.length === 0) {
+        onVibesChange(uniqueVibes);
+        onSearchChange("");
+        return;
+      }
+
+      if (uniqueVibes.length > 0) {
+        onVibesChange(uniqueVibes);
+      } else {
+        onVibesChange([]);
+      }
+
+      onSearchChange(textParts.join(" ").trim());
+    },
+    [onSearchChange, onVibesChange],
+  );
+
+  const commitSearch = useCallback(() => {
+    if (tab === "baby") {
+      const picks = [babyA, babyB].filter(Boolean) as BrowseSearchPick[];
+      applyFilters(picks);
+      return;
+    }
+
+    if (tab === "state" && statePick) {
+      onVibesChange([]);
+      onSearchChange(statePick.stateName ?? statePick.label);
+      return;
+    }
+
+    if (tab === "search") {
+      const pick =
+        searchPick ??
+        (sheetQuery.trim()
+          ? { kind: "text" as const, label: sheetQuery.trim(), query: sheetQuery.trim() }
+          : null);
+      if (!pick) return;
+      applyFilters([pick]);
+    }
+  }, [
+    applyFilters,
+    babyA,
+    babyB,
+    onSearchChange,
+    onVibesChange,
+    searchPick,
+    sheetQuery,
+    statePick,
+    tab,
+  ]);
+
+  const canSubmit =
+    tab === "baby"
+      ? Boolean(babyA && babyB)
+      : tab === "state"
+        ? Boolean(statePick)
+        : Boolean(searchPick?.label.trim() || searchTerm.trim());
+
+  const handleSubmit = () => {
+    if (!canSubmit || hatching) return;
+    commitSearch();
+    setHatching(true);
+  };
+
+  const handleHatchFinished = useCallback(() => {
+    setHatching(false);
+    onSearchComplete?.();
+  }, [onSearchComplete]);
+
+  const tabs: { id: Tab; label: string }[] = [
+    { id: "baby", label: "Baby" },
+    { id: "state", label: "State" },
+    { id: "search", label: "Search" },
+  ];
+
+  return (
+    <div className="lg:hidden">
+      <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2">
+        <div className="relative h-52 w-full overflow-hidden bg-[#FAF8FF] sm:h-56">
+          <Image
+            src={BROWSE_HERO_IMAGE}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[center_55%]"
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 -mt-8 px-4">
+        <div className="rounded-[1.75rem] border border-white/70 bg-white p-4 shadow-[0_20px_50px_rgba(12,17,32,0.12)]">
+          <h2 className="mb-3 text-center font-hero text-xl font-semibold tracking-tight text-[#0C1120]">
+            Find Your Dream School
+          </h2>
+          <div className="grid grid-cols-3 gap-1 rounded-2xl bg-gray-100 p-1">
+            {tabs.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setTab(item.id)}
+                className={cn(
+                  "rounded-xl py-2.5 text-sm font-semibold transition",
+                  tab === item.id
+                    ? "bg-[#956EFE] text-white shadow-sm"
+                    : "text-gray-500 hover:text-gray-700",
+                )}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          {tab === "baby" ? (
+            <div className="mt-4 space-y-3">
+              <FieldRow
+                label="Imagine if…"
+                value={displayValue(babyA, "Nature")}
+                filled={Boolean(babyA)}
+                onClick={() => openSheet("babyA")}
+                showEgg
+                eggSrc={eggs?.[0]}
+                eggBumpKey={eggABump}
+              />
+              <FieldRow
+                label="Had a baby with…"
+                value={displayValue(babyB, "Harvard")}
+                filled={Boolean(babyB)}
+                onClick={() => openSheet("babyB")}
+                showEgg
+                eggSrc={eggs?.[1]}
+                eggBumpKey={eggBBump}
+              />
+            </div>
+          ) : null}
+
+          {tab === "state" ? (
+            <div className="mt-4">
+              <FieldRow
+                label="Colleges in…"
+                value={displayValue(statePick, "California")}
+                filled={Boolean(statePick)}
+                onClick={() => openSheet("state")}
+              />
+            </div>
+          ) : null}
+
+          {tab === "search" ? (
+            <div className="mt-4">
+              <FieldRow
+                label="Describe your vibe"
+                value={displayValue(searchPick, "Studious and social in California")}
+                filled={Boolean(searchPick)}
+                onClick={() => openSheet("search")}
+              />
+            </div>
+          ) : null}
+
+          <button
+            type="button"
+            disabled={!canSubmit || hatching}
+            onClick={handleSubmit}
+            className="mt-5 w-full rounded-2xl bg-[#956EFE] py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#8560ef] disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Search Universities
+          </button>
+        </div>
+      </div>
+
+      <BrowseHatchOverlay active={hatching} onFinished={handleHatchFinished} />
+
+      <BrowseSearchPickerSheet
+        open={sheetOpen}
+        title={sheetTitle}
+        query={sheetQuery}
+        onQueryChange={setSheetQuery}
+        onClose={() => setSheetOpen(false)}
+        onSelect={handlePick}
+        mode={activeField === "state" ? "states" : "all"}
+        disabledVibeValues={disabledVibeValues}
+      />
+    </div>
+  );
+}
+
+function EggSlot({
+  src,
+  filled,
+  playingPop,
+  playingHop,
+  onPopEnd,
+  onHopEnd,
+}: {
+  src?: string;
+  filled: boolean;
+  playingPop: boolean;
+  playingHop: boolean;
+  onPopEnd: () => void;
+  onHopEnd: () => void;
+}) {
+  const animClass = playingHop
+    ? "animate-vibe-egg-hop"
+    : playingPop
+      ? "animate-vibe-egg-pop"
+      : filled
+        ? "animate-vibe-egg-idle"
+        : "";
+
+  return (
+    <span
+      className={cn(
+        "relative shrink-0 overflow-visible pointer-events-none",
+        filled ? "h-10 w-10" : "h-8 w-8 scale-90 opacity-80",
+      )}
+    >
+      {src ? (
+        <span
+          className={cn("block h-full w-full origin-center will-change-transform", animClass)}
+          onAnimationEnd={() => {
+            if (playingHop) onHopEnd();
+            else if (playingPop) onPopEnd();
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt="" className="h-full w-full object-contain drop-shadow-sm" />
+        </span>
+      ) : (
+        <span className="block h-full w-full rounded-full bg-gray-100" aria-hidden />
+      )}
+    </span>
+  );
+}
+
+function FieldRow({
+  label,
+  value,
+  filled,
+  onClick,
+  showEgg = false,
+  eggSrc,
+  eggBumpKey = 0,
+}: {
+  label: string;
+  value: string;
+  filled: boolean;
+  onClick: () => void;
+  showEgg?: boolean;
+  eggSrc?: string;
+  eggBumpKey?: number;
+}) {
+  const [playingPop, setPlayingPop] = useState(false);
+  const [playingHop, setPlayingHop] = useState(false);
+  const lastBump = useRef(0);
+
+  useEffect(() => {
+    setPlayingHop(false);
+  }, [eggBumpKey]);
+
+  useEffect(() => {
+    if (!eggSrc || !filled || eggBumpKey <= 0 || eggBumpKey === lastBump.current) return;
+    lastBump.current = eggBumpKey;
+    setPlayingPop(true);
+  }, [eggSrc, filled, eggBumpKey]);
+
+  const handleClick = () => {
+    if (filled && eggSrc) setPlayingHop(true);
+    onClick();
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      className="flex w-full items-center gap-3 rounded-2xl border border-gray-200 px-4 py-3.5 text-left transition hover:border-[#956EFE]/40 hover:bg-[#faf8ff]"
+    >
+      <span className="min-w-0 flex-1">
+        <span className="block text-xs font-medium text-gray-400">{label}</span>
+        <span className={cn("mt-0.5 block truncate text-base", filled ? "font-medium text-[#0C1120]" : "text-gray-400")}>
+          {value}
+        </span>
+      </span>
+      {showEgg ? (
+        <EggSlot
+          src={eggSrc}
+          filled={filled}
+          playingPop={playingPop}
+          playingHop={playingHop}
+          onPopEnd={() => setPlayingPop(false)}
+          onHopEnd={() => setPlayingHop(false)}
+        />
+      ) : (
+        <ChevronRight className="h-4 w-4 shrink-0 text-gray-300" />
+      )}
+    </button>
+  );
+}

@@ -1,19 +1,25 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useVibeFilteredColleges } from "@/hooks/useVibeFilteredColleges";
 import { createClient } from "@/lib/supabase/client";
 import type { College } from "@/types/college";
+import { BrowseMobileSearchCard } from "@/components/browse/browse-mobile-search-card";
 import { SchoolGrid } from "@/components/directory/SchoolGrid";
 import { VibeMixer } from "@/components/directory/VibeMixer";
 import { Lock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
-import { orderCollegesForBrowse, sliceBrowseCollegesForGrid } from "@/lib/order-colleges-for-browse";
+import {
+  getInitialUnfilteredBrowseColleges,
+  orderUnfilteredBrowseRest,
+  resolveDefaultBrowseColleges,
+} from "@/lib/browse-default-colleges";
+import { orderCollegesForBrowse } from "@/lib/order-colleges-for-browse";
 import { collegeSearchOrFilter } from "@/lib/postgrest-ilike";
 import { VIBE_OPTIONS } from "@/lib/directory/vibe-options";
 import { trackBrowseEvent } from "@/lib/browse-analytics";
@@ -39,6 +45,8 @@ type DirectoryProps = {
   /** Pre-filled search (discover pages); URL `search` overrides when present. */
   defaultSearch?: string;
   urlSync?: DirectoryUrlSync;
+  /** Hide vibe mixer UI (e.g. after vibe-mix hatch game on dev browse). */
+  showVibeMixer?: boolean;
 };
 
 export function Directory({
@@ -46,6 +54,7 @@ export function Directory({
   defaultVibes,
   defaultSearch,
   urlSync = { mode: "browse" },
+  showVibeMixer = true,
 }: DirectoryProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -59,7 +68,7 @@ export function Directory({
 
   const seededBrowse =
     initialVibes.length === 0 && !initialSearchTerm.trim()
-      ? sliceBrowseCollegesForGrid(initialColleges, COLLEGES_PER_PAGE)
+      ? getInitialUnfilteredBrowseColleges(initialColleges)
       : { colleges: [] as College[], hasMore: true };
 
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
@@ -70,10 +79,48 @@ export function Directory({
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMoreColleges, setHasMoreColleges] = useState(seededBrowse.hasMore);
+  const [resultsRevealToken, setResultsRevealToken] = useState(0);
+
+  const mobileResultsRef = useRef<HTMLDivElement>(null);
+  const pendingResultsScrollRef = useRef(false);
 
   const vibeFilterResult = useVibeFilteredColleges(selectedVibes, debouncedSearchTerm);
 
+  const scrollToMobileResults = useCallback(() => {
+    const el = mobileResultsRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY + 12;
+    window.scrollTo({ top, behavior: "smooth" });
+  }, []);
+
+  const handleMobileSearchComplete = useCallback(() => {
+    setResultsRevealToken((t) => t + 1);
+    pendingResultsScrollRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!pendingResultsScrollRef.current) return;
+
+    const twoVibeMode = selectedVibes.length === 2;
+    const resultsLoading = twoVibeMode ? vibeFilterResult.loading : loading;
+    if (resultsLoading) return;
+
+    pendingResultsScrollRef.current = false;
+    const t = window.setTimeout(scrollToMobileResults, 120);
+    return () => window.clearTimeout(t);
+  }, [
+    resultsRevealToken,
+    loading,
+    vibeFilterResult.loading,
+    selectedVibes.length,
+    scrollToMobileResults,
+  ]);
+
   const selectedVibesKey = useMemo(() => [...selectedVibes].sort().join(","), [selectedVibes]);
+
+  /** Last URL query we applied to state — avoids pushing stale vibes/search back after dev pills. */
+  const appliedUrlKeyRef = useRef<string | null>(null);
+
   const filtersKeyRef = useRef("");
   const shuffleSeedRef = useRef(0);
   const fetchGenerationRef = useRef(0);
@@ -81,15 +128,20 @@ export function Directory({
   initialCollegesRef.current = initialColleges;
 
   const applyBrowseSlice = (list: College[], seed: number, pageForSlice: number) => {
-    const allOrdered = orderCollegesForBrowse(list, seed);
-    const from = pageForSlice * COLLEGES_PER_PAGE;
-    const slice = allOrdered.slice(from, from + COLLEGES_PER_PAGE);
-    const more = from + COLLEGES_PER_PAGE < allOrdered.length;
+    const featured = resolveDefaultBrowseColleges(list);
+    const rest = orderUnfilteredBrowseRest(list, seed);
+
     if (pageForSlice === 0) {
-      setColleges(slice);
-    } else {
-      setColleges((prev) => [...prev, ...slice]);
+      setColleges(featured);
+      setHasMoreColleges(rest.length > 0);
+      return;
     }
+
+    const restPage = pageForSlice - 1;
+    const from = restPage * COLLEGES_PER_PAGE;
+    const slice = rest.slice(from, from + COLLEGES_PER_PAGE);
+    const more = from + COLLEGES_PER_PAGE < rest.length;
+    setColleges((prev) => [...prev, ...slice]);
     setHasMoreColleges(more);
   };
 
@@ -197,7 +249,22 @@ export function Directory({
   }, [debouncedSearchTerm, selectedVibesKey, selectedVibes.length, currentPage]);
 
   useEffect(() => {
+    const urlKey = searchParams.toString();
+    const urlSearch = searchParams.get("search") ?? "";
+    const urlVibes = searchParams.get("vibes")?.split(",").filter(Boolean) ?? [];
+    const urlVibesKey = [...urlVibes].sort().join(",");
+
+    if (appliedUrlKeyRef.current !== urlKey) {
+      appliedUrlKeyRef.current = urlKey;
+      setSearchTerm(urlSearch);
+      setSelectedVibes(urlVibes);
+      return;
+    }
+
     if (urlSync.mode === "none") return;
+
+    const stateVibesKey = [...selectedVibes].sort().join(",");
+    if (searchTerm === urlSearch && stateVibesKey === urlVibesKey) return;
 
     const basePath =
       urlSync.mode === "landing"
@@ -206,16 +273,16 @@ export function Directory({
           ? BROWSE_DEV_PATH
           : BROWSE_PUBLIC_PATH;
     const params = new URLSearchParams();
-    if (searchTerm) params.set("search", searchTerm);
+    if (typeof window !== "undefined" && window.location.pathname.startsWith(BROWSE_DEV_PATH)) {
+      const entry = searchParams.get("entry");
+      if (entry) params.set("entry", entry);
+    }
+    if (searchTerm.trim()) params.set("search", searchTerm.trim());
     if (selectedVibes.length > 0) params.set("vibes", selectedVibes.join(","));
     const nextQs = params.toString();
-    const curSearch = searchParams.get("search") ?? "";
-    const curVibes = (searchParams.get("vibes") ?? "").split(",").filter(Boolean).sort().join(",");
-    const nextVibes = [...selectedVibes].sort().join(",");
-    if (searchTerm !== curSearch || nextVibes !== curVibes) {
-      router.replace(nextQs ? `${basePath}?${nextQs}` : basePath, { scroll: false });
-    }
-  }, [searchTerm, selectedVibes, router, searchParams, urlSync]);
+    appliedUrlKeyRef.current = nextQs;
+    router.replace(nextQs ? `${basePath}?${nextQs}` : basePath, { scroll: false });
+  }, [searchParams, searchTerm, selectedVibes, router, urlSync]);
 
   useEffect(() => {
     if (!debouncedSearchTerm.trim() && selectedVibes.length === 0) return;
@@ -237,12 +304,21 @@ export function Directory({
 
   return (
     <div className="min-h-screen bg-white pt-0 flex flex-col" data-scroll-container>
-      <div className="container mx-auto px-4 py-8 sm:py-12 max-w-7xl my-0 pb-8 flex-1 w-full">
-        <div className="lg:hidden">
-          <div className="mb-4">
-            <div className="max-w-3xl mx-auto">
+      <div className="container mx-auto px-4 pb-8 pt-0 sm:py-12 max-w-7xl my-0 flex-1 w-full">
+        <div className="lg:hidden -mx-4 mb-6">
+          {showVibeMixer ? (
+            <BrowseMobileSearchCard
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onVibesChange={setSelectedVibes}
+              vibeOptions={vibeOptions}
+              isVibeDisabled={isVibeDisabled}
+              onSearchComplete={handleMobileSearchComplete}
+            />
+          ) : (
+            <div className="px-4">
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -252,46 +328,15 @@ export function Directory({
                   placeholder="Search schools..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 text-gray-700 placeholder-gray-400 bg-transparent rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-200 text-3xl font-light"
+                  className="w-full rounded-2xl bg-transparent py-4 pl-12 pr-4 text-3xl font-light text-gray-700 placeholder-gray-400 shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
                 />
               </div>
             </div>
-          </div>
-
-          <div className="mb-4 -mx-1 px-1">
-            <div className="flex gap-4 overflow-x-auto pb-4 pt-1 scrollbar-hide justify-start snap-x snap-mandatory">
-              {vibeOptions.map((vibe) => (
-                <Button
-                  key={vibe.value}
-                  variant="outline"
-                  size="sm"
-                  type="button"
-                  onClick={() => {
-                    if (isVibeDisabled(vibe)) return;
-                    toggleVibe(vibe.value);
-                  }}
-                  disabled={isVibeDisabled(vibe)}
-                  className={`shrink-0 snap-start flex items-center gap-2 whitespace-nowrap px-5 py-3.5 min-h-[44px] rounded-full font-medium transition-all duration-300 ${
-                    selectedVibes.includes(vibe.value)
-                      ? "bg-[#A084FF] text-white border-[#A084FF] shadow-lg hover:bg-[#8B6CF7] hover:shadow-xl"
-                      : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 shadow-sm hover:shadow-md"
-                  } ${isVibeDisabled(vibe) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-                >
-                  {isVibeDisabled(vibe) && <Lock className="w-3 h-3" />}
-                  <span className={`text-sm font-medium ${selectedVibes.includes(vibe.value) ? "text-white" : ""}`}>
-                    {vibe.label}
-                  </span>
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-6 sm:mb-8">
-            <VibeMixer selectedVibes={selectedVibes} onVibeChange={setSelectedVibes} vibeOptions={vibeOptions} />
-          </div>
+          )}
         </div>
 
         <div className="hidden lg:flex lg:gap-8">
+          {showVibeMixer ? (
           <div className="w-80 flex-shrink-0">
             <div className="mb-8">
               <VibeMixer
@@ -329,6 +374,7 @@ export function Directory({
               </div>
             </div>
           </div>
+          ) : null}
 
           <div className="flex-1">
             <div className="mb-8">
@@ -367,7 +413,7 @@ export function Directory({
           </div>
         </div>
 
-        <div className="lg:hidden">
+        <div ref={mobileResultsRef} className="scroll-mt-4 lg:hidden">
           <SchoolGrid
             colleges={colleges}
             selectedVibes={selectedVibes}
@@ -375,6 +421,7 @@ export function Directory({
             loading={loading}
             error={error}
             hasMoreColleges={hasMoreColleges}
+            revealToken={resultsRevealToken}
             onLoadMore={() => setCurrentPage((p) => p + 1)}
             onResetFilters={() => {
               setSearchTerm("");

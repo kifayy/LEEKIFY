@@ -15,6 +15,7 @@ import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scho
 import { CountryLayout } from "@/components/country-layout";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { SiteImageProtection } from "@/components/site-image-protection";
+import { DevChromeProvider } from "@/components/dev-chrome-provider";
 import { DevToolbar } from "@/components/dev-toolbar";
 import { ScrollToTopOnNavigate } from "@/components/scroll-to-top-on-navigate";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
@@ -134,6 +135,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <CountryLayout>
+            <DevChromeProvider>
             <ScrollToTopOnNavigate />
             <div className="relative flex min-w-0 flex-col overflow-x-hidden">
               <SiteHeader />
@@ -156,8 +158,11 @@ export default function RootLayout({
               <SiteFooter />
               <CookieConsentBanner />
               <MobileScholarshipQuizStickyFooter />
-              <DevToolbar />
+              <Suspense fallback={null}>
+                <DevToolbar />
+              </Suspense>
             </div>
+            </DevChromeProvider>
             </CountryLayout>
           </ThemeProvider>
         </Suspense>

@@ -10,6 +10,7 @@ import type { College } from "@/types/college";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { cn } from "@/lib/utils";
 
 interface CollegeWithMatch extends College {
   matchScore?: number;
@@ -29,6 +30,7 @@ interface SchoolGridProps {
   loading?: boolean;
   error?: string | null;
   hasMoreColleges?: boolean;
+  revealToken?: number;
   onLoadMore?: () => void;
   onResetFilters?: () => void;
 }
@@ -60,6 +62,7 @@ export function SchoolGrid({
   loading = false,
   error = null,
   hasMoreColleges = false,
+  revealToken = 0,
   onLoadMore,
   onResetFilters,
 }: SchoolGridProps) {
@@ -68,6 +71,7 @@ export function SchoolGrid({
   const { savedColleges, toggleSavedCollege } = useSavedColleges();
   const [collegesWithMatches, setCollegesWithMatches] = useState<CollegeWithMatch[]>([]);
   const [matchScores, setMatchScores] = useState<Map<string, number>>(new Map());
+  const [revealResults, setRevealResults] = useState(false);
 
   const twoVibeMode = selectedVibes.length === 2;
   const collegesData = twoVibeMode ? vibeFiltered.colleges : initialColleges;
@@ -94,6 +98,17 @@ export function SchoolGrid({
     }
     setCollegesWithMatches(updated);
   }, [collegesData, matchScores, isSignedIn, selectedVibes.length]);
+
+  useEffect(() => {
+    if (revealToken <= 0) return;
+    if (isLoading) return;
+    if (collegesWithMatches.length === 0) return;
+
+    setRevealResults(true);
+    const maxDelay = Math.min(collegesWithMatches.length, 12) * 55 + 500;
+    const t = window.setTimeout(() => setRevealResults(false), maxDelay);
+    return () => window.clearTimeout(t);
+  }, [revealToken, isLoading, collegesWithMatches.length]);
 
   const handleSaveSchool = async (schoolId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -136,29 +151,8 @@ export function SchoolGrid({
     );
   }
 
-  const vibeEmoji = (v: string) => VIBE_EMOJIS[v] || "✨";
-
   return (
     <div className="space-y-6">
-      {selectedVibes.length > 0 && (
-        <div className="text-center py-6 bg-white rounded-3xl border border-gray-100 shadow-lg mb-8">
-          <p className="text-gray-700 text-base sm:text-lg px-6 font-light">
-            {selectedVibes.length === 2 ? (
-              <>
-                Showing <span className="font-semibold text-gray-900 text-xl">{collegesWithMatches.length}</span>{" "}
-                colleges that match: {selectedVibes.map((v) => vibeEmoji(v)).join(" ")}
-              </>
-            ) : (
-              <>
-                Add a second vibe to filter — showing{" "}
-                <span className="font-semibold text-gray-900 text-xl">{collegesWithMatches.length}</span> colleges
-                matching search (vibe: {selectedVibes.map((v) => vibeEmoji(v)).join(" ")})
-              </>
-            )}
-          </p>
-        </div>
-      )}
-
       {isSignedIn &&
         collegesData.slice(0, 20).map((college) => (
           <CollegeWithMatchScore key={`match-${college.id}`} college={college} onMatchCalculated={handleMatchCalculated} />
@@ -166,10 +160,14 @@ export function SchoolGrid({
 
       <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-2 sm:px-0">
         {collegesWithMatches.map((school, index) => (
-          <SchoolCard
+          <div
             key={school.id}
-            imageLoadPriority={index < 9}
-            school={{
+            className={cn(revealResults && "animate-browse-result-in")}
+            style={revealResults ? { animationDelay: `${Math.min(index, 12) * 55}ms` } : undefined}
+          >
+            <SchoolCard
+              imageLoadPriority={index < 9}
+              school={{
               id: school.id,
               name: school.name,
               location: school.location || `${school.name} Campus`,
@@ -195,8 +193,9 @@ export function SchoolGrid({
             hideFitCopy
             showMatchScore={isSignedIn && matchScores.has(school.id)}
             matchScore={matchScores.get(school.id)}
-            selectedVibes={selectedVibes}
-          />
+              selectedVibes={selectedVibes}
+            />
+          </div>
         ))}
       </div>
 
