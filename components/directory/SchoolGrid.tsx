@@ -192,6 +192,7 @@ export function SchoolGrid({
             onSaveSchool={handleSaveSchool}
             vibeEmojis={VIBE_EMOJIS}
             mode="directory"
+            hideFitCopy
             showMatchScore={isSignedIn && matchScores.has(school.id)}
             matchScore={matchScores.get(school.id)}
             selectedVibes={selectedVibes}

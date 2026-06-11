@@ -64,6 +64,8 @@ interface SchoolCardProps {
   imageLoadPriority?: boolean;
   /** Active browse vibes — used for plain-language match reasons. */
   selectedVibes?: string[];
+  /** Hide generated fit line + admissions/cost band (browse grid). */
+  hideFitCopy?: boolean;
 }
 
 export function SchoolCard({
@@ -82,6 +84,7 @@ export function SchoolCard({
   buttonPosition = "overlay",
   imageLoadPriority = false,
   selectedVibes = [],
+  hideFitCopy = false,
 }: SchoolCardProps) {
   const { user } = useAuth();
   const isSignedIn = !!user;
@@ -124,17 +127,20 @@ export function SchoolCard({
   };
 
   const schoolHref = getSchoolPageHref(school.slug, school.name);
-  const statLine = buildSchoolCardStatLine({
-    acceptanceRate: school.acceptance_rate,
-    tuitionRange: school.tuition_range,
-  });
-  const fitReason =
-    buildSchoolCardFitReason({
-      selectedVibes,
-      vibeTags: school.vibe_tags,
-      location: school.location,
-      acceptanceRate: school.acceptance_rate,
-    }) ?? statLine;
+  const statLine = hideFitCopy
+    ? null
+    : buildSchoolCardStatLine({
+        acceptanceRate: school.acceptance_rate,
+        tuitionRange: school.tuition_range,
+      });
+  const fitReason = hideFitCopy
+    ? null
+    : (buildSchoolCardFitReason({
+        selectedVibes,
+        vibeTags: school.vibe_tags,
+        location: school.location,
+        acceptanceRate: school.acceptance_rate,
+      }) ?? statLine);
 
   const trackClick = () => {
     trackBrowseEvent({
