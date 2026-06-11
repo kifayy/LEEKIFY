@@ -12,7 +12,10 @@ import {
   POPULAR_BROWSE_LOCATIONS,
   POPULAR_BROWSE_TAB_PLACEHOLDER,
   POPULAR_BROWSE_TABS,
+  POPULAR_SCHOOLS_TAB_PLACEHOLDER,
+  POPULAR_SCHOOLS_TABS,
   type PopularBrowseTab,
+  type PopularSchoolsTab,
 } from "@/lib/browse-picker-popular";
 import { getCollegeHeroUrl } from "@/lib/college-hero-url";
 import { VIBE_OPTIONS } from "@/lib/directory/vibe-options";
@@ -27,7 +30,7 @@ type Props = {
   onQueryChange: (value: string) => void;
   onClose: () => void;
   onSelect: (pick: BrowseSearchPick) => void;
-  mode?: "all" | "states";
+  mode?: "all" | "states" | "schools";
   disabledVibeValues?: Set<string>;
 };
 
@@ -130,18 +133,20 @@ export function BrowseSearchPickerSheet({
   disabledVibeValues,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [popularTab, setPopularTab] = useState<PopularBrowseTab>("vibes");
+  const [popularTab, setPopularTab] = useState<PopularBrowseTab | PopularSchoolsTab>("vibes");
   const { vibes, universitySuggestions, locationSuggestions, customQuery, loading } =
     useBrowseSearchSuggestions(query, mode);
-  const { colleges: popularColleges, loading: popularLoading } = useBrowsePopularColleges(open && mode === "all");
+  const { colleges: popularColleges, loading: popularLoading } = useBrowsePopularColleges(
+    open && (mode === "all" || mode === "schools"),
+  );
 
   useEffect(() => {
     if (open) {
-      setPopularTab("vibes");
+      setPopularTab(mode === "schools" ? "universities" : "vibes");
       const t = window.setTimeout(() => inputRef.current?.focus(), 120);
       return () => window.clearTimeout(t);
     }
-  }, [open]);
+  }, [open, mode]);
 
   if (!open) return null;
 
@@ -161,23 +166,28 @@ export function BrowseSearchPickerSheet({
   const searchPlaceholder =
     mode === "states"
       ? "Search states"
-      : POPULAR_BROWSE_TAB_PLACEHOLDER[popularTab];
+      : mode === "schools"
+        ? POPULAR_SCHOOLS_TAB_PLACEHOLDER[popularTab as PopularSchoolsTab]
+        : POPULAR_BROWSE_TAB_PLACEHOLDER[popularTab as PopularBrowseTab];
 
   const celebrityMatches = mode === "all" && isSearching ? matchPopularCelebrities(query) : [];
 
-  const showVibeResults = mode === "all" ? popularTab === "vibes" : false;
-  const showUniversityResults = mode === "all" ? popularTab === "universities" : false;
-  const showCelebrityResults = mode === "all" ? popularTab === "celebrities" : false;
-  const showStateResults = mode === "states";
+  const showVibeResults = mode === "all" && popularTab === "vibes";
+  const showUniversityResults =
+    mode === "schools" ? isSearching : mode === "all" ? popularTab === "universities" : false;
+  const showCelebrityResults = mode === "all" && popularTab === "celebrities";
+  const showStateResults = mode === "states" || (mode === "schools" && isSearching);
 
   const customResultSubtitle =
     mode === "states"
       ? "Use this state"
-      : popularTab === "vibes"
-        ? "Use this vibe"
-        : popularTab === "universities"
-          ? "Use this university"
-          : "Use this celebrity";
+      : mode === "schools"
+        ? "Use this search"
+        : popularTab === "vibes"
+          ? "Use this vibe"
+          : popularTab === "universities"
+            ? "Use this university"
+            : "Use this celebrity";
 
   return (
     <div className="fixed inset-0 z-[100] lg:hidden">
@@ -254,6 +264,24 @@ export function BrowseSearchPickerSheet({
           {mode === "all" ? (
             <div className="mb-2 flex gap-1 border-b border-gray-200">
               {POPULAR_BROWSE_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setPopularTab(tab.id)}
+                  className={cn(
+                    "border-b-2 px-3 pb-1.5 pt-0.5 text-sm transition",
+                    popularTab === tab.id
+                      ? "border-gray-900 font-medium text-gray-900"
+                      : "border-transparent text-gray-500",
+                  )}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          ) : mode === "schools" ? (
+            <div className="mb-2 flex gap-1 border-b border-gray-200">
+              {POPULAR_SCHOOLS_TABS.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
@@ -360,28 +388,28 @@ export function BrowseSearchPickerSheet({
                   : null}
               </ul>
             </div>
-          ) : mode === "states" ? (
+          ) : mode === "states" || (mode === "schools" && popularTab === "states") ? (
             <div className={CAROUSEL_CLASS}>
-                {POPULAR_BROWSE_LOCATIONS.map((location) => (
-                  <button
-                    key={location}
-                    type="button"
-                    onClick={() =>
-                      handleSelect({
-                        kind: "state",
-                        label: location,
-                        stateName: location,
-                      })
-                    }
-                    className={PILL_BTN_CLASS}
-                  >
-                    {location}
-                  </button>
-                ))}
-              </div>
+              {POPULAR_BROWSE_LOCATIONS.map((location) => (
+                <button
+                  key={location}
+                  type="button"
+                  onClick={() =>
+                    handleSelect({
+                      kind: "state",
+                      label: location,
+                      stateName: location,
+                    })
+                  }
+                  className={PILL_BTN_CLASS}
+                >
+                  {location}
+                </button>
+              ))}
+            </div>
           ) : (
             <>
-              {popularTab === "vibes" ? (
+              {mode === "all" && popularTab === "vibes" ? (
                 <div className={CAROUSEL_CLASS}>
                   {VIBE_OPTIONS.map((tag) => {
                     const disabled = disabledVibeValues?.has(tag.value);
@@ -406,7 +434,8 @@ export function BrowseSearchPickerSheet({
                 </div>
               ) : null}
 
-              {popularTab === "universities" ? (
+              {(mode === "all" && popularTab === "universities") ||
+              (mode === "schools" && popularTab === "universities") ? (
                 <div className={CAROUSEL_CLASS}>
                   {popularLoading ? (
                     <p className="text-sm text-gray-500">Loading…</p>
@@ -441,7 +470,7 @@ export function BrowseSearchPickerSheet({
                 </div>
               ) : null}
 
-              {popularTab === "celebrities" ? (
+              {mode === "all" && popularTab === "celebrities" ? (
                 <div className={CAROUSEL_CLASS}>
                   {POPULAR_BROWSE_CELEBRITIES.map((celebrity) => (
                     <button

@@ -51,3 +51,15 @@ export function matchPopularCelebrities(query: string): PopularCelebrity[] {
   if (!q) return [...POPULAR_BROWSE_CELEBRITIES];
   return POPULAR_BROWSE_CELEBRITIES.filter((c) => c.name.toLowerCase().includes(q));
 }
+
+export type PopularSchoolsTab = "universities" | "states";
+
+export const POPULAR_SCHOOLS_TABS: { id: PopularSchoolsTab; label: string }[] = [
+  { id: "universities", label: "Universities" },
+  { id: "states", label: "States" },
+];
+
+export const POPULAR_SCHOOLS_TAB_PLACEHOLDER: Record<PopularSchoolsTab, string> = {
+  universities: "School or city name",
+  states: "Search states",
+};

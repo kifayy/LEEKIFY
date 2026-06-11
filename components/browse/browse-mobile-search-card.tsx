@@ -15,9 +15,9 @@ import {
 import { pickDistinctVibeMixEggs } from "@/lib/vibe-mix-egg-images";
 import { cn } from "@/lib/utils";
 
-type Tab = "baby" | "state" | "search";
+type Tab = "baby" | "search";
 
-type ActiveField = "babyA" | "babyB" | "state" | "search";
+type ActiveField = "babyA" | "babyB";
 
 const BROWSE_HERO_IMAGE = "/images/Gsasdasdroup 2.png";
 
@@ -50,10 +50,6 @@ export function BrowseMobileSearchCard({
   const [tab, setTab] = useState<Tab>("baby");
   const [babyA, setBabyA] = useState<BrowseSearchPick | null>(null);
   const [babyB, setBabyB] = useState<BrowseSearchPick | null>(null);
-  const [statePick, setStatePick] = useState<BrowseSearchPick | null>(null);
-  const [searchPick, setSearchPick] = useState<BrowseSearchPick | null>(
-    searchTerm.trim() ? { kind: "text", label: searchTerm.trim(), query: searchTerm.trim() } : null,
-  );
   const [eggs, setEggs] = useState<[string, string] | null>(null);
   const [eggABump, setEggABump] = useState(0);
   const [eggBBump, setEggBBump] = useState(0);
@@ -67,6 +63,11 @@ export function BrowseMobileSearchCard({
   const [activeField, setActiveField] = useState<ActiveField>("babyA");
   const [sheetQuery, setSheetQuery] = useState("");
   const [hatching, setHatching] = useState(false);
+  const [searchDraft, setSearchDraft] = useState(searchTerm);
+
+  useEffect(() => {
+    setSearchDraft(searchTerm);
+  }, [searchTerm]);
 
   const disabledVibeValues = useMemo(() => {
     const set = new Set<string>();
@@ -83,36 +84,18 @@ export function BrowseMobileSearchCard({
   };
 
   const sheetTitle = useMemo(() => {
-    switch (activeField) {
-      case "babyA":
-        return "Imagine if…";
-      case "babyB":
-        return "Had a baby with…";
-      case "state":
-        return "Search by state";
-      default:
-        return "Search colleges";
-    }
+    return activeField === "babyA" ? "Imagine if…" : "Had a baby with…";
   }, [activeField]);
 
   const handlePick = useCallback(
     (pick: BrowseSearchPick) => {
-      switch (activeField) {
-        case "babyA":
-          setBabyA(pick);
-          setEggABump((n) => n + 1);
-          break;
-        case "babyB":
-          setBabyB(pick);
-          setEggBBump((n) => n + 1);
-          break;
-        case "state":
-          setStatePick(pick);
-          break;
-        case "search":
-          setSearchPick(pick);
-          break;
+      if (activeField === "babyA") {
+        setBabyA(pick);
+        setEggABump((n) => n + 1);
+        return;
       }
+      setBabyB(pick);
+      setEggBBump((n) => n + 1);
     },
     [activeField],
   );
@@ -147,44 +130,23 @@ export function BrowseMobileSearchCard({
       return;
     }
 
-    if (tab === "state" && statePick) {
-      onVibesChange([]);
-      onSearchChange(statePick.stateName ?? statePick.label);
-      return;
-    }
-
-    if (tab === "search") {
-      const pick =
-        searchPick ??
-        (sheetQuery.trim()
-          ? { kind: "text" as const, label: sheetQuery.trim(), query: sheetQuery.trim() }
-          : null);
-      if (!pick) return;
-      applyFilters([pick]);
-    }
-  }, [
-    applyFilters,
-    babyA,
-    babyB,
-    onSearchChange,
-    onVibesChange,
-    searchPick,
-    sheetQuery,
-    statePick,
-    tab,
-  ]);
+    const query = searchDraft.trim();
+    if (!query) return;
+    onVibesChange([]);
+    onSearchChange(query);
+  }, [applyFilters, babyA, babyB, onSearchChange, onVibesChange, searchDraft, tab]);
 
   const canSubmit =
-    tab === "baby"
-      ? Boolean(babyA && babyB)
-      : tab === "state"
-        ? Boolean(statePick)
-        : Boolean(searchPick?.label.trim() || searchTerm.trim());
+    tab === "baby" ? Boolean(babyA && babyB) : Boolean(searchDraft.trim());
 
   const handleSubmit = () => {
     if (!canSubmit || hatching) return;
     commitSearch();
-    setHatching(true);
+    if (tab === "baby") {
+      setHatching(true);
+      return;
+    }
+    onSearchComplete?.();
   };
 
   const handleHatchFinished = useCallback(() => {
@@ -193,8 +155,7 @@ export function BrowseMobileSearchCard({
   }, [onSearchComplete]);
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: "baby", label: "Baby" },
-    { id: "state", label: "State" },
+    { id: "baby", label: "Baby Maker" },
     { id: "search", label: "Search" },
   ];
 
@@ -218,7 +179,7 @@ export function BrowseMobileSearchCard({
           <h2 className="mb-3 text-center font-hero text-xl font-semibold tracking-tight text-[#0C1120]">
             Find Your Dream School
           </h2>
-          <div className="grid grid-cols-3 gap-1 rounded-2xl bg-gray-100 p-1">
+          <div className="grid grid-cols-2 gap-1 rounded-2xl bg-gray-100 p-1">
             {tabs.map((item) => (
               <button
                 key={item.id}
@@ -240,7 +201,7 @@ export function BrowseMobileSearchCard({
             <div className="mt-4 space-y-3">
               <FieldRow
                 label="Imagine if…"
-                value={displayValue(babyA, "Nature")}
+                value={displayValue(babyA, "🎨 Artsy")}
                 filled={Boolean(babyA)}
                 onClick={() => openSheet("babyA")}
                 showEgg
@@ -249,7 +210,7 @@ export function BrowseMobileSearchCard({
               />
               <FieldRow
                 label="Had a baby with…"
-                value={displayValue(babyB, "Harvard")}
+                value={displayValue(babyB, "💋 Flirty")}
                 filled={Boolean(babyB)}
                 onClick={() => openSheet("babyB")}
                 showEgg
@@ -259,26 +220,25 @@ export function BrowseMobileSearchCard({
             </div>
           ) : null}
 
-          {tab === "state" ? (
-            <div className="mt-4">
-              <FieldRow
-                label="Colleges in…"
-                value={displayValue(statePick, "California")}
-                filled={Boolean(statePick)}
-                onClick={() => openSheet("state")}
-              />
-            </div>
-          ) : null}
-
           {tab === "search" ? (
-            <div className="mt-4">
-              <FieldRow
-                label="Describe your vibe"
-                value={displayValue(searchPick, "Studious and social in California")}
-                filled={Boolean(searchPick)}
-                onClick={() => openSheet("search")}
-              />
-            </div>
+            <form
+              className="mt-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <label className="block">
+                <span className="mb-1.5 block text-xs font-medium text-gray-400">State, city, or school</span>
+                <input
+                  type="text"
+                  value={searchDraft}
+                  onChange={(e) => setSearchDraft(e.target.value)}
+                  placeholder="California, Boston, Harvard…"
+                  className="w-full rounded-2xl border border-gray-200 px-4 py-3.5 text-base text-[#0C1120] placeholder:text-gray-400 focus:border-[#956EFE]/40 focus:outline-none focus:ring-2 focus:ring-[#956EFE]/20"
+                />
+              </label>
+            </form>
           ) : null}
 
           <button
@@ -301,7 +261,6 @@ export function BrowseMobileSearchCard({
         onQueryChange={setSheetQuery}
         onClose={() => setSheetOpen(false)}
         onSelect={handlePick}
-        mode={activeField === "state" ? "states" : "all"}
         disabledVibeValues={disabledVibeValues}
       />
     </div>

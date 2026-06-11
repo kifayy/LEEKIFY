@@ -36,7 +36,7 @@ function matchStates(query: string) {
     .map(([abbr, name]) => ({ kind: "state" as const, label: name, abbr }));
 }
 
-export function useBrowseSearchSuggestions(query: string, mode: "all" | "states" = "all") {
+export function useBrowseSearchSuggestions(query: string, mode: "all" | "states" | "schools" = "all") {
   const debounced = useDebounce(query, 250);
   const [colleges, setColleges] = useState<College[]>([]);
   const [loading, setLoading] = useState(false);
@@ -100,7 +100,6 @@ export function useBrowseSearchSuggestions(query: string, mode: "all" | "states"
       return matchStates(query);
     }
 
-    const vibes = matchVibes(query);
     const collegeSuggestions: BrowseSuggestion[] = colleges.map((college) => ({
       kind: "college",
       label: college.name,
@@ -109,6 +108,11 @@ export function useBrowseSearchSuggestions(query: string, mode: "all" | "states"
       heroUrl: getCollegeHeroUrl(college),
     }));
 
+    if (mode === "schools") {
+      return [...collegeSuggestions, ...matchStates(query)];
+    }
+
+    const vibes = matchVibes(query);
     return [...vibes, ...collegeSuggestions, ...matchStates(query)];
   }, [colleges, mode, query]);
 
