@@ -1,3 +1,5 @@
+import { BROWSE_PUBLIC_PATH } from "@/lib/browse-routes";
+
 /** Canonical browse → school detail path for crawlable `<Link href>` navigation. */
 export function getSchoolPageHref(slug: string, name?: string): string {
   let normalized = slug?.trim();
@@ -8,6 +10,6 @@ export function getSchoolPageHref(slug: string, name?: string): string {
       .replace(/-+/g, "-")
       .replace(/^-|-$/g, "");
   }
-  if (!normalized) return "/browse-schools";
+  if (!normalized) return BROWSE_PUBLIC_PATH;
   return `/schools/${encodeURIComponent(normalized)}`;
 }

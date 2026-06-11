@@ -31,7 +31,7 @@ export function DiscoverPageJsonLd({ copy, canonicalUrl, baseUrl, colleges }: Pr
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "PathPicker", item: baseUrl },
-        { "@type": "ListItem", position: 2, name: "Browse schools", item: `${baseUrl}/browse-schools` },
+        { "@type": "ListItem", position: 2, name: "Browse schools", item: `${baseUrl}/browse` },
         { "@type": "ListItem", position: 3, name: copy.h1, item: canonicalUrl },
       ],
     },

@@ -40,7 +40,7 @@ export function SchoolSeoHubSection({
               Quick answers for searches like admission chances, cost, campus life, and decisions—explore more on
               PathPicker or{" "}
               <Link
-                href="/browse-schools"
+                href="/browse"
                 className="font-medium text-violet-700 underline-offset-2 hover:text-violet-900 hover:underline"
               >
                 browse similar schools

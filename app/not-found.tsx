@@ -24,7 +24,7 @@ export default function NotFound() {
           Home
         </Link>
         <CollegeMatchQuizLink className={linkClassName}>{PATH_COLLEGE_MATCH_QUIZ_LABEL}</CollegeMatchQuizLink>
-        <Link href="/browse-schools" className={linkClassName}>
+        <Link href="/browse" className={linkClassName}>
           Browse Schools
         </Link>
         <Link href="/contact" className={linkClassName}>

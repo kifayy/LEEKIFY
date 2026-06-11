@@ -34,7 +34,7 @@ export function buildLlmsSiteSections(baseUrl: string): LlmsSiteSection[] {
         },
         {
           label: "Browse schools",
-          href: `${baseUrl}/browse-schools`,
+          href: `${baseUrl}/browse`,
           note: "Filter and compare colleges by vibe, location, cost, and admission fit.",
         },
         {
@@ -97,7 +97,7 @@ export function buildLlmsTxtContent(baseUrl: string): string {
     "## Primary discovery",
     `- Home: ${baseUrl}`,
     `- College match quiz: ${baseUrl}/college-match-quiz`,
-    `- Browse schools: ${baseUrl}/browse-schools`,
+    `- Browse schools: ${baseUrl}/browse`,
     `- LLM-readable index (HTML): ${baseUrl}/llms`,
     "",
   ];

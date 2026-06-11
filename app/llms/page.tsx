@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import { getLlmsSiteBaseUrl } from "@/lib/metadata-base-url";
 import { buildLlmsSiteSections } from "@/lib/llms-site-index";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = await getBaseUrlForMetadata();
+  const baseUrl = getLlmsSiteBaseUrl();
   return {
     title: "Site Index for AI & LLMs | PathPicker",
     description:
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LlmsPage() {
-  const baseUrl = await getBaseUrlForMetadata();
+  const baseUrl = getLlmsSiteBaseUrl();
   const sections = buildLlmsSiteSections(baseUrl);
 
   return (

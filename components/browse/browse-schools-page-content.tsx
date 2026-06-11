@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { BrowseDiscoveryHub } from "@/components/browse/browse-discovery-hub";
 import { Directory } from "@/components/directory/Directory";
+import { BROWSE_DEV_PATH } from "@/lib/browse-routes";
 import type { College } from "@/types/college";
 
 function BrowseFallback() {
@@ -24,6 +25,9 @@ function BrowseSchoolsInner({ initialColleges }: { initialColleges: College[] })
     return (
       <>
         <div className="container mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 md:text-center lg:px-8">
+          <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-amber-600">
+            Dev preview — discovery hub
+          </p>
           <h1 className="text-2xl font-semibold tracking-tight text-[#0C1120] sm:text-3xl">
             Browse Schools
           </h1>
@@ -45,7 +49,7 @@ function BrowseSchoolsInner({ initialColleges }: { initialColleges: College[] })
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-gray-600 sm:text-base md:mx-auto">
           Filter results below, or{" "}
-          <a href="/browse-schools" className="text-[#956EFE] underline">
+          <a href={BROWSE_DEV_PATH} className="text-[#956EFE] underline">
             start a new discovery search
           </a>
           .

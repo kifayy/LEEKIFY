@@ -41,7 +41,7 @@ export function SchoolPageJsonLd({ college, canonicalUrl, baseUrl, faqItems }: P
           "@type": "ListItem",
           position: 2,
           name: "Browse schools",
-          item: `${baseUrl}/browse-schools`,
+          item: `${baseUrl}/browse`,
         },
         { "@type": "ListItem", position: 3, name: college.name, item: canonicalUrl },
       ],

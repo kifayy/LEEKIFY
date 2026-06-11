@@ -25,7 +25,7 @@ export function SeoBrowseLandingJsonLd({ config, canonicalUrl, baseUrl }: Props)
           "@type": "ListItem",
           position: 2,
           name: "Browse schools",
-          item: `${baseUrl}/browse-schools`,
+          item: `${baseUrl}/browse`,
         },
         { "@type": "ListItem", position: 3, name: config.h1, item: canonicalUrl },
       ],

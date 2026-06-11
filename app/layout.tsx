@@ -15,6 +15,7 @@ import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scho
 import { CountryLayout } from "@/components/country-layout";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { SiteImageProtection } from "@/components/site-image-protection";
+import { DevToolbar } from "@/components/dev-toolbar";
 import { ScrollToTopOnNavigate } from "@/components/scroll-to-top-on-navigate";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
@@ -155,6 +156,7 @@ export default function RootLayout({
               <SiteFooter />
               <CookieConsentBanner />
               <MobileScholarshipQuizStickyFooter />
+              <DevToolbar />
             </div>
             </CountryLayout>
           </ThemeProvider>

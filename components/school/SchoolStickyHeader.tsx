@@ -22,7 +22,7 @@ export function SchoolStickyHeader({
         <p className="text-sm font-semibold text-gray-900 truncate">
           Viewing: <span className="text-violet-700">{collegeName}</span>
         </p>
-        <Link href="/browse-schools" className="text-sm font-medium text-violet-600 hover:underline shrink-0">
+        <Link href="/browse" className="text-sm font-medium text-violet-600 hover:underline shrink-0">
           Back to Explore
         </Link>
       </div>

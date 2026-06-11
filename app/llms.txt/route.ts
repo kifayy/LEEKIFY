@@ -1,8 +1,8 @@
-import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
+import { getLlmsSiteBaseUrl } from "@/lib/metadata-base-url";
 import { buildLlmsTxtContent } from "@/lib/llms-site-index";
 
 export async function GET() {
-  const baseUrl = await getPublicSiteUrlForSitemap();
+  const baseUrl = getLlmsSiteBaseUrl();
 
   return new Response(buildLlmsTxtContent(baseUrl), {
     headers: {

@@ -118,7 +118,7 @@ export default async function CollegeSearchSlugPage({ params }: Props) {
         </Suspense>
       </section>
       <div className="container mx-auto max-w-3xl px-4 py-8 text-center text-sm text-gray-600">
-        <Link href="/browse-schools" className="font-medium text-[#956EFE] hover:underline">
+        <Link href="/browse" className="font-medium text-[#956EFE] hover:underline">
           ← Browse all schools
         </Link>
         {" · "}

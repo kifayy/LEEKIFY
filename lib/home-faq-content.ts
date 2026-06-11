@@ -3,7 +3,7 @@ export const HOME_FAQ_ITEMS = [
   {
     question: "How does PathPicker's college match work?",
     answer:
-      "You take a short quiz about your personality, goals, and academics. PathPicker's student intelligence compares your answers across 100+ signals and 2,000+ schools to surface colleges where you fit best, with context on admission odds and student-life signals, not a generic ranking list.",
+      "You take the Archetype Quiz — a short look at your goals and academics. PathPicker's student intelligence compares your answers across 100+ signals and 2,000+ schools to surface colleges where you fit best, with context on admission odds and student-life signals, not a generic ranking list.",
   },
   {
     question: "Does PathPicker show admission odds?",

@@ -81,7 +81,7 @@ export function SchoolDetailsLayout({
                 PathPicker
               </Link>
               <span aria-hidden>›</span>
-              <Link href="/browse-schools" className="hover:text-violet-700 hover:underline">
+              <Link href="/browse" className="hover:text-violet-700 hover:underline">
                 Browse schools
               </Link>
               <span aria-hidden>›</span>

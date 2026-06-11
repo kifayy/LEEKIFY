@@ -23,7 +23,7 @@ const DRAWER_LOGO_URL = PATHPICKER_PURPLE_LOGO_URL;
 
 const navLinks = [
   { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL, external: true },
-  { href: "/browse-schools", label: "Browse Schools" },
+  { href: "/browse", label: "Browse Schools" },
   { href: "/#deep-profile-rankings", label: "Features" },
   { href: "/contact", label: "Support" },
 ];

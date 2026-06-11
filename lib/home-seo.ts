@@ -9,6 +9,7 @@ export const HOME_OG_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.
 export const HOME_SEO_KEYWORDS = [
   "PathPicker",
   "student intelligence platform",
+  "Archetype Quiz",
   "college match quiz",
   "student archetype",
   "college finder",
@@ -118,7 +119,7 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
           item: {
             "@type": "WebPage",
             name: "Browse Schools",
-            url: `${baseUrl}/browse-schools`,
+            url: `${baseUrl}/browse`,
           },
         },
         {

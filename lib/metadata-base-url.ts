@@ -19,6 +19,17 @@ export function getCanonicalSiteUrlFromEnv(): string | null {
   return raw.replace(/\/$/, "");
 }
 
+/** Production host for LLM index (`/llms`, `/llms.txt`) — never localhost. */
+export const LLM_SITE_URL_FALLBACK = "https://www.pathpicker.com";
+
+/**
+ * Canonical base URL for AI/LLM site maps. Always lists production URLs for crawlers,
+ * even when the page is rendered on localhost or a preview deploy.
+ */
+export function getLlmsSiteBaseUrl(): string {
+  return getCanonicalSiteUrlFromEnv() ?? LLM_SITE_URL_FALLBACK;
+}
+
 /**
  * URLs in sitemap.xml and robots.txt must match the host that serves those files
  * (e.g. pathpicker.com). Prefer NEXT_PUBLIC_SITE_URL at build time; else request Host; else VERCEL_URL.

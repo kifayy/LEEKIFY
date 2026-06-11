@@ -71,7 +71,7 @@ function buildLanding(seed: LandingSeed): SeoBrowseLandingConfig {
         answer: `This page loads with ${v0} and ${v1} filters active to surface colleges that match ${keyword.toLowerCase()} energy from our browse directory.`,
       },
       {
-        question: "How do I find my best college personality match?",
+        question: "How do I find my best college archetype match?",
         answer:
           "Take the free PathPicker archetype quiz to discover your vibes, then browse schools or mix filters to compare fit, happiness signals, and admission odds.",
       },

@@ -1,7 +1,20 @@
+import { NextResponse, type NextRequest } from "next/server";
+
+import { BROWSE_DEV_PATH, BROWSE_PUBLIC_PATH } from "@/lib/browse-routes";
+import { isLocalDevHost } from "@/lib/dev-mode";
 import { updateSession } from "@/lib/supabase/proxy";
-import { type NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (pathname === BROWSE_DEV_PATH || pathname.startsWith(`${BROWSE_DEV_PATH}/`)) {
+    if (!isLocalDevHost(request.headers.get("host"))) {
+      const url = request.nextUrl.clone();
+      url.pathname = BROWSE_PUBLIC_PATH;
+      return NextResponse.redirect(url);
+    }
+  }
+
   return await updateSession(request);
 }
 

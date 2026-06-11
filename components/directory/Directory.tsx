@@ -19,6 +19,7 @@ import { VIBE_OPTIONS } from "@/lib/directory/vibe-options";
 import { trackBrowseEvent } from "@/lib/browse-analytics";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
 import { BROWSE_COLLEGE_COLUMNS, BROWSE_FETCH_LIMIT } from "@/lib/browse-college-select";
+import { BROWSE_DEV_PATH, BROWSE_PUBLIC_PATH } from "@/lib/browse-routes";
 
 const COLLEGES_PER_PAGE = 20;
 
@@ -198,7 +199,12 @@ export function Directory({
   useEffect(() => {
     if (urlSync.mode === "none") return;
 
-    const basePath = urlSync.mode === "landing" ? urlSync.basePath : "/browse-schools";
+    const basePath =
+      urlSync.mode === "landing"
+        ? urlSync.basePath
+        : typeof window !== "undefined" && window.location.pathname.startsWith(BROWSE_DEV_PATH)
+          ? BROWSE_DEV_PATH
+          : BROWSE_PUBLIC_PATH;
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
     if (selectedVibes.length > 0) params.set("vibes", selectedVibes.join(","));

@@ -48,7 +48,7 @@ export function buildDiscoverCopyTemplate(
       answer: why_fit,
     },
     {
-      question: "How do I find my best personality match?",
+      question: "How do I find my best archetype match?",
       answer:
         "Take the free PathPicker archetype quiz to discover your vibes, then browse schools or mix filters to compare fit, happiness signals, and admission odds.",
     },

@@ -34,7 +34,7 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
     title: "Product",
     links: [
       { href: COLLEGE_MATCH_QUIZ_URL, label: PATH_COLLEGE_MATCH_QUIZ_LABEL },
-      { href: "/browse-schools", label: "School Comparison Tool" },
+      { href: "/browse", label: "School Comparison Tool" },
       { href: COLLEGE_MATCH_QUIZ_URL, label: "Admissions Odds Tool" },
       { href: "/#deep-profile-rankings", label: "Features" },
       { href: "/#commit-with-zero-regrets", label: "How it Works" },

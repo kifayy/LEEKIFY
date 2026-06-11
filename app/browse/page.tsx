@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { BrowseSchoolsPageContent } from "@/components/browse/browse-schools-page-content";
-import { BROWSE_DEV_PATH } from "@/lib/browse-routes";
+import { Directory } from "@/components/directory/Directory";
+import { BROWSE_PUBLIC_PATH } from "@/lib/browse-routes";
 import { getBrowseCollegesInitial } from "@/lib/browse-colleges-server";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { hasBrowseFilterParams, metadataForFilterParams } from "@/lib/seo-filter-params";
@@ -11,7 +11,7 @@ type Props = { searchParams: Promise<{ search?: string; vibes?: string }> };
 
 function BrowseFallback() {
   return (
-    <div className="min-h-[50vh] flex flex-col items-center justify-center gap-2 text-gray-600">
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-2 text-gray-600">
       <div className="text-3xl">🔍</div>
       <p>Loading browse…</p>
     </div>
@@ -28,14 +28,13 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const base: Metadata = {
     title,
     description,
-    alternates: { canonical: `${baseUrl}${BROWSE_DEV_PATH}` },
-    robots: { index: false, follow: false },
+    alternates: { canonical: `${baseUrl}${BROWSE_PUBLIC_PATH}` },
     openGraph: {
       type: "website",
       siteName: "PathPicker",
       title,
       description,
-      url: `${baseUrl}${BROWSE_DEV_PATH}`,
+      url: `${baseUrl}${BROWSE_PUBLIC_PATH}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -47,12 +46,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   return metadataForFilterParams(base, hasBrowseFilterParams(sp));
 }
 
-export default async function BrowseSchoolsPage() {
+export default async function BrowsePage() {
   const initialColleges = await getBrowseCollegesInitial();
 
   return (
     <Suspense fallback={<BrowseFallback />}>
-      <BrowseSchoolsPageContent initialColleges={initialColleges} />
+      <Directory initialColleges={initialColleges} />
     </Suspense>
   );
 }
