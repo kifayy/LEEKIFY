@@ -87,7 +87,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "dark-academia-colleges",
     footerLabel: "Dark Academia Schools",
     keyword: "Dark Academia",
-    vibes: ["academic-weapon", "artsy-af"],
+    vibes: ["academic", "artsy"],
     vibeLabels: ["Academic", "Artsy"],
     metaHook: "with Gothic campuses, humanities strength, and intellectual culture",
     introExtra:
@@ -107,7 +107,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "cottagecore-colleges",
     footerLabel: "Cottagecore Schools",
     keyword: "Cottagecore",
-    vibes: ["nature-lover", "artsy-af"],
+    vibes: ["nature", "artsy"],
     vibeLabels: ["Nature", "Artsy"],
     metaHook: "with cozy campuses, green quads, and creative small-town energy",
     introExtra:
@@ -127,7 +127,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "preppy-colleges",
     footerLabel: "Preppy Schools",
     keyword: "Preppy",
-    vibes: ["academic-weapon", "entrepreneurial"],
+    vibes: ["academic", "business"],
     vibeLabels: ["Academic", "Business"],
     metaHook: "with polished campus culture, strong networks, and career-minded students",
     introExtra:
@@ -147,7 +147,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "old-money-colleges",
     footerLabel: "Old Money Schools",
     keyword: "Old Money",
-    vibes: ["academic-weapon", "entrepreneurial"],
+    vibes: ["academic", "business"],
     vibeLabels: ["Academic", "Business"],
     metaHook: "with legacy campuses, selective culture, and established alumni networks",
     introExtra:
@@ -167,7 +167,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "party-colleges",
     footerLabel: "Party Schools",
     keyword: "Party",
-    vibes: ["party-animal", "flirty"],
+    vibes: ["social", "flirty"],
     vibeLabels: ["Social", "Flirty"],
     metaHook: "known for big weekends, Greek life energy, and a social-first campus scene",
     introExtra:
@@ -187,7 +187,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "greek-life-colleges",
     footerLabel: "Greek Life Schools",
     keyword: "Greek Life",
-    vibes: ["party-animal", "sports-enthusiast"],
+    vibes: ["social", "sports"],
     vibeLabels: ["Social", "Sports"],
     metaHook: "where fraternities and sororities shape social life, philanthropy, and traditions",
     introExtra:
@@ -207,7 +207,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "frat-colleges",
     footerLabel: "Frat Schools",
     keyword: "Frat",
-    vibes: ["party-animal", "sports-enthusiast"],
+    vibes: ["social", "sports"],
     vibeLabels: ["Social", "Sports"],
     metaHook: "with strong fraternity culture, athletics, and brotherhood-driven social life",
     introExtra:
@@ -227,7 +227,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "sorority-colleges",
     footerLabel: "Sorority Schools",
     keyword: "Sorority",
-    vibes: ["party-animal", "flirty"],
+    vibes: ["social", "flirty"],
     vibeLabels: ["Social", "Flirty"],
     metaHook: "with active sorority chapters, formals, and philanthropy-driven sisterhood",
     introExtra:
@@ -247,7 +247,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "aesthetic-colleges",
     footerLabel: "Aesthetic Schools",
     keyword: "Aesthetic",
-    vibes: ["artsy-af", "creative-soul"],
+    vibes: ["artsy", "creative"],
     vibeLabels: ["Artsy", "Creative"],
     metaHook: "for visually driven campuses, design culture, and creative student life",
     introExtra:
@@ -267,7 +267,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "outdoorsy-colleges",
     footerLabel: "Outdoorsy Schools",
     keyword: "Outdoorsy",
-    vibes: ["nature-lover", "sports-enthusiast"],
+    vibes: ["nature", "sports"],
     vibeLabels: ["Nature", "Sports"],
     metaHook: "near trails, rivers, or mountains with adventure-driven student life",
     introExtra:
@@ -287,7 +287,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "beach-colleges",
     footerLabel: "Beach Schools",
     keyword: "Beach",
-    vibes: ["nature-lover", "party-animal"],
+    vibes: ["nature", "social"],
     vibeLabels: ["Nature", "Social"],
     metaHook: "on or near the coast with sun, sand, and a laid-back social scene",
     introExtra:
@@ -307,7 +307,7 @@ const LANDING_SEEDS: readonly LandingSeed[] = [
     slug: "sporty-colleges",
     footerLabel: "Sporty Schools",
     keyword: "Sporty",
-    vibes: ["sports-enthusiast", "party-animal"],
+    vibes: ["sports", "social"],
     vibeLabels: ["Sports", "Social"],
     metaHook: "where athletics, school spirit, and game-day culture define campus life",
     introExtra:

@@ -3,27 +3,21 @@ import type { DiscoverIntentType, ParsedDiscoverIntent } from "@/lib/discover/ty
 import { buildCanonicalSlug, humanIntentTitle } from "@/lib/discover/slug";
 
 const VIBE_KEYWORDS: Record<string, string[]> = {
-  "academic-weapon": [
-    "studious",
-    "academic",
-    "study",
-    "rigorous",
-    "intellectual",
-    "smart",
-    "prestigious",
-    "liberal arts",
-  ],
-  "party-animal": ["party", "partying", "social", "greek", "frat", "sorority", "tailgate", "nightlife"],
-  "nature-lover": ["nature", "outdoors", "outdoor", "hiking", "mountain", "forest", "green"],
-  "tech-savvy": ["tech", "technology", "engineering", "stem", "computer", "silicon"],
-  "artsy-af": ["artsy", "art", "creative", "design", "aesthetic"],
-  "sports-enthusiast": ["sports", "athletic", "game day", "football", "basketball"],
-  "entrepreneurial": ["business", "entrepreneur", "startup", "finance", "pre-professional"],
-  "creative-soul": ["creative", "theater", "music", "film"],
-  "wellness-focused": ["wellness", "health", "yoga", "mindful"],
-  "flirty": ["flirty", "dating", "social scene"],
-  "foodie": ["food", "foodie", "culinary"],
-  "diverse-community": ["diverse", "diversity", "inclusive"],
+  academic: ["studious", "academic", "study", "rigorous", "intellectual", "smart", "prestigious", "liberal arts"],
+  social: ["party", "partying", "social", "greek", "frat", "sorority", "tailgate", "nightlife"],
+  nature: ["nature", "outdoors", "outdoor", "hiking", "mountain", "forest", "green"],
+  tech: ["tech", "technology", "engineering", "stem", "computer", "silicon"],
+  artsy: ["artsy", "art", "creative", "design", "aesthetic"],
+  sports: ["sports", "athletic", "game day", "football", "basketball"],
+  business: ["business", "entrepreneur", "startup", "finance", "pre-professional"],
+  creative: ["creative", "theater", "music", "film"],
+  wellness: ["wellness", "health", "yoga", "mindful"],
+  flirty: ["flirty", "dating", "social scene"],
+  foodie: ["food", "foodie", "culinary"],
+  diversity: ["diverse", "diversity", "inclusive"],
+  beachy: ["beach", "beachy", "coastal", "surf"],
+  city: ["city", "urban", "downtown"],
+  chill: ["chill", "relaxed", "laid-back"],
 };
 
 function vibesFromText(text: string): string[] {
@@ -36,12 +30,12 @@ function vibesFromText(text: string): string[] {
 }
 
 const DIMENSION_TO_VIBES: Record<string, string[]> = {
-  academics: ["academic-weapon"],
-  campus: ["artsy-af"],
-  social_life: ["party-animal", "flirty"],
-  prestige: ["academic-weapon", "entrepreneurial"],
-  location: ["nature-lover"],
-  athletics: ["sports-enthusiast", "party-animal"],
+  academics: ["academic"],
+  campus: ["artsy"],
+  social_life: ["social", "flirty"],
+  prestige: ["academic", "business"],
+  location: ["nature"],
+  athletics: ["sports", "social"],
 };
 
 export function parseIntentHeuristic(input: {
@@ -70,7 +64,7 @@ export function parseIntentHeuristic(input: {
   }
 
   if (vibes.length === 0 && !location) {
-    vibes = ["academic-weapon"];
+    vibes = ["academic"];
   }
 
   const canonical_slug = buildCanonicalSlug({ vibes, location, intent_type });

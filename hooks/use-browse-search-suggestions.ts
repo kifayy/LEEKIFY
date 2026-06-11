@@ -6,7 +6,8 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { BROWSE_COLLEGE_COLUMNS } from "@/lib/browse-college-select";
 import { getCollegeHeroUrl } from "@/lib/college-hero-url";
 import { VIBE_OPTIONS } from "@/lib/directory/vibe-options";
-import { escapePostgrestIlike } from "@/lib/postgrest-ilike";
+import { collegeSearchOrFilter } from "@/lib/postgrest-ilike";
+import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
 import { US_STATE_ABBR_TO_NAME } from "@/lib/us-states";
 import { createClient } from "@/lib/supabase/client";
 import { hasEnvVars, withTimeout } from "@/lib/utils";
@@ -14,10 +15,19 @@ import type { College } from "@/types/college";
 
 export type BrowseSuggestion =
   | { kind: "vibe"; label: string; value: string; emoji: string }
-  | { kind: "college"; label: string; slug: string; location?: string | null; heroUrl?: string | null }
+  | {
+      kind: "college";
+      id: string;
+      label: string;
+      slug: string;
+      location?: string | null;
+      heroUrl?: string | null;
+    }
   | { kind: "state"; label: string; abbr: string };
 
 const QUERY_TIMEOUT_MS = 8_000;
+const COLLEGE_SUGGESTION_FETCH_LIMIT = 40;
+const COLLEGE_SUGGESTION_DISPLAY_LIMIT = 20;
 
 function matchVibes(query: string) {
   const q = query.trim().toLowerCase();
@@ -62,23 +72,21 @@ export function useBrowseSearchSuggestions(query: string, mode: "all" | "states"
       try {
         if (!hasEnvVars) throw new Error("Supabase not configured");
         const supabase = createClient();
-        const safe = escapePostgrestIlike(trimmed);
         const { data, error } = await withTimeout(
           supabase
             .from("colleges")
             .select(BROWSE_COLLEGE_COLUMNS)
-            .eq("popular", true)
-            .ilike("name", `%${safe}%`)
-            .limit(16),
+            .or(collegeSearchOrFilter(trimmed))
+            .limit(COLLEGE_SUGGESTION_FETCH_LIMIT),
           QUERY_TIMEOUT_MS,
           "College search timed out",
         );
         if (cancelled) return;
         if (error) throw error;
         const ranked = ((data ?? []) as College[])
-          .filter((c) => (c.location ?? "").trim().length > 0)
+          .filter((c) => !collegeUsesBrowseExcludedHeroImage(c))
           .sort((a, b) => a.name.length - b.name.length)
-          .slice(0, 8);
+          .slice(0, COLLEGE_SUGGESTION_DISPLAY_LIMIT);
         setColleges(ranked);
       } catch {
         if (!cancelled) setColleges([]);
@@ -102,6 +110,7 @@ export function useBrowseSearchSuggestions(query: string, mode: "all" | "states"
 
     const collegeSuggestions: BrowseSuggestion[] = colleges.map((college) => ({
       kind: "college",
+      id: college.id,
       label: college.name,
       slug: college.slug ?? college.id,
       location: college.location,

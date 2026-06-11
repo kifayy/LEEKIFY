@@ -31,6 +31,8 @@ interface SchoolGridProps {
   error?: string | null;
   hasMoreColleges?: boolean;
   revealToken?: number;
+  /** True when user has search text or vibe filters — gates empty state. */
+  hasActiveBrowseQuery?: boolean;
   onLoadMore?: () => void;
   onResetFilters?: () => void;
 }
@@ -63,6 +65,7 @@ export function SchoolGrid({
   error = null,
   hasMoreColleges = false,
   revealToken = 0,
+  hasActiveBrowseQuery = false,
   onLoadMore,
   onResetFilters,
 }: SchoolGridProps) {
@@ -102,13 +105,13 @@ export function SchoolGrid({
   useEffect(() => {
     if (revealToken <= 0) return;
     if (isLoading) return;
-    if (collegesWithMatches.length === 0) return;
+    if (collegesData.length === 0) return;
 
     setRevealResults(true);
-    const maxDelay = Math.min(collegesWithMatches.length, 12) * 55 + 500;
+    const maxDelay = Math.min(collegesData.length, 12) * 55 + 500;
     const t = window.setTimeout(() => setRevealResults(false), maxDelay);
     return () => window.clearTimeout(t);
-  }, [revealToken, isLoading, collegesWithMatches.length]);
+  }, [revealToken, isLoading, collegesData.length]);
 
   const handleSaveSchool = async (schoolId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -118,7 +121,7 @@ export function SchoolGrid({
 
   const handleResetFilters = () => onResetFilters?.();
 
-  if (isLoading && collegesWithMatches.length === 0) {
+  if (isLoading && collegesData.length === 0) {
     return (
       <div className="text-center py-12">
         <div className="text-4xl mb-4">🔍</div>
@@ -227,7 +230,9 @@ export function SchoolGrid({
         </div>
       )}
 
-      {collegesWithMatches.length === 0 && !isLoading && <NoSchoolsFound onResetFilters={handleResetFilters} />}
+      {hasActiveBrowseQuery && collegesData.length === 0 && !isLoading ? (
+        <NoSchoolsFound onResetFilters={handleResetFilters} />
+      ) : null}
     </div>
   );
 }

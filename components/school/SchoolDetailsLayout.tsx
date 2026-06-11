@@ -15,7 +15,6 @@ import { FloatingBackButton } from "./FloatingBackButton";
 import { SchoolFavoriteToastButton } from "./SchoolFavoriteToastButton";
 import { SchoolAdmissionMatchTeaser } from "./school-admission-match-teaser";
 import type { CollegeDetail } from "@/types/college-detail";
-import { sanitizeCollegeBanner } from "@/lib/sanitize-college-banner";
 import { schoolHeroImageStyle } from "@/lib/school-hero-image-variant";
 import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
 
@@ -37,7 +36,6 @@ export function SchoolDetailsLayout({
   const [studentFoodOpen, setStudentFoodOpen] = useState(true);
 
   const friday = collegeData.friday_timeline?.length ? collegeData.friday_timeline : null;
-  const bannerLogo = sanitizeCollegeBanner(collegeData.banner);
   const heroSrc = collegeData.new_image_link || collegeData.featured_image_url || "";
   const useOptimizedHero = Boolean(heroSrc && shouldUseNextImageOptimizer(heroSrc));
 
@@ -127,12 +125,6 @@ export function SchoolDetailsLayout({
                       style={schoolHeroImageStyle(collegeData.id)}
                       loading="eager"
                     />
-                  )}
-                  {bannerLogo && (
-                    <div className="absolute bottom-8 left-3 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-white/90 backdrop-blur-sm shadow-md border border-white/80 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={bannerLogo} alt="" className="w-full h-full object-contain" loading="lazy" />
-                    </div>
                   )}
                 </div>
               ) : (

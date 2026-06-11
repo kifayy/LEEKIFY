@@ -1,21 +1,11 @@
+import { LEGACY_VIBE_VALUE_ALIASES, VIBE_OPTIONS } from "@/lib/directory/vibe-options";
+
 export const VIBE_EMOJIS: Record<string, string> = {
-  "nature-lover": "🌿",
-  flirty: "💋",
-  "artsy-af": "🎨",
-  "academic-weapon": "🏛️",
-  "party-animal": "🎉",
-  "tech-savvy": "💻",
-  "sports-enthusiast": "🏈",
-  entrepreneurial: "🚀",
-  "creative-soul": "🎭",
-  "wellness-focused": "🧘",
-  "diverse-community": "🌍",
-  foodie: "🍜",
-  "career-focused": "📈",
-  "inclusive-diverse": "🌈",
-  "party-scene": "🥳",
-  "city-energy": "🌇",
-  "chill-vibes": "🧘",
-  "research-driven": "🔬",
-  "pre-professional": "💼",
+  ...Object.fromEntries(VIBE_OPTIONS.map((v) => [v.value, v.emoji])),
+  ...Object.fromEntries(
+    Object.entries(LEGACY_VIBE_VALUE_ALIASES).map(([legacy, next]) => {
+      const emoji = VIBE_OPTIONS.find((v) => v.value === next)?.emoji ?? "✨";
+      return [legacy, emoji];
+    }),
+  ),
 };

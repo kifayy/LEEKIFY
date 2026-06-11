@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Search } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { BrowseSearchPickerSheet } from "@/components/browse/browse-search-picker-sheet";
+import { BrowseSearchPickerDialog } from "@/components/browse/browse-search-picker-dialog";
 import { BrowseHatchOverlay } from "@/components/browse/browse-hatch-overlay";
 import { BrowseVibePreviewText } from "@/components/browse/browse-vibe-preview-text";
 import { VIBE_OPTIONS, type VibeOption } from "@/lib/directory/vibe-options";
@@ -20,7 +20,6 @@ import { useRotatingPreview } from "@/hooks/use-rotating-preview";
 import { cn } from "@/lib/utils";
 
 type Tab = "baby" | "search";
-
 type ActiveField = "babyA" | "babyB";
 
 const CARD_BACKGROUND = "/images/bcg.png";
@@ -47,7 +46,7 @@ function pickDisplay(pick: BrowseSearchPick | null) {
   return { emoji: "✨", text: stripLeadingEmoji(pick.label) };
 }
 
-export function BrowseMobileSearchCard({
+export function BrowseDesktopSearchCard({
   searchTerm,
   onSearchChange,
   onVibesChange,
@@ -61,17 +60,16 @@ export function BrowseMobileSearchCard({
   const [eggs, setEggs] = useState<[string, string] | null>(null);
   const [eggABump, setEggABump] = useState(0);
   const [eggBBump, setEggBBump] = useState(0);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [activeField, setActiveField] = useState<ActiveField>("babyA");
+  const [pickerQuery, setPickerQuery] = useState("");
+  const [hatching, setHatching] = useState(false);
+  const [searchDraft, setSearchDraft] = useState(searchTerm);
 
   useEffect(() => {
     const [first, second] = pickDistinctVibeMixEggs(2);
     setEggs([first, second]);
   }, []);
-
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [activeField, setActiveField] = useState<ActiveField>("babyA");
-  const [sheetQuery, setSheetQuery] = useState("");
-  const [hatching, setHatching] = useState(false);
-  const [searchDraft, setSearchDraft] = useState(searchTerm);
 
   useEffect(() => {
     setSearchDraft(searchTerm);
@@ -85,13 +83,13 @@ export function BrowseMobileSearchCard({
     return set;
   }, [isVibeDisabled, vibeOptions]);
 
-  const openSheet = (field: ActiveField) => {
+  const openPicker = (field: ActiveField) => {
     setActiveField(field);
-    setSheetQuery("");
-    setSheetOpen(true);
+    setPickerQuery("");
+    setPickerOpen(true);
   };
 
-  const sheetTitle = useMemo(() => {
+  const pickerTitle = useMemo(() => {
     return activeField === "babyA" ? "Imagine if…" : "Had a baby with…";
   }, [activeField]);
 
@@ -152,8 +150,7 @@ export function BrowseMobileSearchCard({
     onSearchChange(query);
   }, [applyFilters, babyA, babyB, onSearchChange, onVibesChange, searchDraft, tab]);
 
-  const canSubmit =
-    tab === "baby" ? Boolean(babyA && babyB) : Boolean(searchDraft.trim());
+  const canSubmit = tab === "baby" ? Boolean(babyA && babyB) : Boolean(searchDraft.trim());
 
   const handleSubmit = () => {
     if (!canSubmit || hatching) return;
@@ -177,137 +174,140 @@ export function BrowseMobileSearchCard({
   const babyBDisplay = pickDisplay(babyB) ?? previewB;
 
   return (
-    <div className="relative overflow-hidden pb-6 pt-10 lg:hidden">
-      <Image
-        src={CARD_BACKGROUND}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-56 bg-gradient-to-b from-white from-55% to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40 bg-gradient-to-t from-white via-white/85 to-transparent"
-      />
-
-      <div className="relative z-10 px-4">
-        <div className="mb-5 text-center">
-          <h2 className="font-hero text-[2.25rem] font-bold leading-[1.05] tracking-tight text-[#0C1120] sm:text-[2.5rem]">
-            Find Your
-            <br />
-            Dream School
-          </h2>
+    <div className="relative hidden overflow-hidden pb-10 pt-12 lg:-mx-4 lg:block xl:-mx-8">
+      <div className="relative mx-auto min-h-[34rem] w-full overflow-hidden rounded-[2rem] xl:min-h-[40rem]">
+        <div className="absolute inset-0 scale-[1.18]">
+          <Image
+            src={CARD_BACKGROUND}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
         </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-56 bg-gradient-to-b from-white from-55% to-transparent"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-56 bg-gradient-to-t from-white via-white/85 to-transparent"
+        />
 
-        <div className="relative px-3 pb-5 pt-1 sm:px-4">
-          <div className="relative mb-4 flex rounded-full border border-gray-100 bg-white p-1 shadow-sm">
-            <button
-              type="button"
-              onClick={() => setTab("baby")}
-              className={cn(
-                "flex flex-1 items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold transition",
-                tab === "baby" ? "bg-[#956EFE] text-white shadow-sm" : "text-gray-500",
-              )}
-            >
-              <Image
-                src="/images/incubator.png"
-                alt=""
-                width={18}
-                height={18}
-                className="shrink-0 object-contain"
-              />
-              Baby Maker
-            </button>
-            <button
-              type="button"
-              onClick={() => setTab("search")}
-              className={cn(
-                "flex flex-1 items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold transition",
-                tab === "search" ? "bg-[#956EFE] text-white shadow-sm" : "text-gray-500",
-              )}
-            >
-              <Search className="h-4 w-4" strokeWidth={2.5} />
-              Search
-            </button>
+        <div className="relative z-10 px-8 py-12 xl:px-14 xl:py-14">
+          <div className="mb-8 text-center">
+            <h2 className="font-hero text-5xl font-bold leading-[1.05] tracking-tight text-[#0C1120] xl:text-6xl">
+              Find Your
+              <br />
+              Dream School
+            </h2>
           </div>
 
-          {tab === "baby" ? (
-            <div className="relative space-y-3">
-              <VibeFieldCard
-                label="Imagine if…"
-                emoji={babyADisplay.emoji}
-                value={babyADisplay.text}
-                filled={Boolean(babyA)}
-                onClick={() => openSheet("babyA")}
-                eggSrc={eggs?.[0]}
-                eggBumpKey={eggABump}
-              />
-              <VibeFieldCard
-                label="Had a baby with…"
-                emoji={babyBDisplay.emoji}
-                value={babyBDisplay.text}
-                filled={Boolean(babyB)}
-                onClick={() => openSheet("babyB")}
-                eggSrc={eggs?.[1]}
-                eggBumpKey={eggBBump}
-              />
-            </div>
-          ) : null}
-
-          {tab === "search" ? (
-            <form
-              className="relative"
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-            >
-              <label className="block">
-                <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-400">
-                  State, city, or school
-                </span>
-                <input
-                  type="text"
-                  value={searchDraft}
-                  onChange={(e) => setSearchDraft(e.target.value)}
-                  placeholder="California, Boston, Harvard…"
-                  className="w-full rounded-2xl border border-gray-100 bg-white px-4 py-3.5 text-base text-[#0C1120] shadow-sm placeholder:text-gray-400 focus:border-[#956EFE]/40 focus:outline-none focus:ring-2 focus:ring-[#956EFE]/20"
+          <div className="mx-auto max-w-4xl">
+            <div className="relative mb-6 flex rounded-full border border-gray-100 bg-white p-1.5 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setTab("baby")}
+                className={cn(
+                  "flex flex-1 items-center justify-center gap-2 rounded-full py-4 text-base font-semibold transition xl:text-lg",
+                  tab === "baby" ? "bg-[#956EFE] text-white shadow-sm" : "text-gray-500",
+                )}
+              >
+                <Image
+                  src="/images/incubator.png"
+                  alt=""
+                  width={22}
+                  height={22}
+                  className="shrink-0 object-contain"
                 />
-              </label>
-            </form>
-          ) : null}
+                Baby Maker
+              </button>
+              <button
+                type="button"
+                onClick={() => setTab("search")}
+                className={cn(
+                  "flex flex-1 items-center justify-center gap-2 rounded-full py-4 text-base font-semibold transition xl:text-lg",
+                  tab === "search" ? "bg-[#956EFE] text-white shadow-sm" : "text-gray-500",
+                )}
+              >
+                <Search className="h-5 w-5" strokeWidth={2.5} />
+                Search
+              </button>
+            </div>
 
-          <button
-            type="button"
-            disabled={!canSubmit || hatching}
-            onClick={handleSubmit}
-            className="relative mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] py-4 text-base font-semibold text-white shadow-[0_12px_28px_rgba(149,110,254,0.35)] transition hover:bg-[#8B5CF6] disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            Search Universities
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20">
-              <ArrowRight className="h-4 w-4" />
-            </span>
-          </button>
+            {tab === "baby" ? (
+              <div className="grid gap-4 md:grid-cols-2">
+                <VibeFieldCard
+                  label="Imagine if…"
+                  emoji={babyADisplay.emoji}
+                  value={babyADisplay.text}
+                  filled={Boolean(babyA)}
+                  onClick={() => openPicker("babyA")}
+                  eggSrc={eggs?.[0]}
+                  eggBumpKey={eggABump}
+                />
+                <VibeFieldCard
+                  label="Had a baby with…"
+                  emoji={babyBDisplay.emoji}
+                  value={babyBDisplay.text}
+                  filled={Boolean(babyB)}
+                  onClick={() => openPicker("babyB")}
+                  eggSrc={eggs?.[1]}
+                  eggBumpKey={eggBBump}
+                />
+              </div>
+            ) : null}
 
-          <p className="relative mt-3 text-center text-xs text-gray-400">
-            Discover schools that match your future 💜
-          </p>
+            {tab === "search" ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+              >
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold uppercase tracking-wide text-gray-400">
+                    State, city, or school
+                  </span>
+                  <input
+                    type="text"
+                    value={searchDraft}
+                    onChange={(e) => setSearchDraft(e.target.value)}
+                    placeholder="California, Boston, Harvard…"
+                    className="w-full rounded-2xl border border-gray-100 bg-white px-5 py-4 text-lg text-[#0C1120] shadow-sm placeholder:text-gray-400 focus:border-[#956EFE]/40 focus:outline-none focus:ring-2 focus:ring-[#956EFE]/20"
+                  />
+                </label>
+              </form>
+            ) : null}
+
+            <button
+              type="button"
+              disabled={!canSubmit || hatching}
+              onClick={handleSubmit}
+              className="relative mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-[#956EFE] py-5 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(149,110,254,0.35)] transition hover:bg-[#8B5CF6] disabled:cursor-not-allowed disabled:opacity-40 xl:text-xl"
+            >
+              Search Universities
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20">
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </button>
+
+            <p className="relative mt-4 text-center text-sm text-gray-400">
+              Discover schools that match your future 💜
+            </p>
+          </div>
         </div>
       </div>
 
-      <BrowseHatchOverlay active={hatching} onFinished={handleHatchFinished} />
+      <BrowseHatchOverlay active={hatching} onFinished={handleHatchFinished} mobileOnly={false} />
 
-      <BrowseSearchPickerSheet
-        open={sheetOpen}
-        title={sheetTitle}
-        query={sheetQuery}
-        onQueryChange={setSheetQuery}
-        onClose={() => setSheetOpen(false)}
+      <BrowseSearchPickerDialog
+        open={pickerOpen}
+        title={pickerTitle}
+        query={pickerQuery}
+        onQueryChange={setPickerQuery}
+        onClose={() => setPickerOpen(false)}
         onSelect={handlePick}
         browseTabs={BABY_MAKER_BROWSE_TABS}
         disabledVibeValues={disabledVibeValues}
@@ -319,7 +319,7 @@ export function BrowseMobileSearchCard({
 function BrushUnderline({ color }: { color: string }) {
   return (
     <svg
-      className="pointer-events-none absolute -bottom-1 left-0 h-[0.55rem] w-[108%] max-w-none -translate-x-[3%]"
+      className="pointer-events-none absolute -bottom-1 left-0 h-[0.65rem] w-[108%] max-w-none -translate-x-[3%]"
       viewBox="0 0 120 8"
       preserveAspectRatio="none"
       aria-hidden
@@ -360,7 +360,7 @@ function EggSlot({
     <span
       className={cn(
         "relative shrink-0 overflow-visible pointer-events-none",
-        filled ? "h-14 w-14" : "h-11 w-11 opacity-85",
+        filled ? "h-16 w-16 xl:h-[4.5rem] xl:w-[4.5rem]" : "h-12 w-12 opacity-85",
       )}
     >
       {src ? (
@@ -422,24 +422,24 @@ function VibeFieldCard({
     <button
       type="button"
       onClick={handleClick}
-      className="flex w-full items-center gap-3 rounded-[1.25rem] border border-gray-100 bg-white px-3.5 py-4 text-left shadow-[0_8px_24px_rgba(12,17,32,0.06)] transition active:scale-[0.99]"
+      className="flex w-full items-center gap-4 rounded-[1.25rem] border border-gray-100 bg-white px-5 py-5 text-left shadow-[0_8px_24px_rgba(12,17,32,0.06)] transition hover:scale-[1.01] active:scale-[0.99]"
     >
       <span
         className={cn(
-          "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[1.35rem]",
+          "flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-[1.75rem] xl:h-16 xl:w-16 xl:text-[2rem]",
           styles.iconBg,
         )}
       >
         {emoji}
       </span>
       <span className="min-w-0 flex-1">
-        <span className={cn("block text-[11px] font-bold uppercase tracking-[0.14em]", styles.label)}>
+        <span className={cn("block text-xs font-bold uppercase tracking-[0.14em] xl:text-sm", styles.label)}>
           {label.replace(/…$/, "").replace(/\.$/, "")}
         </span>
-        <span className="relative mt-1 inline-block max-w-full">
+        <span className="relative mt-1.5 inline-block max-w-full">
           <span
             className={cn(
-              "block truncate font-hero text-[1.65rem] font-black leading-none tracking-[-0.02em]",
+              "block truncate font-hero text-[1.85rem] font-black leading-none tracking-[-0.02em] xl:text-[2.15rem]",
               filled ? "text-[#0C1120]" : "text-gray-400",
             )}
           >

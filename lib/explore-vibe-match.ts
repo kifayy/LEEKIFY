@@ -65,12 +65,13 @@ function textFieldsSuggestVibe(college: College, uiVibe: string): boolean {
 }
 
 /**
- * OR-style Explore match: tags (browse map), text fields, or party-school name list for party-animal.
+ * OR-style Explore match: tags (browse map), text fields, or party-school name list for social vibes.
  */
 export function exploreCollegeMatchesVibe(college: College, vibeId: string): boolean {
   if (collegeSatisfiesBrowseVibe(college.vibe_tags ?? undefined, vibeId)) return true;
   if (textFieldsSuggestVibe(college, vibeId)) return true;
   if (vibeId === "party-animal" && isKnownPartySchoolName(college.name)) return true;
+  if (vibeId === "social" && isKnownPartySchoolName(college.name)) return true;
   return false;
 }
 

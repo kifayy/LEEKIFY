@@ -1,13 +1,19 @@
 export type PopularBrowseTab = "vibes" | "universities" | "celebrities";
 
 export const POPULAR_BROWSE_TABS: { id: PopularBrowseTab; label: string }[] = [
-  { id: "vibes", label: "Vibes" },
+  { id: "vibes", label: "Aesthetic" },
   { id: "universities", label: "Universities" },
   { id: "celebrities", label: "Celebrities" },
 ];
 
+/** Baby Maker picker — aesthetic and celebrities only (no universities). */
+export const BABY_MAKER_BROWSE_TABS: readonly PopularBrowseTab[] = ["vibes", "celebrities"];
+
+/** @deprecated Use BABY_MAKER_BROWSE_TABS */
+export const BABY_PARTNER_BROWSE_TABS = BABY_MAKER_BROWSE_TABS;
+
 export const POPULAR_BROWSE_TAB_PLACEHOLDER: Record<PopularBrowseTab, string> = {
-  vibes: "Search vibes",
+  vibes: "Search aesthetic",
   universities: "Search universities",
   celebrities: "Search celebrities",
 };

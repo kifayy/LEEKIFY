@@ -1,165 +1,110 @@
 import type { College } from "@/types/college";
+import { LEGACY_VIBE_VALUE_ALIASES, resolveVibeValue } from "@/lib/directory/vibe-options";
+
+function slugTokens(slug: string, ...extras: string[]): readonly string[] {
+  const label = slug.replace(/-/g, " ");
+  return [slug, label, ...extras];
+}
 
 /**
- * Maps each browse-chip slug to tokens that often appear in `colleges.vibe_tags`
- * (keywords, slug, labels). Keeps filters working when DB tags don’t use the same
- * strings as the UI `value`.
+ * Maps each browse-chip slug to tokens that often appear in `colleges.vibe_tags`.
  */
 export const BROWSE_VIBE_TO_DB_TOKENS: Record<string, readonly string[]> = {
-  "nature-lover": [
-    "nature-lover",
-    "nature",
-    "outdoor",
-    "outdoors",
-    "green",
-    "environmental",
-    "sustainability",
-    "hiking",
-    "environment",
-    "tree",
-    "trees",
-    "park",
-    "ecology",
-    "🌿 Nature-Lover",
-    "Nature-Lover",
-  ],
-  flirty: [
-    "flirty",
-    "flirtatious",
+  flirty: ["flirty", "flirtatious", "dating", "vibrant", "lively", "fun"],
+  social: [
     "social",
-    "dating",
-    "vibrant",
-    "lively",
-    "fun",
+    "party",
+    "party-animal",
     "nightlife",
+    "greek",
+    "fraternity",
+    "sorority",
+    "tailgate",
+    "fun-loving",
+    "🎉 Fun-loving",
+    "Fun-loving",
   ],
-  "artsy-af": [
-    "artsy-af",
-    "artsy",
-    "arts",
-    "studio",
-    "gallery",
-    "design",
-    "theater",
-    "theatre",
-    "museum",
-    "🎨 Creative Spirit",
-    "Creative Spirit",
-  ],
-  "academic-weapon": [
-    "academic-weapon",
+  chill: ["chill", "relaxed", "laid-back", "easygoing", "low-key", "calm"],
+  trendy: ["trendy", "trend", "fashion", "stylish", "hip", "modern"],
+  driven: ["driven", "ambitious", "motivated", "goal-oriented", "hardworking", "grit"],
+  preppy: ["preppy", "prep", "classic", "collegiate", "ivy", "polished"],
+  edgy: ["edgy", "alternative", "underground", "bold", "dark"],
+  bookworm: ["bookworm", "reading", "literary", "library", "studious", "books"],
+  academic: [
     "academic",
+    "academic-weapon",
     "academics",
     "rigorous",
     "intellectual",
     "scholarly",
-    "studious",
     "research",
     "honors",
     "📚 Academic Excellence",
     "Academic Excellence",
   ],
-  "party-animal": [
-    "party-animal",
-    "party",
-    "social",
-    "nightlife",
-    "greek",
-    "fraternity",
-    "sorority",
-    "fun",
-    "lively",
-    "vibrant",
-    "🎉 Fun-loving",
-    "Fun-loving",
-  ],
-  "tech-savvy": [
-    "tech-savvy",
-    "tech",
-    "technology",
-    "stem",
-    "engineering",
-    "innovation",
-    "coding",
-    "computer",
-    "software",
-    "silicon",
-    "🔬 Innovation & Tech",
-    "Innovation & Tech",
-  ],
-  "sports-enthusiast": [
-    "sports-enthusiast",
-    "sports",
-    "athletics",
-    "athletic",
-    "football",
-    "basketball",
-    "ncaa",
-    "varsity",
-    "stadium",
-    "game day",
-  ],
-  entrepreneurial: [
-    "entrepreneurial",
-    "entrepreneurship",
-    "startup",
-    "startups",
-    "business",
-    "venture",
-    "innovation",
-    "💼 Career-focused",
-    "Career-focused",
-  ],
-  "creative-soul": [
-    "creative-soul",
-    "creative",
-    "creativity",
-    "performing",
-    "music",
-    "film",
-    "writing",
-    "drama",
-  ],
-  "wellness-focused": [
-    "wellness-focused",
-    "wellness",
-    "wellbeing",
-    "well-being",
-    "mindful",
-    "yoga",
-    "balance",
-    "mental health",
-    "zen",
-    "🧘 Mindful & Balanced",
-    "Mindful & Balanced",
-  ],
-  "diverse-community": [
-    "diverse-community",
-    "diverse",
-    "diversity",
-    "inclusive",
-    "inclusion",
-    "multicultural",
-    "international",
-    "global",
-    "🌈 Inclusive & Open-minded",
-    "Inclusive & Open-minded",
-    "🌍 Adventurous",
-  ],
-  foodie: [
-    "foodie",
-    "food",
-    "dining",
-    "culinary",
-    "restaurant",
-    "cafeteria",
-    "farm",
-    "🍜",
-  ],
+  creative: ["creative", "creative-soul", "creativity", "performing", "writing", "drama"],
+  artsy: ["artsy", "artsy-af", "arts", "art", "studio", "gallery", "design", "theater", "theatre", "museum"],
+  wellness: ["wellness", "wellness-focused", "wellbeing", "yoga", "mindful", "mental health", "balance", "zen"],
+  tech: ["tech", "tech-savvy", "technology", "stem", "engineering", "coding", "computer", "software", "silicon"],
+  business: ["business", "entrepreneurial", "entrepreneurship", "startup", "finance", "venture", "career-focused"],
+  sports: ["sports", "sports-enthusiast", "athletics", "athletic", "football", "basketball", "varsity", "game day"],
+  foodie: ["foodie", "food", "dining", "culinary", "restaurant", "cafeteria"],
+  nature: ["nature", "nature-lover", "green", "environmental", "sustainability", "ecology", "trees", "park"],
+  outdoorsy: ["outdoorsy", "outdoor", "outdoors", "hiking", "camping", "adventure", "climbing", "trail"],
+  music: ["music", "musical", "band", "orchestra", "concert", "audio"],
+  gamer: ["gamer", "gaming", "esports", "video games", "game design"],
+  luxury: ["luxury", "upscale", "premium", "exclusive", "elite"],
+  international: ["international", "global", "study abroad", "world", "multicultural"],
+  diversity: ["diversity", "diverse", "diverse-community", "inclusive", "inclusion", "multicultural", "🌈 Inclusive"],
+  "school-spirit": ["school spirit", "school-spirit", "pride", "tradition", "alumni", "mascot"],
+  film: ["film", "cinema", "movie", "screenwriting", "filmmaking"],
+  minimalist: ["minimalist", "minimal", "simple", "clean", "understated"],
+  spiritual: ["spiritual", "faith", "meditation", "religious", "mindfulness"],
+  "dark-academia": ["dark academia", "dark-academia", "gothic", "classic literature", "candlelit"],
+  "light-academia": ["light academia", "light-academia", "soft academic", "poetry", "sunlit"],
+  "clean-girl": ["clean girl", "clean-girl", "effortless", "natural beauty", "skincare"],
+  "it-girl": ["it girl", "it-girl", "glam", "influencer", "mainstream chic"],
+  "girl-next-door": ["girl next door", "girl-next-door", "wholesome", "sweet", "approachable"],
+  "soft-boy": ["soft boy", "soft-boy", "gentle", "sensitive", "cozy"],
+  "golden-retriever": ["golden retriever", "golden-retriever", "friendly", "outgoing", "sunshine"],
+  "black-cat": ["black cat", "black-cat", "mysterious", "introverted", "moody"],
+  "main-character": ["main character", "main-character", "protagonist", "center stage", "spotlight"],
+  "coastal-grandmother": ["coastal grandmother", "coastal-grandmother", "linen", "neutral", "seaside calm"],
+  cottagecore: ["cottagecore", "cottage", "rustic", "pastoral", "handmade"],
+  fairycore: ["fairycore", "fairy", "whimsical", "enchanted", "ethereal"],
+  barbiecore: ["barbiecore", "barbie", "pink", "playful glam"],
+  "old-money": ["old money", "old-money", "prestige", "heritage", "quiet luxury"],
+  "indie-sleaze": ["indie sleaze", "indie-sleaze", "indie", "gritty cool", "nightlife indie"],
+  y2k: ["y2k", "2000s", "retro tech", "nostalgic"],
+  grunge: ["grunge", "grungy", "flannel", "90s rock"],
+  boho: ["boho", "bohemian", "free spirit", "eclectic"],
+  streetwear: ["streetwear", "street style", "sneakers", "urban fashion"],
+  royalcore: ["royalcore", "royal", "regal", "palace", "aristocratic"],
+  kawaii: ["kawaii", "cute", "japanese pop culture", "pastel cute"],
+  cybercore: ["cybercore", "cyber", "futuristic", "digital", "neon"],
+  "academia-core": ["academia core", "academia-core", "campus aesthetic", "collegiate core"],
+  beachy: ["beachy", "beach", "ocean", "surf", "sand", "coastal living"],
+  coastal: ["coastal", "coast", "shoreline", "seaside", "harbor"],
+  city: ["city", "urban", "metropolitan", "downtown", "skyline"],
+  suburban: ["suburban", "suburb", "neighborhood", "family-friendly"],
+  mountain: ["mountain", "mountains", "alpine", "ski", "high elevation"],
+  desert: ["desert", "arid", "southwest", "cactus", "dry climate"],
+  southern: ["southern", "south", "hospitality", "warm climate south"],
+  "west-coast": ["west coast", "west-coast", "california", "pacific", "palm"],
+  "east-coast": ["east coast", "east-coast", "northeast", "new york", "boston"],
+  "small-town": ["small town", "small-town", "rural", "close-knit", "hometown"],
 };
 
+/** Legacy slug entries so old URLs still match. */
+for (const [legacy, next] of Object.entries(LEGACY_VIBE_VALUE_ALIASES)) {
+  if (!BROWSE_VIBE_TO_DB_TOKENS[legacy]) {
+    BROWSE_VIBE_TO_DB_TOKENS[legacy] = BROWSE_VIBE_TO_DB_TOKENS[next] ?? slugTokens(legacy, next);
+  }
+}
+
 function tokensForUiVibe(uiVibe: string): readonly string[] {
-  return BROWSE_VIBE_TO_DB_TOKENS[uiVibe] ?? [uiVibe];
+  const resolved = resolveVibeValue(uiVibe);
+  return BROWSE_VIBE_TO_DB_TOKENS[resolved] ?? BROWSE_VIBE_TO_DB_TOKENS[uiVibe] ?? slugTokens(resolved);
 }
 
 /** Deduped list of DB tokens to OR together in PostgREST `vibe_tags.cs.{…}` filters. */
@@ -203,7 +148,6 @@ export function collegeSatisfiesBrowseVibe(schoolTags: string[] | null | undefin
     if (!tok) continue;
     for (const st of normSchool) {
       if (st === tok) return true;
-      // Avoid short tokens matching inside unrelated words (e.g. "art" in "party").
       if (tok.length >= 5 && st.includes(tok)) return true;
       if (st.length >= 5 && tok.includes(st)) return true;
     }

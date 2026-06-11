@@ -2,15 +2,13 @@
 
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useVibeFilteredColleges } from "@/hooks/useVibeFilteredColleges";
 import { createClient } from "@/lib/supabase/client";
 import type { College } from "@/types/college";
+import { BrowseDesktopSearchCard } from "@/components/browse/browse-desktop-search-card";
 import { BrowseMobileSearchCard } from "@/components/browse/browse-mobile-search-card";
 import { SchoolGrid } from "@/components/directory/SchoolGrid";
-import { VibeMixer } from "@/components/directory/VibeMixer";
-import { Lock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useCareerPersonalityStatus } from "@/hooks/useCareerPersonalityStatus";
 import { collegeUsesBrowseExcludedHeroImage } from "@/lib/school-hero-image-variant";
@@ -82,18 +80,20 @@ export function Directory({
   const [resultsRevealToken, setResultsRevealToken] = useState(0);
 
   const mobileResultsRef = useRef<HTMLDivElement>(null);
+  const desktopResultsRef = useRef<HTMLDivElement>(null);
   const pendingResultsScrollRef = useRef(false);
 
   const vibeFilterResult = useVibeFilteredColleges(selectedVibes, debouncedSearchTerm);
 
-  const scrollToMobileResults = useCallback(() => {
-    const el = mobileResultsRef.current;
+  const scrollToResults = useCallback(() => {
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const el = isDesktop ? desktopResultsRef.current : mobileResultsRef.current;
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY + 12;
     window.scrollTo({ top, behavior: "smooth" });
   }, []);
 
-  const handleMobileSearchComplete = useCallback(() => {
+  const handleSearchComplete = useCallback(() => {
     setResultsRevealToken((t) => t + 1);
     pendingResultsScrollRef.current = true;
   }, []);
@@ -106,17 +106,19 @@ export function Directory({
     if (resultsLoading) return;
 
     pendingResultsScrollRef.current = false;
-    const t = window.setTimeout(scrollToMobileResults, 120);
+    const t = window.setTimeout(scrollToResults, 120);
     return () => window.clearTimeout(t);
   }, [
     resultsRevealToken,
     loading,
     vibeFilterResult.loading,
     selectedVibes.length,
-    scrollToMobileResults,
+    scrollToResults,
   ]);
 
   const selectedVibesKey = useMemo(() => [...selectedVibes].sort().join(","), [selectedVibes]);
+  const hasActiveBrowseQuery =
+    selectedVibes.length > 0 || debouncedSearchTerm.trim().length > 0;
 
   /** Last URL query we applied to state — avoids pushing stale vibes/search back after dev pills. */
   const appliedUrlKeyRef = useRef<string | null>(null);
@@ -296,12 +298,6 @@ export function Directory({
   const isVibeDisabled = (vibe: { value: string; requiresQuiz?: boolean }) =>
     Boolean(vibe.requiresQuiz && (!user || !hasCompletedCareerQuiz));
 
-  const toggleVibe = (value: string) => {
-    setSelectedVibes((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : prev.length < 2 ? [...prev, value] : [prev[0]!, value],
-    );
-  };
-
   return (
     <div className="min-h-screen bg-white pt-0 flex flex-col" data-scroll-container>
       <div className="container mx-auto px-4 pb-8 pt-0 sm:py-12 max-w-7xl my-0 flex-1 w-full">
@@ -313,7 +309,7 @@ export function Directory({
               onVibesChange={setSelectedVibes}
               vibeOptions={vibeOptions}
               isVibeDisabled={isVibeDisabled}
-              onSearchComplete={handleMobileSearchComplete}
+              onSearchComplete={handleSearchComplete}
             />
           ) : (
             <div className="px-4">
@@ -335,67 +331,36 @@ export function Directory({
           )}
         </div>
 
-        <div className="hidden lg:flex lg:gap-8">
+        <div className="hidden lg:block">
           {showVibeMixer ? (
-          <div className="w-80 flex-shrink-0">
-            <div className="mb-8">
-              <VibeMixer
-                selectedVibes={selectedVibes}
-                onVibeChange={setSelectedVibes}
-                vibeOptions={vibeOptions}
-                size="compact"
-              />
-            </div>
-            <div className="mb-8">
-              <div className="grid grid-cols-2 gap-2">
-                {vibeOptions.map((vibe) => (
-                  <Button
-                    key={vibe.value}
-                    variant="outline"
-                    size="sm"
-                    type="button"
-                    onClick={() => {
-                      if (isVibeDisabled(vibe)) return;
-                      toggleVibe(vibe.value);
-                    }}
-                    disabled={isVibeDisabled(vibe)}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-xl font-medium transition-all duration-300 ${
-                      selectedVibes.includes(vibe.value)
-                        ? "bg-[#A084FF] text-white border-[#A084FF] shadow-lg hover:bg-[#8B6CF7] hover:shadow-xl"
-                        : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 shadow-sm hover:shadow-md"
-                    } ${isVibeDisabled(vibe) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-                  >
-                    {isVibeDisabled(vibe) && <Lock className="w-3 h-3" />}
-                    <span className={`text-sm font-medium ${selectedVibes.includes(vibe.value) ? "text-white" : ""}`}>
-                      {vibe.label}
-                    </span>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-          ) : null}
-
-          <div className="flex-1">
-            <div className="mb-8">
-              <div className="max-w-2xl">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search schools..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 text-gray-700 placeholder-gray-400 bg-white rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-200 text-3xl font-light"
-                  />
+            <BrowseDesktopSearchCard
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onVibesChange={setSelectedVibes}
+              vibeOptions={vibeOptions}
+              isVibeDisabled={isVibeDisabled}
+              onSearchComplete={handleSearchComplete}
+            />
+          ) : (
+            <div className="mb-8 max-w-2xl">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
                 </div>
+                <input
+                  type="text"
+                  placeholder="Search schools..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full rounded-2xl bg-white py-4 pl-12 pr-4 text-3xl font-light text-gray-700 placeholder-gray-400 shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+                />
               </div>
             </div>
+          )}
 
+          <div ref={desktopResultsRef} className="scroll-mt-8 mt-10">
             <SchoolGrid
               colleges={colleges}
               selectedVibes={selectedVibes}
@@ -403,6 +368,8 @@ export function Directory({
               loading={loading}
               error={error}
               hasMoreColleges={hasMoreColleges}
+              revealToken={resultsRevealToken}
+              hasActiveBrowseQuery={hasActiveBrowseQuery}
               onLoadMore={() => setCurrentPage((p) => p + 1)}
               onResetFilters={() => {
                 setSearchTerm("");
@@ -422,6 +389,7 @@ export function Directory({
             error={error}
             hasMoreColleges={hasMoreColleges}
             revealToken={resultsRevealToken}
+            hasActiveBrowseQuery={hasActiveBrowseQuery}
             onLoadMore={() => setCurrentPage((p) => p + 1)}
             onResetFilters={() => {
               setSearchTerm("");

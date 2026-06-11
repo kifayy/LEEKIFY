@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo } from "react";
 
+import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { parseHumanStats } from "@/components/school/HumanStatsPanel";
-import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import type { CollegeDetail } from "@/types/college-detail";
 
 function seededPercent(seed: string, min: number, max: number): number {
@@ -26,7 +25,6 @@ function BlurredDonut({
   titleLine: string;
   gradId: string;
 }) {
-  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const size = 148;
   const stroke = 10;
   const r = (size - stroke) / 2;
@@ -76,14 +74,11 @@ function BlurredDonut({
           </div>
         </div>
         <div className="absolute inset-0 flex items-center justify-center px-2">
-          <Link
-            href={collegeMatchQuizUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <CollegeMatchQuizLink
             className="max-w-[min(100%,200px)] rounded-full border border-gray-200/90 bg-white px-3 py-2 text-center text-[11px] font-semibold leading-tight text-gray-900 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition hover:bg-gray-50 sm:text-xs"
           >
             Unlock Full Stats
-          </Link>
+          </CollegeMatchQuizLink>
         </div>
       </div>
     </div>

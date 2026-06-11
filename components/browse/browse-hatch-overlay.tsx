@@ -13,9 +13,11 @@ const EXIT_MS = 380;
 type Props = {
   active: boolean;
   onFinished: () => void;
+  /** When true (default), overlay is mobile-only. Set false for desktop hatch. */
+  mobileOnly?: boolean;
 };
 
-export function BrowseHatchOverlay({ active, onFinished }: Props) {
+export function BrowseHatchOverlay({ active, onFinished, mobileOnly = true }: Props) {
   const [mounted, setMounted] = useState(false);
   const [presented, setPresented] = useState(false);
   const [exiting, setExiting] = useState(false);
@@ -57,7 +59,8 @@ export function BrowseHatchOverlay({ active, onFinished }: Props) {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[200] flex flex-col items-center justify-center lg:hidden",
+        "fixed inset-0 z-[200] flex flex-col items-center justify-center",
+        mobileOnly && "lg:hidden",
         "backdrop-blur-xl transition-all duration-300",
         exiting ? "bg-white/0 opacity-0" : "bg-white/55 opacity-100",
       )}
@@ -71,7 +74,7 @@ export function BrowseHatchOverlay({ active, onFinished }: Props) {
           exiting && "duration-[380ms] ease-in",
         )}
       >
-        <div className="h-[min(78vw,22rem)] w-[min(78vw,22rem)]">
+        <div className="h-[min(78vw,22rem)] w-[min(78vw,22rem)] lg:h-80 lg:w-80">
           {presented ? (
             <DotLottieReact src={HATCH_LOTTIE_SRC} autoplay loop={false} className="h-full w-full" />
           ) : null}

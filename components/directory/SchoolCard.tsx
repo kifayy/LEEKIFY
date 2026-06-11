@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginToSaveSchoolDialog } from "@/components/schools/login-to-save-dialog";
 import { MapPin, Heart, ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useSchoolMatchScore } from "@/hooks/useSchoolMatchScore";
 import { MatchBreakdownModal } from "./MatchBreakdownModal";
@@ -19,9 +19,37 @@ import {
 } from "@/lib/school-card-fit-copy";
 import { getSchoolPageHref } from "@/lib/school-page-href";
 import { trackBrowseEvent } from "@/lib/browse-analytics";
+import { cn } from "@/lib/utils";
 
 /** `sizes` for directory grid: 1 / 2 / 3 columns (~full-bleed card image). */
 const SCHOOL_CARD_HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
+
+const BROWSE_TAG_STYLES = [
+  "border-[#DDD6FE] bg-[#EDE9FE] text-[#6D28D9]",
+  "border-[#BBF7D0] bg-[#DCFCE7] text-[#15803D]",
+  "border-[#BAE6FD] bg-[#E0F2FE] text-[#0369A1]",
+  "border-[#FBCFE8] bg-[#FCE7F3] text-[#BE185D]",
+  "border-[#FDE68A] bg-[#FEF3C7] text-[#B45309]",
+] as const;
+
+function hashSeed(seed: string): number {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  }
+  return hash || 1;
+}
+
+function shuffleBrowseTagStyles(seed: string): (typeof BROWSE_TAG_STYLES)[number][] {
+  const arr = [...BROWSE_TAG_STYLES];
+  let state = hashSeed(seed);
+  for (let i = arr.length - 1; i > 0; i--) {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    const j = state % (i + 1);
+    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+  }
+  return arr;
+}
 
 interface SchoolCardProps {
   school: {
@@ -190,10 +218,23 @@ export function SchoolCard({
   /** Pre-sized college heroes: serve from GCS CDN directly (no `/_next/image` fan-out). */
   const serveHeroFromCdn = Boolean(heroSrc && shouldServeImageDirectFromCdn(heroSrc));
 
+  const browseCard = hideFitCopy;
+  const browseTagStyles = useMemo(
+    () => (browseCard ? shuffleBrowseTagStyles(school.id) : []),
+    [browseCard, school.id],
+  );
+
   return (
     <>
-      <div className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white rounded-2xl overflow-hidden relative h-full border border-gray-100 shadow-sm">
-        <div className={`relative ${imageHeight} overflow-hidden`}>
+      <div
+        className={cn(
+          "group relative h-full overflow-hidden bg-white transition-all duration-300",
+          browseCard
+            ? "rounded-[1.25rem] border border-gray-100 shadow-[0_8px_24px_rgba(12,17,32,0.06)] hover:shadow-[0_12px_32px_rgba(12,17,32,0.08)]"
+            : "rounded-2xl border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-xl",
+        )}
+      >
+        <div className={cn("relative overflow-hidden", imageHeight)}>
           <Link href={schoolHref} className="block h-full w-full" aria-label={`View ${school.name}`} onClick={trackClick}>
             {showHero ? (
               useNextImage ? (
@@ -233,15 +274,25 @@ export function SchoolCard({
             )}
           </Link>
 
+          {browseCard ? (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-black/35 via-black/10 to-transparent"
+            />
+          ) : null}
+
           {!hideHeartButton && (
             <button
               type="button"
               onClick={handleSaveClick}
-              className={`absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 ${
+              className={cn(
+                "absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300",
                 isSaved
-                  ? "bg-red-500 text-white hover:bg-red-600 shadow-lg"
-                  : "bg-white/90 text-gray-400 hover:bg-white hover:text-red-500 shadow-md"
-              }`}
+                  ? "bg-red-500 text-white shadow-lg hover:bg-red-600"
+                  : browseCard
+                    ? "bg-white/95 text-gray-400 shadow-[0_4px_12px_rgba(12,17,32,0.12)] hover:bg-white hover:text-red-500"
+                    : "bg-white/90 text-gray-400 shadow-md hover:bg-white hover:text-red-500",
+              )}
               title={isSaved ? "Remove from saved" : "Save school"}
             >
               <Heart className={`h-5 w-5 ${isSaved ? "fill-current" : ""}`} />
@@ -251,25 +302,51 @@ export function SchoolCard({
           {!hideExploreButton && buttonPosition === "overlay" && (
             <Button
               asChild
-              className="absolute bottom-3 right-3 z-20 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:from-[#9575ff] hover:to-[#5d4ec7] hover:shadow-xl"
+              className="absolute bottom-3 right-3 z-20 flex items-center justify-center gap-2 rounded-full bg-[#956EFE] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(149,110,254,0.35)] transition hover:bg-[#8B5CF6]"
             >
               <Link href={schoolHref} onClick={trackClick}>
                 {buttonText}
-                <ArrowRight className="h-4 w-4" />
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
               </Link>
             </Button>
           )}
         </div>
 
-        <div className={`${compactPadding ? "p-1.5 sm:p-3" : "p-4 sm:p-6"} overflow-hidden`}>
-          <div className={compactPadding ? "mb-1 sm:mb-2" : "mb-4"}>
-            <h3 className="font-bold text-gray-900 text-left text-base sm:text-lg lg:text-xl mb-0.5 sm:mb-1 break-words leading-tight">
-              <Link href={schoolHref} className="hover:text-[#6C5DD3] transition-colors" onClick={trackClick}>
+        <div
+          className={cn(
+            "overflow-hidden",
+            browseCard ? "px-3.5 py-4 sm:px-4" : compactPadding ? "p-1.5 sm:p-3" : "p-4 sm:p-6",
+          )}
+        >
+          <div className={cn(browseCard ? "mb-3" : compactPadding ? "mb-1 sm:mb-2" : "mb-4")}>
+            <h3
+              className={cn(
+                "mb-0.5 text-left break-words leading-tight sm:mb-1",
+                browseCard
+                  ? "font-hero text-lg font-black tracking-[-0.02em] text-[#0C1120] sm:text-xl"
+                  : "text-base font-bold text-gray-900 sm:text-lg lg:text-xl",
+              )}
+            >
+              <Link
+                href={schoolHref}
+                className={cn(
+                  "transition-colors",
+                  browseCard ? "hover:text-[#956EFE]" : "hover:text-[#6C5DD3]",
+                )}
+                onClick={trackClick}
+              >
                 {school.name}
               </Link>
             </h3>
-            <div className="flex items-center gap-1 text-gray-500 text-left text-xs sm:text-sm">
-              <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <div
+              className={cn(
+                "flex items-center gap-1 text-left",
+                browseCard ? "text-xs text-gray-400" : "text-xs text-gray-500 sm:text-sm",
+              )}
+            >
+              <MapPin className={cn("shrink-0", browseCard ? "h-3.5 w-3.5" : "h-3 w-3 sm:h-4 sm:w-4")} />
               <span className="break-words">{school.location}</span>
             </div>
           </div>
@@ -280,7 +357,7 @@ export function SchoolCard({
             </p>
           ) : null}
 
-          {school.personality_line && !fitReason ? (
+          {!hideFitCopy && school.personality_line && !fitReason ? (
             <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-4 line-clamp-2 sm:line-clamp-4 italic break-words overflow-wrap-anywhere leading-relaxed">
               {school.personality_line}
             </p>
@@ -291,12 +368,17 @@ export function SchoolCard({
           ) : null}
 
           {!hideEmojiTags && emojiDescElements.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className={cn("flex flex-wrap gap-2", browseCard ? "mb-0" : "mb-4")}>
               {emojiDescElements.slice(0, 3).map((tag, index) => (
                 <Badge
                   key={index}
                   variant="secondary"
-                  className="text-xs font-medium shadow-none px-3 py-1.5 border border-gray-200 bg-white text-gray-800"
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-semibold shadow-none",
+                    browseCard
+                      ? cn("rounded-full border", browseTagStyles[index % browseTagStyles.length])
+                      : "border border-gray-200 bg-white text-gray-800",
+                  )}
                 >
                   {tag}
                 </Badge>
@@ -307,11 +389,13 @@ export function SchoolCard({
           {!hideExploreButton && buttonPosition === "bottom" && (
             <Button
               asChild
-              className="w-full mt-4 px-4 py-2 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#A084FF] to-[#6C5DD3] hover:from-[#9575ff] hover:to-[#5d4ec7] text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#956EFE] py-4 text-base font-semibold text-white shadow-[0_12px_28px_rgba(149,110,254,0.35)] transition hover:bg-[#8B5CF6]"
             >
               <Link href={schoolHref} onClick={trackClick}>
                 {buttonText}
-                <ArrowRight className="w-4 h-4" />
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
               </Link>
             </Button>
           )}

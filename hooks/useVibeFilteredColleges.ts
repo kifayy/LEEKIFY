@@ -43,10 +43,10 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
 
     let abandoned = false;
     const ac = new AbortController();
+    setLoading(true);
+    setError(null);
 
     const run = async () => {
-      setLoading(true);
-      setError(null);
       shuffleSeedRef.current = Math.random();
 
       try {
@@ -98,7 +98,6 @@ export function useVibeFilteredColleges(selectedVibes: string[], debouncedSearch
     return () => {
       abandoned = true;
       ac.abort();
-      setLoading(false);
     };
   }, [debouncedSearch, selectedVibes.length, v0, v1]);
 
