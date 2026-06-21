@@ -1,3 +1,5 @@
+import { hasAnalyticsConsent } from "@/lib/cookie-consent";
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -18,6 +20,7 @@ function sendGtag(event: BrowseAnalyticsEvent) {
 }
 
 export function trackBrowseEvent(event: BrowseAnalyticsEvent) {
+  if (!hasAnalyticsConsent()) return;
   sendGtag(event);
   void fetch("/api/browse/log", {
     method: "POST",

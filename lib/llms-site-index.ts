@@ -65,6 +65,8 @@ export function buildLlmsSiteSections(baseUrl: string): LlmsSiteSection[] {
       title: "Policies",
       links: [
         { label: "Privacy Policy", href: `${baseUrl}/privacy` },
+        { label: "Cookie Policy", href: `${baseUrl}/cookies` },
+        { label: "Accessibility Statement", href: `${baseUrl}/accessibility` },
         { label: "Terms of Service", href: `${baseUrl}/terms` },
         { label: "Refund Policy", href: `${baseUrl}/terms#refund-policy` },
       ],

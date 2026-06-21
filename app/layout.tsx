@@ -10,6 +10,7 @@ import {
 import { ThemeProvider } from "next-themes";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ConsentGatedScripts } from "@/components/consent-gated-scripts";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
@@ -20,22 +21,7 @@ import { DevToolbar } from "@/components/dev-toolbar";
 import { ScrollToTopOnNavigate } from "@/components/scroll-to-top-on-navigate";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
-import { META_PIXEL_ID, META_PIXEL_INIT } from "@/lib/meta-pixel";
-import { SNAPCHAT_PIXEL_ID } from "@/lib/snapchat-pixel";
 import "./globals.css";
-
-const GA_MEASUREMENT_ID = "G-0HQ4Y4J0RB";
-
-const SNAPCHAT_PIXEL_INIT = `
-(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
-{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
-a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
-r.src=n;var u=t.getElementsByTagName(s)[0];
-u.parentNode.insertBefore(r,u);})(window,document,
-'https://sc-static.net/scevent.min.js');
-snaptr('init', '${SNAPCHAT_PIXEL_ID}', {});
-snaptr('track', 'PAGE_VIEW');
-`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
@@ -90,42 +76,16 @@ export default function RootLayout({
         <meta name="impact-site-verification" content="506f7160-3dd6-4477-8a3e-bb29d178f99a" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
         <link rel="preconnect" href="https://my.pathpicker.com" />
-        <link rel="preconnect" href="https://sc-static.net" />
-        <link rel="preconnect" href="https://connect.facebook.net" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="PathPicker LLM site index" />
-        {/* Native inline script so Meta Pixel Helper detects fbq on first paint (Next.js Script queues via __next_s). */}
-        <script dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT.trim() }} />
-        <Script
-          id="snapchat-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: SNAPCHAT_PIXEL_INIT }}
-        />
       </head>
       <body
         className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
       >
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: "none" }}
-              src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-              alt=""
-            />
-          </noscript>
+          <ConsentGatedScripts />
           <SiteImageProtection />
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
-          <Script id="google-analytics" strategy="lazyOnload">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}');
-            `}
-          </Script>
           <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="lazyOnload" />
         <Suspense fallback={<div className="min-h-screen bg-white" />}>
           <ThemeProvider

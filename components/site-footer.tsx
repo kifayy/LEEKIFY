@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { CopyrightYear } from "@/components/copyright-year";
 import { FooterNavLink } from "@/components/footer-nav-link";
+import { CookieSettingsLink } from "@/components/cookie-settings-link";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { isCollegeMatchQuizUrl } from "@/lib/attribution";
 import { PATHPICKER_FOOTER_LOGO_URL } from "@/lib/brand-logos";
@@ -24,6 +25,8 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: "/pricing", label: "Pricing" },
       { href: "/privacy", label: "Privacy" },
+      { href: "/cookies", label: "Cookie Policy" },
+      { href: "/accessibility", label: "Accessibility" },
       { href: "/terms", label: "Terms" },
       { href: "/terms#refund-policy", label: "Refund Policy" },
       { href: "/contact", label: "For Partners" },
@@ -95,6 +98,11 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
             <FooterLinkItem link={link} />
           </li>
         ))}
+        {title === "Company" ? (
+          <li>
+            <CookieSettingsLink className={linkClassName} style={{ color: FOOTER_DARK }} />
+          </li>
+        ) : null}
       </ul>
     </div>
   );

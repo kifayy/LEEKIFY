@@ -81,6 +81,10 @@ export default function TermsPage() {
           <p className="mt-3 text-muted-foreground">
             You must cancel before your trial period ends to avoid being charged for the first subscription period.
           </p>
+          <p className="mt-3 text-muted-foreground">
+            We will send you an email reminder before your trial converts to a paid subscription,
+            including the conversion date and the plan price that will apply unless you cancel.
+          </p>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">5.2 Subscription Plans and Pricing</h3>
           <p className="mt-2 text-muted-foreground">
@@ -251,6 +255,11 @@ export default function TermsPage() {
               support@pathpicker.com
             </a>
             .
+          </p>
+          <p className="mt-3 text-muted-foreground">
+            We record the date, time, and method of your SMS consent (for example, web form
+            submission, checkbox, or text-to-join) and retain that record for at least 48 months
+            for compliance and dispute-resolution purposes.
           </p>
         </section>
 

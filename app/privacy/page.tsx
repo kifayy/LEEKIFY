@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       </h1>
       <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
         <Shield className="h-5 w-5 shrink-0" />
-        <span>Effective Date: June 7, 2026 · Last Updated: June 7, 2026</span>
+        <span>Effective Date: June 7, 2026 · Last Updated: June 11, 2026</span>
       </div>
 
       <div className="mt-8 space-y-8 text-foreground">
@@ -279,28 +279,57 @@ export default function PrivacyPage() {
           </ul>
           <p className="mt-3 text-muted-foreground">You can:</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
+            <li>
+              Manage cookie preferences using our cookie banner or &quot;Cookie Settings&quot; in the
+              site footer
+            </li>
+            <li>
+              Read our full{" "}
+              <a href="/cookies" className="text-[#956EFE] underline hover:no-underline">
+                Cookie Policy
+              </a>{" "}
+              for a list of tools, data collected, recipients, retention, and opt-out options
+            </li>
             <li>Manage cookie preferences in your browser settings</li>
             <li>Disable cookies (though this may break some features)</li>
-            <li>Use &quot;Do Not Track&quot; settings (we will honor these requests)</li>
+            <li>Use &quot;Do Not Track&quot; settings (we honor applicable opt-out signals where required by law)</li>
           </ul>
+          <p className="mt-3 text-muted-foreground">
+            <strong>California residents:</strong> Analytics and marketing cookies, pixels, and
+            similar tracking technologies will not fire until you explicitly opt in via our cookie
+            banner. Essential cookies remain active to provide the Services.
+          </p>
 
-          <h3 className="mt-4 font-semibold text-[#181A1D]">5.2 Third-Party Advertising Networks</h3>
-          <p className="mt-2 text-muted-foreground">We may participate in programmatic advertising networks that:</p>
+          <h3 className="mt-4 font-semibold text-[#181A1D]">5.2 Third-Party Advertising Networks &amp; Pixels</h3>
+          <p className="mt-2 text-muted-foreground">
+            With your opt-in consent, we use third-party advertising pixels and cookies that may:
+          </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Track your browsing across websites</li>
             <li>Create audience profiles</li>
             <li>Deliver targeted ads based on your interests</li>
-            <li>Use third-party cookies and pixels</li>
+            <li>Measure ad conversions and campaign performance</li>
           </ul>
-          <p className="mt-3 text-muted-foreground">Common networks we may use:</p>
+          <p className="mt-3 text-muted-foreground">Tools currently in use (after marketing opt-in):</p>
+          <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
+            <li>Meta (Facebook) Pixel</li>
+            <li>Snapchat Pixel</li>
+            <li>TikTok Pixel</li>
+          </ul>
+          <p className="mt-3 text-muted-foreground">We may also use or test:</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Google Ads</li>
-            <li>Facebook Pixel</li>
             <li>LinkedIn Insight Tag</li>
-            <li>TikTok Pixel</li>
             <li>Other display advertising networks</li>
           </ul>
-          <p className="mt-3 text-muted-foreground">These networks may collect data even when you&apos;re not on PathPicker. You can:</p>
+          <p className="mt-3 text-muted-foreground">
+            See our{" "}
+            <a href="/cookies" className="text-[#956EFE] underline hover:no-underline">
+              Cookie Policy
+            </a>{" "}
+            for details on data collected, recipients, and retention. These networks may collect data
+            even when you&apos;re not on PathPicker. You can:
+          </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Opt out via the Digital Advertising Alliance</li>
             <li>Adjust privacy settings in Google, Facebook, and other accounts</li>
@@ -308,7 +337,9 @@ export default function PrivacyPage() {
           </ul>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">5.3 Analytics</h3>
-          <p className="mt-2 text-muted-foreground">We use Google Analytics and similar tools to track:</p>
+          <p className="mt-2 text-muted-foreground">
+            With your opt-in consent, we use Google Analytics and similar tools to track:
+          </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Pages visited and time spent</li>
             <li>Geographic location</li>
@@ -325,6 +356,24 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
             >
               here
+            </a>
+            .
+          </p>
+
+          <h3 className="mt-4 font-semibold text-[#181A1D]">5.4 Video Viewing &amp; VPPA</h3>
+          <p className="mt-2 text-muted-foreground">
+            Some pages embed third-party video players (for example, Vimeo) to showcase product
+            demos. When you play an embedded video:
+          </p>
+          <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
+            <li>The video provider may receive your IP address, device/browser data, and playback information</li>
+            <li>PathPicker does not combine video viewing history with your name, email, or account ID for disclosure to third parties</li>
+            <li>We do not sell or share personally identifiable video viewing records as defined under the Video Privacy Protection Act (VPPA)</li>
+          </ul>
+          <p className="mt-3 text-muted-foreground">
+            For more information, review the video provider&apos;s privacy policy and our{" "}
+            <a href="/cookies" className="text-[#956EFE] underline hover:no-underline">
+              Cookie Policy
             </a>
             .
           </p>
@@ -364,6 +413,12 @@ export default function PrivacyPage() {
             <li>We will not discriminate against you for exercising these rights</li>
             <li>We will not deny services, charge higher prices, or reduce quality</li>
           </ul>
+          <p className="mt-3 text-muted-foreground">
+            <strong>Cookie &amp; Pixel Opt-In (California):</strong> For California residents,
+            analytics and marketing cookies, pixels, and similar tracking technologies will not fire
+            until you explicitly opt in via our cookie banner. You can change your preferences at any
+            time using &quot;Cookie Settings&quot; in the site footer.
+          </p>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">6.2 European Residents (GDPR &amp; UK DPA)</h3>
           <p className="mt-2 text-muted-foreground"><strong>Right to Access:</strong></p>
@@ -606,15 +661,21 @@ export default function PrivacyPage() {
               </a>
             </li>
             <li>
+              <strong>SMS consent records:</strong> When you opt in to SMS, we record the date, time,
+              and method of your consent (for example, web form submission, checkbox, or text-to-join)
+              and retain that record for at least 48 months for compliance purposes.
+            </li>
+            <li>
               <strong>Account emails:</strong> You cannot opt out of transactional emails (login alerts, receipts, etc.)
             </li>
           </ul>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">12.2 Personalization &amp; Advertising</h3>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li><strong>Disable personalized ads:</strong> Adjust privacy settings in Google, Facebook, and your device</li>
+            <li><strong>Cookie preferences:</strong> Use our cookie banner or &quot;Cookie Settings&quot; in the site footer</li>
+            <li><strong>Disable personalized ads:</strong> Adjust privacy settings in Google, Meta, Snapchat, and your device</li>
             <li><strong>Block third-party cookies:</strong> Use browser settings or privacy extensions</li>
-            <li><strong>California residents:</strong> Use &quot;Do Not Sell&quot; link on our website</li>
+            <li><strong>California residents:</strong> Analytics and marketing cookies require explicit opt-in; you may also email an opt-out request (see Section 6.4)</li>
           </ul>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">12.3 Account Data</h3>
