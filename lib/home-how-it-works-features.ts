@@ -30,7 +30,7 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     id: "personality",
 
-    eyebrow: "STUDENT INTELLIGENCE",
+    eyebrow: "WHAT REALLY MATTERS",
 
     title: "College Matching Was Broken, We Fixed It",
 
@@ -52,7 +52,7 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     id: "ranking",
 
-    eyebrow: "PEER FIT INTELLIGENCE",
+    eyebrow: "SEE YOUR STUDENT STATS",
 
     title: "See Where Students Like You Thrive",
 
@@ -74,7 +74,7 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     id: "location",
 
-    eyebrow: "PREDICTIVE FIT & ROI",
+    eyebrow: "YOUR DREAM LOCATION",
 
     title: "What Location You'd Thrive In",
 

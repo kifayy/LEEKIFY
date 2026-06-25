@@ -52,21 +52,26 @@ export function HomeHowItWorksSection() {
         const mediaFirst = index % 2 === 1;
 
         return (
-          <article
-            key={feature.id}
-            className="border-t border-[#EBEBEA] first:border-t-0"
-          >
-            <div className="container mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14 lg:px-8 lg:py-16">
+          <article key={feature.id}>
+            <div
+              className={cn(
+                "container mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14 lg:px-8",
+                index === 0 ? "lg:pt-16 lg:pb-1" : "lg:py-1",
+                index === HOME_HOW_IT_WORKS_FEATURES.length - 1 && "lg:pb-16",
+              )}
+            >
               <div
                 className={cn(
-                  "grid items-center gap-8 md:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20",
+                  "grid items-center gap-8 md:gap-10",
+                  mediaFirst ? "lg:grid-cols-[auto_1fr] lg:gap-4" : "lg:grid-cols-[1fr_auto] lg:gap-4",
+                  "xl:gap-5",
                   mediaFirst && "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1",
                 )}
               >
                 <div
                   className={cn(
-                    "flex justify-center lg:justify-start",
-                    mediaFirst && "lg:justify-end",
+                    "flex justify-center",
+                    mediaFirst ? "lg:justify-start" : "lg:justify-end",
                   )}
                 >
                   <FeatureTextCard
@@ -76,7 +81,12 @@ export function HomeHowItWorksSection() {
                   />
                 </div>
 
-                <div className="flex justify-center">
+                <div
+                  className={cn(
+                    "flex justify-center",
+                    mediaFirst ? "lg:justify-end" : "lg:justify-start",
+                  )}
+                >
                   <Image
                     src={feature.imageSrc}
                     alt={feature.imageAlt}
@@ -103,8 +113,8 @@ export function HomeHowItWorksSection() {
         );
       })}
 
-      <div className="border-t border-[#EBEBEA]">
-        <div className="container mx-auto max-w-6xl px-4 pb-2 pt-10 md:px-6 md:pt-12 lg:px-8">
+      <div>
+        <div className="container mx-auto max-w-6xl px-4 pb-2 pt-10 md:px-6 md:pt-12 lg:px-8 lg:pt-10">
           <h2 className="text-center font-[family-name:var(--font-poppins)] text-[1.625rem] font-bold leading-[1.22] tracking-[-0.03em] text-[#18062E] md:text-[1.875rem] md:leading-[1.2] lg:text-[2.25rem]">
             <span className="md:hidden">
               Trusted by our
