@@ -84,8 +84,17 @@ export function HomeHowItWorksSection() {
                     height={feature.imageHeight}
                     loading={index === 0 ? "eager" : "lazy"}
                     quality={85}
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="h-auto w-full max-w-[min(100%,28rem)] object-contain md:max-w-[32rem] lg:max-w-none"
+                    sizes={
+                      index < 2
+                        ? "(min-width: 1024px) 17rem, 16rem"
+                        : "(min-width: 1024px) 22rem, 100vw"
+                    }
+                    className={cn(
+                      "h-auto w-full object-contain",
+                      index < 2
+                        ? "max-w-[16rem] sm:max-w-[17rem] md:max-w-[18rem] lg:max-w-[17rem]"
+                        : "max-w-[min(100%,22rem)] md:max-w-[26rem] lg:max-w-[20rem] xl:max-w-[22rem]",
+                    )}
                   />
                 </div>
               </div>

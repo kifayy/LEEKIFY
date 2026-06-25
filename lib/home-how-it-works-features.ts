@@ -36,15 +36,15 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     description:
 
-      "Go beyond GPA and acceptance odds alone. We filter 2,000+ universities through 400+ intelligence signals, mapped to your personality, cognitive style, and how you actually learn and socialize.",
+      "Go beyond GPA and acceptance odds alone. We filter 2,000+ universities through 400+ intelligence signals, mapped to your personality, cognitive style, and where you'd actually thrive at.",
 
-    imageSrc: "/assets/Group%20784.png",
+    imageSrc: "/images/screen2.webp",
 
-    imageAlt: "PathPicker student intelligence mapping for personality and college fit",
+    imageAlt: "PathPicker peer fit intelligence comparing student archetype to campus culture",
 
-    imageWidth: 2786,
+    imageWidth: 540,
 
-    imageHeight: 2393,
+    imageHeight: 1080,
 
   },
 
@@ -58,15 +58,15 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     description:
 
-      "Every campus has students who love it — and students who don't. PathPicker compares your archetype to real campus culture, so you know where you'll belong before you commit.",
+      "Every campus has students who love it, and students who don't. See how you rank versus the average student in key indicators.",
 
-    imageSrc: "/images/Group%20800.png",
+    imageSrc: "/images/screen1.webp",
 
-    imageAlt: "PathPicker peer fit intelligence comparing student archetype to campus culture",
+    imageAlt: "PathPicker student intelligence mapping for personality and college fit",
 
-    imageWidth: 2574,
+    imageWidth: 540,
 
-    imageHeight: 2949,
+    imageHeight: 1080,
 
   },
 
@@ -80,15 +80,15 @@ export const HOME_HOW_IT_WORKS_FEATURES: HomeHowItWorksFeature[] = [
 
     description:
 
-      "Across 19,000+ cities, we surface where you'll actually enjoy living, plus live admission odds, campus happiness scores, and career outlooks so your choice holds up after graduation.",
+      "Location, location, location. We'll tell you exactly what part of the country you belong at to actually be your best.",
 
-    imageSrc: "/assets/asdasdroup%20799.png",
+    imageSrc: "/images/screen3.png",
 
     imageAlt: "PathPicker predictive location, happiness, and admissions insights",
 
-    imageWidth: 2152,
+    imageWidth: 2160,
 
-    imageHeight: 1189,
+    imageHeight: 1500,
 
   },
 
