@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
 import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
+import { CALCULATOR_NAV_PAGES } from "@/lib/calculator-pages";
 import { COLLEGE_MATCH_QUIZ_URL, PATHPICKER_SITE_PURPLE } from "@/lib/constants";
 import {
   PATHPICKER_ASSETS_LOGO_URL,
@@ -28,10 +29,68 @@ const navLinks = [
   { href: "/contact", label: "Support" },
 ];
 
-/** Mobile drawer: omit quiz link + bottom CTA — same entry exists on the floating footer after scroll. */
+/** Mobile drawer: omit quiz link — shown as primary CTA above the link list. */
 const mobileDrawerNavLinks = navLinks.filter((link) => !("external" in link && link.external));
 
+const MOBILE_DRAWER_LINKS_BEFORE_CALCULATORS = mobileDrawerNavLinks.filter(
+  (link) => link.href === "/browse",
+);
+const MOBILE_DRAWER_LINKS_AFTER_CALCULATORS = mobileDrawerNavLinks.filter(
+  (link) => link.href !== "/browse",
+);
+
 const SCROLL_HIDE_THRESHOLD = 0.1;
+
+function MobileCalculatorsNav({
+  pathname,
+  onNavigate,
+}: {
+  pathname: string;
+  onNavigate: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-t border-[#F0F0F2]">
+      <button
+        type="button"
+        className="flex w-full items-center justify-between px-4 py-3.5 text-left text-[15px] font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+      >
+        <span>Calculators</span>
+        <ChevronDown
+          className={cn("h-4 w-4 shrink-0 text-[#9CA3AF] transition-transform", open && "rotate-180")}
+          strokeWidth={2.5}
+          aria-hidden
+        />
+      </button>
+      {open ? (
+        <div className="border-t border-[#F0F0F2] bg-[#FAFAFC] py-1">
+          {CALCULATOR_NAV_PAGES.map((page) => {
+            const active = pathname === page.href || pathname.startsWith(`${page.href}/`);
+            return (
+              <Link
+                key={page.href}
+                href={page.href}
+                className={cn(
+                  "flex items-center px-4 py-3 pl-8 text-[14px] font-medium transition-colors",
+                  active
+                    ? "bg-[#F5F3FF] text-[#956EFE]"
+                    : "text-[#58595D] hover:bg-[#F5F3FF] hover:text-[#956EFE]",
+                )}
+                aria-current={active ? "page" : undefined}
+                onClick={onNavigate}
+              >
+                {page.label}
+              </Link>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -219,12 +278,43 @@ export function SiteHeader() {
             </div>
 
             <nav className="flex-1 px-3" aria-label="Main">
+              <a
+                href={collegeMatchQuizUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-3 flex w-full items-center justify-center rounded-2xl bg-[#956EFE] px-4 py-3.5 text-[15px] font-semibold text-white shadow-[0_4px_16px_rgba(149,110,254,0.35)] transition-opacity hover:opacity-95"
+                onClick={() => {
+                  trackLandingCtaToQuiz();
+                  setMobileMenuOpen(false);
+                }}
+              >
+                {PATH_COLLEGE_MATCH_QUIZ_LABEL}
+              </a>
+
               <div className="rounded-2xl bg-white py-1 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-                {mobileDrawerNavLinks.map((link) => (
+                {MOBILE_DRAWER_LINKS_BEFORE_CALCULATORS.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center justify-between px-4 py-3.5 text-[15px] font-medium text-[#181A1D] transition-colors first:rounded-t-2xl last:rounded-b-2xl hover:bg-[#F5F3FF] hover:text-[#956EFE]"
+                    className="flex items-center justify-between border-b border-[#F0F0F2] px-4 py-3.5 text-[15px] font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <MobileCalculatorsNav
+                  pathname={pathname}
+                  onNavigate={() => setMobileMenuOpen(false)}
+                />
+                {MOBILE_DRAWER_LINKS_AFTER_CALCULATORS.map((link, index) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "flex items-center justify-between px-4 py-3.5 text-[15px] font-medium text-[#181A1D] transition-colors hover:bg-[#F5F3FF] hover:text-[#956EFE]",
+                      index < MOBILE_DRAWER_LINKS_AFTER_CALCULATORS.length - 1 &&
+                        "border-b border-[#F0F0F2]",
+                    )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
