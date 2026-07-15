@@ -80,6 +80,9 @@ function parseFieldValue(
       }
       return { ok: true, missing: false, value: num };
     }
+    case "file":
+      // Server action uploads first and stores JSON metadata / storage path as the value.
+      return { ok: true, missing: false, value: str };
     default:
       return { ok: true, missing: false, value: str };
   }

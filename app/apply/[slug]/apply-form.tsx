@@ -84,6 +84,22 @@ function FormField({ field }: { field: FormFieldDef }) {
     );
   }
 
+  if (field.type === "file") {
+    return (
+      <div className="space-y-1">
+        <input
+          type="file"
+          name={field.key}
+          id={field.key}
+          required={field.required}
+          accept={field.accept ?? ".pdf,application/pdf"}
+          className={`${inputBaseClasses} cursor-pointer file:mr-3 file:rounded file:border-0 file:bg-[#5B4B8A] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white`}
+        />
+        <p className="text-xs text-[#666666]">PDF only, up to 5 MB.</p>
+      </div>
+    );
+  }
+
   return (
     <input
       type={field.type === "email" ? "email" : field.type === "number" ? "number" : field.type === "tel" ? "tel" : field.type === "date" ? "date" : "text"}
@@ -122,7 +138,12 @@ export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) 
   const [state, formAction] = useActionState(submitAction, null);
 
   return (
-    <form action={formAction} id="scholarship-application-form" className="relative space-y-0">
+    <form
+      action={formAction}
+      id="scholarship-application-form"
+      className="relative space-y-0"
+      encType="multipart/form-data"
+    >
       <input type="hidden" name="scholarshipId" value={scholarshipId} />
       <input type="hidden" name="slug" value={slug} />
       <input

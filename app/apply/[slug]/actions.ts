@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { getClientIpFromHeaders, hashClientIp } from "@/lib/client-ip";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { uploadScholarshipApplicationFile } from "@/lib/scholarship-application-upload";
 import {
   createSubmission,
   getHostedScholarshipBySlug,
@@ -56,14 +57,37 @@ export async function submitApplication(
     return { error: "Too many submissions from your network. Please try again later." };
   }
 
-  const rawAnswers: Record<string, string | number | boolean> = {};
+  const fileFields = (scholarship.form_schema.fields ?? []).filter((f) => f.type === "file");
+  const uploadedAnswers: Record<string, string> = {};
+
+  for (const field of fileFields) {
+    const value = formData.get(field.key);
+    if (!(value instanceof File) || value.size === 0) {
+      if (field.required) {
+        return { error: `${field.label} is required.` };
+      }
+      continue;
+    }
+
+    const uploaded = await uploadScholarshipApplicationFile({
+      scholarshipSlug: scholarship.slug,
+      fieldKey: field.key,
+      file: value,
+    });
+    if (!uploaded.ok) return { error: uploaded.error };
+
+    uploadedAnswers[field.key] = JSON.stringify(uploaded.file);
+  }
+
+  const rawAnswers: Record<string, string | number | boolean> = { ...uploadedAnswers };
   for (const [key, value] of formData.entries()) {
     if (
       key === "scholarshipId" ||
       key === "slug" ||
       HONEYPOT_KEYS.has(key) ||
       value == null ||
-      value === ""
+      value === "" ||
+      value instanceof File
     ) {
       continue;
     }

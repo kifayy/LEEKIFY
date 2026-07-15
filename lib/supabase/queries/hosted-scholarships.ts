@@ -5,11 +5,23 @@ import { createPublicSupabaseClient } from "@/lib/supabase/public-client";
 export type FormFieldDef = {
   key: string; // unique key for answers object, e.g. "full_name", "email"
   label: string;
-  type: "text" | "email" | "tel" | "select" | "textarea" | "number" | "date" | "radio" | "checkbox";
+  type:
+    | "text"
+    | "email"
+    | "tel"
+    | "select"
+    | "textarea"
+    | "number"
+    | "date"
+    | "radio"
+    | "checkbox"
+    | "file";
   required?: boolean;
   options?: string[]; // for type "select"
   placeholder?: string;
   maxLength?: number;
+  /** MIME/extension list for type "file", e.g. ".pdf,application/pdf" */
+  accept?: string;
 };
 
 /** Form schema - defines the intake form for a scholarship */

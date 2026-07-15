@@ -4,6 +4,12 @@ import { REMOTE_IMAGE_PATTERNS } from "./lib/remote-image-patterns";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  experimental: {
+    // Hosted scholarship applications accept a supporting PDF (up to 5 MB).
+    serverActions: {
+      bodySizeLimit: "6mb",
+    },
+  },
   async headers() {
     return [
       {
