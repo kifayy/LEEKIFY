@@ -7,7 +7,7 @@ values (
   'scholarship-applications',
   false,
   5242880, -- 5 MB
-  array['application/pdf']
+  null -- any file type
 )
 on conflict (id) do update set
   public = excluded.public,
@@ -19,7 +19,7 @@ on conflict (id) do update set
 update public.hosted_scholarships
 set
   deadline = '2026-12-31T23:59:59Z'::timestamptz,
-  description = 'Awarded to students who demonstrate strong potential. Apply with your profile and upload a supporting PDF document.',
+  description = 'Awarded to students who demonstrate strong potential. Apply with your profile and upload a supporting document.',
   form_schema = '{
     "fields": [
       {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
@@ -28,7 +28,7 @@ set
       {"key": "school_name", "label": "School Name", "type": "text", "required": false},
       {"key": "gpa", "label": "GPA (optional)", "type": "text", "required": false},
       {"key": "state", "label": "State", "type": "text", "required": false},
-      {"key": "supporting_document", "label": "Supporting Document (PDF)", "type": "file", "required": true, "accept": ".pdf,application/pdf"}
+      {"key": "supporting_document", "label": "Supporting Document", "type": "file", "required": true}
     ]
   }'::jsonb,
   updated_at = now()

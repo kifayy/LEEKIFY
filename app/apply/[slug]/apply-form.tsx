@@ -92,10 +92,10 @@ function FormField({ field }: { field: FormFieldDef }) {
           name={field.key}
           id={field.key}
           required={field.required}
-          accept={field.accept ?? ".pdf,application/pdf"}
+          accept={field.accept || undefined}
           className={`${inputBaseClasses} cursor-pointer file:mr-3 file:rounded file:border-0 file:bg-[#5B4B8A] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white`}
         />
-        <p className="text-xs text-[#666666]">PDF only, up to 5 MB.</p>
+        <p className="text-xs text-[#666666]">Any file type, up to 5 MB.</p>
       </div>
     );
   }

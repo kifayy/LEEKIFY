@@ -1,19 +1,13 @@
--- Ensure PathPicker Excellence 2026 apply page has an active hosted scholarship row
-insert into public.hosted_scholarships (
-  slug,
-  title,
-  description,
-  amount,
-  deadline,
-  form_schema,
-  is_active
-) values (
-  'pathpicker-excellence-2026',
-  'PathPicker Excellence Award 2026',
-  'Awarded to students who demonstrate strong potential. Apply with your profile and upload a supporting document.',
-  '$3,100',
-  '2026-12-31T23:59:59Z'::timestamptz,
-  '{
+-- Allow any file type for scholarship application uploads (remove PDF-only MIME filter)
+
+update storage.buckets
+set allowed_mime_types = null
+where id = 'scholarship-applications';
+
+update public.hosted_scholarships
+set
+  description = 'Awarded to students who demonstrate strong potential. Apply with your profile and upload a supporting document.',
+  form_schema = '{
     "fields": [
       {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
       {"key": "email", "label": "Email Address", "type": "email", "required": true},
@@ -24,12 +18,9 @@ insert into public.hosted_scholarships (
       {"key": "supporting_document", "label": "Supporting Document", "type": "file", "required": true}
     ]
   }'::jsonb,
-  true
-) on conflict (slug) do update set
-  title = excluded.title,
-  description = excluded.description,
-  amount = excluded.amount,
-  deadline = excluded.deadline,
-  form_schema = excluded.form_schema,
-  is_active = true,
-  updated_at = now();
+  updated_at = now()
+where slug = 'pathpicker-excellence-2026'
+   or (
+     is_active = true
+     and lower(title) like '%pathpicker excellence%'
+   );
