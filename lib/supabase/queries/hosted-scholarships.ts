@@ -22,6 +22,8 @@ export type FormFieldDef = {
   maxLength?: number;
   /** MIME/extension list for type "file", e.g. ".pdf,application/pdf" */
   accept?: string;
+  /** Helper / prompt text under a field, or consent text next to a checkbox */
+  helpText?: string;
 };
 
 /** Form schema - defines the intake form for a scholarship */

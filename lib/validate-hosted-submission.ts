@@ -44,6 +44,9 @@ function parseFieldValue(
 ): ParseResult {
   if (raw == null || raw === "") {
     if (field.type === "checkbox") {
+      if (field.required) {
+        return { ok: false, error: `${field.label} is required.` };
+      }
       return { ok: true, missing: false, value: false };
     }
     return { ok: true, missing: true };
@@ -67,12 +70,17 @@ function parseFieldValue(
         return { ok: false, error: `Invalid selection for ${field.label}.` };
       }
       return { ok: true, missing: false, value: str };
-    case "checkbox":
+    case "checkbox": {
+      const checked = raw === true || str === "on" || str === "true";
+      if (field.required && !checked) {
+        return { ok: false, error: `${field.label} is required.` };
+      }
       return {
         ok: true,
         missing: false,
-        value: raw === true || str === "on" || str === "true",
+        value: checked,
       };
+    }
     case "number": {
       const num = Number(str);
       if (!Number.isFinite(num)) {

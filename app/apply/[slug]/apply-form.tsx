@@ -18,8 +18,9 @@ function FormField({ field }: { field: FormFieldDef }) {
         disabled={false}
         className={inputBaseClasses}
         aria-label={field.label}
+        defaultValue=""
       >
-        <option value="">Please select</option>
+        <option value="">{field.placeholder || "Please select"}</option>
         {field.options?.map((opt) => (
           <option key={opt} value={opt}>
             {opt}
@@ -58,11 +59,22 @@ function FormField({ field }: { field: FormFieldDef }) {
           type="checkbox"
           name={field.key}
           id={field.key}
-          className="mt-1 h-4 w-4 rounded border-gray-300 text-[#5B4B8A] focus:ring-[#5B4B8A]"
+          required={field.required}
+          className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-[#5B4B8A] focus:ring-[#5B4B8A]"
         />
-        {(field.label || field.placeholder) && (
-          <label htmlFor={field.key} className="cursor-pointer text-sm font-bold text-[#5B4B8A]">
-            {field.label || field.placeholder}
+        {(field.helpText || field.placeholder || field.key === "agree_to_terms") && (
+          <label htmlFor={field.key} className="cursor-pointer text-sm leading-snug text-[#181A1D]">
+            {field.key === "agree_to_terms" ? (
+              <>
+                You agree to the{" "}
+                <a href="/privacy" className="text-[#5B4B8A] underline" target="_blank" rel="noreferrer">
+                  Privacy Policy
+                </a>
+                .
+              </>
+            ) : (
+              field.helpText || field.placeholder
+            )}
           </label>
         )}
       </div>
@@ -87,6 +99,9 @@ function FormField({ field }: { field: FormFieldDef }) {
   if (field.type === "file") {
     return (
       <div className="space-y-1">
+        {field.helpText && (
+          <p className="mb-2 text-sm leading-snug text-[#666666]">{field.helpText}</p>
+        )}
         <input
           type="file"
           name={field.key}
@@ -95,7 +110,7 @@ function FormField({ field }: { field: FormFieldDef }) {
           accept={field.accept || undefined}
           className={`${inputBaseClasses} cursor-pointer file:mr-3 file:rounded file:border-0 file:bg-[#5B4B8A] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white`}
         />
-        <p className="text-xs text-[#666666]">Any file type, up to 5 MB.</p>
+        <p className="text-xs text-[#666666]">Max file size: 5 MB.</p>
       </div>
     );
   }
@@ -163,12 +178,13 @@ export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) 
 
       {fields.map((field) => (
         <div key={field.key} className="mb-4 sm:mb-3">
-          {field.type !== "checkbox" && (
-            <label htmlFor={field.key} className="form-label mb-1 block font-bold text-[#5B4B8A]">
-              {field.label}
-              {field.required && <span className="text-red-600"> *</span>}
-            </label>
-          )}
+          <label
+            htmlFor={field.type === "radio" ? undefined : field.key}
+            className="form-label mb-1 block font-bold text-[#5B4B8A]"
+          >
+            {field.label}
+            {field.required && <span className="text-red-600"> *</span>}
+          </label>
           <FormField field={field} />
         </div>
       ))}
