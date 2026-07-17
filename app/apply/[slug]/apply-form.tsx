@@ -1,22 +1,20 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
-import { submitApplication } from "./actions";
+import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 import type { FormFieldDef } from "@/lib/supabase/queries/hosted-scholarships";
+import { submitApplication, type ApplyFormState } from "./actions";
 
 const inputBaseClasses =
   "w-full rounded border border-gray-300 bg-white px-4 py-3 text-base text-[#181A1D] placeholder:text-[#999999] focus:border-[#5B4B8A] focus:outline-none focus:ring-1 focus:ring-[#5B4B8A] min-h-[44px]";
 
 function DateField({ field }: { field: FormFieldDef }) {
-  // Controlled so browser/automation fills stick in FormData on submit
+  // Controlled so calendar / typed values stick in FormData
   const [value, setValue] = useState("");
   return (
     <input
       type="date"
       name={field.key}
       id={field.key}
-      required={field.required}
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onInput={(e) => setValue((e.target as HTMLInputElement).value)}
@@ -37,7 +35,6 @@ function FileField({ field }: { field: FormFieldDef }) {
         type="file"
         name={field.key}
         id={field.key}
-        // Hint only — real required check is in form onSubmit (clearer errors on long forms)
         accept={field.accept || undefined}
         className={`${inputBaseClasses} cursor-pointer file:mr-3 file:rounded file:border-0 file:bg-[#5B4B8A] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white`}
         onChange={(e) => {
@@ -60,7 +57,6 @@ function FormField({ field }: { field: FormFieldDef }) {
       <select
         name={field.key}
         id={field.key}
-        required={field.required}
         className={inputBaseClasses}
         aria-label={field.label}
         defaultValue=""
@@ -85,7 +81,6 @@ function FormField({ field }: { field: FormFieldDef }) {
               name={field.key}
               id={`${field.key}_${i}`}
               value={opt}
-              required={field.required}
               className="h-4 w-4 border-gray-300 text-[#5B4B8A] focus:ring-[#5B4B8A]"
             />
             <label htmlFor={`${field.key}_${i}`} className="cursor-pointer text-[#181A1D]">
@@ -105,7 +100,6 @@ function FormField({ field }: { field: FormFieldDef }) {
           name={field.key}
           id={field.key}
           value="on"
-          required={field.required}
           className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-[#5B4B8A] focus:ring-[#5B4B8A]"
         />
         {(field.helpText || field.placeholder || field.key === "agree_to_terms") && (
@@ -138,7 +132,6 @@ function FormField({ field }: { field: FormFieldDef }) {
       <textarea
         name={field.key}
         id={field.key}
-        required={field.required}
         placeholder={field.placeholder}
         maxLength={field.maxLength}
         rows={4}
@@ -168,24 +161,10 @@ function FormField({ field }: { field: FormFieldDef }) {
       }
       name={field.key}
       id={field.key}
-      required={field.required}
       placeholder={field.placeholder}
       maxLength={field.maxLength}
       className={inputBaseClasses}
     />
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="inline-flex h-12 w-full min-h-[48px] items-center justify-center rounded-full bg-[#5B4B8A] px-8 text-base font-bold text-white shadow transition hover:bg-[#4a3d70] disabled:opacity-60 sm:w-auto sm:min-w-[220px] sm:text-lg"
-    >
-      {pending ? "Submitting…" : "Submit Application"}
-    </button>
   );
 }
 
@@ -221,7 +200,11 @@ function clientValidate(form: HTMLFormElement, fields: FormFieldDef[]): string |
       continue;
     }
 
-    const el = form.elements.namedItem(field.key) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+    const el = form.elements.namedItem(field.key) as
+      | HTMLInputElement
+      | HTMLSelectElement
+      | HTMLTextAreaElement
+      | null;
     const value = el?.value?.trim() ?? "";
     if (!value) {
       return `${field.label} is required.`;
@@ -234,11 +217,19 @@ type Props = {
   scholarshipId: string;
   slug: string;
   fields: FormFieldDef[];
-  submitAction: typeof submitApplication;
+  submitAction?: typeof submitApplication;
 };
 
-export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) {
-  const [state, formAction] = useActionState(submitAction, null);
+export function ApplyForm({
+  scholarshipId,
+  slug,
+  fields,
+  submitAction = submitApplication,
+}: Props) {
+  const [state, formAction, isPending] = useActionState<ApplyFormState, FormData>(
+    submitAction,
+    null,
+  );
   const [clientError, setClientError] = useState<string | null>(null);
   const errorRef = useRef<HTMLDivElement>(null);
 
@@ -252,24 +243,30 @@ export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) 
 
   return (
     <form
-      action={formAction}
       id="scholarship-application-form"
       className="relative space-y-0"
       encType="multipart/form-data"
       noValidate
       onSubmit={(e) => {
-        const err = clientValidate(e.currentTarget, fields);
+        // Always preventDefault, then dispatch the server action ourselves.
+        // Calling setState during a native action submit can abort the POST
+        // (common after a prior validation error → fix fields → submit again).
+        e.preventDefault();
+        const form = e.currentTarget;
+        const err = clientValidate(form, fields);
         if (err) {
-          e.preventDefault();
           setClientError(err);
           return;
         }
         setClientError(null);
+        const fd = new FormData(form);
+        startTransition(() => {
+          formAction(fd);
+        });
       }}
     >
       <input type="hidden" name="scholarshipId" value={scholarshipId} />
       <input type="hidden" name="slug" value={slug} />
-      {/* Obscure name — "website"/"url" get autofilled and used to falsely trip the honeypot */}
       <input
         type="text"
         name="hp_leave_blank"
@@ -304,7 +301,13 @@ export function ApplyForm({ scholarshipId, slug, fields, submitAction }: Props) 
       ))}
 
       <div className="mt-6 sm:mt-8">
-        <SubmitButton />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="inline-flex h-12 w-full min-h-[48px] items-center justify-center rounded-full bg-[#5B4B8A] px-8 text-base font-bold text-white shadow transition hover:bg-[#4a3d70] disabled:opacity-60 sm:w-auto sm:min-w-[220px] sm:text-lg"
+        >
+          {isPending ? "Submitting…" : "Submit Application"}
+        </button>
       </div>
     </form>
   );

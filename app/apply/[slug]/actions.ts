@@ -10,6 +10,7 @@ import { uploadScholarshipApplicationFile } from "@/lib/scholarship-application-
 import {
   createSubmission,
   getHostedScholarshipBySlug,
+  getHostedScholarshipBySlugForMeta,
   hasRecentSubmissionForScholarship,
 } from "@/lib/supabase/queries/hosted-scholarships";
 import {
@@ -39,17 +40,28 @@ export async function submitApplication(
     return { error: "Missing scholarship info." };
   }
 
-  let scholarship;
-  try {
-    scholarship = await getHostedScholarshipBySlug(slug.trim());
-  } catch (err) {
+  // Public client (no cookies) — more reliable for anonymous apply submits
+  const scholarship = await getHostedScholarshipBySlugForMeta(slug.trim()).catch((err) => {
     console.error("[submitApplication] load scholarship", err);
-    return { error: "Something went wrong submitting your application. Please try again." };
-  }
+    return null;
+  });
 
   if (!scholarship) {
-    return { error: "This scholarship is not available." };
+    // Fallback to cookie client if public env is missing in some environments
+    const fallback = await getHostedScholarshipBySlug(slug.trim()).catch(() => null);
+    if (!fallback) {
+      return { error: "This scholarship is not available." };
+    }
+    return submitWithScholarship(fallback, formData);
   }
+
+  return submitWithScholarship(scholarship, formData);
+}
+
+async function submitWithScholarship(
+  scholarship: NonNullable<Awaited<ReturnType<typeof getHostedScholarshipBySlug>>>,
+  formData: FormData,
+): Promise<ApplyFormState> {
 
   if (scholarship.deadline) {
     const deadline = new Date(scholarship.deadline);
