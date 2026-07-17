@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // Hosted scholarship applications accept a supporting PDF (up to 5 MB).
     serverActions: {
-      bodySizeLimit: "6mb",
+      // PEN and similar forms allow multiple 5MB uploads in one request
+      bodySizeLimit: "25mb",
     },
   },
   async headers() {
