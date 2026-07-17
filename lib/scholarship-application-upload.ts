@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/server";
+import { isNonEmptyFormDataFile } from "@/lib/form-data-file";
 
 export const SCHOLARSHIP_UPLOAD_BUCKET = "scholarship-applications";
 export const SCHOLARSHIP_UPLOAD_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
@@ -22,7 +23,7 @@ export async function uploadScholarshipApplicationFile(options: {
 }): Promise<{ ok: true; file: UploadedScholarshipFile } | { ok: false; error: string }> {
   const { scholarshipSlug, fieldKey, file } = options;
 
-  if (!(file instanceof File) || file.size === 0) {
+  if (!isNonEmptyFormDataFile(file)) {
     return { ok: false, error: "Please choose a file to upload." };
   }
 

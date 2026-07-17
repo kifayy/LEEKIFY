@@ -91,9 +91,33 @@ function parseFieldValue(
     case "file":
       // Server action uploads first and stores JSON metadata / storage path as the value.
       return { ok: true, missing: false, value: str };
+    case "date": {
+      // Native <input type="date"> sends yyyy-mm-dd; also accept mm/dd/yyyy
+      const iso = normalizeDateInput(str);
+      if (!iso) {
+        return { ok: false, error: `Enter a valid date for ${field.label}.` };
+      }
+      return { ok: true, missing: false, value: iso };
+    }
     default:
       return { ok: true, missing: false, value: str };
   }
+}
+
+function normalizeDateInput(raw: string): string | null {
+  const s = raw.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    const d = new Date(`${s}T12:00:00`);
+    return Number.isNaN(d.getTime()) ? null : s;
+  }
+  const mdy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (mdy) {
+    const [, mm, dd, yyyy] = mdy;
+    const iso = `${yyyy}-${mm.padStart(2, "0")}-${dd.padStart(2, "0")}`;
+    const d = new Date(`${iso}T12:00:00`);
+    return Number.isNaN(d.getTime()) ? null : iso;
+  }
+  return null;
 }
 
 export function getSubmissionEmailField(
