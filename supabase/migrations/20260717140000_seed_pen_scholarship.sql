@@ -1,4 +1,4 @@
--- Crowder Law Firm Scholarship (Spring 2027) — same hosted_scholarships table as Excellence
+-- PEN Scholarship — same hosted_scholarships table as Excellence
 insert into public.hosted_scholarships (
   slug,
   title,
@@ -8,9 +8,9 @@ insert into public.hosted_scholarships (
   form_schema,
   is_active
 ) values (
-  'crowder-scholarship',
-  'Crowder Law Firm Scholarship - Spring 2027 Application',
-  'Apply with your profile, essay, transcript, and supporting documents for the Crowder Law Firm Scholarship.',
+  'pen-scholarship',
+  'PEN Scholarship - Spring 2027 Application',
+  'Apply with your profile, essay, transcript, and supporting documents for the PEN Scholarship.',
   null,
   '2027-05-31T23:59:59Z'::timestamptz,
   '{
