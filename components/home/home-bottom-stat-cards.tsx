@@ -2,16 +2,15 @@
 
 import * as React from "react";
 import {
-  Columns2,
-  Compass,
-  Focus,
-  Gauge,
-  GitCompare,
-  UserCheck,
+  Bell,
+  FileText,
+  Radar,
+  Scale,
+  ShieldCheck,
+  Unlock,
   type LucideIcon,
 } from "lucide-react";
 
-import { HomeDesktopScholarshipInboxCta } from "@/components/home/home-desktop-scholarship-inbox-cta";
 import {
   Carousel,
   CarouselContent,
@@ -29,42 +28,41 @@ type BenefitItem = {
 
 const MATCH_BENEFITS: BenefitItem[] = [
   {
-    title: "Know yourself better",
+    title: "Full exposure ledger",
     description:
-      "Get clear on what drives you: your goals, values, and strengths, before you choose your next step.",
-    Icon: Compass,
+      "See every leak tied to your monitored IDs with unblurred breach names, exposed data types, and dates.",
+    Icon: Unlock,
     iconBg: "#0EA5E9",
   },
   {
-    title: "Less noise, more clarity",
-    description: "Focus on what actually matters for your future and tune out the rest.",
-    Icon: Focus,
+    title: "Watch 3 IDs",
+    description: "Monitor email, phone, and additional identifiers from one Leekify dashboard.",
+    Icon: Radar,
     iconBg: "#10B981",
   },
   {
-    title: "Check your fit, fast",
-    description:
-      "See which paths, careers, and options line up with you so the right direction feels obvious.",
-    Icon: Gauge,
+    title: "Real-time breach alerts",
+    description: "Get text and email notifications the moment your data appears in a new breach.",
+    Icon: Bell,
     iconBg: "#2563EB",
   },
   {
-    title: "Narrow your options",
-    description: "Compare your top fits and see exactly why each one works, or why it does not.",
-    Icon: GitCompare,
+    title: "Settlement notifications",
+    description:
+      "Learn when leaked brands face class-action settlements so you can claim what you may be owed.",
+    Icon: Scale,
     iconBg: "#14B8A6",
   },
   {
-    title: "Decision-making tools",
-    description: "Side-by-side insights and comparisons that make your next big decision easier.",
-    Icon: Columns2,
+    title: "24/7 data monitoring",
+    description: "Continuous scanning keeps watch even while you sleep—no manual rechecks required.",
+    Icon: ShieldCheck,
     iconBg: "#F59E0B",
   },
   {
-    title: "Built for you",
-    description:
-      "Guidance shaped around your archetype, your priorities, and the future you are building.",
-    Icon: UserCheck,
+    title: "PDF digital risk report",
+    description: "Export a shareable PDF summary of your exposures anytime for records or support.",
+    Icon: FileText,
     iconBg: "#EC4899",
   },
 ];
@@ -115,7 +113,7 @@ function MatchBenefitsCarousel() {
   return (
     <div className="w-full">
       <Carousel
-        aria-label="PathPicker benefits"
+        aria-label="Leekify Premium benefits"
         setApi={setCarouselApi}
         opts={{ loop: false, align: "start", duration: 0 }}
         className={cn(
@@ -162,7 +160,7 @@ export function HomeMatchBenefitsSection() {
   return (
     <section
       className="w-full bg-white pb-10 pt-10 md:pb-14 md:pt-14 lg:pb-16 lg:pt-16"
-      aria-label="Why use PathPicker"
+      aria-label="Why use Leekify"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <MatchBenefitsCarousel />
@@ -171,13 +169,3 @@ export function HomeMatchBenefitsSection() {
   );
 }
 
-/** Post-FAQ band — scholarship inbox signup on desktop only. */
-export function HomeCollegeMatchQuizCta() {
-  return (
-    <section className="hidden w-full border-t border-slate-200/80 bg-white md:block">
-      <div className="mx-auto max-w-6xl" aria-label="Scholarship picks newsletter">
-        <HomeDesktopScholarshipInboxCta />
-      </div>
-    </section>
-  );
-}

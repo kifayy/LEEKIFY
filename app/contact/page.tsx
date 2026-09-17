@@ -7,14 +7,14 @@ import { ContactFaqs } from "@/components/contact/contact-faqs";
 import { MANAGE_BILLING_URL } from "@/lib/constants";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 
-const SUPPORT_EMAIL = "support@pathpicker.com";
-const PARTNERSHIPS_EMAIL = "ellie@pathpicker.com";
+const SUPPORT_EMAIL = "support@leekify.com";
+const PARTNERSHIPS_EMAIL = "support@leekify.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
   return {
-    title: "Contact | PathPicker",
-    description: "Reach PathPicker support or partnerships directly by email.",
+    title: "Contact | Leekify",
+    description: "Reach Leekify support directly by email for account, billing, or partnership questions.",
     alternates: { canonical: `${baseUrl}/contact` },
   };
 }
@@ -60,7 +60,7 @@ export default function ContactPage() {
             Reach us directly
           </h1>
           <p className="mt-3 text-base text-[#6B7280] md:text-lg">
-            Get in touch with the PathPicker team.
+            Get in touch with the Leekify team.
           </p>
         </header>
 
@@ -69,14 +69,14 @@ export default function ContactPage() {
             icon={<Headphones className="h-7 w-7 text-white" strokeWidth={2} aria-hidden />}
             iconGlow="#3B82F6"
             title="Support"
-            description="Have an issue with your account, or subscription?"
+            description="Have an issue with your account, monitoring, or subscription?"
             email={SUPPORT_EMAIL}
           />
           <ContactCard
             icon={<Handshake className="h-7 w-7 text-white" strokeWidth={2} aria-hidden />}
             iconGlow="#14B8A6"
             title="Partnerships"
-            description="For partnerships, scholarships, or general inquiries."
+            description="For business partnerships, media inquiries, or general questions."
             email={PARTNERSHIPS_EMAIL}
           />
         </div>

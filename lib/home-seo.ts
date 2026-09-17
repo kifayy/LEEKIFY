@@ -1,24 +1,20 @@
-import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
 import { PATHPICKER_LOGO_URL } from "@/lib/brand-logos";
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
 import { HOME_FAQ_ITEMS } from "@/lib/home-faq-content";
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from "@/lib/site-metadata";
 
 export const HOME_OG_IMAGE_URL = "https://storage.googleapis.com/images_592/bsa.png";
 
 export const HOME_SEO_KEYWORDS = [
-  "PathPicker",
-  "student intelligence platform",
-  "Archetype Quiz",
-  "college match quiz",
-  "student archetype",
-  "college finder",
-  "personality college fit",
-  "admission odds",
-  "high school career planning",
-  "AI career resilience",
-  "browse colleges",
-  "college happiness fit",
+  "Leekify",
+  "data breach check",
+  "was my email leaked",
+  "data leak search",
+  "identity monitoring",
+  "breach alerts",
+  "exposure ledger",
+  "class action settlement",
+  "digital risk report",
+  "have i been pwned alternative",
 ] as const;
 
 type HomeJsonLdParams = {
@@ -37,8 +33,8 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
       "@type": "WebSite",
       "@id": websiteId,
       url: baseUrl,
-      name: "PathPicker",
-      alternateName: ["Pathpicker"],
+      name: "Leekify",
+      alternateName: ["leekify.com"],
       description: DEFAULT_SITE_DESCRIPTION,
       publisher: { "@id": organizationId },
       inLanguage: "en-US",
@@ -46,7 +42,7 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
     {
       "@type": "Organization",
       "@id": organizationId,
-      name: "PathPicker",
+      name: "Leekify",
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
@@ -62,7 +58,7 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
       isPartOf: { "@id": websiteId },
       about: {
         "@type": "Thing",
-        name: "College and career planning for students",
+        name: "Personal data breach discovery and identity monitoring",
       },
       primaryImageOfPage: { "@id": primaryImageId },
       inLanguage: "en-US",
@@ -72,12 +68,12 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
       "@id": primaryImageId,
       url: HOME_OG_IMAGE_URL,
       contentUrl: HOME_OG_IMAGE_URL,
-      caption: "PathPicker student archetype and college match platform",
+      caption: "Leekify — see if your data was leaked",
     },
     {
       "@type": "SoftwareApplication",
-      name: "PathPicker",
-      applicationCategory: "EducationalApplication",
+      name: "Leekify",
+      applicationCategory: "SecurityApplication",
       operatingSystem: "Web",
       offers: {
         "@type": "Offer",
@@ -109,8 +105,8 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
           position: 1,
           item: {
             "@type": "WebPage",
-            name: PATH_COLLEGE_MATCH_QUIZ_LABEL,
-            url: COLLEGE_MATCH_QUIZ_URL,
+            name: "Breaches",
+            url: `${baseUrl}/#breaches`,
           },
         },
         {
@@ -118,8 +114,8 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
           position: 2,
           item: {
             "@type": "WebPage",
-            name: "Browse Schools",
-            url: `${baseUrl}/browse`,
+            name: "How it Works",
+            url: `${baseUrl}/#how-it-works`,
           },
         },
         {
@@ -127,22 +123,13 @@ export function buildHomePageJsonLdGraph({ baseUrl }: HomeJsonLdParams) {
           position: 3,
           item: {
             "@type": "WebPage",
-            name: "Features",
-            url: `${baseUrl}/#deep-profile-rankings`,
+            name: "Pricing",
+            url: `${baseUrl}/pricing`,
           },
         },
         {
           "@type": "ListItem",
           position: 4,
-          item: {
-            "@type": "WebPage",
-            name: "How it Works",
-            url: `${baseUrl}/#commit-with-zero-regrets`,
-          },
-        },
-        {
-          "@type": "ListItem",
-          position: 5,
           item: {
             "@type": "WebPage",
             name: "Support",

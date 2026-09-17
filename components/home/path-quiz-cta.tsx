@@ -6,20 +6,22 @@ import {
   PATHPICKER_BRAND_PURPLE,
   PATHPICKER_BRAND_PURPLE_RGB,
 } from "@/components/home/hero-audience-theme";
-import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
-import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 import { cn } from "@/lib/utils";
 
-export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Find My Archetype";
-export const PATH_CAREER_MATCH_QUIZ_LABEL = "Career Match Quiz";
+export const PATH_COLLEGE_MATCH_QUIZ_LABEL = "Check for Leaks";
+export const PATH_CAREER_MATCH_QUIZ_LABEL = "View Pricing";
 
 /** @deprecated Use path quiz CTA labels; kept for existing imports. */
 export const STUDENT_ARCHETYPE_TEST_LABEL = PATH_COLLEGE_MATCH_QUIZ_LABEL;
 export const STUDENT_ARCHETYPE_QUIZ_LABEL = PATH_COLLEGE_MATCH_QUIZ_LABEL;
 
+const LEEKIFY_SEARCH_HREF = "/#search";
+const LEEKIFY_PRICING_HREF = "/pricing";
+
 const PATH_QUIZ_CTA_CONFIG = {
   college: {
     label: PATH_COLLEGE_MATCH_QUIZ_LABEL,
+    href: LEEKIFY_SEARCH_HREF,
     ctaBg: PATHPICKER_BRAND_PURPLE,
     ctaShadow: `0 8px 28px rgba(${PATHPICKER_BRAND_PURPLE_RGB}, 0.32)`,
     ctaFocusClass: "focus-visible:outline-[#6836D5]",
@@ -30,6 +32,7 @@ const PATH_QUIZ_CTA_CONFIG = {
   },
   career: {
     label: PATH_CAREER_MATCH_QUIZ_LABEL,
+    href: LEEKIFY_PRICING_HREF,
     ctaBg: "#E8489A",
     ctaShadow: "0 10px 32px rgba(232, 72, 154, 0.38)",
     ctaFocusClass: "focus-visible:outline-[#E8489A]",
@@ -75,16 +78,12 @@ export function PathQuizCtaButton({
   children,
 }: PathQuizCtaButtonProps) {
   const config = PATH_QUIZ_CTA_CONFIG[variant];
-  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
   const onDark = appearance === "onDark";
 
   return (
     <Link
-      href={collegeMatchQuizUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={config.href}
       tabIndex={tabIndex}
-      onClick={() => trackLandingCtaToQuiz()}
       className={cn(
         PATH_QUIZ_CTA_BASE_CLASS,
         PATH_QUIZ_CTA_SIZE_CLASS[size],

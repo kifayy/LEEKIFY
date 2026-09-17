@@ -1,28 +1,28 @@
 /** FAQ copy for the home page (visible UI + FAQPage JSON-LD). */
 export const HOME_FAQ_ITEMS = [
   {
-    question: "How does PathPicker's college match work?",
+    question: "How does Leekify check if my data was leaked?",
     answer:
-      "You take the Archetype Quiz — a short look at your goals and academics. PathPicker's student intelligence compares your answers across 100+ signals and 2,000+ schools to surface colleges where you fit best, with context on admission odds and student-life signals, not a generic ranking list.",
+      "Enter your email on leekify.com to search known breach databases. Leekify shows where your information appeared, what was exposed, and what to do next—without hiding results behind a paywall blur.",
   },
   {
-    question: "Does PathPicker show admission odds?",
+    question: "What is the full exposure ledger?",
     answer:
-      "Yes. Your results include admission chances alongside fit and happiness-style indicators, so you can balance where you can get in with where you are most likely to enjoy campus life.",
+      "Premium members see every leak tied to their monitored IDs in an unblurred exposure ledger—breach names, exposed data types, and dates—so you know exactly what was compromised.",
   },
   {
-    question: "Can PathPicker help me know if I'll be happy at a school?",
+    question: "Can Leekify monitor more than my email?",
     answer:
-      "PathPicker weighs personality, social fit, pressure, and momentum-style signals, not grades alone. That helps you spot schools that match how you learn and live, and flag mismatches before you commit.",
+      "Yes. Leekify Premium lets you watch up to three identifiers—email, phone, and additional IDs—and sends real-time text and email alerts when new breaches surface.",
   },
   {
     question: "What's the 30-day money-back guarantee?",
     answer:
-      "If you're not satisfied with your report, contact us within 30 days of purchase and we'll refund you with no hassle. We want you to try PathPicker risk-free.",
+      "If you're not satisfied with Leekify Premium, contact us within 30 days of purchase and we'll refund you with no hassle. We want you to try Leekify risk-free.",
   },
   {
     question: "Is my information secure?",
     answer:
-      "We follow industry-standard practices to protect your data, use encryption in transit, and do not sell your personal information. Details are in our Privacy Policy at pathpicker.com/privacy.",
+      "We follow industry-standard practices to protect your data, use encryption in transit, and do not sell your personal information. Details are in our Privacy Policy at leekify.com/privacy.",
   },
 ] as const;

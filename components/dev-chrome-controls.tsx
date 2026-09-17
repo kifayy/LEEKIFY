@@ -1,10 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronUp, Eye, EyeOff } from "lucide-react";
 
 import { useDevChromePreference } from "@/hooks/use-dev-chrome-preference";
-import { BROWSE_DEV_PATH } from "@/lib/browse-routes";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -90,10 +88,9 @@ export function DevChromeControls({ className, compact, minimized }: Props) {
 
 /** Tiny affordance to bring dev chrome back after fully hidden. */
 export function DevChromeRestoreFab() {
-  const pathname = usePathname();
   const { expand, isHidden, isMinimized } = useDevChromePreference();
 
-  if (!isHidden && !(isMinimized && pathname !== BROWSE_DEV_PATH)) return null;
+  if (!isHidden && !isMinimized) return null;
 
   return (
     <button

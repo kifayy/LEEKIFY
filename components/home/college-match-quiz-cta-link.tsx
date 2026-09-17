@@ -10,7 +10,7 @@ type CollegeMatchQuizCtaLinkProps = {
   tabIndex?: number;
 };
 
-/** Site-wide primary CTA → college match quiz (external). */
+/** Site-wide primary CTA → Leekify breach search. */
 export function CollegeMatchQuizCtaLink({
   className,
   children = PATH_COLLEGE_MATCH_QUIZ_LABEL,

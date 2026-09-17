@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import { Check, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -9,29 +8,34 @@ const TRUSTPILOT_RATING = 4.8;
 
 const PRICING_FEATURES = [
   {
-    title: "School Match Report",
+    title: "Full Exposure Ledger",
     description:
-      "Your personalized college breakdown, built around fit—not just stats, rankings, or generic advice.",
+      "See every leak tied to your monitored IDs with unblurred breach names, exposed data types, and dates.",
   },
   {
-    title: "Your Fit At 2,000+ Universities",
+    title: "Watch 3 IDs",
     description:
-      "Happiness scores, social life ratings, career outcomes, and dozens more signals across 2,000+ colleges.",
+      "Monitor email, phone, and additional identifiers from one dashboard—no juggling separate tools.",
   },
   {
-    title: "Admission Odds & Shortlists",
+    title: "Real-Time Breach Alerts",
     description:
-      "Know your real chances and sort every school into Safety, Target, and Reach before you apply.",
+      "Get text and email notifications the moment your data appears in a newly reported breach.",
   },
   {
-    title: "Scholarship Matches",
+    title: "Settlement Notifications",
     description:
-      "Scholarships you actually qualify for, matched to your profile—not random lists you'll never use.",
+      "Learn when leaked brands face class-action settlements so you can claim what you may be owed.",
   },
   {
-    title: "Student Archetype & Vibe Profile",
+    title: "24/7 Data Monitoring",
     description:
-      "See how you learn, socialize, and thrive so every school on your list feels like a real match.",
+      "Continuous scanning keeps watch even while you sleep—no manual rechecks required.",
+  },
+  {
+    title: "PDF Digital Risk Report",
+    description:
+      "Export a shareable PDF summary of your exposures anytime for records, insurance, or support.",
   },
 ] as const;
 
@@ -96,7 +100,7 @@ function PricingMapSocialProof() {
         <p className="text-3xl font-bold tabular-nums tracking-tight text-[#181A1D] md:text-4xl">
           100k+
         </p>
-        <p className="mt-1 text-sm font-medium text-[#6B7280]">Students Served</p>
+        <p className="mt-1 text-sm font-medium text-[#6B7280]">Breach checks run</p>
       </div>
     </div>
   );
@@ -104,7 +108,8 @@ function PricingMapSocialProof() {
 
 function ContinueButton({ outlined = false }: { outlined?: boolean }) {
   return (
-    <CollegeMatchQuizLink
+    <Link
+      href="/#search"
       className={cn(
         "inline-flex w-full items-center justify-center rounded-lg px-5 py-3 text-[15px] font-semibold transition-colors",
         outlined
@@ -113,7 +118,7 @@ function ContinueButton({ outlined = false }: { outlined?: boolean }) {
       )}
     >
       Start Subscription
-    </CollegeMatchQuizLink>
+    </Link>
   );
 }
 
@@ -168,14 +173,14 @@ export function PricingPage() {
       <div className="container mx-auto max-w-5xl px-4 py-14 md:py-20 lg:py-24">
         <header className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B7280]">
-            PathPicker Premium
+            Leekify Premium
           </p>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#181A1D] md:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
-            Simple pricing. Full access.
+            Simple pricing. Full monitoring.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-[#6B7280] md:text-lg">
-            School match reports, fit across 2,000+ universities, admission odds, and scholarship
-            matches—built around who you are.
+            Exposure ledgers, ID monitoring, real-time alerts, settlement notifications, and exportable
+            PDF reports—built for ongoing breach protection.
           </p>
         </header>
 
@@ -190,7 +195,7 @@ export function PricingPage() {
             highlighted
             note={
               <>
-                <span className="font-medium text-[#181A1D]">First-time students:</span> try your first
+                <span className="font-medium text-[#181A1D]">First-time members:</span> try your first
                 30 days for <span className="font-semibold text-[#181A1D]">$2.99</span>, then $14.99 per
                 month. Cancel anytime.
               </>
@@ -202,7 +207,7 @@ export function PricingPage() {
             price="$49.99"
             priceSuffix="/ year"
             outlinedButton
-            note="One payment for a full year of reports, odds, shortlists, and scholarship matches."
+            note="One payment for a full year of monitoring, alerts, settlement notifications, and PDF reports."
           />
         </div>
 
@@ -242,30 +247,15 @@ export function PricingPage() {
               id="coverage-map-heading"
               className="text-xl font-bold tracking-tight text-[#181A1D] md:text-2xl"
             >
-              Nationwide college coverage
+              Global breach database coverage
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-[#6B7280] md:text-base">
-              Explore fit, odds, and outcomes across schools in every region—not just the names you
-              already know.
+              Search and monitor against known public breaches and leak sources—not just the headlines
+              you already saw.
             </p>
           </div>
 
           <PricingMapSocialProof />
-
-          <div className="mx-auto mt-6 max-w-4xl overflow-hidden rounded-2xl border border-[#E5E5E7] bg-white p-2 md:mt-8 md:p-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://my.pathpicker.com/images/social-proof-us-map.webp"
-              srcSet="https://my.pathpicker.com/images/social-proof-us-map.webp 1x, https://my.pathpicker.com/images/social-proof-us-map@2x.webp 2x"
-              width={1200}
-              height={662}
-              alt="United States coverage map"
-              loading="lazy"
-              decoding="async"
-              fetchPriority="low"
-              className="block h-auto w-full"
-            />
-          </div>
         </section>
 
         <section className="mt-20 border-t border-[#EBEBEA] pt-16 md:mt-24 md:pt-20" aria-labelledby="why-us-heading">
@@ -273,27 +263,26 @@ export function PricingPage() {
             id="why-us-heading"
             className="text-center text-xl font-bold tracking-tight text-[#181A1D] md:text-2xl"
           >
-            Why PathPicker
+            Why Leekify
           </h2>
           <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-10">
             <div className="text-center md:text-left">
-              <p className="text-sm font-bold text-[#181A1D]">Student intelligence signals</p>
+              <p className="text-sm font-bold text-[#181A1D]">Unblurred exposure details</p>
               <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
-                Decades of campus intelligence plus personality fit—so picks reflect how students
-                actually live at each school.
+                See exactly what was leaked—breach names, data types, and dates—without hidden results.
               </p>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-sm font-bold text-[#181A1D]">One place to compare</p>
+              <p className="text-sm font-bold text-[#181A1D]">One place to monitor</p>
               <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
-                Vibes, odds, and outcomes together—without spreadsheets, Reddit threads, or conflicting
-                rankings.
+                Search, alerts, settlements, and reports together—without spreadsheets or scattered
+                breach-check sites.
               </p>
             </div>
             <div className="text-center md:text-left">
               <p className="text-sm font-bold text-[#181A1D]">Help when you need it</p>
               <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
-                Questions about your report or account? Reach our team anytime from the contact page.
+                Questions about your account or monitoring? Reach our team anytime from the contact page.
               </p>
             </div>
           </div>

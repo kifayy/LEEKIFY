@@ -1,31 +1,31 @@
 /** Descriptive `alt` text for home page images (SEO + accessibility; not visible copy). */
 
 export const HOME_DESKTOP_HERO_ALT =
-  "Students across the United States matched to colleges including Berkeley, Arizona, LSU, and Harvard on PathPicker";
+  "Leekify data breach search showing whether personal information was leaked";
 
 export const HOME_MOBILE_HERO_BACKDROP_ALT =
-  "Decorative background for PathPicker student archetype and college match hero";
+  "Decorative background for Leekify breach search and monitoring hero";
 
 export const HOME_MOBILE_HERO_STUDENT_ALT =
-  "Student using PathPicker to explore college match and archetype results";
+  "Person using Leekify to check if their email appeared in data breaches";
 
 export const HOME_MOBILE_HERO_FIGMA_ALT = HOME_DESKTOP_HERO_ALT;
 
 export const HOME_DESKTOP_HERO_STUDENT_ALT =
-  "PathPicker college match dashboard preview with student archetype insights";
+  "Leekify breach monitoring dashboard preview with exposure details";
 
-export const HOME_HERO_MATCH_BADGE_ALT = "PathPicker college match percentage badge";
+export const HOME_HERO_MATCH_BADGE_ALT = "Leekify breach match indicator";
 
-export const HOME_PARTNER_LOGO_ALT = "University partner logo";
+export const HOME_PARTNER_LOGO_ALT = "Partner logo";
 
-export const HOME_TRUSTPILOT_ALT = "Trustpilot reviews for PathPicker";
+export const HOME_TRUSTPILOT_ALT = "Trustpilot reviews for Leekify";
 
 export const HOME_STAR_RATING_ALT = "Star rating";
 
-export const HOME_TESTIMONIAL_PHOTO_ALT = (studentName: string) =>
-  `PathPicker student testimonial photo, ${studentName}`;
+export const HOME_TESTIMONIAL_PHOTO_ALT = (name: string) =>
+  `Leekify user testimonial photo, ${name}`;
 
-export const HOME_TESTIMONIAL_MATCH_BADGE_ALT = "Top college match badge";
+export const HOME_TESTIMONIAL_MATCH_BADGE_ALT = "Verified breach check badge";
 
 export function collegeLogoAlt(src: string): string {
   return COLLEGE_LOGO_ALT_BY_SRC[src] ?? HOME_PARTNER_LOGO_ALT;

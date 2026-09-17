@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 
 const LINK_CLASS = "text-[#956EFE] underline hover:no-underline";
 
-/** Emails, external URLs, and pathpicker.com paths in FAQ copy. */
+/** Emails, external URLs, and leekify.com paths in FAQ copy. */
 const LINK_TOKEN_REGEX =
-  /(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|https?:\/\/[^\s,]+|pathpicker\.com\/[^\s,]+)/g;
+  /(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|https?:\/\/[^\s,]+|leekify\.com\/[^\s,]+)/g;
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-function pathpickerHref(path: string) {
-  const pathname = path.replace(/^pathpicker\.com/, "");
+function siteHref(path: string) {
+  const pathname = path.replace(/^leekify\.com/, "");
   return pathname.startsWith("/") ? pathname : `/${pathname}`;
 }
 
@@ -19,7 +19,7 @@ function isLinkToken(part: string) {
     EMAIL_REGEX.test(part) ||
     part.startsWith("http://") ||
     part.startsWith("https://") ||
-    part.startsWith("pathpicker.com/")
+    part.startsWith("leekify.com/")
   );
 }
 
@@ -46,9 +46,9 @@ function linkifyToken(token: string, key: number): ReactNode {
     );
   }
 
-  if (token.startsWith("pathpicker.com")) {
+  if (token.startsWith("leekify.com")) {
     return (
-      <Link key={key} href={pathpickerHref(token)} className={LINK_CLASS}>
+      <Link key={key} href={siteHref(token)} className={LINK_CLASS}>
         {token}
       </Link>
     );

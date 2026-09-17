@@ -1,25 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Eye, EyeOff } from "lucide-react";
 
 import { useDevChromePreference } from "@/hooks/use-dev-chrome-preference";
-import { BROWSE_DEV_PATH, BROWSE_PUBLIC_PATH } from "@/lib/browse-routes";
 import { isLocalDevHost } from "@/lib/dev-mode";
 import { cn } from "@/lib/utils";
 
 const DEV_LINKS = [
-  { href: BROWSE_PUBLIC_PATH, label: "Browse (live)" },
-  { href: BROWSE_DEV_PATH, label: "Browse schools (dev)" },
-  { href: "/llms", label: "AI index" },
-  { href: "/llms.txt", label: "llms.txt" },
-] as const;
-
-const BROWSE_DEV_ENTRIES = [
-  { id: "vibes", label: "Vibe mix", href: `${BROWSE_DEV_PATH}?entry=vibes` },
-  { id: "map", label: "By state", href: `${BROWSE_DEV_PATH}?entry=map` },
+  { href: "/", label: "Home" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 const PANEL_CLASS =
@@ -30,7 +23,6 @@ const FAB_CLASS =
 
 export function DevToolbar() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [onLocalhost, setOnLocalhost] = useState(false);
   const { isExpanded, isMinimized, isHidden, expand, minimize, hide } = useDevChromePreference();
 
@@ -39,9 +31,6 @@ export function DevToolbar() {
   }, []);
 
   if (!onLocalhost) return null;
-
-  const onBrowseDev = pathname === BROWSE_DEV_PATH;
-  const activeEntry = onBrowseDev ? searchParams.get("entry") : null;
 
   if (isHidden) {
     return (
@@ -102,24 +91,6 @@ export function DevToolbar() {
           </button>
         </div>
       </div>
-
-      {onBrowseDev ? (
-        <div className="flex flex-col gap-1 border-b border-white/10 pb-2">
-          <p className="text-[0.625rem] font-semibold uppercase tracking-wide text-amber-200/80">Browse modes</p>
-          {BROWSE_DEV_ENTRIES.map(({ id, label, href }) => (
-            <Link
-              key={id}
-              href={href}
-              className={cn(
-                "rounded-md px-2 py-1.5 transition hover:bg-white/10",
-                activeEntry === id && "bg-[#956EFE]/40 font-semibold",
-              )}
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      ) : null}
 
       <div className="flex flex-col gap-1">
         <p className="text-[0.625rem] font-semibold uppercase tracking-wide text-amber-200/80">Shortcuts</p>

@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
 
-// Legacy / dead paths. Main product URLs are allowed, including:
-// /archetype-quiz, /college-match-quiz, /browse.
 const legacyDisallow = [
   "/directory",
   "/school/",
@@ -15,6 +13,11 @@ const legacyDisallow = [
   "/faq",
   "/dashboard",
   "/404",
+  "/browse",
+  "/schools/",
+  "/discover/",
+  "/apply/",
+  "/scholarships",
 ];
 
 export const dynamic = "force-dynamic";
@@ -22,9 +25,7 @@ export const dynamic = "force-dynamic";
 export default async function robots(): Promise<MetadataRoute.Robots> {
   const baseUrl = await getPublicSiteUrlForSitemap();
   return {
-    rules: [
-      { userAgent: "*", allow: "/", disallow: legacyDisallow },
-    ],
+    rules: [{ userAgent: "*", allow: "/", disallow: legacyDisallow }],
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

@@ -9,11 +9,11 @@ export const REMOTE_IMAGE_PATTERNS = [
   { protocol: "https" as const, hostname: "upload.wikimedia.org", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "storage.googleapis.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "storage.cloud.google.com", pathname: "/**" as const },
-  { protocol: "https" as const, hostname: "my.pathpicker.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "zensignglobal.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "logo.clearbit.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "cdn.prod.website-files.com", pathname: "/**" as const },
   { protocol: "https" as const, hostname: "framerusercontent.com", pathname: "/**" as const },
+  { protocol: "https" as const, hostname: "databreach.com", pathname: "/**" as const },
 ] as const;
 
 const APPROVED_HOSTS = new Set(

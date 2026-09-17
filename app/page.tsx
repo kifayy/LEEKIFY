@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { HomeCollegeVibePicker } from "@/components/home/home-college-vibe-picker";
+import { HomeRecentBreachesCarousel } from "@/components/home/home-recent-breaches-carousel";
 import { HomeHowItWorksSection } from "@/components/home/home-how-it-works-section";
 import { HomeHeroWithAudience } from "@/components/home/home-hero-with-audience";
-import { HomeCollegeMatchQuizCta } from "@/components/home/home-bottom-stat-cards";
 import { HomePageFaqs } from "@/components/home/home-page-faqs";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
+import { getPublishedBreaches } from "@/lib/supabase/queries/recent-breaches";
 
 const HomeMatchBenefitsSection = dynamic(
   () =>
     import("@/components/home/home-bottom-stat-cards").then((m) => ({
       default: m.HomeMatchBenefitsSection,
+    })),
+  { ssr: true },
+);
+const HomePremiumCta = dynamic(
+  () =>
+    import("@/components/home/home-desktop-scholarship-inbox-cta").then((m) => ({
+      default: m.HomeDesktopScholarshipInboxCta,
     })),
   { ssr: true },
 );
@@ -29,10 +36,10 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     alternates: { canonical: baseUrl },
     keywords: [...HOME_SEO_KEYWORDS],
-    authors: [{ name: "PathPicker", url: baseUrl }],
-    creator: "PathPicker",
-    publisher: "PathPicker",
-    category: "education",
+    authors: [{ name: "Leekify", url: baseUrl }],
+    creator: "Leekify",
+    publisher: "Leekify",
+    category: "security",
     robots: {
       index: true,
       follow: true,
@@ -44,13 +51,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: baseUrl,
       title: DEFAULT_SITE_TITLE,
       description: DEFAULT_SITE_DESCRIPTION,
-      siteName: "PathPicker",
+      siteName: "Leekify",
       images: [
         {
           url: HOME_OG_IMAGE_URL,
           width: 1200,
           height: 630,
-          alt: "PathPicker — college match quiz and student archetype platform",
+          alt: "Leekify — see if your data was leaked",
         },
       ],
     },
@@ -60,14 +67,17 @@ export async function generateMetadata(): Promise<Metadata> {
       description: DEFAULT_SITE_DESCRIPTION,
       images: {
         url: HOME_OG_IMAGE_URL,
-        alt: "PathPicker — college match quiz and student archetype platform",
+        alt: "Leekify — see if your data was leaked",
       },
     },
   };
 }
 
 export default async function Home() {
-  const baseUrl = await getBaseUrlForMetadata();
+  const [baseUrl, breaches] = await Promise.all([
+    getBaseUrlForMetadata(),
+    getPublishedBreaches(),
+  ]);
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@graph": buildHomePageJsonLdGraph({ baseUrl }),
@@ -82,13 +92,13 @@ export default async function Home() {
       <div className="-mt-32 md:mt-0">
         <HomeHeroWithAudience />
       </div>
-      <HomeCollegeVibePicker />
+      <HomeRecentBreachesCarousel breaches={breaches} />
       <HomeHowItWorksSection />
       <span id="commit-with-zero-regrets" className="block scroll-mt-28 md:hidden" aria-hidden />
       <span id="deep-profile-rankings" className="block scroll-mt-28 md:hidden" aria-hidden />
       <HomeMatchBenefitsSection />
       <HomePageFaqs />
-      <HomeCollegeMatchQuizCta />
+      <HomePremiumCta />
     </>
   );
 }

@@ -2,9 +2,9 @@ import { Accessibility } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Accessibility Statement | Pathpicker",
+  title: "Accessibility Statement | Leekify",
   description:
-    "PathPicker's commitment to digital accessibility, WCAG alignment, and support for assistive technologies.",
+    "Leekify's commitment to digital accessibility, WCAG alignment, and support for assistive technologies.",
 };
 
 export default function AccessibilityPage() {
@@ -22,8 +22,8 @@ export default function AccessibilityPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">1. Our Commitment</h2>
           <p className="mt-3 text-muted-foreground">
-            Paced Studios LLC (PathPicker) is committed to making our website and digital products
-            accessible to students with disabilities. We aim to conform with the Web Content
+            Paced Studios LLC (Leekify) is committed to making our website and digital products
+            accessible to users with disabilities. We aim to conform with the Web Content
             Accessibility Guidelines (WCAG) 2.1 Level AA and applicable accessibility laws, including
             the Americans with Disabilities Act (ADA) and the California Unruh Civil Rights Act.
           </p>
@@ -45,7 +45,7 @@ export default function AccessibilityPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">3. Assistive Technology Support</h2>
           <p className="mt-3 text-muted-foreground">
-            We design and test PathPicker with common assistive technologies in mind, including
+            We design and test Leekify with common assistive technologies in mind, including
             screen readers (e.g., VoiceOver, NVDA, JAWS), keyboard-only navigation, and browser
             zoom up to 200%. Third-party embeds (such as newsletter forms or video players) may
             follow their own accessibility standards.
@@ -64,13 +64,13 @@ export default function AccessibilityPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">5. Feedback &amp; Assistance</h2>
           <p className="mt-3 text-muted-foreground">
-            If you encounter an accessibility barrier on PathPicker, or need content in an alternative
+            If you encounter an accessibility barrier on Leekify, or need content in an alternative
             format, please contact us:
           </p>
           <p className="mt-3 text-muted-foreground">
             Email:{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
           </p>
           <p className="mt-3 text-muted-foreground">

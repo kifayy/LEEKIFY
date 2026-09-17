@@ -1,5 +1,4 @@
 import Image from "next/image";
-import dynamic from "next/dynamic";
 
 import { HomeCommunityCtaBand } from "@/components/home/home-community-cta-band";
 import {
@@ -8,14 +7,6 @@ import {
 import { HOME_HOW_IT_WORKS_FEATURES } from "@/lib/home-how-it-works-features";
 import { HOME_REVIEWS_TRUST_TITLE } from "@/lib/home-reviews-trust-copy";
 import { cn } from "@/lib/utils";
-
-const StudentsLoveTestimonialMarquee = dynamic(
-  () =>
-    import("@/components/home2/students-love-testimonial-marquee").then((m) => ({
-      default: m.StudentsLoveTestimonialMarquee,
-    })),
-  { ssr: true },
-);
 
 function FeatureTextCard({
   eyebrow,
@@ -45,7 +36,7 @@ export function HomeHowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      aria-label="How PathPicker works"
+      aria-label="How Leekify works"
       className="w-full scroll-mt-28 bg-white"
     >
       {HOME_HOW_IT_WORKS_FEATURES.map((feature, index) => {
@@ -117,19 +108,18 @@ export function HomeHowItWorksSection() {
         <div className="container mx-auto max-w-6xl px-4 pb-2 pt-10 md:px-6 md:pt-12 lg:px-8 lg:pt-10">
           <h2 className="text-center font-[family-name:var(--font-poppins)] text-[1.625rem] font-bold leading-[1.22] tracking-[-0.03em] text-[#18062E] md:text-[1.875rem] md:leading-[1.2] lg:text-[2.25rem]">
             <span className="md:hidden">
-              Trusted by our
+              Trusted by people
               <br />
-              global community of
+              checking whether their
               <br />
-              100k+ students
+              data was leaked
             </span>
             <span className="hidden md:inline">{HOME_REVIEWS_TRUST_TITLE}</span>
             <span className="sr-only">
-              PathPicker college matching — schools and student archetype fit
+              Leekify data breach intelligence — search, monitor, and alert
             </span>
           </h2>
         </div>
-        <StudentsLoveTestimonialMarquee className="mt-4 md:mt-6" />
         <div className="bg-white py-10 md:py-12 lg:py-14" aria-hidden />
         <HomeCommunityCtaBand />
       </div>

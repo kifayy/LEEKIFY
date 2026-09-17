@@ -119,7 +119,7 @@ export function CookieConsentBanner() {
     >
       <div className="container mx-auto max-w-3xl px-4 py-4 sm:py-5">
         <p className="text-xs leading-relaxed text-foreground sm:text-sm">
-          We use cookies and similar technologies to keep PathPicker running, and understand and
+          We use cookies and similar technologies to keep Leekify running, and understand and
           improve how students use our site. You can choose whether to allow analytics and marketing
           cookies.
         </p>

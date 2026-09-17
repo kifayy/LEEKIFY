@@ -1,68 +1,20 @@
 import { MetadataRoute } from "next";
 import { getPublicSiteUrlForSitemap } from "@/lib/metadata-base-url";
-import { PROMOTED_COLLEGE_SEARCH_SLUGS } from "@/lib/college-search/promoted-slugs";
-import { getIndexedDiscoverSlugs } from "@/lib/discover/intent-pages-db";
-import { getAllSeoBrowseLandingSlugs } from "@/lib/seo-browse-landings";
-import { getAllCollegeSlugsForSitemap } from "@/lib/supabase/queries/colleges";
 
-/** Avoid static snapshot at build using VERCEL_URL (preview/prod *.vercel.app) inside pathpicker.com/sitemap.xml */
+/** Avoid static snapshot at build using VERCEL_URL (preview/prod *.vercel.app). */
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = await getPublicSiteUrlForSitemap();
-
   const now = new Date();
 
-  const home: MetadataRoute.Sitemap = [
+  return [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
-  ];
-
-  const seoLandingPages: MetadataRoute.Sitemap = getAllSeoBrowseLandingSlugs().map((slug) => ({
-    url: `${baseUrl}/${slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.9,
-  }));
-
-  const mainProductPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/college-match-quiz`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${baseUrl}/browse`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${baseUrl}/gpa-calculator`, lastModified: now, changeFrequency: "weekly", priority: 0.92 },
-    ...seoLandingPages,
-  ];
-
-  const otherStatic: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.45 },
-    { url: `${baseUrl}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.55 },
+    { url: `${baseUrl}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/cookies`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/accessibility`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/llms`, lastModified: now, changeFrequency: "monthly", priority: 0.35 },
   ];
-
-  const collegeSlugs = await getAllCollegeSlugsForSitemap();
-  const schoolPages: MetadataRoute.Sitemap = collegeSlugs.map((slug) => ({
-    url: `${baseUrl}/schools/${encodeURIComponent(slug)}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.85,
-  }));
-
-  const discoverSlugs = await getIndexedDiscoverSlugs();
-  const discoverPages: MetadataRoute.Sitemap = discoverSlugs.map((slug) => ({
-    url: `${baseUrl}/discover/${encodeURIComponent(slug)}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.75,
-  }));
-
-  const collegeSearchPages: MetadataRoute.Sitemap = PROMOTED_COLLEGE_SEARCH_SLUGS.map((slug) => ({
-    url: `${baseUrl}/college-search/${slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
-
-  return [...home, ...mainProductPages, ...otherStatic, ...schoolPages, ...discoverPages, ...collegeSearchPages];
 }

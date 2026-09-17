@@ -1,12 +1,6 @@
 /** Default `<title>` / Open Graph title — brand first, then what the product does (helps SERP snippets). */
-export const DEFAULT_SITE_TITLE = "PathPicker | Student College Match & Archetype Quiz";
+export const DEFAULT_SITE_TITLE = "Leekify | See If Your Data Was Leaked";
 
 /** 150–220 chars for SERP snippets; includes primary topic keywords without changing on-page layout. */
 export const DEFAULT_SITE_DESCRIPTION =
-  "The student intelligence platform comparing you to 2,000+ schools on personality fit, happiness signals, and more.";
-
-/** SERP title for `/college-match-quiz`. */
-export const COLLEGE_ARCHETYPE_QUIZ_PAGE_TITLE = "College Archetype Quiz";
-
-/** Branded product name — use instead of “personality quiz” in user-facing copy. */
-export const ARCHETYPE_QUIZ_LABEL = "Archetype Quiz";
+  "Find out if your personal information was compromised in data breaches. Search your email on leekify.com to see where your data was leaked and learn what to do.";

@@ -19,11 +19,11 @@ export function getCanonicalSiteUrlFromEnv(): string | null {
   return raw.replace(/\/$/, "");
 }
 
-/** Production host for LLM index (`/llms`, `/llms.txt`) — never localhost. */
-export const LLM_SITE_URL_FALLBACK = "https://www.pathpicker.com";
+/** Production host fallback — never localhost. */
+export const LLM_SITE_URL_FALLBACK = "https://leekify.com";
 
 /**
- * Canonical base URL for AI/LLM site maps. Always lists production URLs for crawlers,
+ * Canonical base URL for site maps. Always lists production URLs for crawlers,
  * even when the page is rendered on localhost or a preview deploy.
  */
 export function getLlmsSiteBaseUrl(): string {
@@ -32,7 +32,7 @@ export function getLlmsSiteBaseUrl(): string {
 
 /**
  * URLs in sitemap.xml and robots.txt must match the host that serves those files
- * (e.g. pathpicker.com). Prefer NEXT_PUBLIC_SITE_URL at build time; else request Host; else VERCEL_URL.
+ * (e.g. leekify.com). Prefer NEXT_PUBLIC_SITE_URL at build time; else request Host; else VERCEL_URL.
  */
 export async function getPublicSiteUrlForSitemap(): Promise<string> {
   const canon = getCanonicalSiteUrlFromEnv();
@@ -54,7 +54,7 @@ export async function getPublicSiteUrlForSitemap(): Promise<string> {
 
 /**
  * Base URL for canonicals and metadata. Uses request host when available
- * (so pathpicker.com/sitemap.xml serves pathpicker.com URLs), else env.
+ * (so leekify.com/sitemap.xml serves leekify.com URLs), else env.
  */
 export async function getBaseUrlForMetadata(): Promise<string> {
   try {

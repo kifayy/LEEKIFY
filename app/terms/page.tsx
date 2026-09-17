@@ -4,9 +4,9 @@ import { TermsHashScroll } from "./terms-hash-scroll";
 import { MANAGE_BILLING_URL } from "@/lib/constants";
 
 export const metadata = {
-  title: "Terms of Service | Pathpicker",
+  title: "Terms of Service | Leekify",
   description:
-    "By accessing or using PathPicker, you agree to these Terms of Service. If you do not agree, do not use the app or website.",
+    "By accessing or using Leekify, you agree to these Terms of Service. If you do not agree, do not use the app or website.",
 };
 
 export default function TermsPage() {
@@ -25,7 +25,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">1. ACCEPTANCE AND MODIFICATION OF TERMS</h2>
           <p className="mt-3 text-muted-foreground">
-            By accessing the PathPicker website, application, or related digital services (the &quot;Services&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;) and our Privacy Policy provided by Paced Studios LLC. If you do not agree, you are expressly prohibited from utilizing the Services.
+            By accessing the Leekify website, application, or related digital services (the &quot;Services&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;) and our Privacy Policy provided by Paced Studios LLC. If you do not agree, you are expressly prohibited from utilizing the Services.
           </p>
           <p className="mt-3 text-muted-foreground">
             Paced Studios LLC reserves the right, at its sole discretion, to modify, amend, or replace these Terms at any time. We will notify you of material changes via email at least 15 days in advance. Continued use of the Services following the posting of modifications constitutes your binding acceptance of the updated Terms.
@@ -45,17 +45,17 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">3. NATURE OF SERVICES AND DISCLAIMER OF ADVICE</h2>
           <p className="mt-3 text-muted-foreground">
-            The Services provide a matching algorithm designed to present Users with educational and financial options and pathways based on self-reported data.
+            The Services provide data breach search, exposure reporting, and identity monitoring based on publicly known leak sources and information you choose to submit.
           </p>
           <p className="mt-3 text-muted-foreground">
-            PACED STUDIOS LLC IS NOT A FINANCIAL ADVISOR, LENDER, BROKER, OR EDUCATIONAL INSTITUTION. All recommendations, content, and matches are provided for informational purposes only and do not constitute professional financial, legal, or educational advice.
+            PACED STUDIOS LLC IS NOT A LAW FIRM, CREDIT BUREAU, INSURER, OR GOVERNMENT AGENCY. All breach results, alerts, and reports are provided for informational purposes only and do not constitute professional legal, financial, or security advice.
           </p>
           <p className="mt-3 text-muted-foreground">You acknowledge and agree that:</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>PathPicker does not guarantee you will be approved for, or receive, any third-party aid offer, loan, bank account, or university admission</li>
-            <li>Matching results are based on algorithms and self-reported information, which may be incomplete or inaccurate</li>
-            <li>You are solely responsible for evaluating the merits, risks, and terms associated with any third-party offer</li>
-            <li>Actual outcomes depend on factors beyond our control, including third-party approval decisions</li>
+            <li>Leekify does not guarantee that every breach involving your data will be detected or that future leaks will be prevented</li>
+            <li>Breach results depend on available public sources and the identifiers you submit, which may be incomplete or outdated</li>
+            <li>You are solely responsible for evaluating the merits, risks, and next steps associated with any exposure or third-party settlement</li>
+            <li>Actual outcomes depend on factors beyond our control, including third-party breach reporting and legal processes</li>
           </ul>
         </section>
 
@@ -105,8 +105,8 @@ export default function TermsPage() {
           </p>
           <p className="mt-3 text-muted-foreground">
             All subscriptions auto-renew until canceled. Cancel anytime through your account settings or by contacting{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
             .
           </p>
@@ -140,7 +140,7 @@ export default function TermsPage() {
             If you are dissatisfied with your first paid subscription, you are eligible for a full refund within 30 days of your first subscription charge, provided that:
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>This is your first paid subscription to PathPicker</li>
+            <li>This is your first paid subscription to Leekify</li>
             <li>You have not received a prior refund</li>
             <li>You request the refund within 30 days of the charge date</li>
             <li>You have not engaged in fraudulent activity or violated these Terms</li>
@@ -189,8 +189,8 @@ export default function TermsPage() {
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>
               Submit a request to:{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>
             </li>
             <li>Include your account email</li>
@@ -214,8 +214,8 @@ export default function TermsPage() {
             <li>Your account settings (self-service)</li>
             <li>
               Email:{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>
             </li>
           </ul>
@@ -227,7 +227,7 @@ export default function TermsPage() {
             <li>You may reactivate your account at current pricing at any time</li>
           </ul>
 
-          <h3 className="mt-4 font-semibold text-[#181A1D]">7.2 Termination by PathPicker</h3>
+          <h3 className="mt-4 font-semibold text-[#181A1D]">7.2 Termination by Leekify</h3>
           <p className="mt-2 text-muted-foreground">We reserve the right to terminate or suspend your account for:</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Violation of these Terms</li>
@@ -251,8 +251,8 @@ export default function TermsPage() {
           </p>
           <p className="mt-3 text-muted-foreground">
             <strong>SMS/Text Messaging:</strong> If you opt-in to SMS services, you agree to receive automated promotional and informational text messages. Consent is not a condition of purchase or use of the Services. Message frequency varies. Standard message and data rates may apply. You may revoke your consent at any time by replying &quot;STOP&quot; to any mobile message. For assistance, reply &quot;HELP&quot; or contact{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
             .
           </p>
@@ -266,7 +266,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">9. USER CONTENT AND DATA RIGHTS</h2>
           <p className="mt-3 text-muted-foreground">
-            By submitting information to PathPicker, you grant us a worldwide, non-exclusive, royalty-free license to use, store, analyze, and improve our Services and algorithms.
+            By submitting information to Leekify, you grant us a worldwide, non-exclusive, royalty-free license to use, store, analyze, and improve our Services and algorithms.
           </p>
           <p className="mt-3 text-muted-foreground">We may use your anonymized data and matching results to:</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
@@ -352,8 +352,8 @@ export default function TermsPage() {
           </p>
           <p className="mt-3 text-muted-foreground">
             <strong>Informal Resolution:</strong> Before initiating arbitration, we encourage you to contact us at{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>{" "}
             to resolve disputes informally within 30 days.
           </p>
@@ -382,8 +382,8 @@ export default function TermsPage() {
           </p>
           <p className="mt-2 text-muted-foreground">
             Email:{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
           </p>
           <p className="mt-2 text-muted-foreground">Company: Paced Studios LLC</p>

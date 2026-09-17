@@ -1,10 +1,8 @@
-import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
 import {
   HERO_SIMPLIFIED_GRADIENT_END,
   HERO_SIMPLIFIED_GRADIENT_START,
 } from "@/components/home/hero-audience-theme";
-
-import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
+import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 
 import { SocialRatingsBar } from "@/components/home/social-ratings-bar";
 
@@ -58,15 +56,12 @@ export function HomeCommunityCtaBand() {
 
 
 
-        <CollegeMatchQuizLink
-
-          className="mt-8 inline-flex h-14 min-w-[min(100%,16rem)] items-center justify-center rounded-full bg-white px-10 font-[family-name:var(--font-poppins)] text-[1.0625rem] font-bold text-[#4E2FFF] shadow-[0_8px_28px_rgba(0,0,0,0.18)] transition hover:opacity-95 active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:mt-10 md:h-[3.75rem] md:min-w-[18rem] md:text-lg"
-
-        >
-
-          {PATH_COLLEGE_MATCH_QUIZ_LABEL}
-
-        </CollegeMatchQuizLink>
+        <PathQuizCtaButton
+          variant="college"
+          size="section"
+          appearance="onDark"
+          className="mt-8 h-14 min-w-[min(100%,16rem)] px-10 text-[1.0625rem] md:mt-10 md:h-[3.75rem] md:min-w-[18rem] md:text-lg"
+        />
 
       </div>
 

@@ -11,16 +11,16 @@ import { HOME_HERO_CTA_LABEL } from "@/lib/home-hero-copy";
 import { HOME_FAQ_ITEMS } from "@/lib/home-faq-content";
 
 const FAQ_ANSWERS: Record<(typeof HOME_FAQ_ITEMS)[number]["question"], ReactNode> = {
-  "How does PathPicker's college match work?": HOME_FAQ_ITEMS[0].answer,
-  "Does PathPicker show admission odds?": HOME_FAQ_ITEMS[1].answer,
-  "Can PathPicker help me know if I'll be happy at a school?": HOME_FAQ_ITEMS[2].answer,
+  "How does Leekify check if my data was leaked?": HOME_FAQ_ITEMS[0].answer,
+  "What is the full exposure ledger?": HOME_FAQ_ITEMS[1].answer,
+  "Can Leekify monitor more than my email?": HOME_FAQ_ITEMS[2].answer,
   "What's the 30-day money-back guarantee?": HOME_FAQ_ITEMS[3].answer,
   "Is my information secure?": (
     <>
       We follow industry-standard practices to protect your data, use encryption in transit, and do not sell your
       personal information. Details are in our{" "}
       <Link
-        href="https://pathpicker.com/privacy"
+        href="/privacy"
         className="font-medium text-[#956EFE] underline decoration-[#956EFE]/35 underline-offset-[3px] transition-colors hover:text-[#7C3AED] hover:decoration-[#7C3AED]/50"
       >
         Privacy Policy
@@ -51,11 +51,11 @@ export function HomePageFaqs() {
       <div className="container mx-auto max-w-3xl">
         <header className="text-center">
           <h2 id="home-faq-heading" className={DESKTOP_SECTION_HEADING_CLASS}>
-            PathPicker FAQ
-            <span className="sr-only"> — college match, schools, and student archetype</span>
+            Leekify FAQ
+            <span className="sr-only"> — data breach search, monitoring, and alerts</span>
           </h2>
           <p className={`mx-auto mt-5 max-w-xl ${DESKTOP_SECTION_SUBTEXT_CLASS}`}>
-            Clear answers on college fit, admission odds, and happiness signals, beyond grades and rankings alone.
+            Clear answers on breach search, exposure ledgers, monitoring, and alerts.
           </p>
         </header>
 

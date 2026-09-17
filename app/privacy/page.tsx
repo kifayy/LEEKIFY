@@ -1,7 +1,7 @@
 import { Shield } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | Pathpicker",
+  title: "Privacy Policy | Leekify",
   description:
     "Our Privacy Policy outlines how we collect, use, and protect your personal information. Your privacy and security are our priorities.",
 };
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">1. INTRODUCTION</h2>
           <p className="mt-3 text-muted-foreground">
-            This Privacy Policy (&quot;Policy&quot;) governs how Paced Studios LLC (doing business as PathPicker and the Awarded App) (collectively, &quot;Company,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) collects, uses, maintains, and discloses information from users (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;) of the PathPicker website, the Awarded mobile application, and all associated digital properties and services (collectively, the &quot;Services&quot;).
+            This Privacy Policy (&quot;Policy&quot;) governs how Paced Studios LLC (doing business as Leekify) (collectively, &quot;Company,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) collects, uses, maintains, and discloses information from users (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;) of the Leekify website and all associated digital properties and services (collectively, the &quot;Services&quot;).
           </p>
           <p className="mt-3 text-muted-foreground">
             By accessing or using the Services, you expressly consent to the data practices described in this Policy. If you do not agree with these practices, please do not use the Services.
@@ -40,22 +40,18 @@ export default function PrivacyPage() {
             <li>Account username and password</li>
             <li>Profile picture (if provided)</li>
           </ul>
-          <p className="mt-3 text-muted-foreground"><strong>Profile &amp; Demographic Data:</strong></p>
+          <p className="mt-3 text-muted-foreground"><strong>Monitoring &amp; Search Data:</strong></p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>Age and date of birth</li>
-            <li>Academic standing and intended major</li>
-            <li>Grade point average (GPA) range</li>
-            <li>Career interests and goals</li>
-            <li>First-generation or second-generation student status</li>
-            <li>Location/state of residence</li>
+            <li>Email addresses, phone numbers, and other identifiers you submit for breach search or monitoring</li>
+            <li>Alert preferences (email, SMS, and in-app notifications)</li>
+            <li>Exposure history and monitoring settings associated with your account</li>
+            <li>Location/state of residence (if provided)</li>
           </ul>
-          <p className="mt-3 text-muted-foreground"><strong>Financial Intent Data:</strong></p>
+          <p className="mt-3 text-muted-foreground"><strong>Billing Data:</strong></p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>Self-reported income bracket</li>
-            <li>Student loan interest</li>
-            <li>Credit card information for payment processing (see Section 2.4)</li>
-            <li>Financial product interests</li>
-            <li>Credit readiness indicators</li>
+            <li>Subscription plan and billing status</li>
+            <li>Payment method details processed by our payment provider (see Section 2.4)</li>
+            <li>Transaction history related to Leekify Premium</li>
           </ul>
           <p className="mt-3 text-muted-foreground"><strong>Communication Preferences:</strong></p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
@@ -124,19 +120,19 @@ export default function PrivacyPage() {
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">3.1 Providing the Services</h3>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>Operating the PathPicker matching engine</li>
-            <li>Delivering personalized educational and financial matches</li>
+            <li>Operating Leekify breach search and exposure reporting</li>
+            <li>Monitoring submitted identifiers and delivering alerts</li>
             <li>Processing subscriptions and payments</li>
             <li>Maintaining and troubleshooting your account</li>
             <li>Responding to your inquiries and support requests</li>
           </ul>
 
-          <h3 className="mt-4 font-semibold text-[#181A1D]">3.2 Proprietary Matching Algorithm</h3>
+          <h3 className="mt-4 font-semibold text-[#181A1D]">3.2 Breach Intelligence Processing</h3>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-            <li>Assessing your profile against available offers</li>
-            <li>Routing you to relevant third-party opportunities</li>
-            <li>Optimizing match accuracy over time</li>
-            <li>A/B testing algorithm improvements</li>
+            <li>Matching submitted identifiers against known breach sources</li>
+            <li>Generating exposure ledgers and digital risk reports</li>
+            <li>Improving detection accuracy and alert relevance over time</li>
+            <li>A/B testing product improvements</li>
           </ul>
 
           <h3 className="mt-4 font-semibold text-[#181A1D]">3.3 Communications</h3>
@@ -251,7 +247,7 @@ export default function PrivacyPage() {
             <li>Protecting our rights or user safety</li>
           </ul>
           <p className="mt-3 text-muted-foreground">
-            <strong>Corporate Changes:</strong> If PathPicker is merged, acquired, or assets are sold, your data may be transferred as a business asset. We will notify you of any such change.
+            <strong>Corporate Changes:</strong> If Leekify is merged, acquired, or assets are sold, your data may be transferred as a business asset. We will notify you of any such change.
           </p>
         </section>
 
@@ -328,7 +324,7 @@ export default function PrivacyPage() {
               Cookie Policy
             </a>{" "}
             for details on data collected, recipients, and retention. These networks may collect data
-            even when you&apos;re not on PathPicker. You can:
+            even when you&apos;re not on Leekify. You can:
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Opt out via the Digital Advertising Alliance</li>
@@ -367,7 +363,7 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>The video provider may receive your IP address, device/browser data, and playback information</li>
-            <li>PathPicker does not combine video viewing history with your name, email, or account ID for disclosure to third parties</li>
+            <li>Leekify does not combine video viewing history with your name, email, or account ID for disclosure to third parties</li>
             <li>We do not sell or share personally identifiable video viewing records as defined under the Video Privacy Protection Act (VPPA)</li>
           </ul>
           <p className="mt-3 text-muted-foreground">
@@ -467,8 +463,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>
               Email:{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>
             </li>
             <li>Include: &quot;Privacy Request&quot; in the subject line</li>
@@ -490,8 +486,8 @@ export default function PrivacyPage() {
           </ul>
           <p className="mt-3 text-muted-foreground">
             <strong>California Opt-Out of Sale/Sharing:</strong> Click &quot;Do Not Sell or Share My Personal Information&quot; on our website, or email{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>{" "}
             with &quot;Opt-Out Request&quot; in the subject line.
           </p>
@@ -622,8 +618,8 @@ export default function PrivacyPage() {
           </ul>
           <p className="mt-3 text-muted-foreground">
             If you are a parent concerned about your child&apos;s data, contact{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
             .
           </p>
@@ -632,7 +628,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">11. THIRD-PARTY LINKS &amp; SERVICES</h2>
           <p className="mt-3 text-muted-foreground">
-            The Services contain links to third-party websites, apps, and services that are not operated by PathPicker. We are not responsible for:
+            The Services contain links to third-party websites, apps, and services that are not operated by Leekify. We are not responsible for:
           </p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>Their privacy practices or policies</li>
@@ -650,14 +646,14 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>
               <strong>Marketing emails:</strong> Opt out by clicking &quot;Unsubscribe&quot; in any email or contacting{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>
             </li>
             <li>
               <strong>SMS messages:</strong> Reply &quot;STOP&quot; to any text, or email{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>
             </li>
             <li>
@@ -682,8 +678,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
             <li>
               <strong>Access your data:</strong> Email{" "}
-              <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-                support@pathpicker.com
+              <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+                support@Leekify.com
               </a>{" "}
               with &quot;Data Access Request&quot;
             </li>
@@ -700,8 +696,8 @@ export default function PrivacyPage() {
           </p>
           <p className="mt-2 text-muted-foreground">
             Email:{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
           </p>
           <p className="mt-3 text-muted-foreground">

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { DesktopHeroPathTypewriter } from "@/components/home/desktop-hero-path-typewriter";
+import { EmailBreachSearchForm } from "@/components/home/email-breach-search-form";
 import { HeroTrustpilotProof } from "@/components/home/hero-trustpilot-proof";
-import { PathQuizCtaButton } from "@/components/home/path-quiz-cta";
 import { HERO_SIMPLIFIED_GRADIENT } from "@/components/home/hero-audience-theme";
 import { HOME_DESKTOP_HERO_ALT } from "@/lib/home-image-seo";
 import { DESKTOP_HERO_SUBTITLE } from "@/lib/home-hero-copy";
@@ -17,7 +17,8 @@ import {
 export function DesktopHeroBanner() {
   return (
     <section
-      className="relative hidden w-full shrink-0 md:block"
+      id="search"
+      className="relative hidden w-full shrink-0 scroll-mt-28 md:block"
       aria-label="Hero"
       style={{ background: HERO_SIMPLIFIED_GRADIENT }}
     >
@@ -25,13 +26,13 @@ export function DesktopHeroBanner() {
         <div className="grid items-center gap-8 py-10 lg:grid-cols-2 lg:gap-12 lg:py-14 xl:py-16">
           <div className="flex flex-col text-left">
             <h1 className="max-w-xl font-[family-name:var(--font-poppins)] text-[2rem] font-extrabold leading-[1.08] tracking-[-0.04em] text-white lg:text-[clamp(2.25rem,3.2vw,3.5rem)] lg:leading-[1.05]">
-              <span className="block">Stop guessing.</span>
+              <span className="block">See if your</span>
               <span className="mt-1 flex flex-wrap items-baseline">
-                Find your&nbsp;
                 <DesktopHeroPathTypewriter className="!bg-white/15 !text-white !shadow-[0_2px_12px_rgba(0,0,0,0.18)]" />
+                &nbsp;was leaked
               </span>
               <span className="sr-only">
-                PathPicker college match quiz for students — find schools by archetype and personality fit
+                Leekify data breach search — check whether your email or phone appeared in known leaks
               </span>
             </h1>
 
@@ -39,12 +40,7 @@ export function DesktopHeroBanner() {
               {DESKTOP_HERO_SUBTITLE}
             </p>
 
-            <PathQuizCtaButton
-              variant="college"
-              size="desktop"
-              appearance="onDark"
-              className="mt-6 lg:mt-8"
-            />
+            <EmailBreachSearchForm appearance="onDark" className="mt-6 lg:mt-8" />
 
             <HeroTrustpilotProof align="left" className="mt-5 lg:mt-6" />
           </div>

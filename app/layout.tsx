@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import Image from "next/image";
 import { Suspense } from "react";
 import {
@@ -12,7 +11,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ConsentGatedScripts } from "@/components/consent-gated-scripts";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
-import { MobileScholarshipQuizStickyFooter } from "@/components/home/mobile-scholarship-quiz-sticky-footer";
 import { CountryLayout } from "@/components/country-layout";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { SiteImageProtection } from "@/components/site-image-protection";
@@ -34,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: DEFAULT_SITE_TITLE,
       description: DEFAULT_SITE_DESCRIPTION,
-      siteName: "PathPicker",
+      siteName: "Leekify",
     },
     twitter: {
       card: "summary_large_image",
@@ -75,8 +73,6 @@ export default function RootLayout({
       <head>
         <meta name="impact-site-verification" content="506f7160-3dd6-4477-8a3e-bb29d178f99a" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
-        <link rel="preconnect" href="https://my.pathpicker.com" />
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="PathPicker LLM site index" />
       </head>
       <body
         className={`${poppins.className} ${poppins.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
@@ -86,7 +82,6 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
-          <Script async src="https://subscribe-forms.beehiiv.com/embed.js" strategy="lazyOnload" />
         <Suspense fallback={<div className="min-h-screen bg-white" />}>
           <ThemeProvider
             attribute="class"
@@ -102,11 +97,10 @@ export default function RootLayout({
               <main className="min-w-0 flex-shrink-0 overflow-x-hidden pt-32 md:pt-44 lg:pt-0">
                 {children}
               </main>
-              {/* Image strip connecting into the footer (now shown on all viewports) */}
               <div className="w-full">
                 <Image
                   src="https://storage.googleapis.com/images_592/Icodn.png"
-                  alt="Students using Pathpicker"
+                  alt="Leekify data breach monitoring"
                   width={1600}
                   height={400}
                   className="block h-auto w-full object-cover"
@@ -117,7 +111,6 @@ export default function RootLayout({
               </div>
               <SiteFooter />
               <CookieConsentBanner />
-              <MobileScholarshipQuizStickyFooter />
               <Suspense fallback={null}>
                 <DevToolbar />
               </Suspense>

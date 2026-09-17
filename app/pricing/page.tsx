@@ -6,9 +6,9 @@ import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = await getBaseUrlForMetadata();
   return {
-    title: "Pricing | PathPicker",
+    title: "Pricing | Leekify",
     description:
-      "PathPicker Premium: school match reports, fit at 2,000+ colleges, admission odds, and scholarship matches. Monthly or yearly plans.",
+      "Leekify Premium: full exposure ledger, watch 3 IDs, real-time breach alerts, settlement notifications, 24/7 monitoring, and exportable PDF risk reports.",
     alternates: { canonical: `${baseUrl}/pricing` },
   };
 }

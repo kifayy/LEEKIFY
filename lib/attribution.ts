@@ -1,8 +1,6 @@
-import { COLLEGE_MATCH_QUIZ_URL } from "@/lib/constants";
+export const ATTRIBUTION_STORAGE_KEY = "leekify_attribution";
 
-export const ATTRIBUTION_STORAGE_KEY = "pathpicker_attribution";
-
-/** Query params captured on pathpicker.com and forwarded to my.pathpicker.com. */
+/** Query params captured on leekify.com for conversion tracking. */
 export const ATTRIBUTION_PARAM_KEYS = [
   "utm_source",
   "utm_medium",
@@ -12,13 +10,15 @@ export const ATTRIBUTION_PARAM_KEYS = [
   "ScCid",
   "sc_cid",
   "fbclid",
+  "gclid",
+  "ttclid",
 ] as const;
 
 export type AttributionParamKey = (typeof ATTRIBUTION_PARAM_KEYS)[number];
 export type AttributionParams = Partial<Record<AttributionParamKey, string>>;
 
 export const QUIZ_REF_PARAM = "ref";
-export const QUIZ_REF_VALUE = "pathpicker_landing";
+export const QUIZ_REF_VALUE = "leekify_landing";
 
 type SearchParamsLike = Pick<URLSearchParams, "get">;
 
@@ -74,7 +74,7 @@ export function buildQuizUrlWithAttribution(
   baseUrl: string,
   attribution: AttributionParams = {},
 ): string {
-  const url = new URL(baseUrl);
+  const url = new URL(baseUrl, "https://leekify.com");
   for (const [key, value] of Object.entries(attribution)) {
     if (value) url.searchParams.set(key, value);
   }
@@ -82,12 +82,6 @@ export function buildQuizUrlWithAttribution(
   return url.toString();
 }
 
-export function buildCollegeMatchQuizUrl(
-  attribution: AttributionParams = getStoredAttribution(),
-): string {
-  return buildQuizUrlWithAttribution(COLLEGE_MATCH_QUIZ_URL, attribution);
-}
-
 export function isCollegeMatchQuizUrl(href: string): boolean {
-  return href === COLLEGE_MATCH_QUIZ_URL || href.startsWith(`${COLLEGE_MATCH_QUIZ_URL}?`);
+  return href === "/#search" || href.startsWith("/#search?");
 }

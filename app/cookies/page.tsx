@@ -2,9 +2,9 @@ import { Cookie } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Cookie Policy | Pathpicker",
+  title: "Cookie Policy | Leekify",
   description:
-    "How PathPicker uses cookies, pixels, and similar technologies — what we collect, who receives it, and how to opt out.",
+    "How Leekify uses cookies, pixels, and similar technologies — what we collect, who receives it, and how to opt out.",
 };
 
 export default function CookiesPage() {
@@ -20,9 +20,9 @@ export default function CookiesPage() {
         <section>
           <h2 className="text-lg font-bold text-[#181A1D]">1. Overview</h2>
           <p className="mt-3 text-muted-foreground">
-            This Cookie Policy explains how Paced Studios LLC (doing business as PathPicker and the
-            Awarded App) (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies, pixels,
-            local storage, and similar technologies on pathpicker.com and related sites
+            This Cookie Policy explains how Paced Studios LLC (doing business as Leekify)
+            (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies, pixels,
+            local storage, and similar technologies on leekify.com and related sites
             (collectively, the &quot;Services&quot;).
           </p>
           <p className="mt-3 text-muted-foreground">
@@ -112,15 +112,6 @@ export default function CookiesPage() {
                   <td className="py-3 pr-4">TikTok Inc.</td>
                   <td className="py-3">Per TikTok&apos;s advertising data retention policies</td>
                 </tr>
-                <tr className="align-top">
-                  <td className="py-3 pr-4">Beehiiv embed</td>
-                  <td className="py-3 pr-4">Essential / Functional</td>
-                  <td className="py-3 pr-4">
-                    Newsletter signup interactions when you use embedded forms
-                  </td>
-                  <td className="py-3 pr-4">Beehiiv, Inc.</td>
-                  <td className="py-3">Per Beehiiv&apos;s privacy policy</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -182,8 +173,8 @@ export default function CookiesPage() {
           <p className="mt-3 text-muted-foreground">
             You may also submit a &quot;Do Not Sell or Share My Personal Information&quot; request
             by emailing{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>{" "}
             with &quot;Opt-Out Request&quot; in the subject line.
           </p>
@@ -193,8 +184,8 @@ export default function CookiesPage() {
           <h2 className="text-lg font-bold text-[#181A1D]">6. Contact</h2>
           <p className="mt-3 text-muted-foreground">
             Questions about this Cookie Policy:{" "}
-            <a href="mailto:support@pathpicker.com" className="text-[#956EFE] underline hover:no-underline">
-              support@pathpicker.com
+            <a href="mailto:support@Leekify.com" className="text-[#956EFE] underline hover:no-underline">
+              support@Leekify.com
             </a>
           </p>
         </section>

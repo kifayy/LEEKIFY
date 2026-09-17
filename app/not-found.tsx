@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-import { CollegeMatchQuizLink } from "@/components/college-match-quiz-link";
-import { PATH_COLLEGE_MATCH_QUIZ_LABEL } from "@/components/home/path-quiz-cta";
-
 const linkClassName =
   "rounded-lg border-2 border-[#18062E] bg-white px-5 py-2.5 text-sm font-medium text-[#18062E] transition hover:bg-[#18062E] hover:text-white";
 
@@ -23,9 +20,11 @@ export default function NotFound() {
         <Link href="/" className={linkClassName}>
           Home
         </Link>
-        <CollegeMatchQuizLink className={linkClassName}>{PATH_COLLEGE_MATCH_QUIZ_LABEL}</CollegeMatchQuizLink>
-        <Link href="/browse" className={linkClassName}>
-          Browse Schools
+        <Link href="/#search" className={linkClassName}>
+          Check for leaks
+        </Link>
+        <Link href="/pricing" className={linkClassName}>
+          Pricing
         </Link>
         <Link href="/contact" className={linkClassName}>
           Contact

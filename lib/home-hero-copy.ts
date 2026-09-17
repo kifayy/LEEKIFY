@@ -1,21 +1,21 @@
 /** Shared home hero copy — mobile and desktop. */
 
-export const HOME_HERO_HEADLINE = "Find Your";
+export const HOME_HERO_HEADLINE = "Was Your";
 
 export const HOME_HERO_BULLETS = [
-  "Dream School",
-  "Archetype",
-  "Next Path",
+  "Email Leaked?",
+  "Phone Exposed?",
+  "Data at Risk?",
 ] as const;
 
 export const HOME_HERO_SUBTEXT =
-  "The student archetype quiz, powered by student intelligence from 2,000+ campuses.";
+  "Search known data breaches to see where your personal information was leaked—and what to do about it.";
 
-export const HOME_HERO_CTA_LABEL = "Find My Archetype";
+export const HOME_HERO_CTA_LABEL = "Check for Leaks";
 
 /** Desktop hero subtitle (unchanged from original desktop layout). */
 export const DESKTOP_HERO_SUBTITLE =
-  "The student intelligence platform finding your future path.";
+  "Data breach intelligence that shows where your information was leaked and helps you monitor it going forward.";
 
 /** @deprecated Use DESKTOP_HERO_SUBTITLE on desktop, HOME_HERO_SUBTEXT on mobile */
 export const HOME_HERO_SUBTITLE = DESKTOP_HERO_SUBTITLE;

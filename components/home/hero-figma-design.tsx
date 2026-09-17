@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 import { MobileHeroRotatingLine } from "@/components/home/mobile-hero-rotating-line";
 import {
@@ -9,12 +8,10 @@ import {
   MOBILE_HERO_SUBTEXT_CLASS,
 } from "@/components/home/mobile-hero-typography";
 import { HERO_SIMPLIFIED_GRADIENT } from "@/components/home/hero-audience-theme";
+import { EmailBreachSearchForm } from "@/components/home/email-breach-search-form";
 import { HeroTrustpilotProof } from "@/components/home/hero-trustpilot-proof";
-import { useCollegeMatchQuizUrl } from "@/hooks/useCollegeMatchQuizUrl";
-import { trackLandingCtaToQuiz } from "@/lib/landing-quiz-cta-tracking";
 import {
   MOBILE_HERO_BULLETS,
-  MOBILE_HERO_CTA_LABEL,
   MOBILE_HERO_HEADLINE,
   MOBILE_HERO_SUBTEXT,
 } from "@/lib/home-hero-copy";
@@ -31,12 +28,11 @@ import {
  * Mobile-only hero (`md:hidden` in `home-hero-with-audience.tsx`).
  */
 export function HeroFigmaDesign() {
-  const collegeMatchQuizUrl = useCollegeMatchQuizUrl();
-
   return (
     <section
-      className="w-full shrink-0 overflow-x-hidden pb-8 pt-32 min-w-0 md:hidden"
-      aria-label="College matching hero"
+      id="search"
+      className="w-full shrink-0 scroll-mt-28 overflow-x-hidden pb-8 pt-32 min-w-0 md:hidden"
+      aria-label="Data breach search hero"
       style={{ background: HERO_SIMPLIFIED_GRADIENT }}
     >
       <div className="mx-auto flex w-full max-w-[420px] flex-col items-center px-4 text-center">
@@ -50,7 +46,7 @@ export function HeroFigmaDesign() {
               className="-mt-0.5 [&_span]:!text-white"
             />
             <span className="sr-only">
-              PathPicker student college match — schools, archetype quiz, and admission odds
+              Leekify breach search — check whether your personal information was leaked
             </span>
           </h1>
         </div>
@@ -61,15 +57,7 @@ export function HeroFigmaDesign() {
           {MOBILE_HERO_SUBTEXT}
         </p>
 
-        <Link
-          href={collegeMatchQuizUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackLandingCtaToQuiz()}
-          className="mt-6 inline-flex h-[3.25rem] w-full max-w-[18rem] items-center justify-center rounded-full bg-white px-8 font-[family-name:var(--font-inter)] text-[1.0625rem] font-semibold text-[#4E2FFF] shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition hover:opacity-95 active:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          {MOBILE_HERO_CTA_LABEL}
-        </Link>
+        <EmailBreachSearchForm appearance="onDark" className="mt-6 max-w-[22rem] sm:max-w-[24rem]" />
 
         <HeroTrustpilotProof className="mt-5" />
 
@@ -84,7 +72,6 @@ export function HeroFigmaDesign() {
             priority
             fetchPriority="high"
             className="h-auto w-full object-contain object-center"
-            sizes="(max-width: 767px) min(100vw - 2rem, 360px)"
           />
         </div>
       </div>

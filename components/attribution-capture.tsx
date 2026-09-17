@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { captureAttributionFromSearchParams } from "@/lib/attribution";
 
-/** Persists landing UTMs (Facebook, Snapchat, etc.) for forwarding to my.pathpicker.com quiz links. */
+/** Persists landing UTMs (Facebook, Snapchat, etc.) for conversion tracking. */
 export function AttributionCapture() {
   const searchParams = useSearchParams();
 
