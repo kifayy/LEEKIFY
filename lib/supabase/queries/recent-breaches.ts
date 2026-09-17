@@ -1,22 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
+import type { RecentBreach } from "@/lib/recent-breaches";
 
-export type RecentBreach = {
-  id: string;
-  slug: string;
-  organization: string;
-  logo_url: string | null;
-  logo_bg: string;
-  rows_label: string;
-  rows_count: number | null;
-  breach_date: string | null;
-  added_at: string | null;
-  summary: string | null;
-  what_happened: string | null;
-  data_exposed: string | null;
-  eligibility: string | null;
-  disclaimer: string | null;
-  sort_order: number;
-};
+export type { RecentBreach } from "@/lib/recent-breaches";
+export { LOCAL_BREACH_LOGOS, resolveBreachLogoUrl } from "@/lib/recent-breaches";
 
 const CAROUSEL_COLUMNS =
   "id, slug, organization, logo_url, logo_bg, rows_label, rows_count, breach_date, sort_order" as const;
