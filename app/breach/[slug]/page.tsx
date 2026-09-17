@@ -6,17 +6,12 @@ import { ArrowLeft, Clock3 } from "lucide-react";
 
 import { EmailBreachSearchForm } from "@/components/home/email-breach-search-form";
 import { getBaseUrlForMetadata } from "@/lib/metadata-base-url";
-import { shouldUseNextImageOptimizer } from "@/lib/remote-image-patterns";
-import {
-  getBreachBySlug,
-} from "@/lib/supabase/queries/recent-breaches";
+import { resolveBreachLogoBg, resolveBreachLogoUrl } from "@/lib/recent-breaches";
+import { getBreachBySlug } from "@/lib/supabase/queries/recent-breaches";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
-
-/** Pick up new breaches from Supabase without a full rebuild. */
-export const revalidate = 60;
 
 function formatBreachDate(value: string | null) {
   if (!value) return null;
@@ -67,7 +62,8 @@ export default async function BreachDetailPage({ params }: PageProps) {
   if (!breach) notFound();
 
   const breachDateLabel = formatBreachDate(breach.breach_date);
-  const logoOptimize = breach.logo_url ? shouldUseNextImageOptimizer(breach.logo_url) : false;
+  const logoSrc = resolveBreachLogoUrl(breach.slug, breach.logo_url);
+  const logoBg = resolveBreachLogoBg(breach.slug, breach.logo_bg);
 
   return (
     <main className="min-h-[70vh] bg-[#FAFAFC] pb-16 pt-6 md:pb-20 md:pt-10">
@@ -83,18 +79,17 @@ export default async function BreachDetailPage({ params }: PageProps) {
         <section className="mt-5 overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(24,6,46,0.08)] ring-1 ring-black/[0.04]">
           <div
             className="relative flex min-h-[11rem] items-end px-6 pb-6 pt-10 sm:min-h-[13rem] sm:px-8"
-            style={{ backgroundColor: breach.logo_bg || "#4E2FFF" }}
+            style={{ backgroundColor: logoBg }}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
-            {breach.logo_url ? (
+            {logoSrc ? (
               <div className="absolute right-6 top-6 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white/95 p-2 shadow-lg sm:h-20 sm:w-20">
                 <Image
-                  src={breach.logo_url}
+                  src={logoSrc}
                   alt=""
                   width={80}
                   height={80}
                   className="h-full w-full object-contain"
-                  unoptimized={!logoOptimize}
                   aria-hidden
                 />
               </div>
